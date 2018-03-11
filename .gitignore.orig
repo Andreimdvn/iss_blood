@@ -1,0 +1,11 @@
+*.pyc
+*.exe
+*.log
+<<<<<<< HEAD
+*.cip
+*.lore
+=======
+*.lore
+*.daniel
+Andrei knows the way
+>>>>>>> The way
