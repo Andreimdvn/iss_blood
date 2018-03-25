@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Iss_blood_front.iml" filepath="$PROJECT_DIR$/.idea/modules/Iss_blood_front.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Iss_blood_front_main.iml" filepath="$PROJECT_DIR$/.idea/modules/Iss_blood_front_main.iml" group="Iss_blood_front" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Iss_blood_front_test.iml" filepath="$PROJECT_DIR$/.idea/modules/Iss_blood_front_test.iml" group="Iss_blood_front" />
+    </modules>
+  </component>
+</project>
