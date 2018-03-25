@@ -1,5 +1,11 @@
-# iss_blood
-# andreimdvn testing commit to master
-# andreimdvn second commit to master
+iss_blood
+Ingineria Sistemelor Soft
+Proiect Colectiv, memrbii echipei:
 
-## test
+Moldovan Andrei
+Oancea Alin
+Nan Tudor
+Olaru Iustin
+Moldovan Daniel
+Munteanu Ciprian
+Pascalau Loredana
