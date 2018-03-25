@@ -1,11 +1,2 @@
-iss_blood
-Ingineria Sistemelor Soft
-Proiect Colectiv, memrbii echipei:
-
-Moldovan Andrei
-Oancea Alin
-Nan Tudor
-Olaru Iustin
-Moldovan Daniel
-Munteanu Ciprian
-Pascalau Loredana
+ISS PROIECT
+https://docs.google.com/document/d/1Xs5zu-kw9Jo-2uVTe6uNs0kAIsLnpygl2Z2ig8Y9XZw/edit
