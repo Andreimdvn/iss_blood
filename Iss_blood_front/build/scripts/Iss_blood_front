@@ -64,7 +64,7 @@ case "`uname`" in
     ;;
 esac
 
-CLASSPATH=$APP_HOME/lib/Iss_blood_front-1.0.jar
+CLASSPATH=$APP_HOME/lib/Iss_blood_front-1.0.jar:$APP_HOME/lib/fontawesomefx-8.9.jar:$APP_HOME/lib/jfoenix-1.10.0.jar:$APP_HOME/lib/controlsfx-8.40.14.jar
 
 # Determine the Java command to use to start the JVM.
 if [ -n "$JAVA_HOME" ] ; then

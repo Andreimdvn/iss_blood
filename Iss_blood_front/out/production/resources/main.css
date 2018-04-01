@@ -1,0 +1,30 @@
+
+
+.textbox {
+    -fx-text-fill: white;
+    -fx-prompt-text-fill: ghostwhite;
+}
+
+.loginPane {
+    -fx-background-color:linear-gradient(#536976,#292E49);
+}
+
+.labelRegister{
+    -fx-text-fill: white;
+    -fx-opacity: 40%;
+}
+
+.labelRegsiterHere{
+
+    -fx-text-fill: red;
+    -fx-fill: red;
+    -fx-highlight-fill: red;
+    -fx-tick-label-fill: red;
+    -fx-opacity: 90%;
+}
+
+.button{
+    -fx-text-fill: white;
+
+}
+

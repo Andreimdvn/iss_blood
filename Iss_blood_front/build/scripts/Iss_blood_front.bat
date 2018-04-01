@@ -63,7 +63,7 @@ set CMD_LINE_ARGS=%*
 :execute
 @rem Setup the command line
 
-set CLASSPATH=%APP_HOME%\lib\Iss_blood_front-1.0.jar
+set CLASSPATH=%APP_HOME%\lib\Iss_blood_front-1.0.jar;%APP_HOME%\lib\fontawesomefx-8.9.jar;%APP_HOME%\lib\jfoenix-1.10.0.jar;%APP_HOME%\lib\controlsfx-8.40.14.jar
 
 @rem Execute Iss_blood_front
 "%JAVA_EXE%" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %ISS_BLOOD_FRONT_OPTS%  -classpath "%CLASSPATH%" Main %CMD_LINE_ARGS%
