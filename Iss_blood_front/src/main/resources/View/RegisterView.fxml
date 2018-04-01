@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import org.controlsfx.control.SegmentedButton?>
+
+
+<AnchorPane prefHeight="253.0" prefWidth="419.0" styleClass="loginPane" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.RegisterController">
+   <children>
+      <Label layoutX="74.0" layoutY="118.0" text="Label" />
+      <SegmentedButton layoutX="88.0" layoutY="55.0" />
+      <ToggleButton layoutX="69.0" layoutY="72.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="99.0" text="Donator" />
+      <ToggleButton layoutX="270.0" layoutY="72.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="99.0" text="ToggleButton" />
+      <Label layoutX="88.0" layoutY="37.0" text="Choose the type of the account you want to make" />
+   </children>
+</AnchorPane>

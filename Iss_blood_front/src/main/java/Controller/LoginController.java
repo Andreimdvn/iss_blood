@@ -28,7 +28,6 @@ public class LoginController {
     @FXML
     private JFXPasswordField passwordTextField;
 
-
     private void enableStyle(){
 
     }
