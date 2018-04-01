@@ -1,7 +1,6 @@
 *.pyc
 *.exe
 *.log
-*.lore
-*.cip
-*.daniel
-Andrei knows the way
+*.iws
+workspace.xml
+tasks.xml
