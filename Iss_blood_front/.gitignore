@@ -1,10 +1,6 @@
 *.pyc
 *.exe
 *.log
-*.iws
-**/.idea/workspace.xml 
-**/.idea/tasks.xml
-
 
 # Created by https://www.gitignore.io/api/gradle,pycharm,intellij
 
