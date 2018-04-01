@@ -2,5 +2,5 @@
 *.exe
 *.log
 *.iws
-*/.idea/workspace.xml 
+*/Iss_blood_back/.idea/workspace.xml 
 */.idea/tasks.xml
