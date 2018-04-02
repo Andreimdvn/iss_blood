@@ -1,4 +1,4 @@
-package Services;
+package Service;
 
 public class MainService {
 }

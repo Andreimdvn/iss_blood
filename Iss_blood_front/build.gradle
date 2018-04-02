@@ -15,12 +15,9 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
     // https://mvnrepository.com/artifact/de.jensd/fontawesomefx
     compile group: 'de.jensd', name: 'fontawesomefx', version: '8.9'
-
     compile group: 'com.jfoenix', name: 'jfoenix', version: '1.10.0'
-
     // https://mvnrepository.com/artifact/org.controlsfx/controlsfx
     compile group: 'org.controlsfx', name: 'controlsfx', version: '8.40.14'
-
 
 }
 

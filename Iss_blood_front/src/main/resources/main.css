@@ -3,24 +3,33 @@
 .textbox {
     -fx-text-fill: white;
     -fx-prompt-text-fill: ghostwhite;
+    -fx-pref-width: 180px;
 }
 
 .loginPane {
     -fx-background-color:linear-gradient(#536976,#292E49);
 }
 
+.label {
+    -fx-text-fill: white;
+}
+
 .labelRegister{
     -fx-text-fill: white;
     -fx-opacity: 40%;
+    -fx-font-style: italic;
 }
 
 .labelRegsiterHere{
-
-    -fx-text-fill: red;
-    -fx-fill: red;
-    -fx-highlight-fill: red;
-    -fx-tick-label-fill: red;
+    -fx-text-fill: #00af66;
     -fx-opacity: 90%;
+}
+
+.registerPane{
+    -fx-border-color: grey;
+    -fx-border-width: 1px;
+    -fx-opacity: 90%;
+    -fx-border-radius: 1%;
 }
 
 .button{
@@ -28,3 +37,18 @@
 
 }
 
+.toggle-button {
+    -fx-background-color: #00af66;
+    -fx-border-width: 0px;
+    -fx-pref-height: 20px;
+    -fx-text-fill: white;
+    -fx-opacity: 50%;
+}
+
+.toggle-button:selected {
+    -fx-background-color: #00af66;
+    -fx-border-width: 0px;
+    -fx-text-fill: white;
+    -fx-pref-height: 40px;
+    -fx-opacity: 100%;
+}
