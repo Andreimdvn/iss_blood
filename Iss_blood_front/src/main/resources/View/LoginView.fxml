@@ -10,9 +10,8 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<?import org.controlsfx.control.HyperlinkLabel?>
 
-<AnchorPane prefHeight="374.0" prefWidth="292.0" styleClass="loginPane" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.LoginController">
+<AnchorPane fx:id="mainPane" prefHeight="374.0" prefWidth="292.0" styleClass="loginPane" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.LoginController">
    <children>
       <VBox layoutX="18.0" layoutY="133.0" spacing="25.0">
          <children>
@@ -47,10 +46,10 @@
                         <Font name="System Italic" size="12.0" />
                      </font>
                   </Label>
-                  <HyperlinkLabel styleClass="labelRegsiterHere" text="here." />
+                  <Label onMouseClicked="#registerLabelClicked" styleClass="labelRegsiterHere" text="here." />
                </children>
             </HBox>
-            <JFXButton buttonType="RAISED" prefHeight="25.0" prefWidth="92.0" text="LOGIN">
+            <JFXButton buttonType="RAISED" onAction="#loginClicked" prefHeight="25.0" prefWidth="92.0" text="LOGIN">
                <VBox.margin>
                   <Insets left="60.0" />
                </VBox.margin>
