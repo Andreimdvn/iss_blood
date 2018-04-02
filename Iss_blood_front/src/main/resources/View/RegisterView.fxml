@@ -1,85 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXPasswordField?>
-<?import com.jfoenix.controls.JFXTextField?>
-<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ToggleButton?>
-<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
 <?import org.controlsfx.control.SegmentedButton?>
 
-<AnchorPane fx:id="mainPane" prefHeight="577.0" prefWidth="443.0" styleClass="loginPane" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.RegisterController">
+
+<AnchorPane prefHeight="253.0" prefWidth="419.0" styleClass="loginPane" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.RegisterController">
    <children>
+      <Label layoutX="74.0" layoutY="118.0" text="Label" />
       <SegmentedButton layoutX="88.0" layoutY="55.0" />
-      <HBox layoutX="22.0" layoutY="92.0">
-         <children>
-            <ToggleButton fx:id="donatorToggleButton" mnemonicParsing="false" onAction="#selectedToggleButton" prefHeight="34.0" prefWidth="99.0" selected="true" text="Donator">
-               <toggleGroup>
-                  <ToggleGroup fx:id="accountType" />
-               </toggleGroup>
-            </ToggleButton>
-            <ToggleButton fx:id="medicToggleButton" mnemonicParsing="false" onAction="#selectedToggleButton" prefHeight="34.0" prefWidth="99.0" text="Medic" toggleGroup="$accountType" />
-            <ToggleButton fx:id="recoltareToggleButton" mnemonicParsing="false" onAction="#selectedToggleButton" prefHeight="34.0" prefWidth="99.0" text="Staff recoltare" toggleGroup="$accountType" />
-            <ToggleButton fx:id="transfuzieToggleButton" mnemonicParsing="false" onAction="#selectedToggleButton" prefHeight="34.0" prefWidth="99.0" text="Staff transfuzie" toggleGroup="$accountType" />
-         </children>
-      </HBox>
-      <FontAwesomeIconView fill="WHITE" glyphName="CREDIT_CARD" layoutX="203.0" layoutY="48.0" size="40" wrappingWidth="28.63494873046875" />
-      <FontAwesomeIconView fx:id="closeIcon" fill="WHITE" glyphName="CLOSE" layoutX="421.0" layoutY="21.0" onMouseClicked="#closeWindow" size="20" wrappingWidth="14.285722374916077" />
-      <AnchorPane layoutX="77.0" layoutY="144.0" prefHeight="414.0" prefWidth="288.0" styleClass="registerPane" stylesheets="@../main.css">
-         <children>
-            <VBox fx:id="registerPane" layoutX="47.0" layoutY="30.0" spacing="20.0">
-               <children>
-                  <HBox spacing="4.0">
-                     <children>
-                        <FontAwesomeIconView fill="WHITE" glyphName="BOOK" size="22" wrappingWidth="19.30157470703125" />
-                        <JFXTextField fx:id="fullnameTextField" prefHeight="25.0" prefWidth="170.0" promptText="Fullname" styleClass="textbox" unFocusColor="WHITE" />
-                     </children>
-                  </HBox>
-                  <HBox spacing="4.0">
-                     <children>
-                        <FontAwesomeIconView fill="WHITE" glyphName="ENVELOPE" size="22" wrappingWidth="19.30157470703125" />
-                        <JFXTextField fx:id="emailTextField" prefHeight="25.0" prefWidth="170.0" promptText="Email" styleClass="textbox" unFocusColor="WHITE" />
-                     </children>
-                  </HBox>
-                  <HBox spacing="4.0">
-                     <children>
-                        <FontAwesomeIconView fill="WHITE" glyphName="USER" size="22" wrappingWidth="19.30157470703125" />
-                        <JFXTextField fx:id="usernameTextField" prefHeight="25.0" prefWidth="170.0" promptText="Username" styleClass="textbox" unFocusColor="WHITE" />
-                     </children>
-                  </HBox>
-                  <HBox spacing="4.0">
-                     <children>
-                        <FontAwesomeIconView fill="WHITE" glyphName="KEY" size="22" wrappingWidth="19.30157470703125" />
-                        <JFXPasswordField fx:id="passwordTextField" prefHeight="25.0" prefWidth="170.0" promptText="Password" styleClass="textbox" unFocusColor="WHITE" />
-                     </children>
-                  </HBox>
-                  <HBox spacing="4.0">
-                     <children>
-                        <FontAwesomeIconView fill="WHITE" glyphName="MAP" size="22" wrappingWidth="19.30157470703125" />
-                        <JFXTextField fx:id="addressTextField" prefHeight="25.0" prefWidth="170.0" promptText="Adresa" styleClass="textbox" unFocusColor="WHITE" />
-                     </children>
-                  </HBox>
-                  <HBox spacing="4.0">
-                     <children>
-                        <FontAwesomeIconView fill="WHITE" glyphName="PHONE" size="22" wrappingWidth="19.30157470703125" />
-                        <JFXTextField fx:id="phoneTextField" prefHeight="25.0" prefWidth="170.0" promptText="Telefon" styleClass="textbox" unFocusColor="WHITE" />
-                     </children>
-                  </HBox>
-               </children>
-            </VBox>
-            <JFXButton layoutX="114.0" layoutY="374.0" onAction="#registerClicked" text="Register" />
-            <HBox layoutX="38.0" layoutY="346.0" spacing="2.0">
-               <children>
-                  <Label styleClass="labelRegister" text="You already have an account?Login" />
-                  <Label onMouseClicked="#loginLabelClicked" styleClass="labelRegsiterHere" text="here." />
-               </children>
-            </HBox>
-         </children>
-      </AnchorPane>
-      <Label layoutX="85.0" layoutY="67.0" text="Choose the type of the account you want to make" />
+      <ToggleButton layoutX="69.0" layoutY="72.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="99.0" text="Donator" />
+      <ToggleButton layoutX="270.0" layoutY="72.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="99.0" text="ToggleButton" />
+      <Label layoutX="88.0" layoutY="37.0" text="Choose the type of the account you want to make" />
    </children>
 </AnchorPane>

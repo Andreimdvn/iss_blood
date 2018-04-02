@@ -1,6 +1,5 @@
 import Controller.LoginController;
-import Controller.RegisterController;
-import Service.MainService;
+import Services.MainService;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,6 +10,7 @@ import java.io.IOException;
 
 public class Main extends Application{
 
+
     private void loadLogin(Stage primaryStage){
         FXMLLoader loader =new FXMLLoader();
         loader.setLocation(getClass().getResource("/View/LoginView.fxml"));
@@ -20,30 +20,16 @@ public class Main extends Application{
             LoginController loginController = new LoginController();
             loginController.setMainService(service);
             primaryStage.initStyle(StageStyle.UNDECORATED);
-            primaryStage.setResizable(false);
             primaryStage.setScene(new Scene(root));
             primaryStage.show();
 
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
     private void loadRegister(Stage primaryStage){
-        FXMLLoader loader =new FXMLLoader();
-        loader.setLocation(getClass().getResource("/View/RegisterView.fxml"));
-        MainService service = new MainService();
-        try {
-            Parent root = loader.load();
-            RegisterController loginController = new RegisterController();
-            loginController.setMainService(service);
-            primaryStage.initStyle(StageStyle.UNDECORATED);
-            primaryStage.setResizable(false);
-            primaryStage.setScene(new Scene(root));
-            primaryStage.show();
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
     @Override
     public void start(Stage primaryStage) {
