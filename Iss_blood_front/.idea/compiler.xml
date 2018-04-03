@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="CompilerConfiguration">
-    <bytecodeTargetLevel>
-      <module name="Iss_blood_front_main" target="1.8" />
-      <module name="Iss_blood_front_test" target="1.8" />
-    </bytecodeTargetLevel>
-  </component>
-</project>
