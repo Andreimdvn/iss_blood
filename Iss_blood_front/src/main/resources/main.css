@@ -1,0 +1,63 @@
+
+
+* {
+    -fx-primary-color: linear-gradient(#536976,#292E49);
+    -fx-secondary-color : red;
+    -fx-primary-text-color: white;
+    -fx-secondary-text-color: grey;
+    -fx-primary-button-color : transparent;
+    -fx-secondary-button-color :  #00af66;
+}
+
+.textbox {
+    -fx-text-fill: -fx-primary-text-color;
+    -fx-prompt-text-fill: ghostwhite;
+    -fx-pref-width: 180px;
+}
+
+.loginPane {
+    -fx-background-color:-fx-primary-color;
+}
+
+.label {
+    -fx-text-fill: -fx-primary-text-color;
+}
+
+.labelRegister{
+    -fx-text-fill: -fx-primary-text-color;
+    -fx-opacity: 40%;
+    -fx-font-style: italic;
+}
+
+.labelRegsiterHere{
+    -fx-text-fill: -fx-secondary-button-color;
+    -fx-opacity: 90%;
+}
+
+.registerPane{
+    -fx-border-color: -fx-secondary-text-color;
+    -fx-border-width: 1px;
+    -fx-opacity: 90%;
+    -fx-border-radius: 1%;
+}
+
+.button{
+    -fx-text-fill: -fx-primary-text-color;
+    -fx-background-color: -fx-primary-button-color;
+}
+
+.toggle-button {
+    -fx-background-color: -fx-secondary-button-color;
+    -fx-border-width: 0px;
+    -fx-pref-height: 20px;
+    -fx-text-fill: -fx-primary-text-color;
+    -fx-opacity: 50%;
+}
+
+.toggle-button:selected {
+    -fx-background-color: -fx-secondary-button-color;
+    -fx-border-width: 0px;
+    -fx-text-fill: -fx-primary-text-color;
+    -fx-pref-height: 40px;
+    -fx-opacity: 100%;
+}
