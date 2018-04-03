@@ -2,9 +2,9 @@
 *.exe
 *.log
 *.iws
-**/.idea/workspace.xml 
+**/.idea/workspace.xml
 **/.idea/tasks.xml
-
+.idea/
 
 # Created by https://www.gitignore.io/api/gradle,pycharm,intellij
 
