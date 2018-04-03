@@ -18,7 +18,7 @@ public class PreloaderApp  extends Preloader {
     @Override
     public void init() throws Exception {
         super.init();
-        ImageView imageView = new ImageView(new Image("../resources/CG_Heart.gif"));
+        ImageView imageView = new ImageView(new Image("Media/CG_Heart.gif"));
         imageView.setSmooth(true);
         imageView.setPreserveRatio(true);
         BorderPane borderPane = new BorderPane();
