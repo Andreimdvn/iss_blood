@@ -22,10 +22,6 @@ public class LoginController {
 
     private MainService mainService;
 
-    /***
-     *
-     * @param mainService
-     */
     public void setMainService(MainService mainService) {
         this.mainService = mainService;
     }
@@ -45,7 +41,6 @@ public class LoginController {
     private double yOffset;
 
     private void enableStyle(){
-
         String focusColor = "#00af66";
         usernameTextField.setFocusColor(Paint.valueOf(focusColor));
         passwordTextField.setFocusColor(Paint.valueOf(focusColor));
@@ -57,6 +52,7 @@ public class LoginController {
                 yOffset = event.getSceneY();
             }
         });
+        
         mainPane.setOnMouseDragged(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -70,7 +66,6 @@ public class LoginController {
     @FXML
     private void initialize(){
         enableStyle();
-
     }
 
     @FXML

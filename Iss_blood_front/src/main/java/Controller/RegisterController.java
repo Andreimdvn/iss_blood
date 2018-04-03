@@ -136,13 +136,8 @@ public class RegisterController {
         String fullname = fullnameTextField.getText();
         String address = addressTextField.getText();
         String phone = phoneTextField.getText();
-
     }
 
-    /***
-     *
-     * @param mainService
-     */
     public void setMainService(MainService mainService) {
         this.mainService = mainService;
     }
@@ -177,7 +172,6 @@ public class RegisterController {
         fullnameTextField.setFocusColor(Paint.valueOf(focusColor));
         phoneTextField.setFocusColor(Paint.valueOf(focusColor));
 
-
         mainPane.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -185,6 +179,7 @@ public class RegisterController {
                 yOffset = event.getSceneY();
             }
         });
+
         mainPane.setOnMouseDragged(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
