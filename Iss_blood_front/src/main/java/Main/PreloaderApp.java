@@ -36,23 +36,12 @@ public class PreloaderApp  extends Preloader {
         primaryStage.initStyle(StageStyle.TRANSPARENT);
         primaryStage.show();
     }
-
     @Override
     public void handleStateChangeNotification(Preloader.StateChangeNotification info) {
         // Handle state change notifications.
         Preloader.StateChangeNotification.Type type = info.getType();
         switch (type) {
-            case BEFORE_LOAD:
-                // Called after MyPreloader#start is called.
-                System.out.println("BEFORE_LOAD");
-                break;
-            case BEFORE_INIT:
-                // Called before MyApplication#init is called.
-                System.out.println("BEFORE_INIT");
-                break;
             case BEFORE_START:
-                // Called after MyApplication#init and before MyApplication#start is called.
-                System.out.println("BEFORE_START");
                 preloaderStage.close();
                 break;
         }
