@@ -72,8 +72,25 @@ public class LoginController {
     private void loginClicked(){
         String username = usernameTextField.getText();
         String password = passwordTextField.getText();
-    }
 
+        FXMLLoader loader =new FXMLLoader();
+        loader.setLocation(getClass().getResource("/View/DonatorDashboardView.fxml"));
+        MainService service = new MainService();
+        try {
+            Stage primaryStage = new Stage();
+            Parent root = loader.load();
+            DonatorDashboardController loginController = new DonatorDashboardController();
+            loginController.setMainService(service);
+            primaryStage.initStyle(StageStyle.UNDECORATED);
+            primaryStage.setResizable(false);
+            primaryStage.setScene(new Scene(root));
+            primaryStage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        closeWindow();
+    }
 
     /***
      * Load /View/RegisterView.fxml

@@ -9,6 +9,40 @@
     -fx-secondary-button-color :  #00af66;
 }
 
+.hboxDashBoard{
+
+}
+
+.vboxButtonDashBoard{
+    -fx-spacing: 5px;
+    -fx-padding: 2em;
+    -fx-pref-width: 200px;
+    -fx-alignment: top-center;
+}
+
+.vboxButtonDashBoard > .label{
+    -fx-font-size: 11px;
+    -fx-opacity: 80%;
+    -fx-text-alignment: center;
+    -fx-font-style: italic;
+    -fx-wrap-text: true;
+}
+
+.vboxButtonDashBoard > .buttonDashboard{
+}
+
+.vboxButtonDashBoard:hover{
+    -fx-border-color: -fx-secondary-text-color;
+    -fx-border-width: 1px;
+    -fx-border-radius: 1%;
+}
+
+.buttonDashboard{
+    -fx-padding: 0.5em;
+    -fx-background-color:-fx-secondary-button-color;
+
+}
+
 .textbox {
     -fx-text-fill: -fx-primary-text-color;
     -fx-prompt-text-fill: ghostwhite;
@@ -41,7 +75,7 @@
     -fx-border-radius: 1%;
 }
 
-.button{
+.buttonTransparent{
     -fx-text-fill: -fx-primary-text-color;
     -fx-background-color: -fx-primary-button-color;
 }

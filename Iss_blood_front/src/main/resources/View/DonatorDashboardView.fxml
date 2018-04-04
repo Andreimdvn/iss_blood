@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="547.0" prefWidth="923.0" styleClass="loginPane" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.DonatorDashboardController">
+   <top>
+      <AnchorPane prefHeight="556.0" prefWidth="923.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox fx:id="dashboardHBox" layoutX="162.0" layoutY="200.0">
+               <children>
+                  <VBox fx:id="formularVBox" onMouseEntered="#mouseEnteredFormularContainer" onMouseExited="#mouseLeftFormularContainer" styleClass="vboxButtonDashBoard">
+                     <children>
+                        <ToggleButton fx:id="formularToggleButton" mnemonicParsing="false" onMouseClicked="#animationDashboardButtons" text="Doresc sa donez">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="dashboardButtons" />
+                           </toggleGroup>
+                        </ToggleButton>
+                        <Label text="Completeaza o cerere de donare." />
+                        <Label text="Cererea ta o sa fie trimisa unui doctor" />
+                     </children>
+                  </VBox>
+                  <VBox fx:id="istoricVBox" onMouseEntered="#mouseEnteredIstoricContainer" onMouseExited="#mouseLeftIstoricContainer" styleClass="vboxButtonDashBoard">
+                     <children>
+                        <ToggleButton fx:id="istoricToggleButton" mnemonicParsing="false" onMouseClicked="#animationDashboardButtons" text="Vizuallizare istoric" toggleGroup="$dashboardButtons" />
+                        <Label text="Poti sa vizualizezi rezultatele anilizelor precedente" />
+                        <Label />
+                     </children>
+                  </VBox>
+                  <VBox fx:id="anunturiVBox" onMouseEntered="#mouseEnteredAnunturiContainer" onMouseExited="#mouseLeftAnunturiContainer" styleClass="vboxButtonDashBoard">
+                     <children>
+                        <ToggleButton fx:id="anunturiToggleButton" mnemonicParsing="false" onMouseClicked="#animationDashboardButtons" text="Vizualizare anunturi" toggleGroup="$dashboardButtons" />
+                        <Label text="Poti sa vizualizezi daca este nevoie de sange la cel mai apropiat centru de transfuzie" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
+   </top>
+</BorderPane>
