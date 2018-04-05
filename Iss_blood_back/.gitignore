@@ -2,7 +2,7 @@
 *.exe
 *.log
 *.iws
-**/.idea/workspace.xml 
+**/.idea/workspace.xml
 **/.idea/tasks.xml
 .idea/
 
