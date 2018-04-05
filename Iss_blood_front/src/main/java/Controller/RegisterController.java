@@ -176,9 +176,12 @@ public class RegisterController implements ControlledScreensInterface{
         enableStyle();
     }
 
-    @Override
-    public void setScreenParent(ControllerScreens screenParent, MainService mainService) {
+    public void setMainService(MainService mainService){
         this.mainService = mainService;
+    }
+
+    @Override
+    public void setScreenParent(ControllerScreens screenParent) {
         this.controller = screenParent;
     }
 }
