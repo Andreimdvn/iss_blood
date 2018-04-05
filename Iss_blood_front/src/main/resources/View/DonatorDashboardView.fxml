@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.control.ToggleGroup?>
@@ -8,12 +10,54 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="547.0" prefWidth="923.0" styleClass="loginPane" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.DonatorDashboardController">
-   <top>
-      <AnchorPane prefHeight="556.0" prefWidth="923.0" BorderPane.alignment="CENTER">
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="510.0" prefWidth="800.0" styleClass="loginPane" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.DonatorDashboardController">
+   <center>
+      <AnchorPane fx:id="centerPane" prefHeight="337.0" prefWidth="800.0" BorderPane.alignment="CENTER">
          <children>
-            <HBox fx:id="dashboardHBox" layoutX="162.0" layoutY="200.0">
+            <AnchorPane fx:id="statsPane" layoutX="56.0" layoutY="27.0" prefHeight="258.0" prefWidth="688.0">
+               <children>
+                  <Label layoutX="14.0" layoutY="27.0" prefHeight="30.0" prefWidth="163.0" styleClass="header" text="Welcome back," />
+                  <Label layoutX="151.0" layoutY="57.0" styleClass="header2" text="Moldovan Daniel-Gabriel" />
+                  <AnchorPane layoutX="74.0" layoutY="176.0">
+                     <children>
+                        <Label text="Ultima data cand ai donat:" />
+                        <Label layoutY="29.0" text="In cate zile mai poti dona:" />
+                        <Label layoutX="282.0" text="De cate ori ai donat in acest an:" />
+                        <Label layoutX="282.0" layoutY="29.0" text="De cate ori mai poti dona in acest an:" />
+                        <Label fx:id="ultimaDataDonare" layoutX="178.0" text="01/01/1997" />
+                        <Label fx:id="urmatoareDonatie" layoutX="178.0" layoutY="29.0" text="102 zile" />
+                        <Label fx:id="donariAnCurent" layoutX="488.0" text="2" />
+                        <Label fx:id="donariRamaseAnCurent" layoutX="488.0" layoutY="31.0" text="3" />
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </center>
+   <top>
+      <AnchorPane fx:id="navBar" prefHeight="36.0" prefWidth="844.0" styleClass="topbar">
+         <children>
+            <FontAwesomeIconView glyphName="ARROW_RIGHT" layoutX="744.0" layoutY="22.0" size="24" wrappingWidth="30.666748046875" />
+            <HBox fx:id="navSegmentHbox" layoutX="62.0" layoutY="1.4285717010498047">
+               <children>
+                  <FontAwesomeIconView glyphName="USER" size="24" wrappingWidth="24.00006103515625" />
+                  <Label text="DanielmanRO">
+                     <padding>
+                        <Insets top="5.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </HBox>
+            <FontAwesomeIconView fx:id="closeIcon" fill="WHITE" glyphName="CLOSE" layoutX="775.0" layoutY="22.0" onMouseClicked="#closeWindow" size="24" wrappingWidth="14.285722374916077" />
+            <FontAwesomeIconView fill="WHITE" glyphName="BELL_ALT" layoutX="710.0" layoutY="21.0" size="24" wrappingWidth="26.666748046875" />
+         </children>
+      </AnchorPane>
+   </top>
+   <bottom>
+      <AnchorPane fx:id="bottomPane" prefHeight="158.0" prefWidth="800.0" styleClass="submeniuDashboard" BorderPane.alignment="CENTER">
+         <children>
+            <HBox fx:id="dashboardHBox" layoutX="197.0" layoutY="3.0" prefHeight="143.0" prefWidth="406.0" styleClass="hboxDashBoard">
                <children>
                   <VBox fx:id="formularVBox" onMouseEntered="#mouseEnteredFormularContainer" onMouseExited="#mouseLeftFormularContainer" styleClass="vboxButtonDashBoard">
                      <children>
@@ -22,8 +66,7 @@
                               <ToggleGroup fx:id="dashboardButtons" />
                            </toggleGroup>
                         </ToggleButton>
-                        <Label text="Completeaza o cerere de donare." />
-                        <Label text="Cererea ta o sa fie trimisa unui doctor" />
+                        <Label text="Completeaza o cerere de donare.Cererea ta o sa fie trimisa unui doctor" />
                      </children>
                   </VBox>
                   <VBox fx:id="istoricVBox" onMouseEntered="#mouseEnteredIstoricContainer" onMouseExited="#mouseLeftIstoricContainer" styleClass="vboxButtonDashBoard">
@@ -33,15 +76,9 @@
                         <Label />
                      </children>
                   </VBox>
-                  <VBox fx:id="anunturiVBox" onMouseEntered="#mouseEnteredAnunturiContainer" onMouseExited="#mouseLeftAnunturiContainer" styleClass="vboxButtonDashBoard">
-                     <children>
-                        <ToggleButton fx:id="anunturiToggleButton" mnemonicParsing="false" onMouseClicked="#animationDashboardButtons" text="Vizualizare anunturi" toggleGroup="$dashboardButtons" />
-                        <Label text="Poti sa vizualizezi daca este nevoie de sange la cel mai apropiat centru de transfuzie" />
-                     </children>
-                  </VBox>
                </children>
             </HBox>
          </children>
       </AnchorPane>
-   </top>
+   </bottom>
 </BorderPane>

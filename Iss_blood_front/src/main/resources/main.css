@@ -1,16 +1,92 @@
 
 
 * {
-    -fx-primary-color: linear-gradient(#536976,#292E49);
-    -fx-secondary-color : red;
+    -fx-primary-color: linear-gradient(#434343 , #000000 );
+    -fx-secondary-color : white;
+    -fx-submeniu-primary-color: whitesmoke;
     -fx-primary-text-color: white;
     -fx-secondary-text-color: grey;
+    -fx-tertiary-text-color: black;
     -fx-primary-button-color : transparent;
     -fx-secondary-button-color :  #00af66;
+
+    -fx-formular-color: #344b52;
+    -fx-pane-formular-color:#587983;
+    -fx-button-formular-color:#fea02f;
+
+}
+
+
+.jfx-radio-button{
+    -jfx-selected-color: -fx-button-formular-color;;
+    -fx-text-fill: -fx-primary-text-color;
+}
+
+.check-box{
+    -fx-text-fill: -fx-primary-text-color;
+    -jfx-checked-color: -fx-button-formular-color;
+}
+
+.combo-box{
+    -fx-prompt-text-fill: -fx-primary-text-color;
+    -fx-text-fill: -fx-primary-text-color;
+    -fx-pref-width: 200px;
+
+}
+
+.headerPaneFormular{
+    -fx-background-color: -fx-button-formular-color;
+    -fx-text-alignment: center;
+    -fx-alignment: center;
+}
+
+.headerPaneFormular > .labelFormularHeader{
+    -fx-fill:  -fx-tertiary-text-color;
+    -fx-text-fill: -fx-tertiary-text-color;
+}
+
+.buttonFormular {
+    -fx-background-color: -fx-button-formular-color;
+    -fx-text-fill: -fx-tertiary-text-color;
+}
+.labelFormularHeader{
+    -fx-font-size: 15;
+    -fx-font-style: italic;
+    -fx-fill:  -fx-tertiary-text-color;
+}
+
+.subFormularPane{
+    -fx-background-color:  -fx-pane-formular-color;
+}
+
+.topbar{
+    -fx-pref-height: 20px;
+}
+
+.submeniuDashboard {
+    -fx-background-color: -fx-submeniu-primary-color;
+}
+
+.formularPane{
+    -fx-background-color: -fx-formular-color;
+}
+
+.header  {
+    -fx-text-fill: -fx-tertiary-text-color;
+    -fx-font-size: 20;
+}
+
+.header2 {
+    -fx-text-fill: -fx-tertiary-text-color;
+    -fx-font-size:22;
+    -fx-font-style: italic;
+}
+
+.formularPane > .label{
+    -fx-text-fill: -fx-tertiary-text-color;
 }
 
 .hboxDashBoard{
-
 }
 
 .vboxButtonDashBoard{
@@ -26,15 +102,32 @@
     -fx-text-alignment: center;
     -fx-font-style: italic;
     -fx-wrap-text: true;
+    -fx-text-fill: -fx-tertiary-text-color;
 }
 
-.vboxButtonDashBoard > .buttonDashboard{
+.vboxButtonDashBoard > .buttonDashboard:selected{
 }
 
 .vboxButtonDashBoard:hover{
     -fx-border-color: -fx-secondary-text-color;
     -fx-border-width: 1px;
     -fx-border-radius: 1%;
+}
+
+.vboxButtonDashBoardSelected {
+    -fx-padding: 2px;
+}
+
+.vboxButtonDashBoardSelected .buttonDashboard{
+   -fx-background-color: red;
+}
+
+.vboxButtonDashBoard > .toggle-button{
+    -fx-background-color: -fx-secondary-button-color ;
+    -fx-opacity: 100%;
+    -fx-text-fill: -fx-tertiary-text-color;
+    -fx-pref-width: 200px;
+    -fx-padding: 10px;
 }
 
 .buttonDashboard{
