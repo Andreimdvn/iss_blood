@@ -1,9 +1,12 @@
 package Controller;
 
 import Service.MainService;
-import com.jfoenix.controls.JFXButton;
+import Utils.Screen;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
-import javafx.animation.*;
+import javafx.animation.FadeTransition;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,16 +21,21 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import javafx.util.Duration;
-
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 
-public class DonatorDashboardController {
+
+public class DonatorDashboardController implements ControlledScreensInterface {
 
     private MainService mainService;
+
+    private ControllerScreens controller;
+
+    @Override
+    public void setScreenParent(ControllerScreens screenParent) {
+        this.controller = screenParent;
+    }
 
     public void setMainService(MainService mainService) {
         this.mainService = mainService;
@@ -254,27 +262,17 @@ public class DonatorDashboardController {
     private void loadIstoric() {
 
 
-        borderPane.setBottom(istoricRoot);
-        fadeIn(istoricRoot);
+        borderPane.setBottom(getIstoric());
+        fadeIn(getIstoric());
 
     }
 
     private void loadFormular() {
-        borderPane.setBottom(formularRoot);
+        borderPane.setBottom(getFormular());
     }
 
-    private void preloadFormular(){
-        FXMLLoader loader =new FXMLLoader();
-        loader.setLocation(getClass().getResource("/View/FormularDonareView.fxml"));
-        MainService service = new MainService();
-        try {
-            AnchorPane root = loader.load();
-            FormularDonareController loginController = new FormularDonareController();
-            loginController.setMainService(service);
-            formularRoot = root;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    private AnchorPane getFormular(){
+        return (AnchorPane) controller.getScreen(Screen.FORMULAR_DONARE_SCREEN);
     }
 
     private void unloadFormular(){
@@ -283,10 +281,7 @@ public class DonatorDashboardController {
         borderPane.setBottom(emptyPane);
     }
 
-
-
     private void setBottomAfterMovement(){
-
 
         bottomPane.setPrefHeight(prefBottomPaneHeight);
         borderPane.setBottom(bottomPane);
@@ -300,23 +295,9 @@ public class DonatorDashboardController {
 
         okStyle = false;
     }
-    private AnchorPane istoricRoot;
-    private AnchorPane formularRoot;
 
-    private void preloadIstoric(){
-        FXMLLoader loader =new FXMLLoader();
-        loader.setLocation(getClass().getResource("/View/IstoricDonariView.fxml"));
-        MainService service = new MainService();
-        try {
-            AnchorPane root = loader.load();
-            IstoricDonariController loginController = new IstoricDonariController();
-            loginController.setMainService(service);
-
-            istoricRoot = root;
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    private AnchorPane getIstoric(){
+        return (AnchorPane) controller.getScreen(Screen.ISTORIC_DONARI_SCREEN);
     }
 
     private void moveBottomDown()
@@ -369,9 +350,6 @@ public class DonatorDashboardController {
         emptyPane = new AnchorPane();
         emptyPane.setStyle("-fx-background-color: white");
         animationSpeed = 200.0d;
-        preloadFormular();
-        preloadIstoric();
-
         formularVBox.getChildren().forEach(
                 x -> {
                     if( x instanceof Label )
@@ -449,25 +427,11 @@ public class DonatorDashboardController {
     }
     @FXML
     private void logout(){
-        Stage current = getStage();
-        current.close();
         loadLogin();
     }
 
     private void loadLogin() {
-        FXMLLoader loader =new FXMLLoader();
-        loader.setLocation(getClass().getResource("/View/LoginView.fxml"));
-        MainService service = new MainService();
-        try {
-            Parent root = loader.load();
-            Stage primaryStage = getStage();
-            LoginController loginController = new LoginController();
-            loginController.setMainService(service);
-            primaryStage.setScene(new Scene(root));
-            primaryStage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        controller.setScreen(Screen.LOGIN_SCREEN);
     }
 
 }

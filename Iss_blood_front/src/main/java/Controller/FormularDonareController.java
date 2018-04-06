@@ -5,7 +5,7 @@ import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
 
-public class FormularDonareController {
+public class FormularDonareController implements ControlledScreensInterface {
 
     private MainService mainService;
 
@@ -36,6 +36,13 @@ public class FormularDonareController {
     @FXML
     private void initialize(){
 
+    }
+
+    private ControllerScreens controller;
+
+    @Override
+    public void setScreenParent(ControllerScreens screenParent) {
+        this.controller = screenParent;
     }
 
     public void setMainService(MainService service) {
