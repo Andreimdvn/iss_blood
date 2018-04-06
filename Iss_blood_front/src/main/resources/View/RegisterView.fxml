@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import org.controlsfx.control.SegmentedButton?>
 
-<AnchorPane fx:id="mainPane" prefHeight="577.0" prefWidth="443.0" styleClass="loginPane" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.RegisterController">
+<AnchorPane fx:id="mainPane" prefHeight="577.0" prefWidth="443.0" styleClass="loginPane" stylesheets="@../main.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.RegisterController">
    <children>
       <SegmentedButton layoutX="88.0" layoutY="55.0" />
       <HBox layoutX="22.0" layoutY="92.0">

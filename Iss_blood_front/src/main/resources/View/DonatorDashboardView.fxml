@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
@@ -16,18 +17,18 @@
          <children>
             <AnchorPane fx:id="statsPane" layoutX="56.0" layoutY="27.0" prefHeight="258.0" prefWidth="688.0">
                <children>
-                  <Label layoutX="14.0" layoutY="27.0" prefHeight="30.0" prefWidth="163.0" styleClass="header" text="Welcome back," />
-                  <Label layoutX="151.0" layoutY="57.0" styleClass="header2" text="Moldovan Daniel-Gabriel" />
-                  <AnchorPane layoutX="74.0" layoutY="176.0">
+                  <Label layoutX="14.0" layoutY="30.0" prefHeight="30.0" prefWidth="163.0" styleClass="header" text="Welcome back," />
+                  <Label layoutX="150.0" layoutY="66.0" styleClass="header2" text="Moldovan Daniel-Gabriel" />
+                  <AnchorPane layoutX="51.0" layoutY="183.0" prefHeight="51.0" prefWidth="585.0">
                      <children>
-                        <Label text="Ultima data cand ai donat:" />
-                        <Label layoutY="29.0" text="In cate zile mai poti dona:" />
-                        <Label layoutX="282.0" text="De cate ori ai donat in acest an:" />
-                        <Label layoutX="282.0" layoutY="29.0" text="De cate ori mai poti dona in acest an:" />
-                        <Label fx:id="ultimaDataDonare" layoutX="178.0" text="01/01/1997" />
-                        <Label fx:id="urmatoareDonatie" layoutX="178.0" layoutY="29.0" text="102 zile" />
-                        <Label fx:id="donariAnCurent" layoutX="488.0" text="2" />
-                        <Label fx:id="donariRamaseAnCurent" layoutX="488.0" layoutY="31.0" text="3" />
+                        <Label styleClass="labelNormal" text="Ultima data cand ai donat:" />
+                        <Label layoutY="29.0" styleClass="labelNormal" text="In cate zile mai poti dona:" />
+                        <Label layoutX="282.0" styleClass="labelNormal" text="De cate ori ai donat in acest an:" />
+                        <Label layoutX="282.0" layoutY="31.0" prefHeight="20.0" prefWidth="240.0" styleClass="labelNormal" text="De cate ori mai poti dona in acest an:" />
+                        <Label fx:id="ultimaDataDonare" layoutX="178.0" styleClass="labelNormal" text="01/01/1997" />
+                        <Label fx:id="urmatoareDonatie" layoutX="178.0" layoutY="29.0" styleClass="labelNormal" text="102 zile" />
+                        <Label fx:id="donariAnCurent" layoutX="549.0" styleClass="labelNormal" text="2" />
+                        <Label fx:id="donariRamaseAnCurent" layoutX="553.0" layoutY="31.0" styleClass="labelNormal" text="3" />
                      </children>
                   </AnchorPane>
                </children>
@@ -38,26 +39,27 @@
    <top>
       <AnchorPane fx:id="navBar" prefHeight="36.0" prefWidth="844.0" styleClass="topbar">
          <children>
-            <FontAwesomeIconView glyphName="ARROW_RIGHT" layoutX="744.0" layoutY="22.0" size="24" wrappingWidth="30.666748046875" />
-            <HBox fx:id="navSegmentHbox" layoutX="62.0" layoutY="1.4285717010498047">
+            <HBox fx:id="navSegmentHbox" layoutX="210.0" layoutY="3.0" prefHeight="20.0" prefWidth="219.0" styleClass="hboxTopBar" />
+            <FontAwesomeIconView fx:id="closeIcon" fill="WHITE" glyphName="CLOSE" layoutX="775.0" layoutY="22.0" onMouseClicked="#closeWindow" size="24" wrappingWidth="14.285722374916077" />
+            <FontAwesomeIconView fill="WHITE" glyphName="BELL_ALT" layoutX="740.0" layoutY="22.0" size="24" wrappingWidth="26.666748046875" />
+            <HBox fx:id="navSegmentHbox1" layoutX="13.0" styleClass="hboxTopBar">
                <children>
                   <FontAwesomeIconView glyphName="USER" size="24" wrappingWidth="24.00006103515625" />
-                  <Label text="DanielmanRO">
+                  <Label styleClass="labelNormal" text="DanielmanRO">
                      <padding>
                         <Insets top="5.0" />
                      </padding>
                   </Label>
                </children>
             </HBox>
-            <FontAwesomeIconView fx:id="closeIcon" fill="WHITE" glyphName="CLOSE" layoutX="775.0" layoutY="22.0" onMouseClicked="#closeWindow" size="24" wrappingWidth="14.285722374916077" />
-            <FontAwesomeIconView fill="WHITE" glyphName="BELL_ALT" layoutX="710.0" layoutY="21.0" size="24" wrappingWidth="26.666748046875" />
+            <JFXButton fx:id="logoutButton" layoutX="134.0" layoutY="1.0" onAction="#logout" styleClass="logoutButton" text="Logout" />
          </children>
       </AnchorPane>
    </top>
    <bottom>
       <AnchorPane fx:id="bottomPane" prefHeight="158.0" prefWidth="800.0" styleClass="submeniuDashboard" BorderPane.alignment="CENTER">
          <children>
-            <HBox fx:id="dashboardHBox" layoutX="197.0" layoutY="3.0" prefHeight="143.0" prefWidth="406.0" styleClass="hboxDashBoard">
+            <HBox fx:id="dashboardHBox" layoutX="197.0" layoutY="7.0" prefHeight="143.0" prefWidth="406.0" styleClass="hboxDashBoard">
                <children>
                   <VBox fx:id="formularVBox" onMouseEntered="#mouseEnteredFormularContainer" onMouseExited="#mouseLeftFormularContainer" styleClass="vboxButtonDashBoard">
                      <children>
@@ -73,7 +75,6 @@
                      <children>
                         <ToggleButton fx:id="istoricToggleButton" mnemonicParsing="false" onMouseClicked="#animationDashboardButtons" text="Vizuallizare istoric" toggleGroup="$dashboardButtons" />
                         <Label text="Poti sa vizualizezi rezultatele anilizelor precedente" />
-                        <Label />
                      </children>
                   </VBox>
                </children>

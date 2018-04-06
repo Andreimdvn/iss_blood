@@ -1,12 +1,15 @@
 import Controller.LoginController;
 import Controller.RegisterController;
 import Service.MainService;
+import javafx.animation.FadeTransition;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Duration;
+
 import java.io.IOException;
 
 public class Main extends Application{
@@ -23,7 +26,6 @@ public class Main extends Application{
             primaryStage.setResizable(false);
             primaryStage.setScene(new Scene(root));
             primaryStage.show();
-
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -164,7 +164,7 @@ public class RegisterController {
     }
 
     private void enableStyle(){
-        String focusColor = "#00af66";
+        String focusColor = "#fea02f";
         addressTextField.setFocusColor(Paint.valueOf(focusColor));
         passwordTextField.setFocusColor(Paint.valueOf(focusColor));
         usernameTextField.setFocusColor(Paint.valueOf(focusColor));

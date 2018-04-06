@@ -3,10 +3,7 @@ package Controller;
 import Service.MainService;
 import com.jfoenix.controls.JFXButton;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.Timeline;
-import javafx.animation.TranslateTransition;
+import javafx.animation.*;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -134,25 +131,16 @@ public class DonatorDashboardController {
         mouseLeftFormularContainer();
         mouseLeftIstoricContainer();
 
-        if(this.isAnySelected()) {
-            moveCenterToTop();
-            selectedButtonLoad();
-            if(!okStyle) {
-                styleRemoveAndAddDashboard
-                        ("vboxButtonDashBoard", "vboxButtonDashBoardSelected");
-                okStyle=true;
-                ok = false;
-            }
+        if(this.isAnySelected() && this.isAnyLoaded())
+        {
+         loadBottomPane();
         }
-        else if(!this.isAnySelected()) {
-
+        else if(this.isAnySelected() && !okStyle) {
+            moveCenterToTop();
+        }
+        else if(!this.isAnySelected() && okStyle) {
+            unloadFormular();
             moveTopToCenter();
-            if(okStyle) {
-                styleRemoveAndAddDashboard
-                        ("vboxButtonDashBoardSelected", "vboxButtonDashBoard");
-                okStyle = false;
-            }
-            moveBottomDown();
             istoricLoaded = false;
             formularLoaded = false;
         }
@@ -168,22 +156,23 @@ public class DonatorDashboardController {
     private void hideTopBar(){
         navSegmentHbox.getChildren().removeAll(formularToggleButton,istoricToggleButton);
     }
+
+    private void showDashboard(){
+        if(!bottomPane.getChildren().contains(dashboardHBox))
+        bottomPane.getChildren().add(dashboardHBox);
+
+    }
+    private void hideDashboard(){
+        if(bottomPane.getChildren().contains(dashboardHBox))
+            bottomPane.getChildren().remove(dashboardHBox);
+    }
     @FXML
     private void moveCenterToTop(){
 
         hideStats();
-        Timeline timeline = new Timeline();
-        double pref = dashboardHBox.getHeight();
+        hideDashboard();
+        topPaneGoUp();
 
-        timeline.getKeyFrames().addAll(
-                new KeyFrame(Duration.millis(animationSpeed), new KeyValue(dashboardHBox.layoutYProperty(), 0))
-        );
-        timeline.play();
-
-        timeline.setOnFinished(
-                x->
-                        topPaneGoUp()
-        );
 
     }
     private void topPaneGoUp()
@@ -195,9 +184,22 @@ public class DonatorDashboardController {
                         new KeyValue(centerPane.prefHeightProperty(), pref))
         );
         timeline1.play();
+        timeline1.setOnFinished(
+                x->
+                {
+                    if(!okStyle) {
+                        styleRemoveAndAddDashboard
+                                ("vboxButtonDashBoard", "vboxButtonDashBoardSelected");
+                        okStyle=true;
+                        ok = false;
+                    }
+                    selectedButtonLoad();
+                }
+        );
     }
 
     private void moveTopToCenter(){
+
         Timeline timeline = new Timeline();
         double pref = prefYHBox;
 
@@ -209,7 +211,7 @@ public class DonatorDashboardController {
                 x->
                 {
                     showStats();
-                    unloadFormular();
+                    moveBottomDown();
                 }
         );
     }
@@ -239,7 +241,29 @@ public class DonatorDashboardController {
         }
 
     }
-    private void loadFormular(){
+
+    private void fadeIn(Node node){
+        {
+            FadeTransition ft = new FadeTransition(Duration.millis(1000), node);
+            ft.setFromValue(0.1);
+            ft.setToValue(1.0);
+            ft.play();
+        }
+    }
+
+    private void loadIstoric() {
+
+
+        borderPane.setBottom(istoricRoot);
+        fadeIn(istoricRoot);
+
+    }
+
+    private void loadFormular() {
+        borderPane.setBottom(formularRoot);
+    }
+
+    private void preloadFormular(){
         FXMLLoader loader =new FXMLLoader();
         loader.setLocation(getClass().getResource("/View/FormularDonareView.fxml"));
         MainService service = new MainService();
@@ -247,36 +271,69 @@ public class DonatorDashboardController {
             AnchorPane root = loader.load();
             FormularDonareController loginController = new FormularDonareController();
             loginController.setMainService(service);
-
-            borderPane.setBottom(root);
-
+            formularRoot = root;
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
     private void unloadFormular(){
-        formularVBox.getChildren().add(0,formularToggleButton);
-        istoricVBox.getChildren().add(0,istoricToggleButton);
-        borderPane.setBottom(bottomPane);
+
+        emptyPane.setPrefHeight(borderPane.getHeight());
+        borderPane.setBottom(emptyPane);
     }
 
-    private void loadIstoric(){
 
+
+    private void setBottomAfterMovement(){
+
+
+        bottomPane.setPrefHeight(prefBottomPaneHeight);
+        borderPane.setBottom(bottomPane);
+        this.showDashboard();
+
+        formularVBox.getChildren().add(0,formularToggleButton);
+        istoricVBox.getChildren().add(0,istoricToggleButton);
+
+        styleRemoveAndAddDashboard
+                ("vboxButtonDashBoardSelected", "vboxButtonDashBoard");
+
+        okStyle = false;
+    }
+    private AnchorPane istoricRoot;
+    private AnchorPane formularRoot;
+
+    private void preloadIstoric(){
+        FXMLLoader loader =new FXMLLoader();
+        loader.setLocation(getClass().getResource("/View/IstoricDonariView.fxml"));
+        MainService service = new MainService();
+        try {
+            AnchorPane root = loader.load();
+            IstoricDonariController loginController = new IstoricDonariController();
+            loginController.setMainService(service);
+
+            istoricRoot = root;
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void moveBottomDown()
     {
         hideTopBar();
         Timeline timeline = new Timeline();
-        double pref = 0d;
+        System.out.println(prefBottomPaneHeight);
+        double pref = prefBottomPaneHeight;
         timeline.getKeyFrames().addAll(
                 new KeyFrame(Duration.millis(animationSpeed),
-                        new KeyValue(bottomPane.prefHeightProperty()
+                        new KeyValue(emptyPane.prefHeightProperty()
                                 , pref))
         );
         timeline.play();
         timeline.setOnFinished(
                 x-> {
+                    setBottomAfterMovement();
                 }
         );
     }
@@ -303,11 +360,17 @@ public class DonatorDashboardController {
 
     double xOffset;
     double yOffset;
-
+    double prefBottomPaneHeight;
+    private AnchorPane emptyPane;
     @FXML
     private void initialize(){
         prefYHBox = dashboardHBox.getLayoutY();
+        prefBottomPaneHeight = ((AnchorPane) borderPane.getBottom()).getPrefHeight();
+        emptyPane = new AnchorPane();
+        emptyPane.setStyle("-fx-background-color: white");
         animationSpeed = 200.0d;
+        preloadFormular();
+        preloadIstoric();
 
         formularVBox.getChildren().forEach(
                 x -> {
@@ -383,6 +446,28 @@ public class DonatorDashboardController {
     private void closeWindow(){
         Stage current = getStage();
         current.close();
+    }
+    @FXML
+    private void logout(){
+        Stage current = getStage();
+        current.close();
+        loadLogin();
+    }
+
+    private void loadLogin() {
+        FXMLLoader loader =new FXMLLoader();
+        loader.setLocation(getClass().getResource("/View/LoginView.fxml"));
+        MainService service = new MainService();
+        try {
+            Parent root = loader.load();
+            Stage primaryStage = getStage();
+            LoginController loginController = new LoginController();
+            loginController.setMainService(service);
+            primaryStage.setScene(new Scene(root));
+            primaryStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

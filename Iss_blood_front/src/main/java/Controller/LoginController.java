@@ -41,7 +41,7 @@ public class LoginController {
     private double yOffset;
 
     private void enableStyle(){
-        String focusColor = "#00af66";
+        String focusColor = "#fea02f";
         usernameTextField.setFocusColor(Paint.valueOf(focusColor));
         passwordTextField.setFocusColor(Paint.valueOf(focusColor));
 

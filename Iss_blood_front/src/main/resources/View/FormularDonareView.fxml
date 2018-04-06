@@ -20,12 +20,12 @@
                <children>
                   <AnchorPane prefHeight="41.0" prefWidth="339.0" styleClass="headerPaneFormular">
                      <children>
-                        <Label layoutX="121.0" layoutY="10.0" styleClass="labelFormularHeader" text="Date personale" />
+                        <Label layoutX="121.0" layoutY="14.0" styleClass="labelFormularHeader" text="Date personale" />
                      </children>
                   </AnchorPane>
                   <VBox fillWidth="false" layoutX="78.0" layoutY="55.0" prefHeight="153.0" prefWidth="182.0" spacing="20.0">
                      <children>
-                        <JFXTextField focusColor="#fea02f" promptText="Fullname" styleClass="textbox" unFocusColor="WHITE" />
+                        <JFXTextField fx:id="fullnameTextField" focusColor="#fea02f" promptText="Fullname" styleClass="textbox" unFocusColor="WHITE" />
                         <HBox spacing="30.0">
                            <children>
                               <Label text="Sex" />
@@ -33,8 +33,8 @@
                               <JFXRadioButton text="F" />
                            </children>
                         </HBox>
-                        <JFXTextField focusColor="#fea02f" promptText="Address" styleClass="textbox" unFocusColor="WHITE" />
-                        <JFXTextField focusColor="#fea02f" promptText="Telefon" styleClass="textbox" unFocusColor="WHITE" />
+                        <JFXTextField fx:id="addressTextField" focusColor="#fea02f" promptText="Address" styleClass="textbox" unFocusColor="WHITE" />
+                        <JFXTextField fx:id="phoneTextField" focusColor="#fea02f" promptText="Telefon" styleClass="textbox" unFocusColor="WHITE" />
                      </children>
                   </VBox>
                </children>
@@ -50,18 +50,18 @@
                         <Label text="Ziua cand pot dona" />
                         <HBox spacing="4.0">
                            <children>
-                              <JFXCheckBox text="Luni" />
-                              <JFXCheckBox text="Marti" />
-                              <JFXCheckBox text="Miercuri" />
-                              <JFXCheckBox text="Joi" />
-                              <JFXCheckBox text="Vineri" />
+                              <JFXCheckBox fx:id="luniCheckbox" text="Luni" />
+                              <JFXCheckBox fx:id="martiCheckbox" text="Marti" />
+                              <JFXCheckBox fx:id="miercuriCheckbox" text="Miercuri" />
+                              <JFXCheckBox fx:id="joiCheckbox" text="Joi" />
+                              <JFXCheckBox fx:id="vineriCheckbox" text="Vineri" />
                            </children>
                         </HBox>
                      </children>
                   </VBox>
                   <AnchorPane prefHeight="41.0" prefWidth="339.0" styleClass="headerPaneFormular">
                      <children>
-                        <Label layoutX="88.0" layoutY="10.0" styleClass="labelFormularHeader" text="Informatii utile(Optional)" />
+                        <Label layoutX="88.0" layoutY="14.0" styleClass="labelFormularHeader" text="Informatii utile(Optional)" />
                      </children>
                   </AnchorPane>
                </children>
@@ -70,7 +70,7 @@
       </HBox>
       <AnchorPane layoutX="56.0" layoutY="28.0" prefHeight="59.0" prefWidth="688.0" styleClass="headerPaneFormular">
          <children>
-            <Text layoutX="261.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="labelFormularHeader" text="Formular inscriere donare" />
+            <Text layoutX="261.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="labelFormularHeader" text="Formular inscriere donare" />
          </children>
       </AnchorPane>
    </children>

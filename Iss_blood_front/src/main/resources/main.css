@@ -8,7 +8,9 @@
     -fx-secondary-text-color: grey;
     -fx-tertiary-text-color: black;
     -fx-primary-button-color : transparent;
-    -fx-secondary-button-color :  #00af66;
+    -fx-secondary-button-color :  #fea02f;
+
+    -fx-aux-color: #00af66;
 
     -fx-formular-color: #344b52;
     -fx-pane-formular-color:#587983;
@@ -16,6 +18,14 @@
 
 }
 
+.logoutButton{
+    -fx-background-color: -fx-button-formular-color;
+    -fx-text-fill: -fx-tertiary-text-color;
+}
+
+.labelDashboard{
+    -fx-text-fill:-fx-primary-text-color ;
+}
 
 .jfx-radio-button{
     -jfx-selected-color: -fx-button-formular-color;;
@@ -34,15 +44,36 @@
 
 }
 
-.headerPaneFormular{
-    -fx-background-color: -fx-button-formular-color;
-    -fx-text-alignment: center;
-    -fx-alignment: center;
+.hboxIstoric {
+    -fx-spacing: 3;
+    -fx-pref-width: 550px;
 }
 
-.headerPaneFormular > .labelFormularHeader{
+.labelIstoric {
+    -fx-background-color: -fx-pane-formular-color;
+    -fx-text-fill: -fx-primary-text-color;
+    -fx-pref-height: 40px;
+    -fx-text-alignment: center;
+    -fx-alignment: center;
+    -fx-font-size: 12;
+}
+
+.headerPaneFormular{
+    -fx-background-color: -fx-button-formular-color;
+    -fx-text-fill: -fx-tertiary-text-color;
+    -fx-pref-height: 50px;
+    -fx-fill: -fx-tertiary-text-color;
+    -fx-text-alignment: center;
+    -fx-alignment: center;
+    -fx-font-size: 15;
+    -fx-font-style: italic;
+}
+
+.headerPaneFormular .labelFormularHeader {
     -fx-fill:  -fx-tertiary-text-color;
     -fx-text-fill: -fx-tertiary-text-color;
+    -fx-text-alignment: center;
+    -fx-alignment: center;
 }
 
 .buttonFormular {
@@ -59,8 +90,24 @@
     -fx-background-color:  -fx-pane-formular-color;
 }
 
+
+.hboxTopBar{
+    -fx-spacing: 2px;
+}
+
 .topbar{
     -fx-pref-height: 20px;
+}
+
+.topbar .toggle-button{
+    -fx-text-fill: -fx-tertiary-text-color;
+    -fx-opacity: 20%;
+    -fx-pref-height: 20px;
+}
+
+.topbar .toggle-button:selected{
+    -fx-pref-height: 20px;
+    -fx-opacity: 100%;
 }
 
 .submeniuDashboard {
@@ -72,18 +119,18 @@
 }
 
 .header  {
-    -fx-text-fill: -fx-tertiary-text-color;
-    -fx-font-size: 20;
+    -fx-text-fill: -fx-primary-text-color;
+    -fx-font-size: 24;
 }
 
 .header2 {
-    -fx-text-fill: -fx-tertiary-text-color;
-    -fx-font-size:22;
+    -fx-text-fill: -fx-primary-text-color;
+    -fx-font-size:26;
     -fx-font-style: italic;
 }
 
 .formularPane > .label{
-    -fx-text-fill: -fx-tertiary-text-color;
+    -fx-text-fill: -fx-primary-text-color;
 }
 
 .hboxDashBoard{
@@ -146,8 +193,9 @@
     -fx-background-color:-fx-primary-color;
 }
 
-.label {
+.labelNormal {
     -fx-text-fill: -fx-primary-text-color;
+    -fx-font-size: 14;
 }
 
 .labelRegister{
