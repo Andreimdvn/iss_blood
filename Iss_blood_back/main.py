@@ -26,8 +26,8 @@ def init_flask_server(flask_config):
     flask = FlaskServer(flask_config)
     flask.run()
 
-def main():
 
+def main():
 
     parser = argparse.ArgumentParser(description="ISS Blood Server")
     parser.add_argument('-c', metavar='--config_file', type=str,
@@ -52,6 +52,7 @@ def main():
     print(db_config)
 
     init_flask_server(flask_config)
+
 
 # run with:  py -3 main.py -c config.json
 if __name__ == "__main__":
