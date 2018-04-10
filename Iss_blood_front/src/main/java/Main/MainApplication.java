@@ -1,5 +1,6 @@
 package Main;
 
+import Communication.FlaskClient;
 import Controller.ControllerScreens;
 
 import Service.MainService;
@@ -16,7 +17,7 @@ public class MainApplication extends Application {
     private  static Stage primaryStage;
 
     private void loadScreens(){
-        MainService service = new MainService();
+        MainService service = new MainService(new FlaskClient());
         ControllerScreens controller = new ControllerScreens(service);
         controller.loadScreen(Screen.LOGIN_SCREEN, Screen.LOGIN_RESOURCE);
         controller.loadScreen(Screen.REGISTER_SCREEN, Screen.REGISTER_RESOURCE);
