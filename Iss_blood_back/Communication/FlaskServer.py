@@ -1,3 +1,5 @@
+import json
+
 from flask import Flask, request
 import logging
 
@@ -27,8 +29,20 @@ class FlaskServer:
 
     def init_requests(self):
         self.app.add_url_rule("/test", "test_request", self.test_request, methods=["GET", "POST"])
+        self.app.add_url_rule("/login", "login_request", self.login_request, methods=["POST"])
 
     def test_request(self):
         self.request_data = request.get_json()
         self.logger.debug("Req data: {}".format(self.request_data))
         return "ok"
+
+    def login_request(self):
+        self.request_data = request.get_json()
+        self.logger.debug("Got Login Request JSON: {}".format(self.request_data))
+
+        if self.request_data["username"] == "Admin":
+            return_dict = {"status": "1", "message": "Login cu success!"}
+        else:
+            return_dict = {"status": "2", "message": "Login Failed!"}
+
+        return json.dumps(return_dict)

@@ -13,7 +13,7 @@ public class FlaskClient {
 
     public FlaskClient()
     {
-        this.urlRoot = "localhost:16000";
+        this.urlRoot = "http://127.0.0.1:16000";
     }
 
     private HttpURLConnection getConnection(String urlRelativePath) {
