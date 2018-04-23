@@ -1,7 +1,7 @@
 *.pyc
 *.exe
 *.log
-
+.idea/
 # Created by https://www.gitignore.io/api/gradle,pycharm,intellij
 
 ### Intellij ###
