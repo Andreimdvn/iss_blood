@@ -34,7 +34,7 @@ class FlaskServer:
     def test_request(self):
         self.request_data = request.get_json()
         self.logger.debug("Req data: {}".format(self.request_data))
-        return "ok"
+        return json.dumps(self.request_data)
 
     def login_request(self):
         self.request_data = request.get_json()

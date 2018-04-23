@@ -11,11 +11,15 @@ public class FlaskClient {
 
     private String urlRoot;
 
-    public FlaskClient()
-    {
+    public FlaskClient() {
         this.urlRoot = "http://127.0.0.1:16000";
     }
 
+    /**
+     * Creates a http connection using the given path
+     * @param urlRelativePath: String containing the type of request, for example /login
+     * @return HttpURLConnection that will be used to send json to the server
+     */
     private HttpURLConnection getConnection(String urlRelativePath) {
         try {
 
@@ -32,6 +36,11 @@ public class FlaskClient {
         return null;
     }
 
+    /**
+     * @param http : HttpURLConnection returned by getConnection method
+     * @param jsonString : String in json format to be sent to the server
+     * @return JsonObject returned by the server
+     */
     private JSONObject sendRequest(HttpURLConnection http, String jsonString){
         byte[] outJson = jsonString.getBytes(StandardCharsets.UTF_8);
         int length = outJson.length;
@@ -58,6 +67,13 @@ public class FlaskClient {
         }
     }
 
+    /**
+     * Sends a login request to the server
+     * @param user : Username for login
+     * @param password : Password for login
+     * @return <bool,string> true if the login was succesfully , false otheewise
+     * + a string message describing the status
+     */
     public Pair<Boolean, String> login(String user, String password){
 
         HttpURLConnection http = getConnection("/login");
@@ -72,17 +88,29 @@ public class FlaskClient {
         JSONObject jsonResponse = this.sendRequest(http, jsonString);
         System.out.println(jsonResponse);
 
-        if(jsonResponse == null)
-        {
+        if(jsonResponse == null) {
             return new Pair<>(false, "Connection error.");
         }
-        if (jsonResponse.getString("status").equals("1"))
-        {
+        if (jsonResponse.getString("status").equals("1")) {
             return new Pair<>(true, "Success!");
         }
-        else
-        {
+        else {
             return new Pair<>(false, jsonResponse.getString("message"));
         }
+    }
+
+    /** Sends a json string to a given relative path
+     * @param jsonString : String to be sent to the server
+     * @param urlRelateivePath : Type of request, like /login
+     * @return JsonObject returned from the server
+     */
+    public JSONObject send_json_request(String jsonString, String urlRelateivePath) {
+        HttpURLConnection http = getConnection(urlRelateivePath);
+
+        if(http == null){
+            return null;
+        }
+
+        return this.sendRequest(http, jsonString);
     }
 }

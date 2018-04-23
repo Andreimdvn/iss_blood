@@ -7,13 +7,11 @@ public class MainService {
 
     FlaskClient flaskClient;
 
-    public MainService(FlaskClient flaskClient)
-    {
+    public MainService(FlaskClient flaskClient) {
         this.flaskClient = flaskClient;
     }
 
-    public Pair<Boolean, String> login(String user, String pass)
-    {
+    public Pair<Boolean, String> login(String user, String pass) {
         return flaskClient.login(user, pass);
     }
 }
