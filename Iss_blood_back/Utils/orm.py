@@ -1,40 +1,231 @@
-#!/usr/bin/env python3
+import sys
 
-from sqlalchemy import MetaData, create_engine
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import Column, Integer, String, ForeignKey, Date, SmallInteger, Enum, Float, create_engine
+from sqlalchemy.orm import relationship, sessionmaker
 
-from Utils import libsql
-from Utils.model import MODEL
+
+MYSQL_CON_STRING = 'mysql://%s:%s@%s/%s'
+
+DB = declarative_base()
+
+
+class User(DB):
+    __tablename__ = 'User'
+
+    id = Column(Integer, autoincrement=True, primary_key=True)
+    username = Column(String(100), nullable=False)
+    email = Column(String(100), nullable=False, unique=True)
+    password = Column(String(100), nullable=False)
+
+    donatori = relationship('Donator', back_populates='user')
+    staff_transfuzii = relationship('StaffTransfurzii', back_populates='user')
+    staff_recoltare = relationship('StaffRecoltare', back_populates='user')
+    medici = relationship('Medic', back_populates='user')
+
+
+class Judet(DB):
+    __tablename__ = 'Judet'
+
+    id = Column(Integer, autoincrement=True, primary_key=True)
+    nume = Column(String(50), nullable=False)
+
+    localitati = relationship('Localitate', back_populates='judet')
+
+
+class Localitate(DB):
+    __tablename__ = 'Localitate'
+
+    id = Column(Integer, autoincrement=True, primary_key=True)
+    id_judet = Column(Integer, ForeignKey('Judet.id'))
+    nume = Column(String(50), nullable=False)
+
+    judet = relationship('Judet', back_populates='localitati')
+    locatii = relationship('Locatie', back_populates='localitate')
+
+
+class Donator(DB):
+    __tablename__ = 'Donator'
+
+    id_user = Column(Integer, ForeignKey('User.id'), primary_key=True)
+    prenume = Column(String(50), nullable=False)
+    nume = Column(String(50), nullable=False)
+    cnp = Column(String(13), nullable=False)
+    id_domiciliu = Column(Integer, ForeignKey('Localitate.id'))
+    adresa_domiciliu = Column(String(100), nullable=False)
+    data_nasterii = Column(Date, nullable=False)
+    telefon = Column(String(20), nullable=False)
+    id_localitate_resedinta = Column(Integer, ForeignKey('Localitate.id'))
+    adresa_resedinta = Column(String(100), nullable=False)
+
+    user = relationship('User', back_populates='donatori')
+    sange_brut = relationship('SangeBrut', back_populates='donator')
+
+
+class Locatie(DB):
+    __tablename__ = 'Locatie'
+
+    id = Column(Integer, autoincrement=True, primary_key=True)
+    nume = Column(String(50), nullable=False)
+    adresa = Column(String(100), nullable=False)
+    id_localitate = Column(Integer, ForeignKey('Localitate.id'))
+    tip_locatie = Column(SmallInteger, nullable=False)
+
+    localitate = relationship('Localitate', back_populates='locatii')
+    staff_transfuzii = relationship('StaffTransfurzii', back_populates='locatie')
+    staff_recoltare = relationship('StaffRecoltare', back_populates='locatie')
+    medici = relationship('Medic', back_populates='locatie')
+    sange_prelucrat = relationship('SangePrelucrat', back_populates='locatie')
+
+
+class StaffTransfurzii(DB):
+    __tablename__ = 'StaffTransfurzii'
+
+    id_user = Column(Integer, ForeignKey('User.id'), primary_key=True)
+    id_locatie = Column(Integer, ForeignKey('Locatie.id'))
+    telefon = Column(String(20), nullable=False)
+    prenume = Column(String(50), nullable=False)
+    nume = Column(String(50), nullable=False)
+    cnp = Column(String(13), nullable=False)
+
+    user = relationship('User', back_populates='staff_transfuzii')
+    locatie = relationship('Locatie', back_populates='staff_transfuzii')
+    analize = relationship('Analize', back_populates='staff_transfuzii')
+
+
+class StaffRecoltare(DB):
+    __tablename__ = 'StaffRecoltare'
+
+    id_user = Column(Integer, ForeignKey('User.id'), primary_key=True)
+    id_locatie = Column(Integer, ForeignKey('Locatie.id'))
+    prenume = Column(String(50), nullable=False)
+    nume = Column(String(50), nullable=False)
+    cnp = Column(String(13), nullable=False)
+
+    user = relationship('User', back_populates='staff_recoltare')
+    locatie = relationship('Locatie', back_populates='staff_recoltare')
+
+
+class Medic(DB):
+    __tablename__ = 'Medic'
+
+    id_user = Column(Integer, ForeignKey('User.id'), primary_key=True)
+    id_locatie = Column(Integer, ForeignKey('Locatie.id'))
+    prenume = Column(String(50), nullable=False)
+    nume = Column(String(50), nullable=False)
+    cnp = Column(String(13), nullable=False)
+    telefon = Column(String(20), nullable=False)
+    specializare = Column(String(50), nullable=False)
+
+    user = relationship('User', back_populates='medici')
+    locatie = relationship('Locatie', back_populates='medici')
+
+
+class Analize(DB):
+    __tablename__ = 'Analize'
+
+    id = Column(Integer, autoincrement=True, primary_key=True)
+    id_staff_transfuzii = Column(Integer, ForeignKey('StaffTransfurzii.id_user'))
+
+    staff_transfuzii = relationship('StaffTransfurzii', back_populates='analize')
+    sange_brut = relationship('SangeBrut', back_populates='analize')
+
+
+class SangeBrut(DB):
+    __tablename__ = 'SangeBrut'
+
+    id = Column(Integer, autoincrement=True, primary_key=True)
+    id_donator = Column(Integer, ForeignKey('Donator.id_user'))
+    id_locatie_recoltare = Column(Integer, ForeignKey('Locatie.id'))
+    data_donare = Column(Date, nullable=False)
+    id_analize = Column(Integer, ForeignKey('Analize.id'))
+    stadiu = Column(Enum('Recoltata', 'Analizata', 'Impartita', 'Aruncata'), nullable=False)
+    id_locatie_curenta = Column(Integer, ForeignKey('Locatie.id'))
+
+    donator = relationship('Donator', back_populates='sange_brut')
+    analize = relationship('Analize', back_populates='sange_brut')
+    sange_prelucrat = relationship('SangePrelucrat', back_populates='sange_brut')
+
+
+class SangePrelucrat(DB):
+    __tablename__ = 'SangePrelucrat'
+
+    id = Column(Integer, autoincrement=True, primary_key=True)
+    id_sange_brut = Column(Integer, ForeignKey('SangeBrut.id'))
+    tip = Column(Enum('Plasma', 'Trombocite', 'Globule_rosii'))
+    id_locatie = Column(Integer, ForeignKey('Locatie.id'))
+    gramaj = Column(Float, nullable=False)
+    status = Column(Enum('Depozitat', 'Folosit', 'Expirat'))
+
+    sange_brut = relationship('SangeBrut', back_populates='sange_prelucrat')
+    locatie = relationship('Locatie', back_populates='sange_prelucrat')
 
 
 class ORM:
 
-    def __init__(self, config_file):
-        self.__conf = libsql.load_config(config_file)
-        con_string = libsql.MYSQL_CON_STRING % (self.__conf['username'], self.__conf['password'], self.__conf['host'],
-                                                self.__conf['database'])
+    def __init__(self, config):
+        con_string = MYSQL_CON_STRING % (config['username'], config['password'], config['host'], config['database'])
 
-        # create engine for ORM
-        self.eng = create_engine(con_string)
+        engine = create_engine(con_string)
+        self.session = sessionmaker(bind=engine)
+        # DB.metadata.drop_all(engine) # if you want to delete all tables in database
+        DB.metadata.create_all(engine)
 
-        # create metadata object to map all tables from the engine
-        self.metadata = MetaData(self.eng)
-        # get in metadata object all tables from engine
-        self.metadata.reflect()
+    def __columns_objects(self, table, columns):
+        cols = []
+        for col in columns:
+            try:
+                c = getattr(table, col)
+            except AttributeError:
+                c = None
+            if not c:
+                raise ValueError('[!] Column [%s] not present in table [%s]!' % (col, table))
+            cols.append(c)
+        return cols
 
-        self.model = MODEL(self.metadata)
+    def __table_object(self, table):
+        try:
+            tb = getattr(sys.modules[__name__], table)
+        except AttributeError:
+            tb = None
+        if not tb:
+            raise ValueError('[!] Table [%s] couldn\'t be found!' % table)
+        return tb
+
+    def insert(self, table, columns=None, values=None):
+        """
+        Insert into table, into specified columns values provided.
+        :param table:
+        :param columns:
+        :param values:
+        :return:
+        """
+        tb = self.__table_object(table)
+        if columns:
+            cols = self.__columns_objects(tb, columns)
+            if len(cols) != len(values):
+                raise ValueError('[!] Columns and values are not equal!')
+            col_val = {e[0]: e[1] for e in zip(columns, values)}
+            ses = self.session()
+            ses.add(tb(**col_val))
+            ses.commit()
 
     def select(self, table, columns=None):
         """
-        Execute a query for all the fields in a table and returnes the results.
+        Execute a query on all rows in a table and returnes the results.
         :param table: table name to be queried.
         :param columns: list with required columns.
-        :return: a tuple for each row in table. e.g. (field1, field2, ...)
+        :return: a list with objects of table type if not columns were specified, tuples otherwise.
         """
-        tb = getattr(self.model, table)
+        tb = self.__table_object(table)
         if not columns:
-            return tb.select().execute().fetchall()
+            return self.session().query(tb)
         else:
-            rows = []
-            for r in tb.select().execute():
-                rows.append(tuple(r[col] for col in columns))
-            return rows
+            cols = [getattr(tb, c) for c in columns]
+            return self.session().query(*cols)
+
+
+orm = ORM({"host": "127.0.0.1",
+    "database": "iss_blood",
+    "username": "root",
+    "password": "root"})

@@ -1,6 +1,6 @@
 *.pyc
 *.exe
-*.log
+./Logs/*.log
 *.iws
 **/.idea/workspace.xml
 **/.idea/tasks.xml
