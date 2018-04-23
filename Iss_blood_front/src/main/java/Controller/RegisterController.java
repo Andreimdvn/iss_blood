@@ -1,15 +1,13 @@
 package Controller;
 
 import Service.MainService;
+import Utils.Screen;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -17,13 +15,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
-import java.io.IOException;
 
-public class RegisterController {
-
-    private MainService mainService;
+public class RegisterController implements ControlledScreensInterface{
 
     @FXML
     private AnchorPane mainPane;
@@ -71,7 +65,12 @@ public class RegisterController {
     private FontAwesomeIconView closeIcon;
 
     private double xOffset;
+
     private double yOffset;
+
+    private MainService mainService;
+
+    private ControllerScreens controller;
 
     private void removeLicentaHBox(){
         registerPane.getChildren().remove(licentaHbox);
@@ -102,14 +101,13 @@ public class RegisterController {
         licentaHbox.getChildren().addAll(a, licentaTextField);
         registerPane.getChildren().add(licentaHbox);
     }
+
     @FXML
     private void selectedToggleButton(){
-        if(donatorToggleButton.isSelected())
-        {
+        if(donatorToggleButton.isSelected()) {
             removeLicentaHBox();
         }
-        else if(this.isAnySelected())
-        {
+        else if(this.isAnySelected()) {
             if(licentaHbox == null) {
                addLicentaHBox();
             }
@@ -136,31 +134,12 @@ public class RegisterController {
         String fullname = fullnameTextField.getText();
         String address = addressTextField.getText();
         String phone = phoneTextField.getText();
-    }
 
-    public void setMainService(MainService mainService) {
-        this.mainService = mainService;
     }
 
     @FXML
     private void loginLabelClicked(){
-        FXMLLoader loader =new FXMLLoader();
-        loader.setLocation(getClass().getResource("/View/LoginView.fxml"));
-        MainService service = new MainService();
-        try {
-            Stage primaryStage = new Stage();
-            Parent root = loader.load();
-            LoginController loginController = new LoginController();
-            loginController.setMainService(service);
-            primaryStage.initStyle(StageStyle.UNDECORATED);
-            primaryStage.setResizable(false);
-            primaryStage.setScene(new Scene(root));
-            primaryStage.show();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        closeWindow();
+       controller.setScreen(Screen.LOGIN_SCREEN);
     }
 
     private void enableStyle(){
@@ -172,6 +151,7 @@ public class RegisterController {
         fullnameTextField.setFocusColor(Paint.valueOf(focusColor));
         phoneTextField.setFocusColor(Paint.valueOf(focusColor));
 
+
         mainPane.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -179,7 +159,6 @@ public class RegisterController {
                 yOffset = event.getSceneY();
             }
         });
-
         mainPane.setOnMouseDragged(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -193,5 +172,14 @@ public class RegisterController {
     @FXML
     private void initialize(){
         enableStyle();
+    }
+
+    public void setMainService(MainService mainService){
+        this.mainService = mainService;
+    }
+
+    @Override
+    public void setScreenParent(ControllerScreens screenParent) {
+        this.controller = screenParent;
     }
 }

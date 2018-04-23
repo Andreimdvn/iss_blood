@@ -5,7 +5,7 @@ apply plugin: 'java'
 apply plugin: 'application'
 
 sourceCompatibility = 1.8
-mainClassName = 'Main'
+mainClassName = 'Main.Main'
 
 repositories {
     mavenCentral()
@@ -18,7 +18,8 @@ dependencies {
     compile group: 'com.jfoenix', name: 'jfoenix', version: '1.10.0'
     // https://mvnrepository.com/artifact/org.controlsfx/controlsfx
     compile group: 'org.controlsfx', name: 'controlsfx', version: '8.40.14'
-
+    // https://mvnrepository.com/artifact/org.json/json
+    compile group: 'org.json', name: 'json', version: '20160810'
 }
 
 jar {

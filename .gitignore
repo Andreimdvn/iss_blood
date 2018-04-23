@@ -2,7 +2,7 @@
 *.exe
 *.log
 *.iws
-**/.idea/workspace.xml 
+**/.idea/workspace.xml
 **/.idea/tasks.xml
 
 
@@ -43,6 +43,7 @@ cmake-build-debug/
 
 # IntelliJ
 /out/
+*.orig
 
 # mpeltonen/sbt-idea plugin
 .idea_modules/
@@ -131,3 +132,8 @@ gradle-app.setting
 
 
 # End of https://www.gitignore.io/api/gradle,pycharm,intellij
+.idea/iss_blood.iml
+.idea/modules.xml
+.idea/vcs.xml
+Iss_blood_front/.idea/vcs.xml
+Iss_blood_front/.idea/modules/Iss_blood_front.iml
