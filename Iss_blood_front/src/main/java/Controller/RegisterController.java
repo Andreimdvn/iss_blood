@@ -104,12 +104,10 @@ public class RegisterController implements ControlledScreensInterface{
 
     @FXML
     private void selectedToggleButton(){
-        if(donatorToggleButton.isSelected())
-        {
+        if(donatorToggleButton.isSelected()) {
             removeLicentaHBox();
         }
-        else if(this.isAnySelected())
-        {
+        else if(this.isAnySelected()) {
             if(licentaHbox == null) {
                addLicentaHBox();
             }

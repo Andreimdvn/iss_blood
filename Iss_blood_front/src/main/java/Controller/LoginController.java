@@ -7,10 +7,12 @@ import com.jfoenix.controls.JFXTextField;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
+import javafx.util.Pair;
 
 
 public class LoginController implements ControlledScreensInterface {
@@ -67,6 +69,12 @@ public class LoginController implements ControlledScreensInterface {
     private void loginClicked(){
         String username = usernameTextField.getText();
         String password = passwordTextField.getText();
+        Pair<Boolean, String> canLogin = mainService.login(username, password);
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Login");
+        alert.setContentText(canLogin.getValue());
+        alert.showAndWait();
     }
 
     @FXML
