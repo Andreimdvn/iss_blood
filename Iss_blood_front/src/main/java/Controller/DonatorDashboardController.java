@@ -3,10 +3,7 @@ package Controller;
 import Service.MainService;
 import Utils.Screen;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
-import javafx.animation.FadeTransition;
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.Timeline;
+import javafx.animation.*;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,6 +21,8 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class DonatorDashboardController implements ControlledScreensInterface {
@@ -141,6 +140,7 @@ public class DonatorDashboardController implements ControlledScreensInterface {
 
         if(this.isAnySelected() && this.isAnyLoaded())
         {
+         stopTimer();
          loadBottomPane();
         }
         else if(this.isAnySelected() && !okStyle) {
@@ -151,6 +151,7 @@ public class DonatorDashboardController implements ControlledScreensInterface {
             moveTopToCenter();
             istoricLoaded = false;
             formularLoaded = false;
+            startTimer();
         }
     }
 
@@ -259,6 +260,15 @@ public class DonatorDashboardController implements ControlledScreensInterface {
         }
     }
 
+    private void fadeOut(Node node){
+        {
+            FadeTransition ft = new FadeTransition(Duration.millis(1000), node);
+            ft.setFromValue(1.0);
+            ft.setToValue(0.0);
+            ft.play();
+        }
+    }
+
     private void loadIstoric() {
 
 
@@ -324,6 +334,59 @@ public class DonatorDashboardController implements ControlledScreensInterface {
     @FXML
     private HBox navSegmentHbox;
 
+    @FXML
+    private AnchorPane statsPane1;
+
+    @FXML
+    private AnchorPane statsPane2;
+
+
+    private void changePane(){
+        AnchorPane center = centerStatsPane;
+
+        if(center.getChildren().contains(statsPane))
+        {
+            centerStatsPane.getChildren().remove(statsPane);
+            fadeOut(statsPane);
+            centerStatsPane.getChildren().add(statsPane1);
+            fadeIn(statsPane1);
+
+        }
+        else if(center.getChildren().contains(statsPane1))
+        {
+            centerStatsPane.getChildren().remove(statsPane1);
+            centerStatsPane.getChildren().add(statsPane2);
+            fadeIn(statsPane2);
+        }
+        else if(center.getChildren().contains(statsPane2))
+        {
+            centerStatsPane.getChildren().remove(statsPane2);
+            centerStatsPane.getChildren().add(statsPane);
+            fadeIn(statsPane);
+        }
+
+    }
+    Timeline timeTransition;
+    private void createTimer(){
+
+        timeTransition = new Timeline();
+
+        timeTransition.getKeyFrames().addAll(
+            new KeyFrame(Duration.seconds(5), x ->
+            {
+                changePane();
+            }
+        ));
+        timeTransition.setCycleCount(Animation.INDEFINITE);
+        timeTransition.play();
+    }
+    private void startTimer(){
+        timeTransition.play();
+    }
+
+    private void stopTimer(){
+        timeTransition.stop();
+    }
 
     private void moveBottomToTop(){
 
@@ -345,11 +408,17 @@ public class DonatorDashboardController implements ControlledScreensInterface {
     private AnchorPane emptyPane;
     @FXML
     private void initialize(){
+
         prefYHBox = dashboardHBox.getLayoutY();
         prefBottomPaneHeight = ((AnchorPane) borderPane.getBottom()).getPrefHeight();
         emptyPane = new AnchorPane();
         emptyPane.setStyle("-fx-background-color: white");
         animationSpeed = 200.0d;
+
+        centerStatsPane.getChildren().removeAll(statsPane1,statsPane2);
+
+        createTimer();
+        startTimer();
         formularVBox.getChildren().forEach(
                 x -> {
                     if( x instanceof Label )
@@ -400,19 +469,21 @@ public class DonatorDashboardController implements ControlledScreensInterface {
     @FXML
     private AnchorPane statsPane;
 
+    @FXML
+    private AnchorPane centerStatsPane;
     private void showStats()
     {
 
         AnchorPane center = (AnchorPane) borderPane.getCenter();
-        if(!center.getChildren().contains(statsPane) && !isAnyLoaded())
-            center.getChildren().add(statsPane);
+        if(!center.getChildren().contains(centerStatsPane) && !isAnyLoaded())
+            center.getChildren().add(centerStatsPane);
 
     }
 
     private void hideStats(){
         AnchorPane center = (AnchorPane) borderPane.getCenter();
-        if(center.getChildren().contains(statsPane))
-            center.getChildren().remove(statsPane);
+        if(center.getChildren().contains(centerStatsPane))
+            center.getChildren().remove(centerStatsPane);
     }
 
     private Stage getStage()

@@ -15,20 +15,37 @@
    <center>
       <AnchorPane fx:id="centerPane" prefHeight="337.0" prefWidth="800.0" BorderPane.alignment="CENTER">
          <children>
-            <AnchorPane fx:id="statsPane" layoutX="56.0" layoutY="27.0" prefHeight="258.0" prefWidth="688.0">
+            <AnchorPane fx:id="centerStatsPane" layoutX="65.0" layoutY="29.0">
                <children>
-                  <Label layoutX="14.0" layoutY="30.0" prefHeight="30.0" prefWidth="163.0" styleClass="header" text="Welcome back," />
-                  <Label layoutX="150.0" layoutY="66.0" styleClass="header2" text="Moldovan Daniel-Gabriel" />
-                  <AnchorPane layoutX="51.0" layoutY="183.0" prefHeight="51.0" prefWidth="585.0">
+                  <AnchorPane fx:id="statsPane1" layoutX="13.0" layoutY="2.0" prefHeight="254.0" prefWidth="662.0">
                      <children>
-                        <Label styleClass="labelNormal" text="Ultima data cand ai donat:" />
-                        <Label layoutY="29.0" styleClass="labelNormal" text="In cate zile mai poti dona:" />
-                        <Label layoutX="282.0" styleClass="labelNormal" text="De cate ori ai donat in acest an:" />
-                        <Label layoutX="282.0" layoutY="31.0" prefHeight="20.0" prefWidth="240.0" styleClass="labelNormal" text="De cate ori mai poti dona in acest an:" />
-                        <Label fx:id="ultimaDataDonare" layoutX="178.0" styleClass="labelNormal" text="01/01/1997" />
-                        <Label fx:id="urmatoareDonatie" layoutX="178.0" layoutY="29.0" styleClass="labelNormal" text="102 zile" />
-                        <Label fx:id="donariAnCurent" layoutX="549.0" styleClass="labelNormal" text="2" />
-                        <Label fx:id="donariRamaseAnCurent" layoutX="553.0" layoutY="31.0" styleClass="labelNormal" text="3" />
+                        <Label layoutX="14.0" layoutY="30.0" prefHeight="35.0" prefWidth="219.0" styleClass="header" text="De ce sa donezi?" />
+                        <Label layoutX="59.0" layoutY="65.0" prefHeight="183.0" prefWidth="544.0" styleClass="labelNormal" text="Deocamdata nu s-a descoperit un inlocuitor al sangelui asa ca donarea este singura solutie pentru a putea face fata nevoilor de sange si elemente ale sangelui necesare terapeuticii transfuzionale. Medicii si chirurgii se bazeaza pe donarea de sange pentru a efectua, in fiecare zi, o serie de interventii care salveaza viata oamenilor, sau o prelungesc." wrapText="true" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="statsPane" prefHeight="258.0" prefWidth="688.0">
+                     <children>
+                        <Label layoutX="14.0" layoutY="30.0" prefHeight="30.0" prefWidth="163.0" styleClass="header" text="Welcome back," />
+                        <Label layoutX="150.0" layoutY="66.0" styleClass="header2" text="Moldovan Daniel-Gabriel" />
+                        <AnchorPane layoutX="51.0" layoutY="183.0" prefHeight="51.0" prefWidth="585.0">
+                           <children>
+                              <Label styleClass="labelNormal" text="Ultima data cand ai donat:" />
+                              <Label layoutY="29.0" styleClass="labelNormal" text="In cate zile mai poti dona:" />
+                              <Label layoutX="282.0" styleClass="labelNormal" text="De cate ori ai donat in acest an:" />
+                              <Label layoutX="282.0" layoutY="31.0" prefHeight="20.0" prefWidth="240.0" styleClass="labelNormal" text="De cate ori mai poti dona in acest an:" />
+                              <Label fx:id="ultimaDataDonare" layoutX="178.0" styleClass="labelNormal" text="01/01/1997" />
+                              <Label fx:id="urmatoareDonatie" layoutX="178.0" layoutY="29.0" styleClass="labelNormal" text="102 zile" />
+                              <Label fx:id="donariAnCurent" layoutX="549.0" styleClass="labelNormal" text="2" />
+                              <Label fx:id="donariRamaseAnCurent" layoutX="553.0" layoutY="31.0" styleClass="labelNormal" text="3" />
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="statsPane2" layoutX="23.0" layoutY="12.0" prefHeight="254.0" prefWidth="662.0">
+                     <children>
+                        <Label layoutX="14.0" layoutY="14.0" prefHeight="35.0" prefWidth="190.0" styleClass="header" text="Situatia actuala" />
+                        <Label layoutX="37.0" layoutY="42.0" prefHeight="100.0" prefWidth="587.0" styleClass="labelNormal" text="  Anual, peste 600.000 de persoane au nevoie de sânge şi de preparate sanguine. Din păcate, nu de puţine ori, pacienţii şi cei dragi lor se confruntă cu lipsa sângelui din spitale iar operaţiile şi tratamentele medicale de care au atâta nevoie sunt amânate." wrapText="true" />
+                        <Label layoutX="37.0" layoutY="142.0" prefHeight="86.0" prefWidth="588.0" styleClass="labelNormal" text="  România se află în continuare pe ultimele locuri în Europa la capitolul donării de sânge - doar 1,7% din populaţia adultă donează sânge. Cu toate astea, în situaţii limită românii au demonstrat solidaritate şi simt civic, stând ore în şir la coadă pentru a dona sânge. Chiar dacă pe moment aceste situaţii sunt rezolvate, nevoia de sânge este însă una constantă." wrapText="true" />
                      </children>
                   </AnchorPane>
                </children>

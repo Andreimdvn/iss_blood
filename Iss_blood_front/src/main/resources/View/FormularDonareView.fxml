@@ -6,31 +6,35 @@
 <?import com.jfoenix.controls.JFXRadioButton?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="480.0" prefWidth="800.0" styleClass="formularPane" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.FormularDonareController">
+<AnchorPane prefHeight="468.0" prefWidth="800.0" styleClass="formularPane" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.FormularDonareController">
    <children>
-      <JFXButton layoutX="349.0" layoutY="416.0" styleClass="buttonFormular" text="Trimite formular" />
-      <HBox layoutX="56.0" layoutY="127.0" prefHeight="263.0" prefWidth="688.0" spacing="10.0">
+      <JFXButton layoutX="349.0" layoutY="419.0" styleClass="buttonFormular" text="Trimite formular" />
+      <HBox layoutX="56.0" layoutY="108.0" prefHeight="299.0" prefWidth="688.0" spacing="10.0">
          <children>
-            <AnchorPane prefHeight="242.0" prefWidth="339.0" styleClass="subFormularPane">
+            <AnchorPane prefHeight="271.0" prefWidth="339.0" styleClass="subFormularPane">
                <children>
                   <AnchorPane prefHeight="41.0" prefWidth="339.0" styleClass="headerPaneFormular">
                      <children>
                         <Label layoutX="121.0" layoutY="14.0" styleClass="labelFormularHeader" text="Date personale" />
                      </children>
                   </AnchorPane>
-                  <VBox fillWidth="false" layoutX="78.0" layoutY="55.0" prefHeight="153.0" prefWidth="182.0" spacing="20.0">
+                  <VBox fillWidth="false" layoutX="78.0" layoutY="73.0" prefHeight="153.0" prefWidth="182.0" spacing="20.0">
                      <children>
                         <JFXTextField fx:id="fullnameTextField" focusColor="#fea02f" promptText="Fullname" styleClass="textbox" unFocusColor="WHITE" />
                         <HBox spacing="30.0">
                            <children>
                               <Label text="Sex" />
-                              <JFXRadioButton selected="true" styleClass="jfx-radio-button" text="M" />
-                              <JFXRadioButton text="F" />
+                              <JFXRadioButton styleClass="jfx-radio-button" text="M">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="sex" />
+                                 </toggleGroup></JFXRadioButton>
+                              <JFXRadioButton text="F" toggleGroup="$sex" />
                            </children>
                         </HBox>
                         <JFXTextField fx:id="addressTextField" focusColor="#fea02f" promptText="Address" styleClass="textbox" unFocusColor="WHITE" />
@@ -47,14 +51,14 @@
                         <JFXComboBox prefHeight="25.0" prefWidth="180.0" promptText="Pentru cine vrei sa donezi?" />
                         <JFXComboBox prefHeight="25.0" prefWidth="167.0" promptText="Grupa de sange" />
                         <JFXComboBox prefHeight="25.0" prefWidth="167.0" promptText="RH" />
-                        <Label text="Ziua cand pot dona" />
+                        <Label styleClass="labelNormal" text="Ziua cand pot dona" />
                         <HBox spacing="4.0">
                            <children>
-                              <JFXCheckBox fx:id="luniCheckbox" text="Luni" />
-                              <JFXCheckBox fx:id="martiCheckbox" text="Marti" />
-                              <JFXCheckBox fx:id="miercuriCheckbox" text="Miercuri" />
-                              <JFXCheckBox fx:id="joiCheckbox" text="Joi" />
-                              <JFXCheckBox fx:id="vineriCheckbox" text="Vineri" />
+                              <JFXCheckBox fx:id="luniCheckbox" selected="true" text="Luni" />
+                              <JFXCheckBox fx:id="martiCheckbox" selected="true" text="Marti" />
+                              <JFXCheckBox fx:id="miercuriCheckbox" selected="true" text="Miercuri" />
+                              <JFXCheckBox fx:id="joiCheckbox" selected="true" text="Joi" />
+                              <JFXCheckBox fx:id="vineriCheckbox" selected="true" text="Vineri" />
                            </children>
                         </HBox>
                      </children>
@@ -68,7 +72,7 @@
             </AnchorPane>
          </children>
       </HBox>
-      <AnchorPane layoutX="56.0" layoutY="28.0" prefHeight="59.0" prefWidth="688.0" styleClass="headerPaneFormular">
+      <AnchorPane layoutX="56.0" layoutY="14.0" prefHeight="59.0" prefWidth="688.0" styleClass="headerPaneFormular">
          <children>
             <Text layoutX="261.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="labelFormularHeader" text="Formular inscriere donare" />
          </children>

@@ -15,7 +15,31 @@
     -fx-formular-color: #344b52;
     -fx-pane-formular-color:#587983;
     -fx-button-formular-color:#fea02f;
+    -fx-warning-color: red;
+}
 
+
+.labelClickable{
+
+}
+
+.smallPane{
+    -fx-max-height: 200px;
+}
+
+.labelWarning{
+
+    -fx-font-weight: bold;
+}
+
+.infoBox{
+    -fx-border-color: -fx-formular-color;
+}
+
+.labelInfoBox{
+    -fx-text-fill: -fx-primary-text-color;
+    -fx-font-size: 12px;
+    -fx-wrap-text: true;
 }
 
 .logoutButton{
@@ -43,6 +67,7 @@
     -fx-pref-width: 200px;
 
 }
+
 
 .hboxIstoric {
     -fx-spacing: 3;
