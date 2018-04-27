@@ -14,7 +14,7 @@ class User(DB):
     __tablename__ = 'User'
 
     id = Column(Integer, autoincrement=True, primary_key=True)
-    username = Column(String(100), nullable=False)
+    username = Column(String(100), nullable=False, unique=True)
     email = Column(String(100), nullable=False, unique=True)
     password = Column(String(100), nullable=False)
 
@@ -170,8 +170,9 @@ class ORM:
         self.session = sessionmaker(bind=engine)
         # DB.metadata.drop_all(engine) # if you want to delete all tables in database
         DB.metadata.create_all(engine)
+        self.ses = self.session()
 
-    def __columns_objects(self, table, columns):
+    def columns_objects(self, table, columns):
         cols = []
         for col in columns:
             try:
@@ -183,7 +184,7 @@ class ORM:
             cols.append(c)
         return cols
 
-    def __table_object(self, table):
+    def table_object(self, table):
         try:
             tb = getattr(sys.modules[__name__], table)
         except AttributeError:
@@ -200,32 +201,92 @@ class ORM:
         :param values:
         :return:
         """
-        tb = self.__table_object(table)
         if columns:
-            cols = self.__columns_objects(tb, columns)
+            if type(columns) not in (list, tuple):
+                raise ValueError('[!] Type [%s] for columns are not allowed!' % type(columns))
+        if values:
+            if type(values) not in (list, tuple):
+                raise ValueError('[!] Type [%s] for values are not allowed!' % type(values))
+        tb = self.table_object(table)
+        if columns:
+            cols = self.columns_objects(tb, columns)
             if len(cols) != len(values):
                 raise ValueError('[!] Columns and values are not equal!')
             col_val = {e[0]: e[1] for e in zip(columns, values)}
-            ses = self.session()
-            ses.add(tb(**col_val))
-            ses.commit()
+            self.ses.add(tb(**col_val))
+            self.ses.commit()
+            self.ses.flush()
+        else:
+            cols = [c.key for c in tb.__table__.columns if c.key != 'id']
+            if len(cols) != len(values):
+                raise ValueError('[!] Columns and values number are not equal!')
+            col_val = {e[0]: e[1] for e in zip(cols, values)}
+            self.ses.add(tb(**col_val))
+            self.ses.commit()
+            self.ses.flush()
 
-    def select(self, table, columns=None):
+    def select(self, table, columns=None, values=None, first=False):
         """
         Execute a query on all rows in a table and returnes the results.
         :param table: table name to be queried.
         :param columns: list with required columns.
+        :param values:
+        :param first: first item is returned.
         :return: a list with objects of table type if not columns were specified, tuples otherwise.
         """
-        tb = self.__table_object(table)
+        res = None
+        if columns:
+            if type(columns) not in (list, tuple):
+                raise ValueError('[!] Type [%s] for columns are not allowed!' % type(columns))
+        if values:
+            if type(values) not in (list, tuple):
+                raise ValueError('[!] Type [%s] for values are not allowed!' % type(values))
+        tb = self.table_object(table)
         if not columns:
-            return self.session().query(tb)
+            res = self.ses.query(tb)
+        elif not values:
+            cols = [getattr(tb, c) for c in columns]
+            res = self.ses.query(*cols)
         else:
             cols = [getattr(tb, c) for c in columns]
-            return self.session().query(*cols)
+            if len(cols) != len(values):
+                raise ValueError('[!] There are not enough values/columns!')
+            col_val = {e[0].key: e[1] for e in zip(cols, values)}
+            res = self.ses.query(tb).filter_by(**col_val)
+        if first:
+            return res.first()
+        return res.all()
 
+    def update(self):
+        pass
 
-orm = ORM({"host": "127.0.0.1",
-    "database": "iss_blood",
-    "username": "root",
-    "password": "root"})
+    def delete(self, table, columns=None, values=None):
+        """
+        Execute a delete on a table with specific columns and values.
+        :param table:
+        :param columns:
+        :param values:
+        :return:
+        """
+        if columns:
+            if type(columns) not in (list, tuple):
+                raise ValueError('[!] Type [%s] for columns are not allowed!' % type(columns))
+            if len(columns) < 1:
+                raise ValueError('[!] Specify some columns!')
+        else:
+            raise ValueError('[!] Specify columns for where clause!')
+        if values:
+            if type(values) not in (list, tuple):
+                raise ValueError('[!] Type [%s] for values are not allowed!' % type(values))
+            if len(values) < 1:
+                raise ValueError('[!] Specify some values!')
+        else:
+            raise ValueError('[!] Specify values for where clause!')
+        if len(values) != len(columns):
+            raise ValueError('[!] There are not enough values/columns!')
+        item = self.select(table, columns, values, first=True)
+        if not item:
+            raise ValueError('[!] Item with specified values doesn\'t exists!')
+        self.ses.delete(item)
+        self.ses.commit()
+        self.ses.flush()
