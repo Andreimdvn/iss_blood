@@ -69,15 +69,20 @@ public class LoginController implements ControlledScreensInterface {
     private void loginClicked(){
         String username = usernameTextField.getText();
         String password = passwordTextField.getText();
-        Pair<Boolean, String> canLogin = mainService.login(username, password);
-        
 
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Login");
-        alert.setContentText(canLogin.getValue());
-        alert.showAndWait();
-		controller.setScreen(Screen.DONATOR_SCREEN);    
-}
+        controller.setScreen(Screen.DONATOR_SCREEN);
+
+/*        Pair<Boolean, String> canLogin = mainService.login(username, password);
+        if (canLogin.getKey()) {
+            controller.setScreen(Screen.DONATOR_SCREEN);
+        } else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Login");
+            alert.setContentText(canLogin.getValue());
+            alert.showAndWait();
+        }
+  */
+    }
 
     /***
      * Load /View/RegisterView.fxml
