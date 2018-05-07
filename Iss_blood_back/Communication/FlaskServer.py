@@ -30,6 +30,7 @@ class FlaskServer:
     def init_requests(self):
         self.app.add_url_rule("/test", "test_request", self.test_request, methods=["GET", "POST"])
         self.app.add_url_rule("/login", "login_request", self.login_request, methods=["POST"])
+        self.app.add_url_rule("/register", "register_request", self.register_request, methods=["POST"])
 
     def test_request(self):
         self.request_data = request.get_json()
@@ -44,5 +45,17 @@ class FlaskServer:
             return_dict = {"status": "1", "message": "Login cu success!"}
         else:
             return_dict = {"status": "2", "message": "Login Failed!"}
+
+        return json.dumps(return_dict)
+
+    def register_request(self):
+        self.request_data = request.get_json()
+        self.logger.debug("Got register request JSON: {}".format(self.request_data))
+
+        # add to DB
+        # catch exception
+        # send JSON
+
+        return_dict = {"status": "1", "message": "Registered successfully"}
 
         return json.dumps(return_dict)
