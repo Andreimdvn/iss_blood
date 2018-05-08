@@ -1,7 +1,11 @@
 package Controller;
 
+import Communication.FlaskClient;
+import Model.RegisterInfo;
+import Model.UserType;
 import Service.MainService;
 import Utils.Screen;
+import Validators.RegisterValidator;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
@@ -9,12 +13,14 @@ import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
+import javafx.util.Pair;
 
 
 public class RegisterController implements ControlledScreensInterface{
@@ -51,6 +57,8 @@ public class RegisterController implements ControlledScreensInterface{
 
     @FXML
     private ToggleButton transfuzieToggleButton;
+
+    private ToggleGroup accountTypeToggleGroup;
 
     @FXML
     private JFXTextField licentaTextField;
@@ -134,7 +142,27 @@ public class RegisterController implements ControlledScreensInterface{
         String fullname = fullnameTextField.getText();
         String address = addressTextField.getText();
         String phone = phoneTextField.getText();
+        String accountType = accountTypeToggleGroup.getSelectedToggle().toString();
 
+        //presupunem ca e ok
+        RegisterInfo info = new RegisterInfo(username, password, email, fullname, address, phone, accountType);
+        RegisterValidator validator = new RegisterValidator();
+        if(validator.Validate(info))
+        {
+            Pair<Boolean, String> response = mainService.register(info);
+            if(response.getKey())
+            {
+                System.out.println("Registered successfully");
+            }
+            else
+            {
+                System.out.println("Error " + response.getValue());
+            }
+        }
+        else
+        {
+            System.out.println("Invalid");
+        }
     }
 
     @FXML
@@ -172,6 +200,7 @@ public class RegisterController implements ControlledScreensInterface{
     @FXML
     private void initialize(){
         enableStyle();
+        accountTypeToggleGroup = donatorToggleButton.getToggleGroup();
     }
 
     public void setMainService(MainService mainService){
