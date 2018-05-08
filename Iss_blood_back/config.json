@@ -3,5 +3,6 @@
    "mysql_server": "sql9.freemysqlhosting.net",
    "mysql_username": "sql9226036",
    "mysql_password": "dLLzzTqMxg",
+   "mysql_database": "sql9226036",
    "mysql_port": 3306
 }

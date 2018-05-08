@@ -156,7 +156,6 @@ class SangePrelucrat(DB):
     id_locatie = Column(Integer, ForeignKey('Locatie.id'))
     gramaj = Column(Float, nullable=False)
     status = Column(Enum('Depozitat', 'Folosit', 'Expirat'))
-
     sange_brut = relationship('SangeBrut', back_populates='sange_prelucrat')
     locatie = relationship('Locatie', back_populates='sange_prelucrat')
 
@@ -164,7 +163,8 @@ class SangePrelucrat(DB):
 class ORM:
 
     def __init__(self, config):
-        con_string = MYSQL_CON_STRING % (config['username'], config['password'], config['host'], config['database'])
+        con_string = MYSQL_CON_STRING % (config['mysql_username'], config['mysql_password'], config['mysql_server'],
+                                         config['mysql_database'])
 
         engine = create_engine(con_string)
         self.session = sessionmaker(bind=engine)

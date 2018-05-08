@@ -3,11 +3,14 @@ import json
 from flask import Flask, request
 import logging
 
+from Controller.BackController import BackController
+
 
 class FlaskServer:
     app = Flask(__name__)
 
-    def __init__(self, config_data):
+    def __init__(self, config_data, controller):
+        self.controller = controller
         self.port = config_data["flask_http_port"]
         self.host = '0.0.0.0'
         self.request_data = {}
@@ -40,11 +43,16 @@ class FlaskServer:
     def login_request(self):
         self.request_data = request.get_json()
         self.logger.debug("Got Login Request JSON: {}".format(self.request_data))
+        user = self.request_data["username"]
+        password = self.request_data["password"]
 
-        if self.request_data["username"] == "Admin":
-            return_dict = {"status": "1", "message": "Login cu success!"}
+        status = self.controller.login(user, password)
+
+        return_dict = {"status": status}
+        if status == 0:
+            return_dict["message"] = "Login successfully"
         else:
-            return_dict = {"status": "2", "message": "Login Failed!"}
+            return_dict["message"] = "Invalid username or password"
 
         return json.dumps(return_dict)
 
