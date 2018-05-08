@@ -4,7 +4,8 @@ import argparse
 import os
 import json
 
-from Communication.FlaskServer import FlaskServer
+from Communication.flask_server import FlaskServer
+from Controller.BackController import BackController
 
 logger = None
 
@@ -26,8 +27,8 @@ def parse_input_file(config_file):
     return flask_config, db_config
 
 
-def init_flask_server(flask_config):
-    flask = FlaskServer(flask_config)
+def init_flask_server(flask_config, controller):
+    flask = FlaskServer(flask_config, controller)
     flask.run()
 
 
@@ -74,7 +75,9 @@ def main():
     logger.debug("Flask_config: {}".format(flask_config))
     logger.debug("db_config: {}".format(db_config))
 
-    init_flask_server(flask_config)
+    controller = BackController()
+    controller.init_services(db_config)
+    init_flask_server(flask_config, controller)
 
 
 # run with:  py -3 main.py -c config.json
