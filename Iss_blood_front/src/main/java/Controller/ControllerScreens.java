@@ -54,6 +54,7 @@ public class ControllerScreens extends StackPane {
             ControlledScreensInterface controller = loader.getController();
             controller.setScreenParent(this);
             controller.setMainService(mainService);
+
             addScreen(name, loadedScreen);
             return true;
         } catch (IOException exception){

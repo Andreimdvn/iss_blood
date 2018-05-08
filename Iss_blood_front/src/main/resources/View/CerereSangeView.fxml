@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXRadioButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+
+
+<AnchorPane prefHeight="540.0" prefWidth="555.0" styleClass="formularPane" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.CerereSangeView">
+   <children>
+      <Pane layoutX="106.0" layoutY="31.0" prefHeight="440.0" prefWidth="343.0" styleClass="subFormularPane">
+         <children>
+            <Pane layoutX="1.0" prefHeight="57.0" prefWidth="341.0" styleClass="headerPaneFormular">
+               <children>
+                  <Label layoutX="115.0" layoutY="14.0" text="Informatie cerere" />
+               </children>
+            </Pane>
+            <AnchorPane layoutX="53.0" layoutY="309.0" prefHeight="110.0" prefWidth="239.0">
+               <children>
+                  <HBox spacing="30.0">
+                     <children>
+                        <Label alignment="CENTER" styleClass="labelNormal" text="Punga trombocite" />
+                        <HBox spacing="10.0">
+                           <children>
+                              <FontAwesomeIconView glyphName="MINUS" glyphStyle="+" size="30" />
+                              <JFXTextField prefHeight="25.0" prefWidth="36.0" text="0" />
+                              <FontAwesomeIconView glyphName="PLUS" glyphStyle="+" size="30" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </HBox>
+                  <HBox layoutY="31.0" spacing="30.0">
+                     <children>
+                        <Label alignment="CENTER" styleClass="labelNormal" text="Punga globule rosii" />
+                        <HBox spacing="10.0">
+                           <children>
+                              <FontAwesomeIconView glyphName="MINUS" glyphStyle="+" size="30" />
+                              <JFXTextField prefHeight="25.0" prefWidth="36.0" text="0" />
+                              <FontAwesomeIconView glyphName="PLUS" glyphStyle="+" size="30" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </HBox>
+                  <HBox layoutY="65.0" spacing="30.0">
+                     <children>
+                        <Label alignment="CENTER" styleClass="labelNormal" text="Punga plasma" />
+                        <HBox spacing="10.0">
+                           <children>
+                              <FontAwesomeIconView glyphName="MINUS" glyphStyle="+" size="30" />
+                              <JFXTextField prefHeight="25.0" prefWidth="36.0" text="0" />
+                              <FontAwesomeIconView glyphName="PLUS" glyphStyle="+" size="30" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </HBox>
+               </children>
+            </AnchorPane>
+            <JFXRadioButton layoutX="58.0" layoutY="269.0" styleClass="jfx-radio-button" text="Scazuta">
+               <toggleGroup>
+                  <ToggleGroup fx:id="sex" />
+               </toggleGroup>
+            </JFXRadioButton>
+            <JFXRadioButton layoutX="138.0" layoutY="269.0" text="Medie">
+               <toggleGroup>
+                  <ToggleGroup fx:id="sex" />
+               </toggleGroup>
+            </JFXRadioButton>
+            <JFXRadioButton layoutX="215.0" layoutY="269.0" text="Ridicata">
+               <toggleGroup>
+                  <ToggleGroup fx:id="sex1" />
+               </toggleGroup>
+            </JFXRadioButton>
+            <Label layoutX="134.0" layoutY="236.0" styleClass="labelNormal" text="Importanta" />
+            <JFXTextField layoutX="82.0" layoutY="67.0" promptText="Nume pacient" styleClass="textbox" />
+            <JFXTextField layoutX="82.0" layoutY="111.0" promptText="CNP Client" styleClass="textbox" />
+            <JFXComboBox layoutX="72.0" layoutY="156.0" prefHeight="25.0" prefWidth="180.0" promptText="Grupa de sange" />
+            <JFXComboBox layoutX="72.0" layoutY="195.0" prefHeight="25.0" prefWidth="167.0" promptText="RH" />
+         </children>
+      </Pane>
+      <JFXButton layoutX="246.0" layoutY="500.0" styleClass="buttonFormular" text="Trimitere" />
+   </children>
+</AnchorPane>

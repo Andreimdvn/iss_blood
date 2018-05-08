@@ -53,6 +53,7 @@ public class IstoricDonariController implements ControlledScreensInterface{
         Label nume = new Label(numeCentru);
         Label st = new Label(status);
 
+
         String numeLabelStyle = "labelIstoric";
         id.getStyleClass().add(numeLabelStyle);
         data.getStyleClass().add(numeLabelStyle);

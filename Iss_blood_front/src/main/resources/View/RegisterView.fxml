@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import org.controlsfx.control.SegmentedButton?>
 
-<AnchorPane fx:id="mainPane" prefHeight="577.0" prefWidth="443.0" styleClass="loginPane" stylesheets="@../main.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.RegisterController">
+<AnchorPane fx:id="mainPane" prefHeight="666.0" prefWidth="443.0" styleClass="loginPane" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.RegisterController">
    <children>
       <SegmentedButton layoutX="88.0" layoutY="55.0" />
       <HBox layoutX="22.0" layoutY="92.0">
@@ -29,7 +29,7 @@
       </HBox>
       <FontAwesomeIconView fill="WHITE" glyphName="CREDIT_CARD" layoutX="203.0" layoutY="48.0" size="40" wrappingWidth="28.63494873046875" />
       <FontAwesomeIconView fx:id="closeIcon" fill="WHITE" glyphName="CLOSE" layoutX="421.0" layoutY="21.0" onMouseClicked="#closeWindow" size="20" wrappingWidth="14.285722374916077" />
-      <AnchorPane layoutX="77.0" layoutY="144.0" prefHeight="414.0" prefWidth="288.0" styleClass="registerPane" stylesheets="@../main.css">
+      <AnchorPane layoutX="77.0" layoutY="144.0" prefHeight="482.0" prefWidth="288.0" styleClass="registerPane" stylesheets="@../main.css">
          <children>
             <VBox fx:id="registerPane" layoutX="47.0" layoutY="30.0" spacing="20.0">
                <children>
@@ -60,7 +60,19 @@
                   <HBox spacing="4.0">
                      <children>
                         <FontAwesomeIconView fill="WHITE" glyphName="MAP" size="22" wrappingWidth="19.30157470703125" />
-                        <JFXTextField fx:id="addressTextField" prefHeight="25.0" prefWidth="170.0" promptText="Adresa" styleClass="textbox" unFocusColor="WHITE" />
+                        <JFXTextField fx:id="addressTextField" prefHeight="25.0" prefWidth="170.0" promptText="Adresa" styleClass="textbox" text="Judet" unFocusColor="WHITE" />
+                     </children>
+                  </HBox>
+                  <HBox spacing="4.0">
+                     <children>
+                        <FontAwesomeIconView fill="WHITE" glyphName="MAP" size="22" wrappingWidth="19.30157470703125" />
+                        <JFXTextField fx:id="addressTextField1" prefHeight="25.0" prefWidth="170.0" promptText="Adresa" styleClass="textbox" text="Localitate" unFocusColor="WHITE" />
+                     </children>
+                  </HBox>
+                  <HBox spacing="4.0">
+                     <children>
+                        <FontAwesomeIconView fill="WHITE" glyphName="MAP" size="22" wrappingWidth="19.30157470703125" />
+                        <JFXTextField fx:id="addressTextField2" prefHeight="25.0" prefWidth="170.0" promptText="Adresa" styleClass="textbox" text="Adresa" unFocusColor="WHITE" />
                      </children>
                   </HBox>
                   <HBox spacing="4.0">
@@ -71,8 +83,8 @@
                   </HBox>
                </children>
             </VBox>
-            <JFXButton layoutX="114.0" layoutY="374.0" onAction="#registerClicked" styleClass="buttonTransparent" text="Register" />
-            <HBox layoutX="38.0" layoutY="346.0" spacing="2.0">
+            <JFXButton layoutX="118.0" layoutY="442.0" onAction="#registerClicked" styleClass="buttonTransparent" text="Register" />
+            <HBox layoutX="42.0" layoutY="424.0" spacing="2.0">
                <children>
                   <Label styleClass="labelRegister" text="You already have an account?Login" />
                   <Label onMouseClicked="#loginLabelClicked" styleClass="labelRegsiterHere" text="here." />

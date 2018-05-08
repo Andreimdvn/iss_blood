@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="596.0" prefWidth="811.0" styleClass="formularPane" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.IstoricCereriView">
+   <children>
+      <TableView layoutX="50.0" layoutY="90.0" prefHeight="183.0" prefWidth="715.0">
+        <columns>
+          <TableColumn prefWidth="116.88887786865234" text="Nume pacient" />
+          <TableColumn minWidth="3.5555419921875" prefWidth="49.33331298828125" text="Grupa" />
+            <TableColumn prefWidth="36.0" text="RH" />
+            <TableColumn prefWidth="123.5555419921875" text="Pungi trombocite" />
+            <TableColumn prefWidth="123.11114501953125" text="Pungi globule rosii" />
+            <TableColumn prefWidth="111.99993896484375" text="Pungi plasma" />
+            <TableColumn prefWidth="76.888916015625" text="Data" />
+            <TableColumn prefWidth="76.888916015625" text="Importanta" />
+        </columns>
+      </TableView>
+      <TableView layoutX="50.0" layoutY="367.0" prefHeight="183.0" prefWidth="715.0">
+         <columns>
+            <TableColumn prefWidth="116.88887786865234" text="Nume pacient" />
+            <TableColumn minWidth="3.5555419921875" prefWidth="49.33331298828125" text="Grupa" />
+            <TableColumn prefWidth="36.0" text="RH" />
+            <TableColumn prefWidth="123.5555419921875" text="Pungi trombocite" />
+            <TableColumn prefWidth="123.11114501953125" text="Pungi globule rosii" />
+            <TableColumn prefWidth="111.99993896484375" text="Pungi plasma" />
+            <TableColumn prefWidth="76.888916015625" text="Data" />
+            <TableColumn prefWidth="76.888916015625" text="Importanta" />
+         </columns>
+      </TableView>
+      <Label layoutX="322.0" layoutY="30.0" text="Cereri in asteptare" />
+      <Label layoutX="323.0" layoutY="309.0" text="Cereri completate" />
+      <JFXTextField layoutX="50.0" layoutY="54.0" prefHeight="25.0" prefWidth="276.0" promptText="Search pacient by name" styleClass="textbox" />
+      <JFXTextField layoutX="50.0" layoutY="326.0" prefHeight="25.0" prefWidth="276.0" promptText="Search pacient by name" styleClass="textbox" />
+   </children>
+</AnchorPane>

@@ -16,8 +16,17 @@
     -fx-pane-formular-color:#587983;
     -fx-button-formular-color:#fea02f;
     -fx-warning-color: red;
+
 }
 
+.vboxMedic{
+    -fx-spacing : 2px;
+}
+
+.vboxMedicButton{
+    -fx-background-color: -fx-econdary-button-color;
+
+}
 
 .labelClickable{
 
