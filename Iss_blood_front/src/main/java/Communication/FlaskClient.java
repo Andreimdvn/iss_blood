@@ -109,7 +109,7 @@ public class FlaskClient {
 
         String jsonString = new JSONObject().put("username", info.getUsername()).put("password", info.getPassword())
                 .put("email", info.getEmail()).put("fullname", info.getFullname()).put("address", info.getAddress())
-                .put("phone", info.getPhone()).toString();
+                .put("phone", info.getPhone()).put("userType", info.getUserType().toString()).toString();
 
         System.out.println("Sending " + jsonString);
 
