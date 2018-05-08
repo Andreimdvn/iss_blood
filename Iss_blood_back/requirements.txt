@@ -1,2 +1,4 @@
+sqlalchemy
 flask
 flask_sqlalchemy
+mysqlclient
