@@ -3,7 +3,7 @@ import json
 from flask import Flask, request
 import logging
 
-from Controller.BackController import BackController
+from Controller.back_controller import BackController
 
 
 class FlaskServer:
@@ -49,10 +49,10 @@ class FlaskServer:
 
         return_dict = {"status": status}
         if status == 0:
-            return_dict["message"] = "Login successfully"
+            return_dict["message"] = "Login cu success!"
         else:
-            return_dict["message"] = "Invalid username or password"
+            return_dict["message"] = "Username sau parola invalide"
 
-        self.logger.debug("Returnin response for Login Request: {}".format(return_dict))
+        self.logger.debug("Returning response for Login Request: {}".format(return_dict))
 
         return json.dumps(return_dict)

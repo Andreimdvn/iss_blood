@@ -5,7 +5,7 @@ import os
 import json
 
 from Communication.flask_server import FlaskServer
-from Controller.BackController import BackController
+from Controller.back_controller import BackController
 
 logger = None
 
