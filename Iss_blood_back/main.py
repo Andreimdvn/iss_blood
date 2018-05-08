@@ -75,8 +75,7 @@ def main():
     logger.debug("Flask_config: {}".format(flask_config))
     logger.debug("db_config: {}".format(db_config))
 
-    controller = BackController()
-    controller.init_services(db_config)
+    controller = BackController(db_config)
     init_flask_server(flask_config, controller)
 
 

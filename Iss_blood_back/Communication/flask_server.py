@@ -9,7 +9,7 @@ from Controller.BackController import BackController
 class FlaskServer:
     app = Flask(__name__)
 
-    def __init__(self, config_data, controller):
+    def __init__(self, config_data, controller: BackController):
         self.controller = controller
         self.port = config_data["flask_http_port"]
         self.host = '0.0.0.0'
@@ -52,5 +52,7 @@ class FlaskServer:
             return_dict["message"] = "Login successfully"
         else:
             return_dict["message"] = "Invalid username or password"
+
+        self.logger.debug("Returnin response for Login Request: {}".format(return_dict))
 
         return json.dumps(return_dict)
