@@ -16,8 +16,59 @@
     -fx-pane-formular-color:#587983;
     -fx-button-formular-color:#fea02f;
     -fx-warning-color: red;
+    -fx-header-formular-color:#fea02f;
+    -fx-header-text-formular-color: black;
+    -fx-text-formular-color: white;
+}
+
+
+.table-view{
+    -fx-background-color: transparent;
+}
+
+.table-view:focused{
+    -fx-background-color: transparent;
+}
+.table-view .column-header-background{
+    -fx-background-color: -fx-header-formular-color;
+}
+
+.table-view .column-header-background .label{
+    -fx-background-color: transparent;
+    -fx-text-fill: -fx-header-text-formular-color;
+}
+
+.table-view .column-header {
+    -fx-background-color: transparent;
+}
+
+.table-view .table-cell{
+    -fx-text-fill: white;
+    -fx-text-alignment: center;
+    -fx-alignment: center;
+    -fx-border-width: 0;
 
 }
+
+.table-row-cell{
+    -fx-background-color: -fx-pane-formular-color;
+    -fx-background-insets: 0, 0 0 0 0;
+    -fx-padding: 0.0em; /* 0 */
+}
+
+.table-row-cell:odd{
+    -fx-background-color:  transparent;
+    -fx-background-insets: 0, 0 0 0 0;
+    -fx-padding: 0.0em; /* 0 */
+}
+
+.table-row-cell:selected {
+    -fx-background-color: -fx-aux-color;
+    -fx-background-insets: 0;
+    -fx-background-radius: 1;
+}
+
+
 
 .vboxMedic{
     -fx-spacing : 2px;
@@ -73,10 +124,16 @@
 .combo-box{
     -fx-prompt-text-fill: -fx-primary-text-color;
     -fx-text-fill: -fx-primary-text-color;
-    -fx-pref-width: 200px;
-
+    -fx-pref-width: 180px;
+    -fx-alignment: center;
+    -fx-text-alignment: center;
 }
 
+.combo-box .textbox{
+    -fx-text-alignment: center;
+
+    -fx-alignment: center;
+}
 
 .hboxIstoric {
     -fx-spacing: 3;
@@ -221,6 +278,22 @@
     -fx-text-fill: -fx-primary-text-color;
     -fx-prompt-text-fill: ghostwhite;
     -fx-pref-width: 180px;
+}
+
+
+
+.textboxSmall{
+    -fx-text-fill: -fx-primary-text-color;
+    -fx-pref-width: 100px;
+    -fx-text-alignment: center;
+}
+
+.textboxTiny{
+
+    -fx-text-fill: -fx-primary-text-color;
+    -fx-pref-width: 50px;
+    -fx-text-alignment: center;
+    -fx-alignment: center;
 }
 
 .loginPane {

@@ -70,7 +70,7 @@ public class LoginController implements ControlledScreensInterface {
         String username = usernameTextField.getText();
         String password = passwordTextField.getText();
 
-        controller.setScreen(Screen.DONATOR_SCREEN);
+        controller.setScreen(Screen.MEDIC_SCREEN);
 
 /*        Pair<Boolean, String> canLogin = mainService.login(username, password);
         if (canLogin.getKey()) {

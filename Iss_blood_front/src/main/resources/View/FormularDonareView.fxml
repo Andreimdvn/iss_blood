@@ -12,10 +12,10 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="468.0" prefWidth="800.0" styleClass="formularPane" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.FormularDonareController">
+<AnchorPane prefHeight="530.0" prefWidth="866.0" styleClass="formularPane" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.FormularDonareController">
    <children>
-      <JFXButton layoutX="349.0" layoutY="419.0" styleClass="buttonFormular" text="Trimite formular" />
-      <HBox layoutX="56.0" layoutY="108.0" prefHeight="299.0" prefWidth="688.0" spacing="10.0">
+      <JFXButton layoutX="382.0" layoutY="490.0" styleClass="buttonFormular" text="Trimite formular" />
+      <HBox layoutX="89.0" layoutY="101.0" prefHeight="373.0" prefWidth="699.0" spacing="10.0">
          <children>
             <AnchorPane prefHeight="271.0" prefWidth="339.0" styleClass="subFormularPane">
                <children>
@@ -24,12 +24,12 @@
                         <Label layoutX="121.0" layoutY="14.0" styleClass="labelFormularHeader" text="Date personale" />
                      </children>
                   </AnchorPane>
-                  <VBox fillWidth="false" layoutX="78.0" layoutY="73.0" prefHeight="153.0" prefWidth="182.0" spacing="20.0">
+                  <VBox fillWidth="false" layoutX="79.0" layoutY="58.0" prefHeight="98.0" prefWidth="182.0" spacing="10.0">
                      <children>
                         <JFXTextField fx:id="fullnameTextField" focusColor="#fea02f" promptText="Fullname" styleClass="textbox" unFocusColor="WHITE" />
-                        <HBox spacing="30.0">
+                        <HBox prefHeight="20.0" prefWidth="154.0" spacing="30.0">
                            <children>
-                              <Label text="Sex" />
+                              <Label styleClass="labelNormal" text="Sex" />
                               <JFXRadioButton styleClass="jfx-radio-button" text="M">
                                  <toggleGroup>
                                     <ToggleGroup fx:id="sex" />
@@ -37,15 +37,31 @@
                               <JFXRadioButton text="F" toggleGroup="$sex" />
                            </children>
                         </HBox>
-                        <JFXTextField fx:id="addressTextField" focusColor="#fea02f" promptText="Address" styleClass="textbox" unFocusColor="WHITE" />
                         <JFXTextField fx:id="phoneTextField" focusColor="#fea02f" promptText="Telefon" styleClass="textbox" unFocusColor="WHITE" />
                      </children>
                   </VBox>
+                  <HBox layoutX="57.0" layoutY="176.0" spacing="23.0">
+                     <children>
+                        <JFXTextField focusColor="#fea02f" prefHeight="25.0" prefWidth="135.0" promptText="Localitate" styleClass="textboxSmall" unFocusColor="WHITE" />
+                        <JFXTextField focusColor="#fea02f" promptText="Judet" styleClass="textboxSmall" unFocusColor="WHITE" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="18.0" layoutY="273.0" spacing="23.0" />
+                  <HBox layoutX="59.0" layoutY="280.0" spacing="23.0">
+                     <children>
+                        <JFXTextField focusColor="#fea02f" prefHeight="25.0" prefWidth="135.0" promptText="Localitate" styleClass="textboxSmall" unFocusColor="WHITE" />
+                        <JFXTextField focusColor="#fea02f" promptText="Judet" styleClass="textboxSmall" unFocusColor="WHITE" />
+                     </children>
+                  </HBox>
+                  <Label layoutX="137.0" layoutY="156.0" styleClass="labelNormal" text="Domiciliu" />
+                  <JFXTextField focusColor="#fea02f" layoutX="81.0" layoutY="213.0" prefHeight="25.0" prefWidth="223.0" promptText="Telefon" styleClass="textbox" text="Adresa" unFocusColor="WHITE" />
+                  <Label layoutX="141.0" layoutY="253.0" styleClass="labelNormal" text="Resedinta" />
+                  <JFXTextField focusColor="#fea02f" layoutX="81.0" layoutY="323.0" prefHeight="25.0" prefWidth="223.0" promptText="Telefon" styleClass="textbox" text="Adresa" unFocusColor="WHITE" />
                </children>
             </AnchorPane>
             <AnchorPane prefHeight="242.0" prefWidth="339.0" styleClass="subFormularPane">
                <children>
-                  <VBox alignment="CENTER" fillWidth="false" layoutX="28.0" layoutY="41.0" spacing="20.0">
+                  <VBox alignment="CENTER" fillWidth="false" layoutX="28.0" layoutY="41.0" spacing="35.0">
                      <children>
                         <HBox />
                         <JFXComboBox prefHeight="25.0" prefWidth="180.0" promptText="Pentru cine vrei sa donezi?" />
@@ -70,9 +86,10 @@
                   </AnchorPane>
                </children>
             </AnchorPane>
+            <JFXTextField fx:id="phoneTextField1" focusColor="#fea02f" promptText="Telefon" styleClass="textbox" unFocusColor="WHITE" />
          </children>
       </HBox>
-      <AnchorPane layoutX="56.0" layoutY="14.0" prefHeight="59.0" prefWidth="688.0" styleClass="headerPaneFormular">
+      <AnchorPane layoutX="89.0" layoutY="14.0" prefHeight="59.0" prefWidth="688.0" styleClass="headerPaneFormular">
          <children>
             <Text layoutX="261.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="labelFormularHeader" text="Formular inscriere donare" />
          </children>
