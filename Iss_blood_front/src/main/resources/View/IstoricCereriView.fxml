@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="579.0" prefWidth="950.0" styleClass="formularPane" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.IstoricCereriController">
+   <children>
+      <AnchorPane layoutX="66.0" layoutY="30.0" prefHeight="520.0" prefWidth="817.0">
+         <children>
+            <TableView fx:id="cerereSangeTableView" layoutY="60.0" prefHeight="204.0" prefWidth="800.0">
+              <columns>
+                <TableColumn fx:id="numePacientColumn" prefWidth="145.33334350585938" text="Nume pacient" />
+                <TableColumn fx:id="grupaSangeColumn" minWidth="3.5555419921875" prefWidth="50.66668701171875" text="Grupa" />
+                  <TableColumn fx:id="rhColumn" prefWidth="69.33331298828125" text="RH" />
+                  <TableColumn fx:id="trombociteColumn" prefWidth="114.22216796875" text="Pungi trombocite" />
+                  <TableColumn fx:id="globuleColumn" prefWidth="124.88894653320312" text="Pungi globule rosii" />
+                  <TableColumn fx:id="plasmaColumn" prefWidth="101.77783203125" text="Pungi plasma" />
+                  <TableColumn fx:id="dateColumn" prefWidth="99.5555419921875" text="Data" />
+                  <TableColumn fx:id="importantaColumn" prefWidth="89.7777099609375" text="Importanta" />
+              </columns>
+            </TableView>
+            <TableView fx:id="cerereSangeCompletateTableView" layoutY="322.0" prefHeight="183.0" prefWidth="800.0">
+               <columns>
+                  <TableColumn fx:id="numePacient2Column" prefWidth="137.33337020874023" text="Nume pacient" />
+                  <TableColumn fx:id="grupaSange2Column" minWidth="3.5555419921875" prefWidth="63.55560302734375" text="Grupa" />
+                  <TableColumn fx:id="rh2Column" prefWidth="57.7777099609375" text="RH" />
+                  <TableColumn fx:id="trombocite2Column" prefWidth="125.77777099609375" text="Pungi trombocite" />
+                  <TableColumn fx:id="globule2Column" prefWidth="127.55563354492188" text="Pungi globule rosii" />
+                  <TableColumn fx:id="plasma2Column" prefWidth="102.22216796875" text="Pungi plasma" />
+                  <TableColumn fx:id="date2Column" prefWidth="97.77783203125" text="Data" />
+                  <TableColumn fx:id="importanta2Column" prefWidth="83.555419921875" text="Importanta" />
+               </columns>
+            </TableView>
+            <Label layoutX="308.0" layoutY="260.0" styleClass="header2" text="Cereri completate" />
+            <Label layoutX="305.0" styleClass="header2" text="Cereri in asteptare" />
+            <JFXTextField layoutX="14.0" layoutY="285.0" prefHeight="25.0" prefWidth="276.0" promptText="Search pacient by name" styleClass="textbox" unFocusColor="WHITE" />
+            <JFXTextField layoutY="25.0" prefHeight="25.0" prefWidth="276.0" promptText="Search pacient by name" styleClass="textbox" unFocusColor="WHITE" />
+            <JFXButton layoutX="692.0" layoutY="10.0" onAction="#populate" prefHeight="29.0" prefWidth="107.0" styleClass="buttonDashboard" text="Anulare cerere" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

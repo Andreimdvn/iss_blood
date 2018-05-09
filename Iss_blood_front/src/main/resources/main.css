@@ -1,12 +1,278 @@
 
 
 * {
-    -fx-primary-color: linear-gradient(#536976,#292E49);
-    -fx-secondary-color : red;
+    -fx-primary-color: linear-gradient(#434343 , #000000 );
+    -fx-secondary-color : white;
+    -fx-submeniu-primary-color: whitesmoke;
     -fx-primary-text-color: white;
     -fx-secondary-text-color: grey;
+    -fx-tertiary-text-color: black;
     -fx-primary-button-color : transparent;
-    -fx-secondary-button-color :  #00af66;
+    -fx-secondary-button-color :  #fea02f;
+
+    -fx-aux-color: #00af66;
+
+    -fx-formular-color: #344b52;
+    -fx-pane-formular-color:#587983;
+    -fx-button-formular-color:#fea02f;
+    -fx-warning-color: red;
+    -fx-header-formular-color:#fea02f;
+    -fx-header-text-formular-color: black;
+    -fx-text-formular-color: white;
+}
+
+
+.table-view{
+    -fx-background-color: transparent;
+}
+
+.table-view:focused{
+    -fx-background-color: transparent;
+}
+.table-view .column-header-background{
+    -fx-background-color: -fx-header-formular-color;
+}
+
+.table-view .column-header-background .label{
+    -fx-background-color: transparent;
+    -fx-text-fill: -fx-header-text-formular-color;
+}
+
+.table-view .column-header {
+    -fx-background-color: transparent;
+}
+
+.table-view .table-cell{
+    -fx-text-fill: white;
+    -fx-text-alignment: center;
+    -fx-alignment: center;
+    -fx-border-width: 0;
+
+}
+
+.table-row-cell{
+    -fx-background-color: -fx-pane-formular-color;
+    -fx-background-insets: 0, 0 0 0 0;
+    -fx-padding: 0.0em; /* 0 */
+}
+
+.table-row-cell:odd{
+    -fx-background-color:  transparent;
+    -fx-background-insets: 0, 0 0 0 0;
+    -fx-padding: 0.0em; /* 0 */
+}
+
+.table-row-cell:selected {
+    -fx-background-color: -fx-aux-color;
+    -fx-background-insets: 0;
+    -fx-background-radius: 1;
+}
+
+
+
+.vboxMedic{
+    -fx-spacing : 2px;
+}
+
+.vboxMedicButton{
+    -fx-background-color: -fx-econdary-button-color;
+
+}
+
+.labelClickable{
+
+}
+
+.smallPane{
+    -fx-max-height: 200px;
+}
+
+.labelWarning{
+
+    -fx-font-weight: bold;
+}
+
+.infoBox{
+    -fx-border-color: -fx-formular-color;
+}
+
+.labelInfoBox{
+    -fx-text-fill: -fx-primary-text-color;
+    -fx-font-size: 12px;
+    -fx-wrap-text: true;
+}
+
+.logoutButton{
+    -fx-background-color: -fx-button-formular-color;
+    -fx-text-fill: -fx-tertiary-text-color;
+}
+
+.labelDashboard{
+    -fx-text-fill:-fx-primary-text-color ;
+}
+
+.jfx-radio-button{
+    -jfx-selected-color: -fx-button-formular-color;;
+    -fx-text-fill: -fx-primary-text-color;
+}
+
+.check-box{
+    -fx-text-fill: -fx-primary-text-color;
+    -jfx-checked-color: -fx-button-formular-color;
+}
+
+.combo-box{
+    -fx-prompt-text-fill: -fx-primary-text-color;
+    -fx-text-fill: -fx-primary-text-color;
+    -fx-fill:-fx-primary-text-color;
+    -fx-pref-width: 180px;
+    -fx-alignment: center;
+    -fx-text-alignment: center;
+}
+
+.combo-box .textbox{
+    -fx-text-alignment: center;
+
+    -fx-alignment: center;
+}
+
+.hboxIstoric {
+    -fx-spacing: 3;
+    -fx-pref-width: 550px;
+}
+
+.labelIstoric {
+    -fx-background-color: -fx-pane-formular-color;
+    -fx-text-fill: -fx-primary-text-color;
+    -fx-pref-height: 40px;
+    -fx-text-alignment: center;
+    -fx-alignment: center;
+    -fx-font-size: 12;
+}
+
+.headerPaneFormular{
+    -fx-background-color: -fx-button-formular-color;
+    -fx-text-fill: -fx-tertiary-text-color;
+    -fx-pref-height: 50px;
+    -fx-fill: -fx-tertiary-text-color;
+    -fx-text-alignment: center;
+    -fx-alignment: center;
+    -fx-font-size: 15;
+    -fx-font-style: italic;
+}
+
+.headerPaneFormular .labelFormularHeader {
+    -fx-fill:  -fx-tertiary-text-color;
+    -fx-text-fill: -fx-tertiary-text-color;
+    -fx-text-alignment: center;
+    -fx-alignment: center;
+}
+
+.buttonFormular {
+    -fx-background-color: -fx-button-formular-color;
+    -fx-text-fill: -fx-tertiary-text-color;
+}
+.labelFormularHeader{
+    -fx-font-size: 15;
+    -fx-font-style: italic;
+    -fx-fill:  -fx-tertiary-text-color;
+}
+
+.subFormularPane{
+    -fx-background-color:  -fx-pane-formular-color;
+}
+
+
+.hboxTopBar{
+    -fx-spacing: 2px;
+}
+
+.topbar{
+    -fx-pref-height: 20px;
+}
+
+.topbar .toggle-button{
+    -fx-text-fill: -fx-tertiary-text-color;
+    -fx-opacity: 20%;
+    -fx-pref-height: 20px;
+}
+
+.topbar .toggle-button:selected{
+    -fx-pref-height: 20px;
+    -fx-opacity: 100%;
+}
+
+.submeniuDashboard {
+    -fx-background-color: -fx-submeniu-primary-color;
+}
+
+.formularPane{
+    -fx-background-color: -fx-formular-color;
+}
+
+.header  {
+    -fx-text-fill: -fx-primary-text-color;
+    -fx-font-size: 24;
+}
+
+.header2 {
+    -fx-text-fill: -fx-primary-text-color;
+    -fx-font-size:26;
+    -fx-font-style: italic;
+}
+
+.formularPane > .label{
+    -fx-text-fill: -fx-primary-text-color;
+}
+
+.hboxDashBoard{
+}
+
+.vboxButtonDashBoard{
+    -fx-spacing: 5px;
+    -fx-padding: 2em;
+    -fx-pref-width: 200px;
+    -fx-alignment: top-center;
+}
+
+.vboxButtonDashBoard > .label{
+    -fx-font-size: 11px;
+    -fx-opacity: 80%;
+    -fx-text-alignment: center;
+    -fx-font-style: italic;
+    -fx-wrap-text: true;
+    -fx-text-fill: -fx-tertiary-text-color;
+}
+
+.vboxButtonDashBoard > .buttonDashboard:selected{
+}
+
+.vboxButtonDashBoard:hover{
+    -fx-border-color: -fx-secondary-text-color;
+    -fx-border-width: 1px;
+    -fx-border-radius: 1%;
+}
+
+.vboxButtonDashBoardSelected {
+    -fx-padding: 2px;
+}
+
+.vboxButtonDashBoardSelected .buttonDashboard{
+   -fx-background-color: red;
+}
+
+.vboxButtonDashBoard > .toggle-button{
+    -fx-background-color: -fx-secondary-button-color ;
+    -fx-opacity: 100%;
+    -fx-text-fill: -fx-tertiary-text-color;
+    -fx-pref-width: 200px;
+    -fx-padding: 10px;
+}
+
+.buttonDashboard{
+    -fx-padding: 0.5em;
+    -fx-background-color:-fx-secondary-button-color;
+
 }
 
 .textbox {
@@ -15,12 +281,29 @@
     -fx-pref-width: 180px;
 }
 
+.textboxSmall{
+    -fx-text-fill: -fx-primary-text-color;
+    -fx-pref-width: 100px;
+    -fx-text-alignment: center;
+    -fx-prompt-text-fill: ghostwhite;
+}
+
+.textboxTiny{
+
+    -fx-text-fill: -fx-primary-text-color;
+    -fx-pref-width: 50px;
+    -fx-text-alignment: center;
+    -fx-alignment: center;
+    -fx-prompt-text-fill: ghostwhite;
+}
+
 .loginPane {
     -fx-background-color:-fx-primary-color;
 }
 
-.label {
+.labelNormal {
     -fx-text-fill: -fx-primary-text-color;
+    -fx-font-size: 14;
 }
 
 .labelRegister{
@@ -41,7 +324,7 @@
     -fx-border-radius: 1%;
 }
 
-.button{
+.buttonTransparent{
     -fx-text-fill: -fx-primary-text-color;
     -fx-background-color: -fx-primary-button-color;
 }

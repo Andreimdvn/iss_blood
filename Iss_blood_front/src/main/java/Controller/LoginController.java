@@ -14,6 +14,8 @@ import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import javafx.util.Pair;
 
+import java.util.Objects;
+
 
 public class LoginController implements ControlledScreensInterface {
 
@@ -38,8 +40,8 @@ public class LoginController implements ControlledScreensInterface {
     private ControllerScreens controller;
 
     private void enableStyle(){
+        String focusColor = "#fea02f";
 
-        String focusColor = "#00af66";
         usernameTextField.setFocusColor(Paint.valueOf(focusColor));
         passwordTextField.setFocusColor(Paint.valueOf(focusColor));
 
@@ -69,13 +71,26 @@ public class LoginController implements ControlledScreensInterface {
     private void loginClicked(){
         String username = usernameTextField.getText();
         String password = passwordTextField.getText();
-        Pair<Boolean, String> canLogin = mainService.login(username, password);
 
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Login");
-        alert.setContentText(canLogin.getValue());
-        alert.showAndWait();
+        if(Objects.equals(username, "donator"))
+        controller.setScreen(Screen.DONATOR_SCREEN);
+        else if(Objects.equals(username, "medic"))
+            controller.setScreen(Screen.MEDIC_SCREEN);
+/*        Pair<Boolean, String> canLogin = mainService.login(username, password);
+        if (canLogin.getKey()) {
+            controller.setScreen(Screen.DONATOR_SCREEN);
+        } else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Login");
+            alert.setContentText(canLogin.getValue());
+            alert.showAndWait();
+        }
+  */
     }
+
+    /***
+     * Load /View/RegisterView.fxml
+     */
 
     @FXML
     private void registerLabelClicked() {

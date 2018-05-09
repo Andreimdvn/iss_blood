@@ -46,8 +46,6 @@ public class RegisterController implements ControlledScreensInterface{
     @FXML
     private ToggleButton medicToggleButton;
 
-    @FXML
-    private ToggleButton recoltareToggleButton;
 
     @FXML
     private ToggleButton transfuzieToggleButton;
@@ -79,8 +77,7 @@ public class RegisterController implements ControlledScreensInterface{
 
     private boolean isAnySelected(){
         return transfuzieToggleButton.isSelected() ||
-                medicToggleButton.isSelected() ||
-                recoltareToggleButton.isSelected();
+                medicToggleButton.isSelected();
 
     }
 
@@ -112,8 +109,10 @@ public class RegisterController implements ControlledScreensInterface{
                addLicentaHBox();
             }
         }
-        else if(!this.isAnySelected())
+        else if(!this.isAnySelected()) {
             removeLicentaHBox();
+            donatorToggleButton.setSelected(true);
+        }
     }
 
     @FXML
@@ -143,7 +142,7 @@ public class RegisterController implements ControlledScreensInterface{
     }
 
     private void enableStyle(){
-        String focusColor = "#00af66";
+        String focusColor = "#fea02f";
         addressTextField.setFocusColor(Paint.valueOf(focusColor));
         passwordTextField.setFocusColor(Paint.valueOf(focusColor));
         usernameTextField.setFocusColor(Paint.valueOf(focusColor));

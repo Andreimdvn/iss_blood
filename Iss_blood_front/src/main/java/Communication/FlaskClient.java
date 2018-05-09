@@ -12,7 +12,7 @@ public class FlaskClient {
     private String urlRoot;
 
     public FlaskClient() {
-        this.urlRoot = "http://127.0.0.1:16000";
+        this.urlRoot = "http://172.30.114.116:16000";
     }
 
     /**
@@ -22,7 +22,6 @@ public class FlaskClient {
      */
     private HttpURLConnection getConnection(String urlRelativePath) {
         try {
-
             URL url = new URL(this.urlRoot + urlRelativePath);
             URLConnection con = url.openConnection();
             HttpURLConnection http = (HttpURLConnection) con;

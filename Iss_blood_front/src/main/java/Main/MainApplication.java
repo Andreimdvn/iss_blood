@@ -21,6 +21,13 @@ public class MainApplication extends Application {
         ControllerScreens controller = new ControllerScreens(service);
         controller.loadScreen(Screen.LOGIN_SCREEN, Screen.LOGIN_RESOURCE);
         controller.loadScreen(Screen.REGISTER_SCREEN, Screen.REGISTER_RESOURCE);
+        controller.loadScreen(Screen.DONATOR_SCREEN,Screen.DONATOR_RESOURCE);
+        controller.loadScreen(Screen.FORMULAR_DONARE_SCREEN, Screen.FORMULAR_DONARE_RESOURCE);
+        controller.loadScreen(Screen.ISTORIC_DONARI_SCREEN,Screen.ISTORIC_DONARI_RESOURCE);
+        controller.loadScreen(Screen.MEDIC_SCREEN,Screen.MEDIC_RESOURCE);
+        controller.loadScreen(Screen.ISTORIC_CERERI_SCREEN,Screen.ISTORIC_CERERI_RESOURCE);
+        controller.loadScreen(Screen.STARE_PACIENTI_SCREEN,Screen.STARE_PACIENTI_RESOURCE);
+        controller.loadScreen(Screen.CERERE_SANGE_SCREEN,Screen.CERERE_SANGE_RESOURCE);
 
         controller.setScreen(Screen.LOGIN_SCREEN);
         Group root = new Group();

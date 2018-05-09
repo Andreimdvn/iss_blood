@@ -49,7 +49,7 @@
                   <Label onMouseClicked="#registerLabelClicked" styleClass="labelRegsiterHere" text="here." />
                </children>
             </HBox>
-            <JFXButton buttonType="RAISED" onAction="#loginClicked" prefHeight="25.0" prefWidth="92.0" text="LOGIN">
+            <JFXButton buttonType="RAISED" onAction="#loginClicked" prefHeight="25.0" prefWidth="92.0" styleClass="buttonTransparent" text="LOGIN">
                <VBox.margin>
                   <Insets left="60.0" />
                </VBox.margin>
@@ -59,7 +59,7 @@
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
          </padding>
       </VBox>
-      <FontAwesomeIconView fill="WHITE" glyphName="LOCK" layoutX="130.0" layoutY="105.0" size="50" wrappingWidth="32.88884902000427" />
+      <FontAwesomeIconView fill="WHITE" glyphName="LOCK" layoutX="128.0" layoutY="89.0" size="50" styleClass="fontIcon" wrappingWidth="36.44439101219177" />
       <FontAwesomeIconView fx:id="closeIcon" fill="WHITE" glyphName="CLOSE" layoutX="272.0" layoutY="21.0" onMouseClicked="#closeWindow" size="20" wrappingWidth="14.285722374916077" />
    </children>
 </AnchorPane>

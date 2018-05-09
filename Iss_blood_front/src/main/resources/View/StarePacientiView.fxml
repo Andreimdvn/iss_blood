@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="573.0" prefWidth="950.0" styleClass="formularPane" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.StarePacientiController">
+   <children>
+      <TableView fx:id="starePacientTableView" layoutX="32.0" layoutY="103.0" prefHeight="448.0" prefWidth="883.0">
+         <columns>
+            <TableColumn fx:id="numePacientColumn" prefWidth="119.55554962158203" text="Nume pacient" />
+            <TableColumn fx:id="grupaSangeColumn" minWidth="3.5555419921875" prefWidth="52.888916015625" text="Grupa" />
+            <TableColumn fx:id="rhColumn" prefWidth="68.88885498046875" text="RH" />
+            <TableColumn fx:id="trombociteColumn" prefWidth="114.22222900390625" text="Pungi trombocite" />
+            <TableColumn fx:id="globuleColumn" prefWidth="121.77777099609375" text="Pungi globule rosii" />
+            <TableColumn fx:id="plasmaColumn" prefWidth="95.5555419921875" text="Pungi plasma" />
+            <TableColumn fx:id="numarCereriColumn" prefWidth="75.99993896484375" text="Nr cereri" />
+            <TableColumn fx:id="donatoriColumn" prefWidth="144.8887939453125" text="Donatori preferentiali" />
+            <TableColumn fx:id="importantaColumn" prefWidth="87.55550808376734" text="Importanta" />
+         </columns>
+      </TableView>
+      <JFXTextField layoutX="32.0" layoutY="69.0" onKeyPressed="#populate" prefHeight="25.0" prefWidth="276.0" promptText="Search pacient by name" styleClass="textbox" />
+      <Label fx:id="fullnameLabel" layoutX="402.0" layoutY="14.0" prefHeight="55.0" prefWidth="144.0" styleClass="header" text="Stare actuala" />
+   </children>
+</AnchorPane>
