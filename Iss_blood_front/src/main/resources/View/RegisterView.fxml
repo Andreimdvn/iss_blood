@@ -29,7 +29,7 @@
       </HBox>
       <FontAwesomeIconView fill="WHITE" glyphName="CREDIT_CARD" layoutX="203.0" layoutY="48.0" size="40" wrappingWidth="28.63494873046875" />
       <FontAwesomeIconView fx:id="closeIcon" fill="WHITE" glyphName="CLOSE" layoutX="421.0" layoutY="21.0" onMouseClicked="#closeWindow" size="20" wrappingWidth="14.285722374916077" />
-      <AnchorPane layoutX="77.0" layoutY="144.0" prefHeight="482.0" prefWidth="288.0" styleClass="registerPane" stylesheets="@../main.css">
+      <AnchorPane layoutX="77.0" layoutY="144.0" prefHeight="507.0" prefWidth="288.0" styleClass="registerPane" stylesheets="@../main.css">
          <children>
             <VBox fx:id="registerPane" layoutX="47.0" layoutY="30.0" spacing="20.0">
                <children>
@@ -89,8 +89,8 @@
                   </HBox>
                </children>
             </VBox>
-            <JFXButton layoutX="118.0" layoutY="442.0" onAction="#registerClicked" styleClass="buttonTransparent" text="Register" />
-            <HBox layoutX="42.0" layoutY="424.0" spacing="2.0">
+            <JFXButton layoutX="118.0" layoutY="492.0" onAction="#registerClicked" styleClass="buttonTransparent" text="Register" />
+            <HBox layoutX="42.0" layoutY="474.0" spacing="2.0">
                <children>
                   <Label styleClass="labelRegister" text="You already have an account?Login" />
                   <Label onMouseClicked="#loginLabelClicked" styleClass="labelRegsiterHere" text="here." />

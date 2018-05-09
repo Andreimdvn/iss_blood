@@ -62,14 +62,16 @@ class FlaskServer:
         self.request_data = request.get_json()
         self.logger.debug("Got register request JSON: {}".format(self.request_data))
 
-        registerInfo = RegisterInfo(self.request_data["username"], self.request_data["password"],
+        register_info = RegisterInfo(self.request_data["username"], self.request_data["password"],
                                     self.request_data["email"], self.request_data["fullname"],
                                     self.request_data["cnp"],
                                     self.request_data["localitate"], self.request_data["judet"],
                                     self.request_data["address"], self.request_data["phone"],
                                     AccountType[self.request_data["accountType"]], self.request_data["license"])
 
-        status_code, status_message = self.controller.register(registerInfo)
+        #TO DO: server side validation: sa nu fie medici cu licenta = "", telefonul sa aiba 10 char...
+
+        status_code, status_message = self.controller.register(register_info)
 
         return_dict = {"status": str(status_code), "message": status_message}
 

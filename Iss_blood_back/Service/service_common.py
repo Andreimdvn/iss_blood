@@ -17,13 +17,27 @@ class ServiceCommon(IService):
         :return: Tuple<int, string> = (status code, status message); status code = 0 on success or >= 1 otherwise
         '''
 
+        mark_license_callback = None
+
+        # -1. Daca are licenta, valideaz-o
+        if register_info.license != "":
+            #self.db.insert('Licente', ['tip_licenta', 'cod_licenta', 'folosita'], [register_info.account_type.name, register_info.license, False])
+            license_is_valid, message = self.check_license(register_info.account_type.name, register_info.license)
+            if not license_is_valid:
+                return 1, message
+
+            # licenta e buna, la sfarsit seteaz-o la folosita
+            mark_license_callback = lambda: self.db.delete('Licente', ['tip_licenta', 'cod_licenta'],
+                                                                       [register_info.account_type.name,
+                                                                        register_info.license])
+            # TO DO: cand avem update, apeleaza update  ^^^^^
 
         # 0. Verifica daca exista deja userul. Username si email trebuie sa fie unice
-        duplicate_user = self.db.select('User', ['username'], [register_info.username])
-        if len(duplicate_user) != 0:
+        duplicate_user = self.db.select('User', ['username'], [register_info.username], True)
+        if duplicate_user is not None:
             return 1, "Username already taken"
-        duplicate_user = self.db.select('User', ['email'], [register_info.email])
-        if len(duplicate_user) != 0:
+        duplicate_user = self.db.select('User', ['email'], [register_info.email], True)
+        if duplicate_user is not None:
             return 1, "email already in use"
 
         # 1. Creeaza obiectul de baza - User
@@ -33,41 +47,85 @@ class ServiceCommon(IService):
         new_user_object.email = register_info.email
 
         # 2. Vezi daca exista judetul in BD sau trebuie adaugat
-        judet = self.db.select('Judet', ['nume'], [register_info.judet], True)
-        if judet is None:
-            self.db.insert('Judet', ['nume'], [register_info.judet])
-            judet = self.db.select('Judet', ['nume'], [register_info.judet], True)
-        id_judet = judet.id
+        id_judet = self.get_id_judet(register_info.judet)
 
         # 3. La fel pentru localitate
-        localitate = self.db.select('Localitate', ['nume', 'id_judet'], [register_info.localitate, id_judet], True)
-        if localitate is None:  # trebuie adaugata
-            self.db.insert('Localitate', ['nume', 'id_judet'], [register_info.localitate, id_judet])
-            localitate = self.db.select('Localitate', ['nume', 'id_judet'], [register_info.localitate, id_judet], True)
-        id_localitate = localitate.id
+        id_localitate = self.get_id_localitate(register_info.localitate, id_judet)
 
         # 4. Numele tabelului si coloanele in functie de tipul de cont
+        # TO DO: splituieste undeva numele de prenume, de preferat in UI
         table_name = None
         specific_col_names = []
         specific_vals = []
         if register_info.account_type == AccountType['Donator']:
             table_name = 'Donator'
             specific_col_names = ['prenume', 'nume', 'cnp', 'id_domiciliu', 'adresa_domiciliu', 'data_nasterii',
-                                'telefon', 'id_localitate_resedinta', 'adresa_resedinta', 'user']
-            specific_vals = [register_info.fullname, register_info.fullname, register_info.cnp, id_localitate, register_info.address, '-',
+                                  'telefon', 'id_localitate_resedinta', 'adresa_resedinta', 'user']
+            #TO DO: data nasterii din CNP
+            specific_vals = [register_info.fullname, register_info.fullname, register_info.cnp, id_localitate,
+                             register_info.address, '-',
                              register_info.phone, id_localitate, register_info.address, new_user_object]
         elif register_info.account_type == AccountType['Medic']:
             table_name = 'Medic'
-        elif register_info.account_type == AccountType['StaffRecoltare']:
-            table_name = 'StaffRecoltare'
+            specific_col_names = ['prenume', 'nume', 'cnp', 'telefon', 'specializare', 'user']  # id_locatie ramane null
+            specific_vals = [register_info.fullname, register_info.fullname, register_info.cnp, register_info.phone,
+                             'pl', new_user_object]
         elif register_info.account_type == AccountType['StaffTransfuzie']:
             table_name = 'StaffTransfurzii'
+            specific_col_names = ['prenume', 'nume', 'cnp', 'telefon', 'user']  # id_locatie ramane null
+            specific_vals = [register_info.fullname, register_info.fullname, register_info.cnp, register_info.phone,
+                             new_user_object]
         # else ramane None
-
 
         # 5. Adauga in tabel
         try:
             self.db.insert(table_name, specific_col_names, specific_vals)
         except...:
             return 2, "Database error"
+
+        if mark_license_callback is not None:
+            mark_license_callback()
+
         return 0, "Added successfully"
+
+
+    def check_license(self, license_type, license_code):
+        '''
+
+        :param license_type:
+        :param license_code:
+        :return: Tuple<bool, string> daca licenta poate fi folosita si un mesaj
+        '''
+        license_row = self.db.select('Licente', ['tip_licenta', 'cod_licenta'],
+                                    [license_type, license_code], True)
+        if license_row is None:
+            return False, "Licenta nu este valida"
+        if license_row.folosita:
+            return False, "Licenta este deja folosita"
+
+        return True, "Ok"
+
+    def get_id_judet(self, nume):
+        '''
+        Cauta ID-ul unui judet. Daca nu exista, il adauga in BD si returneaza ID-ul creat
+        :param nume: string, numele judetului
+        :return: int, ID-ul
+        '''
+        judet = self.db.select('Judet', ['nume'], [nume], True)
+        if judet is None:  # trebuie adaugat
+            self.db.insert('Judet', ['nume'], [nume])
+            judet = self.db.select('Judet', ['nume'], [nume], True)
+        return judet.id
+
+    def get_id_localitate(self, nume, id_judet):
+        '''
+        Cauta ID-ul unei localitati. Daca nu exista, o adauga in BD si returneaza ID-ul creat
+        :param nume: string, numele localitatii
+        :return: int, ID-ul
+        '''
+        localitate = self.db.select('Localitate', ['nume', 'id_judet'], [nume, id_judet], True)
+        if localitate is None:  # trebuie adaugata
+            self.db.insert('Localitate', ['nume', 'id_judet'], [nume, id_judet])
+            localitate = self.db.select('Localitate', ['nume', 'id_judet'], [nume, id_judet], True)
+        return localitate.id
+

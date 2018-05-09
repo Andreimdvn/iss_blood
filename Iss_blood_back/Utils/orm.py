@@ -1,7 +1,7 @@
 import sys
 
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Column, Integer, String, ForeignKey, Date, SmallInteger, Enum, Float, create_engine
+from sqlalchemy import Column, Integer, String, ForeignKey, Date, SmallInteger, Enum, Float, create_engine, Boolean
 from sqlalchemy.orm import relationship, sessionmaker
 
 
@@ -120,6 +120,13 @@ class Medic(DB):
     user = relationship('User', back_populates='medici')
     locatie = relationship('Locatie', back_populates='medici')
 
+class Licente(DB):
+    __tablename__ = 'Licente'
+
+    id = Column(Integer, autoincrement=True, primary_key=True)
+    tip_licenta = Column(Enum('StaffTransfuzie', 'Medic'), nullable=False)
+    cod_licenta = Column(String(20), nullable=False)
+    folosita = Column(Boolean, nullable=False)
 
 class Analize(DB):
     __tablename__ = 'Analize'
