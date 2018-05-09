@@ -1,8 +1,6 @@
 package Controller;
 
-import Communication.FlaskClient;
 import Model.RegisterInfo;
-import Model.UserType;
 import Service.MainService;
 import Utils.Screen;
 import Validators.RegisterValidator;
@@ -41,10 +39,19 @@ public class RegisterController implements ControlledScreensInterface{
     private JFXTextField phoneTextField;
 
     @FXML
+    private JFXTextField judetTextField;
+
+    @FXML
+    private JFXTextField localitateTextField;
+
+    @FXML
     private JFXTextField addressTextField;
 
     @FXML
     private JFXTextField fullnameTextField;
+
+    @FXML
+    private JFXTextField cnpTextField;
 
     @FXML
     private ToggleButton donatorToggleButton;
@@ -102,7 +109,7 @@ public class RegisterController implements ControlledScreensInterface{
         licentaTextField = new JFXTextField();
         licentaTextField.getStyleClass().add("textbox");
         licentaTextField.setUnFocusColor(Paint.valueOf("white"));
-        licentaTextField.setFocusColor(addressTextField.getFocusColor());
+        licentaTextField.setFocusColor(judetTextField.getFocusColor());
         licentaTextField.setPromptText("Licenta");
 
         licentaHbox.setSpacing(4);
@@ -140,28 +147,34 @@ public class RegisterController implements ControlledScreensInterface{
         String password = passwordTextField.getText();
         String email = emailTextField.getText();
         String fullname = fullnameTextField.getText();
+        String cnp = cnpTextField.getText();
+        String judet = judetTextField.getText();
+        String localitate = localitateTextField.getText();
         String address = addressTextField.getText();
         String phone = phoneTextField.getText();
         String accountType = accountTypeToggleGroup.getSelectedToggle().toString();
+        String license = "";
+        if(licentaTextField != null)
+            license = licentaTextField.getText();
 
-        //presupunem ca e ok
-        RegisterInfo info = new RegisterInfo(username, password, email, fullname, address, phone, accountType);
+        RegisterInfo info = new RegisterInfo(username, password, email, fullname, cnp, judet, localitate, address, phone, accountType, license);
         RegisterValidator validator = new RegisterValidator();
-        if(validator.Validate(info))
+        Pair<Boolean, String> validationResult = validator.Validate(info);
+        if(validationResult.getKey())
         {
             Pair<Boolean, String> response = mainService.register(info);
             if(response.getKey())
             {
-                System.out.println("Registered successfully");
+                ControllerUtils.ShowConfirmationMessage("Info", "Registered successfully");
             }
             else
             {
-                System.out.println("Error " + response.getValue());
+                ControllerUtils.ShowErrorMessage(response.getValue());
             }
         }
         else
         {
-            System.out.println("Invalid");
+            ControllerUtils.ShowErrorMessage(validationResult.getValue());
         }
     }
 
@@ -172,7 +185,7 @@ public class RegisterController implements ControlledScreensInterface{
 
     private void enableStyle(){
         String focusColor = "#fea02f";
-        addressTextField.setFocusColor(Paint.valueOf(focusColor));
+        judetTextField.setFocusColor(Paint.valueOf(focusColor));
         passwordTextField.setFocusColor(Paint.valueOf(focusColor));
         usernameTextField.setFocusColor(Paint.valueOf(focusColor));
         emailTextField.setFocusColor(Paint.valueOf(focusColor));

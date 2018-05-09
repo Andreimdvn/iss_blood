@@ -1,5 +1,5 @@
 package Model;
 
-public enum UserType {
+public enum AccountType {
     Donator, Medic, StaffRecoltare, StaffTransfuzie
 }

@@ -227,20 +227,20 @@ class ORM:
 
     def select(self, table, columns=None, values=None, first=False):
         """
-        Execute a query on all rows in a table and returnes the results.
+        Execute a query on all rows in a table and returns the results with all the columns.
         :param table: table name to be queried.
-        :param columns: list with required columns.
-        :param values:
-        :param first: first item is returned.
-        :return: a list with objects of table type if not columns were specified, tuples otherwise.
+        :param columns: list with required columns for the WHERE clause.
+        :param values: list with values corresponding to the given columns
+        :param first: only the first item is returned.
+        :return: a list with: objects of table type if no columns were specified, tuples<Column> otherwise.
         """
         res = None
         if columns:
             if type(columns) not in (list, tuple):
-                raise ValueError('[!] Type [%s] for columns are not allowed!' % type(columns))
+                raise ValueError('[!] Type [%s] for columns are not allowed! Use list or tuple.' % type(columns))
         if values:
             if type(values) not in (list, tuple):
-                raise ValueError('[!] Type [%s] for values are not allowed!' % type(values))
+                raise ValueError('[!] Type [%s] for values are not allowed! Use list or tuple.' % type(values))
         tb = self.table_object(table)
         if not columns:
             res = self.ses.query(tb)

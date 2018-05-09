@@ -4,6 +4,8 @@ from flask import Flask, request
 import logging
 
 from Controller.BackController import BackController
+from Model.AccountType import AccountType
+from Model.RegisterInfo import RegisterInfo
 
 
 class FlaskServer:
@@ -60,10 +62,15 @@ class FlaskServer:
         self.request_data = request.get_json()
         self.logger.debug("Got register request JSON: {}".format(self.request_data))
 
-        # add to DB
-        # catch exception
-        # send JSON
+        registerInfo = RegisterInfo(self.request_data["username"], self.request_data["password"],
+                                    self.request_data["email"], self.request_data["fullname"],
+                                    self.request_data["cnp"],
+                                    self.request_data["localitate"], self.request_data["judet"],
+                                    self.request_data["address"], self.request_data["phone"],
+                                    AccountType[self.request_data["accountType"]], self.request_data["license"])
 
-        return_dict = {"status": "1", "message": "Registered successfully"}
+        status_code, status_message = self.controller.register(registerInfo)
+
+        return_dict = {"status": str(status_code), "message": status_message}
 
         return json.dumps(return_dict)

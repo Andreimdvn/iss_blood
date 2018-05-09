@@ -5,31 +5,39 @@ public class RegisterInfo {
     private String password;
     private String email;
     private String fullname;
+    private String cnp;
+    private String judet;
+    private String localitate;
     private String address;
     private String phone;
-    private UserType userType;
+    private AccountType accountType;
+    private String licence;
 
-    public RegisterInfo(String username, String password, String email, String fullname, String address, String phone, String userTypeString) {
+    public RegisterInfo(String username, String password, String email, String fullname, String cnp, String judet, String localitate, String address, String phone, String accountTypeString, String licence) {
         this.username = username;
         this.password = password;
         this.email = email;
         this.fullname = fullname;
+        this.cnp = cnp;
+        this.judet = judet;
+        this.localitate = localitate;
         this.address = address;
         this.phone = phone;
+        this.licence = licence;
 
-        UserType userType;
-        userTypeString = userTypeString.toLowerCase();
+        AccountType accountType;
+        accountTypeString = accountTypeString.toLowerCase();
 
-        if(userTypeString.contains("donator"))
-            userType = UserType.Donator;
-        else if(userTypeString.contains("medic"))
-            userType = UserType.Medic;
-        else if(userTypeString.contains("recoltare"))
-            userType = UserType.StaffRecoltare;
+        if(accountTypeString.contains("donator"))
+            accountType = AccountType.Donator;
+        else if(accountTypeString.contains("medic"))
+            accountType = AccountType.Medic;
+        else if(accountTypeString.contains("recoltare"))
+            accountType = AccountType.StaffRecoltare;
         else
-            userType = UserType.StaffTransfuzie;
+            accountType = AccountType.StaffTransfuzie;
 
-        this.userType = userType;
+        this.accountType = accountType;
     }
 
     public String getUsername() {
@@ -56,7 +64,23 @@ public class RegisterInfo {
         return phone;
     }
 
-    public UserType getUserType() {
-        return userType;
+    public AccountType getAccountType() {
+        return accountType;
+    }
+
+    public String getLicence() {
+        return licence;
+    }
+
+    public String getLocalitate() {
+        return localitate;
+    }
+
+    public String getJudet() {
+        return judet;
+    }
+
+    public String getCnp() {
+        return cnp;
     }
 }

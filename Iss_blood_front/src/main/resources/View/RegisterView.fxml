@@ -41,6 +41,12 @@
                   </HBox>
                   <HBox spacing="4.0">
                      <children>
+                        <FontAwesomeIconView fill="WHITE" glyphName="BOOK" size="22" wrappingWidth="19.30157470703125" />
+                        <JFXTextField fx:id="cnpTextField" prefHeight="25.0" prefWidth="170.0" promptText="CNP" styleClass="textbox" unFocusColor="WHITE" />
+                     </children>
+                  </HBox>
+                  <HBox spacing="4.0">
+                     <children>
                         <FontAwesomeIconView fill="WHITE" glyphName="ENVELOPE" size="22" wrappingWidth="19.30157470703125" />
                         <JFXTextField fx:id="emailTextField" prefHeight="25.0" prefWidth="170.0" promptText="Email" styleClass="textbox" unFocusColor="WHITE" />
                      </children>
@@ -60,19 +66,19 @@
                   <HBox spacing="4.0">
                      <children>
                         <FontAwesomeIconView fill="WHITE" glyphName="MAP" size="22" wrappingWidth="19.30157470703125" />
-                        <JFXTextField fx:id="addressTextField" prefHeight="25.0" prefWidth="170.0" promptText="Adresa" styleClass="textbox" text="Judet" unFocusColor="WHITE" />
+                        <JFXTextField fx:id="judetTextField" prefHeight="25.0" prefWidth="170.0" promptText="Judet" styleClass="textbox" unFocusColor="WHITE" />
                      </children>
                   </HBox>
                   <HBox spacing="4.0">
                      <children>
                         <FontAwesomeIconView fill="WHITE" glyphName="MAP" size="22" wrappingWidth="19.30157470703125" />
-                        <JFXTextField fx:id="addressTextField1" prefHeight="25.0" prefWidth="170.0" promptText="Adresa" styleClass="textbox" text="Localitate" unFocusColor="WHITE" />
+                        <JFXTextField fx:id="localitateTextField" prefHeight="25.0" prefWidth="170.0" promptText="Localitate" styleClass="textbox" unFocusColor="WHITE" />
                      </children>
                   </HBox>
                   <HBox spacing="4.0">
                      <children>
                         <FontAwesomeIconView fill="WHITE" glyphName="MAP" size="22" wrappingWidth="19.30157470703125" />
-                        <JFXTextField fx:id="addressTextField2" prefHeight="25.0" prefWidth="170.0" promptText="Adresa" styleClass="textbox" text="Adresa" unFocusColor="WHITE" />
+                        <JFXTextField fx:id="addressTextField" prefHeight="25.0" prefWidth="170.0" promptText="Adresa" styleClass="textbox" unFocusColor="WHITE" />
                      </children>
                   </HBox>
                   <HBox spacing="4.0">

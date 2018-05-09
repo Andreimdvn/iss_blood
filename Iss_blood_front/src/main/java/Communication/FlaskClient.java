@@ -13,7 +13,7 @@ public class FlaskClient {
     private String urlRoot;
 
     public FlaskClient() {
-        this.urlRoot = "http://172.30.114.116:16000";
+        this.urlRoot = "http://127.0.0.1:16000";
     }
 
     /**
@@ -107,8 +107,11 @@ public class FlaskClient {
             return new Pair<>(false, "Client connection request Error");
 
         String jsonString = new JSONObject().put("username", info.getUsername()).put("password", info.getPassword())
-                .put("email", info.getEmail()).put("fullname", info.getFullname()).put("address", info.getAddress())
-                .put("phone", info.getPhone()).put("userType", info.getUserType().toString()).toString();
+                .put("email", info.getEmail()).put("fullname", info.getFullname()).put("cnp", info.getCnp())
+                .put("judet", info.getJudet())
+                .put("localitate", info.getLocalitate()).put("address", info.getAddress())
+                .put("phone", info.getPhone()).put("accountType", info.getAccountType().toString())
+                .put("license", info.getLicence()).toString();
 
         System.out.println("Sending " + jsonString);
 
@@ -117,7 +120,7 @@ public class FlaskClient {
         if(jsonResponse == null)
             return new Pair<>(false, "Connection error.");
 
-        if(jsonResponse.getString("status").equals("1"))
+        if(jsonResponse.getString("status").equals("0"))
             return new Pair<>(true, "Registered successfully");
 
         return new Pair<>(false, jsonResponse.getString("message"));
