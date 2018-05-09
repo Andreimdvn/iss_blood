@@ -15,15 +15,14 @@
 <AnchorPane fx:id="mainPane" prefHeight="666.0" prefWidth="443.0" styleClass="loginPane" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.RegisterController">
    <children>
       <SegmentedButton layoutX="88.0" layoutY="55.0" />
-      <HBox layoutX="22.0" layoutY="92.0">
+      <HBox layoutX="73.0" layoutY="84.0">
          <children>
-            <ToggleButton fx:id="donatorToggleButton" mnemonicParsing="false" onAction="#selectedToggleButton" prefHeight="34.0" prefWidth="99.0" selected="true" text="Donator">
+            <ToggleButton fx:id="donatorToggleButton" mnemonicParsing="false" onAction="#selectedToggleButton" prefHeight="34.0" prefWidth="99.0" selected="true" styleClass="buttonFormular" text="Donator">
                <toggleGroup>
                   <ToggleGroup fx:id="accountType" />
                </toggleGroup>
             </ToggleButton>
-            <ToggleButton fx:id="medicToggleButton" mnemonicParsing="false" onAction="#selectedToggleButton" prefHeight="34.0" prefWidth="99.0" text="Medic" toggleGroup="$accountType" />
-            <ToggleButton fx:id="recoltareToggleButton" mnemonicParsing="false" onAction="#selectedToggleButton" prefHeight="34.0" prefWidth="99.0" text="Staff recoltare" toggleGroup="$accountType" />
+            <ToggleButton fx:id="medicToggleButton" mnemonicParsing="false" onAction="#selectedToggleButton" prefHeight="34.0" prefWidth="99.0" styleClass="buttonFormular" text="Medic" toggleGroup="$accountType" />
             <ToggleButton fx:id="transfuzieToggleButton" mnemonicParsing="false" onAction="#selectedToggleButton" prefHeight="34.0" prefWidth="99.0" text="Staff transfuzie" toggleGroup="$accountType" />
          </children>
       </HBox>
@@ -92,6 +91,6 @@
             </HBox>
          </children>
       </AnchorPane>
-      <Label layoutX="85.0" layoutY="67.0" text="Choose the type of the account you want to make" />
+      <Label layoutX="67.0" layoutY="55.0" styleClass="labelNormal" text="Choose the type of the account you want to make" />
    </children>
 </AnchorPane>

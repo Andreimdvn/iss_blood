@@ -3,12 +3,16 @@ package Controller;
 import Main.MainApplication;
 import Service.MainService;
 import Utils.Screen;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -54,7 +58,6 @@ public class MedicDashboardController implements ControlledScreensInterface {
         leftAnchorPane.getChildren().remove(burgerPane);
         Timeline timeline = new Timeline();
         double pref = prefLeftPaneWidth;
-        System.out.println(pref);
 
         timeline.getKeyFrames().addAll(
                 new KeyFrame(Duration.millis(animationSpeed),
@@ -80,28 +83,28 @@ public class MedicDashboardController implements ControlledScreensInterface {
 
         centralPane.setCenter(controller.getScreen("CERERE_SANGE"));
 
-        mainPane.setPrefWidth(900);
-        resizeCentralPane();
+        mainPane.setPrefWidth(950);
+        //resizeCentralPane();
     }
     @FXML
     private void IstoricCereriClicked(){
 
         centralPane.setCenter(controller.getScreen("ISTORIC_CERERI"));
-        mainPane.setPrefWidth(900);
-        resizeCentralPane();
+        mainPane.setPrefWidth(950);
+       // resizeCentralPane();
     }
     @FXML
     private void stareActualaClicked(){
         centralPane.setCenter(controller.getScreen("STARE_PACIENTI"));
-        mainPane.setPrefWidth(900);
-        resizeCentralPane();
+        mainPane.setPrefWidth(950);
+      //  resizeCentralPane();
     }
 
     @FXML
     private void homeButtonClicked(){
         centralPane.setCenter(mainPane);
-        mainPane.setPrefWidth(740);
-        resizeCentralPane();
+        mainPane.setPrefWidth(950);
+      //  resizeCentralPane();
     }
 
     @FXML
@@ -114,7 +117,6 @@ public class MedicDashboardController implements ControlledScreensInterface {
        // borderPane.getScene().getWindow().setWidth(prefCentral);
 
         Window a = borderPane.getScene().getWindow();
-        System.out.println(pref);
         timeline.getKeyFrames().addAll(
                 new KeyFrame(Duration.millis(animationSpeed),
                         new KeyValue(leftAnchorPane.prefWidthProperty()
@@ -125,9 +127,7 @@ public class MedicDashboardController implements ControlledScreensInterface {
         timeline.setOnFinished(
                 x-> {
                     leftAnchorPane.getChildren().add(burgerPane);
-                    System.out.println(prefBorderPaneWidth);
                     resizeCentralPane();
-                    //resizeCentralPane(prefCentral);
                 }
         );
 
@@ -146,7 +146,6 @@ public class MedicDashboardController implements ControlledScreensInterface {
         prefWindowSize = mainPane.getPrefWidth() + getLeftSize();
 
         borderPane.getScene().getWindow().setWidth(prefWindowSize);
-        System.out.println(getLeftSize());
         timeline.getKeyFrames().addAll(
                 new KeyFrame(Duration.millis(animationSpeed),
                         new KeyValue(borderPane.prefWidthProperty(),
@@ -155,13 +154,15 @@ public class MedicDashboardController implements ControlledScreensInterface {
         timeline.play();
         timeline.setOnFinished(
                 x-> {
-
                 }
         );
     }
     @FXML
     private AnchorPane mainPane;
 
+
+    private double xOffset;
+    private double yOffset;
 
     @FXML
     private void initialize(){
@@ -171,6 +172,26 @@ public class MedicDashboardController implements ControlledScreensInterface {
         prefBorderPaneWidth = borderPane.getPrefWidth();
         prefWindowSize = prefBorderPaneWidth;
         leftAnchorPane.getChildren().remove(burgerPane);
+        mainPane.setPrefWidth(950);
+
+        borderPane.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                xOffset = event.getSceneX();
+                yOffset = event.getSceneY();
+            }
+        });
+
+        borderPane.setOnMouseDragged(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                Stage primaryStage = getStage();
+                primaryStage.setX(event.getScreenX() - xOffset);
+                primaryStage.setY(event.getScreenY() - yOffset);
+            }
+        });
+
+
     }
 
     public void setMainService(MainService mainService){
@@ -189,5 +210,19 @@ public class MedicDashboardController implements ControlledScreensInterface {
 
     private void loadLogin() {
         controller.setScreen(Screen.LOGIN_SCREEN);
+    }
+
+    @FXML
+    private FontAwesomeIconView closeIcon;
+
+    private Stage getStage()
+    {
+        return (Stage) closeIcon.getScene().getWindow();
+    }
+
+    @FXML
+    private void closeWindow(){
+        Stage current = getStage();
+        current.close();
     }
 }

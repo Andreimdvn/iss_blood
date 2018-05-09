@@ -280,12 +280,11 @@
     -fx-pref-width: 180px;
 }
 
-
-
 .textboxSmall{
     -fx-text-fill: -fx-primary-text-color;
     -fx-pref-width: 100px;
     -fx-text-alignment: center;
+    -fx-prompt-text-fill: ghostwhite;
 }
 
 .textboxTiny{
@@ -294,6 +293,7 @@
     -fx-pref-width: 50px;
     -fx-text-alignment: center;
     -fx-alignment: center;
+    -fx-prompt-text-fill: ghostwhite;
 }
 
 .loginPane {

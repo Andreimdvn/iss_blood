@@ -13,7 +13,28 @@ public class FormularDonareController implements ControlledScreensInterface {
     private JFXTextField fullnameTextField;
 
     @FXML
-    private JFXTextField addressTextField;
+    private JFXTextField donatFullnameTextField;
+
+    @FXML
+    private JFXTextField donatCnpTextField;
+
+    @FXML
+    private JFXTextField DomiciliuLocalitateTextField;
+
+    @FXML
+    private JFXTextField DomiciliuJudetTextField;
+
+    @FXML
+    private JFXTextField DomiciliuAdresaTextField;
+
+    @FXML
+    private JFXTextField ResedintaLocalitateTextField;
+
+    @FXML
+    private JFXTextField ResedintaJudetTextField;
+
+    @FXML
+    private JFXTextField ResedintaAdresaTextField;
 
     @FXML
     private JFXTextField phoneTextField;

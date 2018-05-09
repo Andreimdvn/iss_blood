@@ -12,9 +12,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="513.0" prefWidth="900.0" styleClass="formularPane" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CerereSangeController">
+<AnchorPane prefHeight="513.0" prefWidth="950.0" styleClass="formularPane" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CerereSangeController">
    <children>
-      <AnchorPane layoutX="89.0" layoutY="27.0" prefHeight="460.0" prefWidth="722.0">
+      <AnchorPane layoutX="114.0" layoutY="27.0" prefHeight="460.0" prefWidth="722.0">
          <children>
             <Pane centerShape="false" layoutY="127.0" prefHeight="262.0" prefWidth="342.0" scaleShape="false" styleClass="subFormularPane">
                <children>

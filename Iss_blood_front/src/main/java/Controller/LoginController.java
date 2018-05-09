@@ -14,6 +14,8 @@ import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import javafx.util.Pair;
 
+import java.util.Objects;
+
 
 public class LoginController implements ControlledScreensInterface {
 
@@ -70,8 +72,10 @@ public class LoginController implements ControlledScreensInterface {
         String username = usernameTextField.getText();
         String password = passwordTextField.getText();
 
-        controller.setScreen(Screen.MEDIC_SCREEN);
-
+        if(Objects.equals(username, "donator"))
+        controller.setScreen(Screen.DONATOR_SCREEN);
+        else if(Objects.equals(username, "medic"))
+            controller.setScreen(Screen.MEDIC_SCREEN);
 /*        Pair<Boolean, String> canLogin = mainService.login(username, password);
         if (canLogin.getKey()) {
             controller.setScreen(Screen.DONATOR_SCREEN);

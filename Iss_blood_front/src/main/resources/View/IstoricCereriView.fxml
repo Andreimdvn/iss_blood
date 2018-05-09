@@ -7,9 +7,9 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="579.0" prefWidth="900.0" styleClass="formularPane" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.IstoricCereriController">
+<AnchorPane prefHeight="579.0" prefWidth="950.0" styleClass="formularPane" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.IstoricCereriController">
    <children>
-      <AnchorPane layoutX="50.0" layoutY="30.0" prefHeight="520.0" prefWidth="817.0">
+      <AnchorPane layoutX="66.0" layoutY="30.0" prefHeight="520.0" prefWidth="817.0">
          <children>
             <TableView fx:id="cerereSangeTableView" layoutY="60.0" prefHeight="204.0" prefWidth="800.0">
               <columns>
@@ -39,8 +39,8 @@
             <Label layoutX="305.0" styleClass="header2" text="Cereri in asteptare" />
             <JFXTextField layoutX="14.0" layoutY="285.0" prefHeight="25.0" prefWidth="276.0" promptText="Search pacient by name" styleClass="textbox" unFocusColor="WHITE" />
             <JFXTextField layoutY="25.0" prefHeight="25.0" prefWidth="276.0" promptText="Search pacient by name" styleClass="textbox" unFocusColor="WHITE" />
+            <JFXButton layoutX="692.0" layoutY="10.0" onAction="#populate" prefHeight="29.0" prefWidth="107.0" styleClass="buttonDashboard" text="Anulare cerere" />
          </children>
       </AnchorPane>
-      <JFXButton layoutX="631.0" layoutY="15.0" onAction="#populate" prefHeight="29.0" prefWidth="107.0" styleClass="buttonDashboard" text="Populate" />
    </children>
 </AnchorPane>
