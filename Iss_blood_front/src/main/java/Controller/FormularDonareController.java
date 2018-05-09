@@ -1,9 +1,13 @@
 package Controller;
 
+import Model.GrupaSange;
+import Model.RH;
 import Service.MainService;
 import com.jfoenix.controls.JFXCheckBox;
+import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
+import javafx.scene.control.ComboBox;
 
 public class FormularDonareController implements ControlledScreensInterface {
 
@@ -54,9 +58,18 @@ public class FormularDonareController implements ControlledScreensInterface {
     @FXML
     private JFXCheckBox vineriCheckbox;
 
+
+    @FXML
+    private ComboBox<GrupaSange> grupaSangeComboBox;
+
+    @FXML
+    private ComboBox<RH> rhComboBox;
+
+
     @FXML
     private void initialize(){
-
+        grupaSangeComboBox.getItems().addAll(GrupaSange.O1,GrupaSange.A2,GrupaSange.B3,GrupaSange.AB4);
+        rhComboBox.getItems().addAll(RH.POZITIV,RH.NEGATIV);
     }
 
     private ControllerScreens controller;

@@ -124,6 +124,7 @@
 .combo-box{
     -fx-prompt-text-fill: -fx-primary-text-color;
     -fx-text-fill: -fx-primary-text-color;
+    -fx-fill:-fx-primary-text-color;
     -fx-pref-width: 180px;
     -fx-alignment: center;
     -fx-text-alignment: center;

@@ -57,8 +57,8 @@
                   <VBox alignment="CENTER" fillWidth="false" layoutX="28.0" layoutY="132.0" prefHeight="261.0" prefWidth="284.0" spacing="35.0">
                      <children>
                         <HBox />
-                        <JFXComboBox prefHeight="25.0" prefWidth="167.0" promptText="Grupa de sange" />
-                        <JFXComboBox prefHeight="25.0" prefWidth="167.0" promptText="RH" />
+                        <JFXComboBox fx:id="grupaSangeComboBox" prefHeight="25.0" prefWidth="167.0" promptText="Grupa de sange" />
+                        <JFXComboBox fx:id="rhComboBox" prefHeight="25.0" prefWidth="167.0" promptText="RH" />
                         <Label styleClass="labelNormal" text="Ziua cand pot dona" />
                         <HBox spacing="4.0">
                            <children>
