@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.octicons.OctIconView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="pane" prefHeight="261.0" prefWidth="485.0" styleClass="backgroundMessageBox" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Utils.CustomMessageBoxController">
+   <children>
+      <OctIconView fx:id="iconita" glyphName="INFO" layoutX="64.0" layoutY="79.0" size="80" wrappingWidth="72.0" />
+      <Label fx:id="titleLabel" layoutX="136.0" layoutY="42.0" prefHeight="30.0" prefWidth="322.0" styleClass="titleMessageBox" text="Pula lui Iustin" />
+      <Label fx:id="textLabel" layoutX="32.0" layoutY="100.0" prefHeight="108.0" prefWidth="429.0" styleClass="textMessageBox" text="Pula lui Iustin" />
+      <JFXButton layoutX="173.0" layoutY="217.0" onAction="#close" prefHeight="29.0" prefWidth="148.0" styleClass="buttonMessageBox" text="OK" />
+   </children>
+</AnchorPane>
