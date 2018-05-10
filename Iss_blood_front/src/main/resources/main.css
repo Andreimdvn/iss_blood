@@ -21,6 +21,34 @@
     -fx-text-formular-color: white;
 }
 
+.buttonMessageBox{
+    -fx-text-fill: -fx-header-text-formular-color;
+    -fx-background-color: -fx-button-formular-color;
+
+}
+
+.backgroundMessageBox{
+    -fx-background-color: -fx-primary-color;
+}
+
+.titleMessageBox{
+    -fx-font-size: 20px;
+    -fx-alignment: center;
+    -fx-text-alignment: center;
+    -fx-text-fill: -fx-primary-text-color;
+    -fx-font-style: italic;
+    -fx-font-weight: bold;
+}
+
+.textMessageBox{
+    -fx-font-size: 14px;
+    -fx-alignment: center;
+    -fx-text-alignment: center;
+    -fx-text-fill: -fx-primary-text-color;
+    -fx-border-width: 1px;
+    -fx-border-color: -fx-primary-text-color;
+    -fx-border-radius: 3px;
+}
 
 .table-view{
     -fx-background-color: transparent;

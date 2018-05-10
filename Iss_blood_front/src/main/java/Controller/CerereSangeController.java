@@ -5,6 +5,7 @@ import Model.GrupaSange;
 import Model.Importanta;
 import Model.RH;
 import Service.MainService;
+import Utils.CustomMessageBox;
 import Utils.FunctiiUtile;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXRadioButton;
@@ -71,7 +72,9 @@ public class CerereSangeController implements  ControlledScreensInterface{
 
         if(mesajEroare.isEmpty())
             return true;
-        //showAlert(mesajEroare); to do
+
+        CustomMessageBox box = new CustomMessageBox("Error",mesajEroare);
+        box.show();
         return false;
     }
 
@@ -81,16 +84,19 @@ public class CerereSangeController implements  ControlledScreensInterface{
         if (verificareCerere()) {
 
             CerereSange a = getCerereSange();
+
+
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Cerere trimisa");
             alert.setHeaderText(a.getNumePacient() + " "
                     + a.getCnpPacient() + " cu grupa " + a.getGrupaSange() + "si rh " + a.getRh());
-            alert.setContentText("Are importanta : " + getImportanta() + " si are nevoie de :"
+            String x = "Are importanta : " + getImportanta() + " si are nevoie de :"
                     + a.getNumarPungiTrombocite() + "," + a.getNumarPungiGlobuleRosii() + ","
-                    + a.getNumarPungiPlasma()
-            );
-            alert.show();
+                    + a.getNumarPungiPlasma();
+            CustomMessageBox e = new CustomMessageBox("Cerere trimisa",x,0);
+            e.show();
         }
+
     }
 
     @FXML
