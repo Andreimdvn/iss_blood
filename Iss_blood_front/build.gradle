@@ -20,6 +20,10 @@ dependencies {
     compile group: 'org.controlsfx', name: 'controlsfx', version: '8.40.14'
     // https://mvnrepository.com/artifact/org.json/json
     compile group: 'org.json', name: 'json', version: '20160810'
+
+    // https://mvnrepository.com/artifact/de.jensd/fontawesomefx-octicons
+    compile group: 'de.jensd', name: 'fontawesomefx-octicons', version: '4.3.0-9.1.2'
+
 }
 
 jar {

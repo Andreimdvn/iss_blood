@@ -3,7 +3,7 @@ import json
 from flask import Flask, request
 import logging
 
-from Controller.BackController import BackController
+from Controller.back_controller import BackController
 from Model.AccountType import AccountType
 from Model.RegisterInfo import RegisterInfo
 
