@@ -1,3 +1,5 @@
+import datetime
+
 from Model.AccountType import AccountType
 from Service.i_service import IService
 from Utils.orm import User
@@ -53,27 +55,30 @@ class ServiceCommon(IService):
         id_localitate = self.get_id_localitate(register_info.localitate, id_judet)
 
         # 4. Numele tabelului si coloanele in functie de tipul de cont
-        # TO DO: splituieste undeva numele de prenume, de preferat in UI
         table_name = None
         specific_col_names = []
         specific_vals = []
         if register_info.account_type == AccountType['Donator']:
+            try:
+                data_nasterii = self.data_nasterii_din_cnp(register_info.cnp)
+            except ValueError:
+                return 1, "CNP invalid"
+
             table_name = 'Donator'
             specific_col_names = ['prenume', 'nume', 'cnp', 'id_domiciliu', 'adresa_domiciliu', 'data_nasterii',
                                   'telefon', 'id_localitate_resedinta', 'adresa_resedinta', 'user']
-            #TO DO: data nasterii din CNP
-            specific_vals = [register_info.fullname, register_info.fullname, register_info.cnp, id_localitate,
-                             register_info.address, '-',
+            specific_vals = [register_info.prenume, register_info.nume, register_info.cnp, id_localitate,
+                             register_info.address, data_nasterii,
                              register_info.phone, id_localitate, register_info.address, new_user_object]
         elif register_info.account_type == AccountType['Medic']:
             table_name = 'Medic'
             specific_col_names = ['prenume', 'nume', 'cnp', 'telefon', 'specializare', 'user']  # id_locatie ramane null
-            specific_vals = [register_info.fullname, register_info.fullname, register_info.cnp, register_info.phone,
+            specific_vals = [register_info.prenume, register_info.nume, register_info.cnp, register_info.phone,
                              'pl', new_user_object]
         elif register_info.account_type == AccountType['StaffTransfuzie']:
             table_name = 'StaffTransfurzii'
             specific_col_names = ['prenume', 'nume', 'cnp', 'telefon', 'user']  # id_locatie ramane null
-            specific_vals = [register_info.fullname, register_info.fullname, register_info.cnp, register_info.phone,
+            specific_vals = [register_info.prenume, register_info.nume, register_info.cnp, register_info.phone,
                              new_user_object]
         # else ramane None
 
@@ -87,7 +92,6 @@ class ServiceCommon(IService):
             mark_license_callback()
 
         return 0, "Added successfully"
-
 
     def check_license(self, license_type, license_code):
         '''
@@ -129,3 +133,18 @@ class ServiceCommon(IService):
             localitate = self.db.select('Localitate', ['nume', 'id_judet'], [nume, id_judet], True)
         return localitate.id
 
+    def data_nasterii_din_cnp(self, cnp):
+        '''
+        Extrage data nasterii din CNP
+        Arunca ValueError daca rezulta o data invalida
+        :param cnp:
+        :return: datetime.datetime
+        '''
+        #-yymmdd---
+        year = int(cnp[1:3]) + 2000
+        if year > datetime.datetime.now().year:
+            year-=100
+        month = cnp[3:5]
+        day = cnp[5:7]
+        date = datetime.datetime.strptime("{0}-{1}-{2}".format(str(year), month, day), "%Y-%m-%d")
+        return date

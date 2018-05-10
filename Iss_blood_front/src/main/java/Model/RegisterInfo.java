@@ -4,7 +4,8 @@ public class RegisterInfo {
     private String username;
     private String password;
     private String email;
-    private String fullname;
+    private String nume;
+    private String prenume;
     private String cnp;
     private String judet;
     private String localitate;
@@ -13,11 +14,12 @@ public class RegisterInfo {
     private AccountType accountType;
     private String licence;
 
-    public RegisterInfo(String username, String password, String email, String fullname, String cnp, String judet, String localitate, String address, String phone, String accountTypeString, String licence) {
+    public RegisterInfo(String username, String password, String email, String nume, String prenume, String cnp, String judet, String localitate, String address, String phone, String accountTypeString, String licence) {
         this.username = username;
         this.password = password;
         this.email = email;
-        this.fullname = fullname;
+        this.nume = nume;
+        this.prenume = prenume;
         this.cnp = cnp;
         this.judet = judet;
         this.localitate = localitate;
@@ -32,8 +34,6 @@ public class RegisterInfo {
             accountType = AccountType.Donator;
         else if(accountTypeString.contains("medic"))
             accountType = AccountType.Medic;
-        else if(accountTypeString.contains("recoltare"))
-            accountType = AccountType.StaffRecoltare;
         else
             accountType = AccountType.StaffTransfuzie;
 
@@ -52,8 +52,8 @@ public class RegisterInfo {
         return email;
     }
 
-    public String getFullname() {
-        return fullname;
+    public String getNume() {
+        return nume;
     }
 
     public String getAddress() {

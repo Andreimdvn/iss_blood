@@ -239,7 +239,8 @@ class ORM:
         :param columns: list with required columns for the WHERE clause.
         :param values: list with values corresponding to the given columns
         :param first: only the first item is returned.
-        :return: a list with: objects of table type if no columns were specified, tuples<Column> otherwise.
+        :return: if first==False, a list with: objects of table type if no columns were specified, tuples<Column> otherwise.
+                 if first==True, a single object is returned instead of a list
         """
         res = None
         if columns:

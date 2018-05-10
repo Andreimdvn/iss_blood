@@ -1,10 +1,11 @@
 
 class RegisterInfo:
-    def __init__(self, username, password, email, fullname, cnp, judet, localitate, address, phone, account_type, license):
+    def __init__(self, username, password, email, nume, prenume, cnp, judet, localitate, address, phone, account_type, license):
         self.username = username
         self.password = password
         self.email = email
-        self.fullname = fullname
+        self.nume = nume
+        self.prenume = prenume
         self.cnp = cnp
         self.judet = judet
         self.localitate = localitate

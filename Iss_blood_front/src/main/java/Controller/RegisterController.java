@@ -157,7 +157,7 @@ public class RegisterController implements ControlledScreensInterface{
         if(licentaTextField != null)
             license = licentaTextField.getText();
 
-        RegisterInfo info = new RegisterInfo(username, password, email, fullname, cnp, judet, localitate, address, phone, accountType, license);
+        RegisterInfo info = new RegisterInfo(username, password, email, fullname, fullname, cnp, judet, localitate, address, phone, accountType, license);
         RegisterValidator validator = new RegisterValidator();
         Pair<Boolean, String> validationResult = validator.Validate(info);
         if(validationResult.getKey())
