@@ -180,7 +180,7 @@ class ORM:
             except AttributeError:
                 c = None
             if not c:
-                raise ValueError('[!] Column [%s] not present in table [%s]!' % (col, table))
+                raise ValueError('[!] Column [%s] is not present in table [%s]!' % (col, table))
             cols.append(c)
         return cols
 
@@ -203,10 +203,10 @@ class ORM:
         """
         if columns:
             if type(columns) not in (list, tuple):
-                raise ValueError('[!] Type [%s] for columns are not allowed!' % type(columns))
+                raise ValueError('[!] Type [%s] is not allowed for columns!' % type(columns))
         if values:
             if type(values) not in (list, tuple):
-                raise ValueError('[!] Type [%s] for values are not allowed!' % type(values))
+                raise ValueError('[!] Type [%s] is not allowed for values!' % type(values))
         tb = self.table_object(table)
         if columns:
             cols = self.columns_objects(tb, columns)
@@ -237,10 +237,10 @@ class ORM:
         res = None
         if columns:
             if type(columns) not in (list, tuple):
-                raise ValueError('[!] Type [%s] for columns are not allowed!' % type(columns))
+                raise ValueError('[!] Type [%s] is not allowed for columns!' % type(columns))
         if values:
             if type(values) not in (list, tuple):
-                raise ValueError('[!] Type [%s] for values are not allowed!' % type(values))
+                raise ValueError('[!] Type [%s is not allowed for values!' % type(values))
         tb = self.table_object(table)
         if not columns:
             res = self.ses.query(tb)
@@ -257,8 +257,61 @@ class ORM:
             return res.first()
         return res.all()
 
-    def update(self):
-        pass
+    def update(self, table, columns_where=None, values_where=None, columns=None, values=None):
+        """
+        Execute an update on a specified table.
+        :param table:
+        :param columns_where:
+        :param values_where:
+        :param columns:
+        :param values:
+        :return:
+        """
+        if columns_where:
+            if type(columns_where) not in (list, tuple):
+                raise ValueError('[!] Type [%s] is not allowed for columns in where clause!' % type(columns))
+            if len(columns_where) < 1:
+                raise ValueError('[!] Specify some columns!')
+            if values_where:
+                if type(values_where) not in (list, tuple):
+                    raise ValueError('[!] Type [%s] is not allowed for values!' % type(columns))
+                if len(values_where) < 1:
+                    raise ValueError('[!] Specify some columns!')
+            if len(columns_where) != len(values_where):
+                raise ValueError('[!] Columns and values for where clause in update are wrong!')
+        else:
+            if values_where:
+                raise ValueError('[!] Specify columns for where clause!')
+        if columns:
+            if type(columns) not in (list, tuple):
+                raise ValueError('[!] Type [%s] is not allowed for columns!' % type(columns))
+            if len(columns) < 1:
+                raise ValueError('[!] Specify some columns!')
+        else:
+            raise ValueError('[!] Specify columns to update!')
+        if values:
+            if type(values) not in (list, tuple):
+                raise ValueError('[!] Type [%s] is not allowed for values!' % type(values))
+            if len(values) < 1:
+                raise ValueError('[!] Specify some values!')
+        else:
+            raise ValueError('[!] Specify new values to update!')
+        if len(values) != len(columns):
+            raise ValueError('[!] There are not enough values/columns!')
+
+        items = self.select(table, columns=columns_where, values=values_where)
+        tb = self.table_object(table)
+
+        cols = [getattr(tb, c) for c in columns]
+        if len(cols) != len(values):
+            raise ValueError('[!] There are not enough values/columns!')
+        col_val = {e[0].key: e[1] for e in zip(cols, values)}
+        for item in items:
+
+            for i, col in enumerate(columns):
+                setattr(item, col, values[i])
+        self.ses.commit()
+        self.ses.flush()
 
     def delete(self, table, columns=None, values=None):
         """
@@ -270,14 +323,14 @@ class ORM:
         """
         if columns:
             if type(columns) not in (list, tuple):
-                raise ValueError('[!] Type [%s] for columns are not allowed!' % type(columns))
+                raise ValueError('[!] Type [%s] is not allowed for columns!' % type(columns))
             if len(columns) < 1:
                 raise ValueError('[!] Specify some columns!')
         else:
             raise ValueError('[!] Specify columns for where clause!')
         if values:
             if type(values) not in (list, tuple):
-                raise ValueError('[!] Type [%s] for values are not allowed!' % type(values))
+                raise ValueError('[!] Type [%s] is not allowed for values!' % type(values))
             if len(values) < 1:
                 raise ValueError('[!] Specify some values!')
         else:
