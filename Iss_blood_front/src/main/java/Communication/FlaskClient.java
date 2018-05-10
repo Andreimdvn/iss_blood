@@ -107,8 +107,8 @@ public class FlaskClient {
             return new Pair<>(false, "Client connection request Error");
 
         String jsonString = new JSONObject().put("username", info.getUsername()).put("password", info.getPassword())
-                .put("email", info.getEmail()).put("fullname", info.getNume()).put("cnp", info.getCnp())
-                .put("judet", info.getJudet())
+                .put("email", info.getEmail()).put("nume", info.getNume()).put("prenume", info.getPrenume())
+                .put("cnp", info.getCnp()).put("judet", info.getJudet())
                 .put("localitate", info.getLocalitate()).put("address", info.getAddress())
                 .put("phone", info.getPhone()).put("accountType", info.getAccountType().toString())
                 .put("license", info.getLicence()).toString();

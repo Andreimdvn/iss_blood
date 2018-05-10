@@ -83,4 +83,8 @@ public class RegisterInfo {
     public String getCnp() {
         return cnp;
     }
+
+    public String getPrenume() {
+        return prenume;
+    }
 }

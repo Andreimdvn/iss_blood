@@ -2,6 +2,7 @@ package Controller;
 
 import Model.RegisterInfo;
 import Service.MainService;
+import Utils.CustomMessageBox;
 import Utils.Screen;
 import Validators.RegisterValidator;
 import com.jfoenix.controls.JFXPasswordField;
@@ -164,16 +165,20 @@ public class RegisterController implements ControlledScreensInterface{
             Pair<Boolean, String> response = mainService.register(info);
             if(response.getKey())
             {
-                ControllerUtils.ShowConfirmationMessage("Info", "Registered successfully");
+                CustomMessageBox customMessageBox = new CustomMessageBox("info", "Registered successfully", 0);
+                customMessageBox.show();
+                controller.setScreen(Screen.LOGIN_SCREEN);
             }
             else
             {
-                ControllerUtils.ShowErrorMessage(response.getValue());
+                CustomMessageBox messageBox = new CustomMessageBox("Error", response.getValue(), 1);
+                messageBox.show();
             }
         }
         else
         {
-            ControllerUtils.ShowErrorMessage(validationResult.getValue());
+            CustomMessageBox messageBox = new CustomMessageBox("Error", validationResult.getValue(), 1);
+            messageBox.show();
         }
     }
 

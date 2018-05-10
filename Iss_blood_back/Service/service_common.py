@@ -26,9 +26,9 @@ class ServiceCommon(IService):
         :return: Tuple<int, string> = (status code, status message); status code = 0 on success or >= 1 otherwise
         '''
 
-        mark_license_callback = None
+        use_license_callback = None
 
-        # -1. Daca are licenta, valideaz-o
+        # 1. Daca are licenta, valideaz-o
         if register_info.license != "":
             #self.db.insert('Licente', ['tip_licenta', 'cod_licenta', 'folosita'], [register_info.account_type.name, register_info.license, False])
             license_is_valid, message = self.check_license(register_info.account_type.name, register_info.license)
@@ -36,12 +36,11 @@ class ServiceCommon(IService):
                 return 1, message
 
             # licenta e buna, la sfarsit seteaz-o la folosita
-            mark_license_callback = lambda: self.db.delete('Licente', ['tip_licenta', 'cod_licenta'],
-                                                                       [register_info.account_type.name,
-                                                                        register_info.license])
-            # TO DO: cand avem update, apeleaza update  ^^^^^
+            use_license_callback = lambda: self.db.update('Licente', ['tip_licenta', 'cod_licenta'],
+                                                           [register_info.account_type.name, register_info.license],
+                                                           ['folosita'], [True])
 
-        # 0. Verifica daca exista deja userul. Username si email trebuie sa fie unice
+        # 2. Verifica daca exista deja userul. Username si email trebuie sa fie unice
         duplicate_user = self.db.select('User', ['username'], [register_info.username], True)
         if duplicate_user is not None:
             return 1, "Username already taken"
@@ -49,19 +48,19 @@ class ServiceCommon(IService):
         if duplicate_user is not None:
             return 1, "email already in use"
 
-        # 1. Creeaza obiectul de baza - User
+        # 3. Creeaza obiectul de baza - User
         new_user_object = User()
         new_user_object.username = register_info.username
         new_user_object.password = register_info.password
         new_user_object.email = register_info.email
 
-        # 2. Vezi daca exista judetul in BD sau trebuie adaugat
+        # 4. Vezi daca exista judetul in BD sau trebuie adaugat
         id_judet = self.get_id_judet(register_info.judet)
 
-        # 3. La fel pentru localitate
+        # 5. La fel pentru localitate
         id_localitate = self.get_id_localitate(register_info.localitate, id_judet)
 
-        # 4. Numele tabelului si coloanele in functie de tipul de cont
+        # 6. Numele tabelului si coloanele in functie de tipul de cont
         table_name = None
         specific_col_names = []
         specific_vals = []
@@ -89,14 +88,14 @@ class ServiceCommon(IService):
                              new_user_object]
         # else ramane None
 
-        # 5. Adauga in tabel
+        # 7. Adauga in tabel
         try:
             self.db.insert(table_name, specific_col_names, specific_vals)
         except...:
             return 2, "Database error"
 
-        if mark_license_callback is not None:
-            mark_license_callback()
+        if use_license_callback is not None:
+            use_license_callback()
 
         return 0, "Added successfully"
 
