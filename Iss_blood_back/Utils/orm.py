@@ -249,12 +249,10 @@ class ORM:
         if values:
             if type(values) not in (list, tuple):
                 raise ValueError('[!] Type [%s] for values are not allowed! Use list or tuple.' % type(values))
-=======
                 raise ValueError('[!] Type [%s] is not allowed for columns!' % type(columns))
         if values:
             if type(values) not in (list, tuple):
                 raise ValueError('[!] Type [%s is not allowed for values!' % type(values))
->>>>>>> origin
         tb = self.table_object(table)
         if not columns:
             res = self.ses.query(tb)
