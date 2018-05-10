@@ -10,6 +10,13 @@ class ServiceCommon(IService):
         super().__init__(repo_manager, db)
 
     def login(self, username, password):
+        """
+        Checks the databse for the username and password entry
+        :return: int 0(success) 1(error)
+        """
+        lst = self.db.select("User", ["username", "password"], [username, password])
+        if len(lst) == 0:
+            return 1
         return 0
 
     def register(self, register_info):

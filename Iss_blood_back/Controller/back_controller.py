@@ -6,20 +6,16 @@ from Utils.orm import ORM
 
 
 class BackController:
-    def __init__(self):
+    def __init__(self, db_config):
         self.repo_manager = None
-        self.service_common = None
-        self.service_donator = None
-        self.service_medic = None
-        self.service_transfuzie = None
-        self.service_administrator = None
-
-    def init_services(self, db_config):
         orm = ORM(db_config)
         self.repo_manager = RepoManager(orm)
         self.service_common = ServiceCommon(self.repo_manager, orm)
         self.service_donator = ServiceDonator(self.repo_manager, orm)
         self.service_medic = ServiceMedic(self.repo_manager, orm)
+
+        self.service_transfuzie = None
+        self.service_administrator = None
 
     def login(self, user, password):
         return self.service_common.login(user, password)

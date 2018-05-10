@@ -11,7 +11,7 @@ from Model.RegisterInfo import RegisterInfo
 class FlaskServer:
     app = Flask(__name__)
 
-    def __init__(self, config_data, controller):
+    def __init__(self, config_data, controller: BackController):
         self.controller = controller
         self.port = config_data["flask_http_port"]
         self.host = '0.0.0.0'
@@ -52,9 +52,11 @@ class FlaskServer:
 
         return_dict = {"status": status}
         if status == 0:
-            return_dict["message"] = "Login successfully"
+            return_dict["message"] = "Login cu success!"
         else:
-            return_dict["message"] = "Invalid username or password"
+            return_dict["message"] = "Username sau parola invalide"
+
+        self.logger.debug("Returning response for Login Request: {}".format(return_dict))
 
         return json.dumps(return_dict)
 

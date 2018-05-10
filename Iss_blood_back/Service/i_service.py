@@ -1,3 +1,5 @@
+import logging
+
 
 class IService:
     def __init__(self, repo_manager, db):
@@ -7,3 +9,4 @@ class IService:
         """
         self.repo_manager = repo_manager
         self.db = db
+        self.logger = logging.getLogger()

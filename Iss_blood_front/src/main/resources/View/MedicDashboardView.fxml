@@ -10,83 +10,115 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="955.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="600.0" prefWidth="1165.0" styleClass="formularPane" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MedicDashboardController">
    <center>
-      <BorderPane BorderPane.alignment="CENTER">
+      <BorderPane fx:id="centralPane" styleClass="formularPane" BorderPane.alignment="CENTER">
          <center>
-            <AnchorPane prefHeight="446.0" prefWidth="740.0" styleClass="formularPane" stylesheets="@../main.css">
+            <AnchorPane fx:id="mainPane" prefHeight="446.0" prefWidth="900.0" styleClass="formularPane" stylesheets="@../main.css" BorderPane.alignment="CENTER">
                <children>
-                  <Label layoutX="89.0" layoutY="44.0" prefHeight="55.0" prefWidth="195.0" styleClass="header2" text="Welcome back," />
-                  <Pane layoutX="38.0" layoutY="232.0" prefHeight="289.0" prefWidth="320.0" styleClass="subFormularPane">
+                  <AnchorPane layoutX="61.0" layoutY="38.0">
                      <children>
-                        <JFXButton layoutX="74.0" layoutY="250.0" prefHeight="25.0" prefWidth="173.0" styleClass="buttonFormular" text="View all request" />
-                        <Pane prefHeight="40.0" prefWidth="320.0" styleClass="headerPaneFormular">
+                        <Label layoutX="93.0" prefHeight="55.0" prefWidth="195.0" styleClass="header2" text="Welcome back," />
+                        <Pane layoutY="193.0" prefHeight="289.0" prefWidth="381.0" styleClass="subFormularPane">
                            <children>
-                              <Label layoutX="112.0" layoutY="15.0" text="Active requests" />
+                              <JFXButton layoutX="104.0" layoutY="250.0" prefHeight="25.0" prefWidth="173.0" styleClass="buttonFormular" text="View all request" />
+                              <Pane prefHeight="40.0" prefWidth="381.0" styleClass="headerPaneFormular">
+                                 <children>
+                                    <Label layoutX="144.0" layoutY="15.0" text="Active requests" />
+                                 </children>
+                              </Pane>
+                              <TableView layoutX="19.0" layoutY="65.0" prefHeight="159.0" prefWidth="343.0">
+                                <columns>
+                                  <TableColumn prefWidth="103.55553817749023" text="Numele" />
+                                  <TableColumn prefWidth="88.888916015625" text="Importanta" />
+                                    <TableColumn prefWidth="76.44442749023438" text="Grupa" />
+                                    <TableColumn prefWidth="70.2222900390625" text="RH" />
+                                </columns>
+                              </TableView>
                            </children>
                         </Pane>
-                        <TableView layoutX="26.0" layoutY="73.0" prefHeight="159.0" prefWidth="269.0">
-                          <columns>
-                            <TableColumn prefWidth="95.55560302734375" text="Numele" />
-                            <TableColumn prefWidth="96.00006103515625" text="Importanta" />
-                              <TableColumn prefWidth="76.44442749023438" text="Grupa + RH" />
-                          </columns>
-                        </TableView>
-                     </children>
-                  </Pane>
-                  <Pane layoutX="382.0" layoutY="232.0" prefHeight="290.0" prefWidth="320.0" styleClass="subFormularPane">
-                     <children>
-                        <JFXButton layoutX="74.0" layoutY="251.0" prefHeight="25.0" prefWidth="173.0" styleClass="buttonFormular" text="View all" />
-                        <Pane prefHeight="40.0" prefWidth="320.0" styleClass="headerPaneFormular">
+                        <Pane layoutX="446.0" layoutY="193.0" prefHeight="290.0" prefWidth="381.0" styleClass="subFormularPane">
                            <children>
-                              <Label layoutX="67.0" layoutY="15.0" text="Patients who still need blood" />
+                              <JFXButton layoutX="104.0" layoutY="251.0" prefHeight="25.0" prefWidth="173.0" styleClass="buttonFormular" text="View all" />
+                              <Pane prefHeight="40.0" prefWidth="381.0" styleClass="headerPaneFormular">
+                                 <children>
+                                    <Label layoutX="98.0" layoutY="15.0" text="Patients who still need blood" />
+                                 </children>
+                              </Pane>
+                              <TableView layoutX="14.0" layoutY="66.0" prefHeight="159.0" prefWidth="353.0">
+                                 <columns>
+                                    <TableColumn prefWidth="129.33334350585938" text="Pacient name" />
+                                    <TableColumn prefWidth="76.0" text="Importanta" />
+                                    <TableColumn prefWidth="144.88873291015625" text="Donatori preferentiali" />
+                                 </columns>
+                              </TableView>
                            </children>
                         </Pane>
-                        <TableView layoutX="19.0" layoutY="66.0" prefHeight="159.0" prefWidth="283.0">
-                           <columns>
-                              <TableColumn prefWidth="95.55560302734375" text="Pacient name" />
-                              <TableColumn prefWidth="83.55569458007812" text="Importanta" />
-                              <TableColumn prefWidth="100.888916015625" text="Donatori preferentiari" />
-                           </columns>
-                        </TableView>
+                        <Label fx:id="fullnameLabel" layoutX="191.0" layoutY="43.0" prefHeight="55.0" prefWidth="353.0" styleClass="header" text="Doctor Moldovan Daniel-Gabriel" />
                      </children>
-                  </Pane>
-                  <Label layoutX="213.0" layoutY="83.0" prefHeight="55.0" prefWidth="353.0" styleClass="header" text="Doctor Moldovan Daniel-Gabriel" />
+                  </AnchorPane>
                </children>
             </AnchorPane>
          </center>
          <top>
-            <AnchorPane prefHeight="40.0" prefWidth="740.0" styleClass="formularPane" stylesheets="@../main.css" BorderPane.alignment="CENTER" />
+            <AnchorPane prefHeight="40.0" prefWidth="740.0" styleClass="formularPane" stylesheets="@../main.css" BorderPane.alignment="CENTER">
+               <children>
+                  <FontAwesomeIconView fx:id="closeIcon" fill="WHITE" glyphName="CLOSE" glyphStyle="ARROW_LEFT" layoutX="924.0" layoutY="30.0" onMouseClicked="#closeWindow" size="30" />
+               </children></AnchorPane>
          </top>
       </BorderPane>
    </center>
    <left>
-      <AnchorPane prefHeight="600.0" prefWidth="215.0" styleClass="loginPane" stylesheets="@../main.css" BorderPane.alignment="CENTER">
+      <AnchorPane fx:id="leftAnchorPane" prefHeight="600.0" prefWidth="215.0" styleClass="loginPane" stylesheets="@../main.css" BorderPane.alignment="CENTER">
          <children>
-            <FontAwesomeIconView glyphName="BARS" glyphStyle="BARS" layoutX="22.0" layoutY="39.0" size="30" />
-            <VBox layoutX="22.0" layoutY="68.0" prefHeight="412.0" prefWidth="171.0" styleClass="vboxMedic">
+            <AnchorPane fx:id="meniuPane" layoutX="31.0" layoutY="9.0">
                <children>
-                  <Pane prefHeight="112.0" prefWidth="171.0" />
-                  <Pane prefHeight="112.0" prefWidth="171.0">
+                  <VBox layoutX="9.0" layoutY="78.0" prefHeight="359.0" prefWidth="157.0" styleClass="vboxMedic">
                      <children>
-                        <JFXButton prefHeight="25.0" prefWidth="173.0" styleClass="buttonFormular" text="Cerere sange" />
+                        <Pane prefHeight="112.0" prefWidth="171.0">
+                           <children>
+                              <JFXButton fx:id="homeButton" onMouseClicked="#homeButtonClicked" prefHeight="25.0" prefWidth="156.0" styleClass="buttonFormular" text="Home" />
+                           </children>
+                        </Pane>
+                        <Pane prefHeight="112.0" prefWidth="171.0">
+                           <children>
+                              <JFXButton fx:id="cerereSangeButton" onMouseClicked="#CerereSangeClicked" prefHeight="25.0" prefWidth="157.0" styleClass="buttonFormular" text="Cerere sange" />
+                           </children>
+                        </Pane>
+                        <Pane prefHeight="112.0" prefWidth="171.0">
+                           <children>
+                              <JFXButton fx:id="istoricCereriButton" layoutX="-1.0" layoutY="2.0" onMouseClicked="#IstoricCereriClicked" prefHeight="25.0" prefWidth="159.0" styleClass="buttonFormular" text="Vizualizare cereri" />
+                           </children>
+                        </Pane>
+                        <Pane prefHeight="112.0" prefWidth="171.0">
+                           <children>
+                              <JFXButton fx:id="stareActualaButton" onMouseClicked="#stareActualaClicked" prefHeight="25.0" prefWidth="156.0" styleClass="buttonFormular" text="Stare actuala" />
+                           </children>
+                        </Pane>
                      </children>
-                  </Pane>
-                  <Pane prefHeight="112.0" prefWidth="171.0">
-                     <children>
-                        <JFXButton layoutX="-1.0" layoutY="2.0" prefHeight="25.0" prefWidth="173.0" styleClass="buttonFormular" text="Vizualizare cereri" />
-                     </children>
-                  </Pane>
-                  <Pane prefHeight="112.0" prefWidth="171.0">
-                     <children>
-                        <JFXButton prefHeight="25.0" prefWidth="173.0" styleClass="buttonFormular" text="Stare actuala" />
-                     </children>
-                  </Pane>
+                  </VBox>
+                  <JFXButton fx:id="logoutButton" layoutY="554.7142848968506" onMouseClicked="#logout" prefHeight="25.0" prefWidth="173.0" styleClass="buttonFormular" text="Logout" />
+                  <FontAwesomeIconView fill="WHITE" glyphName="ARROW_LEFT" layoutX="151.0" layoutY="24.0" onMouseClicked="#hideLeftMenu" size="30" />
                </children>
-            </VBox>
-            <JFXButton layoutX="22.0" layoutY="567.0" prefHeight="25.0" prefWidth="173.0" styleClass="buttonFormular" text="Logout" />
-            <FontAwesomeIconView glyphName="ARROW_LEFT" glyphStyle="ARROW_LEFT" layoutX="175.0" layoutY="38.0" size="30" />
+            </AnchorPane>
+            <AnchorPane fx:id="burgerPane" layoutX="4.0" layoutY="20.0" prefHeight="572.0" prefWidth="36.0">
+               <children>
+                  <FontAwesomeIconView fill="WHITE" glyphName="BARS" layoutX="5.0" layoutY="10.0" onMouseClicked="#showLeftMenu" size="30" />
+                  <VBox layoutX="3.0" layoutY="67.28571319580078" spacing="58.0">
+                     <children>
+                        <FontAwesomeIconView fill="WHITE" glyphName="HOME" onMouseClicked="#homeButtonClicked" size="30" />
+                        <FontAwesomeIconView fill="WHITE" glyphName="FILE" onMouseClicked="#CerereSangeClicked" size="30" />
+                        <FontAwesomeIconView fill="WHITE" glyphName="FOLDER_OPEN" onMouseClicked="#IstoricCereriClicked" size="30" />
+                        <FontAwesomeIconView fill="WHITE" glyphName="HEART" onMouseClicked="#stareActualaClicked" size="30" />
+                     </children>
+                  </VBox>
+                  <FontAwesomeIconView fill="WHITE" glyphName="UNLOCK" glyphStyle="UNLOCK" layoutX="3.0" layoutY="570.0" onMouseClicked="#logout" size="30" />
+               </children>
+            </AnchorPane>
          </children>
       </AnchorPane>
    </left>
+   <right>
+      <AnchorPane prefHeight="600.0" prefWidth="0.0" styleClass="formularPane" BorderPane.alignment="CENTER" />
+   </right>
 </BorderPane>

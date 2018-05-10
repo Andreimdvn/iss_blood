@@ -10,79 +10,85 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 
-
-<AnchorPane prefHeight="540.0" prefWidth="555.0" styleClass="formularPane" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.CerereSangeView">
+<AnchorPane prefHeight="513.0" prefWidth="950.0" styleClass="formularPane" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CerereSangeController">
    <children>
-      <Pane layoutX="106.0" layoutY="31.0" prefHeight="440.0" prefWidth="343.0" styleClass="subFormularPane">
+      <AnchorPane layoutX="114.0" layoutY="27.0" prefHeight="460.0" prefWidth="722.0">
          <children>
-            <Pane layoutX="1.0" prefHeight="57.0" prefWidth="341.0" styleClass="headerPaneFormular">
+            <Pane centerShape="false" layoutY="127.0" prefHeight="262.0" prefWidth="342.0" scaleShape="false" styleClass="subFormularPane">
                <children>
-                  <Label layoutX="115.0" layoutY="14.0" text="Informatie cerere" />
+                  <Pane layoutX="1.0" prefHeight="57.0" prefWidth="340.0" styleClass="headerPaneFormular">
+                     <children>
+                        <Label layoutX="115.0" layoutY="15.0" text="Detalii persoana" />
+                     </children>
+                  </Pane>
+                  <JFXTextField fx:id="numePacientTextField" focusColor="#fea02f" layoutX="82.0" layoutY="67.0" promptText="Nume pacient" styleClass="textbox" unFocusColor="WHITE" />
+                  <JFXTextField fx:id="cnpPacientTextField" focusColor="#fea02f" layoutX="82.0" layoutY="111.0" promptText="CNP Client" styleClass="textbox" unFocusColor="WHITE" />
+                  <JFXComboBox fx:id="grupaSangeComboBox" focusColor="#fea02f" layoutX="82.0" layoutY="154.0" prefHeight="25.0" prefWidth="180.0" promptText="Grupa de sange" unFocusColor="WHITE" />
+                  <JFXComboBox fx:id="rhComboBox" focusColor="#fea02f" layoutX="82.0" layoutY="200.0" prefHeight="25.0" prefWidth="167.0" promptText="RH" unFocusColor="WHITE" />
                </children>
             </Pane>
-            <AnchorPane layoutX="53.0" layoutY="309.0" prefHeight="110.0" prefWidth="239.0">
+            <Pane prefHeight="57.0" prefWidth="722.0" styleClass="headerPaneFormular">
                <children>
-                  <HBox spacing="30.0">
-                     <children>
-                        <Label alignment="CENTER" styleClass="labelNormal" text="Punga trombocite" />
-                        <HBox spacing="10.0">
-                           <children>
-                              <FontAwesomeIconView glyphName="MINUS" glyphStyle="+" size="30" />
-                              <JFXTextField prefHeight="25.0" prefWidth="36.0" text="0" />
-                              <FontAwesomeIconView glyphName="PLUS" glyphStyle="+" size="30" />
-                           </children>
-                        </HBox>
-                     </children>
-                  </HBox>
-                  <HBox layoutY="31.0" spacing="30.0">
-                     <children>
-                        <Label alignment="CENTER" styleClass="labelNormal" text="Punga globule rosii" />
-                        <HBox spacing="10.0">
-                           <children>
-                              <FontAwesomeIconView glyphName="MINUS" glyphStyle="+" size="30" />
-                              <JFXTextField prefHeight="25.0" prefWidth="36.0" text="0" />
-                              <FontAwesomeIconView glyphName="PLUS" glyphStyle="+" size="30" />
-                           </children>
-                        </HBox>
-                     </children>
-                  </HBox>
-                  <HBox layoutY="65.0" spacing="30.0">
-                     <children>
-                        <Label alignment="CENTER" styleClass="labelNormal" text="Punga plasma" />
-                        <HBox spacing="10.0">
-                           <children>
-                              <FontAwesomeIconView glyphName="MINUS" glyphStyle="+" size="30" />
-                              <JFXTextField prefHeight="25.0" prefWidth="36.0" text="0" />
-                              <FontAwesomeIconView glyphName="PLUS" glyphStyle="+" size="30" />
-                           </children>
-                        </HBox>
-                     </children>
-                  </HBox>
+                  <Label layoutX="306.0" layoutY="15.0" text="Informatie cerere" />
                </children>
-            </AnchorPane>
-            <JFXRadioButton layoutX="58.0" layoutY="269.0" styleClass="jfx-radio-button" text="Scazuta">
-               <toggleGroup>
-                  <ToggleGroup fx:id="sex" />
-               </toggleGroup>
-            </JFXRadioButton>
-            <JFXRadioButton layoutX="138.0" layoutY="269.0" text="Medie">
-               <toggleGroup>
-                  <ToggleGroup fx:id="sex" />
-               </toggleGroup>
-            </JFXRadioButton>
-            <JFXRadioButton layoutX="215.0" layoutY="269.0" text="Ridicata">
-               <toggleGroup>
-                  <ToggleGroup fx:id="sex1" />
-               </toggleGroup>
-            </JFXRadioButton>
-            <Label layoutX="134.0" layoutY="236.0" styleClass="labelNormal" text="Importanta" />
-            <JFXTextField layoutX="82.0" layoutY="67.0" promptText="Nume pacient" styleClass="textbox" />
-            <JFXTextField layoutX="82.0" layoutY="111.0" promptText="CNP Client" styleClass="textbox" />
-            <JFXComboBox layoutX="72.0" layoutY="156.0" prefHeight="25.0" prefWidth="180.0" promptText="Grupa de sange" />
-            <JFXComboBox layoutX="72.0" layoutY="195.0" prefHeight="25.0" prefWidth="167.0" promptText="RH" />
+            </Pane>
+            <Pane centerShape="false" layoutX="379.0" layoutY="127.0" prefHeight="262.0" prefWidth="342.0" scaleShape="false" styleClass="subFormularPane">
+               <children>
+                  <Pane layoutX="1.0" prefHeight="57.0" prefWidth="340.0" styleClass="headerPaneFormular">
+                     <children>
+                        <Label layoutX="127.0" layoutY="15.0" text="Detalii cerere" />
+                     </children>
+                  </Pane>
+                  <AnchorPane layoutX="44.0" layoutY="142.0" prefHeight="110.0" prefWidth="277.0">
+                     <children>
+                        <VBox spacing="11.0">
+                           <children>
+                              <Label alignment="CENTER" styleClass="labelNormal" text="Punga trombocite" />
+                              <Label alignment="CENTER" styleClass="labelNormal" text="Punga globule rosii" />
+                              <Label alignment="CENTER" styleClass="labelNormal" text="Punga plasma" />
+                           </children>
+                        </VBox>
+                        <VBox layoutX="141.77777099609375">
+                           <children>
+                              <HBox spacing="10.0">
+                                 <children>
+                                    <FontAwesomeIconView fill="WHITE" glyphName="MINUS" glyphStyle="+" onMouseClicked="#trombociteDown" size="30" />
+                                    <JFXTextField fx:id="trombocitetTextField" alignment="CENTER" prefHeight="25.0" prefWidth="36.0" styleClass="textboxTiny" stylesheets="@../main.css" text="0" />
+                                    <FontAwesomeIconView fill="WHITE" glyphName="PLUS" glyphStyle="+" onMouseClicked="#trombociteUp" size="30" />
+                                 </children>
+                              </HBox>
+                              <HBox spacing="10.0">
+                                 <children>
+                                    <FontAwesomeIconView fill="WHITE" glyphName="MINUS" glyphStyle="+" onMouseClicked="#globuleRosiDown" size="30" />
+                                    <JFXTextField fx:id="globuleRosiTextField" prefHeight="25.0" prefWidth="36.0" styleClass="textboxTiny" text="0" />
+                                    <FontAwesomeIconView fill="WHITE" glyphName="PLUS" glyphStyle="+" onMouseClicked="#globuleRosiUp" size="30" />
+                                 </children>
+                              </HBox>
+                              <HBox spacing="10.0">
+                                 <children>
+                                    <FontAwesomeIconView fill="WHITE" glyphName="MINUS" glyphStyle="+" onMouseClicked="#plasmaDown" size="30" />
+                                    <JFXTextField fx:id="plasmaTextField" prefHeight="25.0" prefWidth="36.0" styleClass="textboxTiny" text="0" />
+                                    <FontAwesomeIconView fill="WHITE" glyphName="PLUS" glyphStyle="+" onMouseClicked="#plasmaUp" size="30" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+                  <JFXRadioButton fx:id="scazutaRadioButton" layoutX="58.0" layoutY="97.0" styleClass="jfx-radio-button" text="Scazuta">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="importanta" />
+                     </toggleGroup>
+                  </JFXRadioButton>
+                  <JFXRadioButton fx:id="medieRadioButton" layoutX="141.0" layoutY="97.0" selected="true" text="Medie" toggleGroup="$importanta" />
+                  <JFXRadioButton fx:id="ridicataRadioButton" layoutX="216.0" layoutY="97.0" text="Ridicata" toggleGroup="$importanta" />
+                  <Label layoutX="137.0" layoutY="64.0" styleClass="labelNormal" text="Importanta" />
+               </children>
+            </Pane>
+            <JFXButton layoutX="329.0" layoutY="420.0" onMouseClicked="#trimiteCerere" styleClass="buttonFormular" text="Trimitere" />
          </children>
-      </Pane>
-      <JFXButton layoutX="246.0" layoutY="500.0" styleClass="buttonFormular" text="Trimitere" />
+      </AnchorPane>
    </children>
 </AnchorPane>

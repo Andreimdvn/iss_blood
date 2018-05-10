@@ -10,10 +10,10 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="480.0" prefWidth="800.0" styleClass="formularPane" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.IstoricDonariController">
+<AnchorPane prefHeight="560.0" prefWidth="800.0" styleClass="formularPane" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.IstoricDonariController">
    <children>
       <VBox layoutX="44.0" layoutY="14.0" />
-      <JFXButton layoutX="28.0" layoutY="400.0" onAction="#dummyTest" prefHeight="25.0" prefWidth="184.0" styleClass="buttonFormular" text="Adaugare dummy donare" />
+      <JFXButton layoutX="28.0" layoutY="469.0" onAction="#dummyTest" prefHeight="25.0" prefWidth="184.0" styleClass="buttonFormular" text="Adaugare dummy donare" />
       <VBox layoutX="28.0" layoutY="31.0" spacing="3.0">
          <children>
             <AnchorPane prefHeight="62.0" prefWidth="184.0" styleClass="headerPaneFormular">
@@ -21,7 +21,7 @@
                   <Label layoutX="37.0" layoutY="14.0" styleClass="labelFormularHeader" text="Advanced search" />
                </children>
             </AnchorPane>
-            <AnchorPane prefHeight="257.0" prefWidth="184.0" styleClass="subFormularPane">
+            <AnchorPane prefHeight="321.0" prefWidth="184.0" styleClass="subFormularPane">
                <children>
                   <JFXDatePicker layoutX="11.0" layoutY="38.0" prefHeight="28.0" prefWidth="162.0" />
                   <Label layoutX="14.0" layoutY="14.0" prefHeight="17.0" prefWidth="32.0" styleClass="labelNormal" text="Data" />
@@ -33,7 +33,7 @@
             </AnchorPane>
          </children>
       </VBox>
-      <JFXButton layoutX="28.0" layoutY="358.0" prefHeight="25.0" prefWidth="184.0" styleClass="buttonFormular" text="Cauta" />
+      <JFXButton layoutX="28.0" layoutY="419.0" prefHeight="25.0" prefWidth="184.0" styleClass="buttonFormular" text="Cauta" />
       <VBox fx:id="tabelDonari" layoutX="229.0" layoutY="31.0" spacing="3.0">
          <children>
             <HBox spacing="4.0" styleClass="hboxIstoric">

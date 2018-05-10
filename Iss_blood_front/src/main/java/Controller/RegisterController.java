@@ -59,8 +59,6 @@ public class RegisterController implements ControlledScreensInterface{
     @FXML
     private ToggleButton medicToggleButton;
 
-    @FXML
-    private ToggleButton recoltareToggleButton;
 
     @FXML
     private ToggleButton transfuzieToggleButton;
@@ -94,8 +92,7 @@ public class RegisterController implements ControlledScreensInterface{
 
     private boolean isAnySelected(){
         return transfuzieToggleButton.isSelected() ||
-                medicToggleButton.isSelected() ||
-                recoltareToggleButton.isSelected();
+                medicToggleButton.isSelected();
 
     }
 
@@ -127,8 +124,10 @@ public class RegisterController implements ControlledScreensInterface{
                addLicentaHBox();
             }
         }
-        else if(!this.isAnySelected())
+        else if(!this.isAnySelected()) {
             removeLicentaHBox();
+            donatorToggleButton.setSelected(true);
+        }
     }
 
     @FXML

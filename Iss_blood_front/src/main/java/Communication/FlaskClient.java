@@ -91,7 +91,7 @@ public class FlaskClient {
         if(jsonResponse == null) {
             return new Pair<>(false, "Connection error.");
         }
-        if (jsonResponse.getString("status").equals("1")) {
+        if (jsonResponse.getInt("status")== 0) {
             return new Pair<>(true, "Success!");
         }
         else {

@@ -5,7 +5,7 @@ from sqlalchemy import Column, Integer, String, ForeignKey, Date, SmallInteger, 
 from sqlalchemy.orm import relationship, sessionmaker
 
 
-MYSQL_CON_STRING = 'mysql://%s:%s@%s/%s'
+MYSQL_CON_STRING = 'mysql://%s:%s@%s:%s/%s'
 
 DB = declarative_base()
 
@@ -171,11 +171,11 @@ class ORM:
 
     def __init__(self, config):
         con_string = MYSQL_CON_STRING % (config['mysql_username'], config['mysql_password'], config['mysql_server'],
-                                         config['mysql_database'])
+                                         config['mysql_port'], config['mysql_database'])
 
         engine = create_engine(con_string)
         self.session = sessionmaker(bind=engine)
-        # DB.metadata.drop_all(engine) # if you want to delete all tables in database
+        # DB.metadata.drop_all(engine)  ### ---> DON'T TOUCH THIS LINE <--- ### (deletes all tables from db)
         DB.metadata.create_all(engine)
         self.ses = self.session()
 
