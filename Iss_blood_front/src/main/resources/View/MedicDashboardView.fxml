@@ -18,7 +18,7 @@
                <children>
                   <AnchorPane layoutX="61.0" layoutY="38.0">
                      <children>
-                        <Label layoutX="93.0" prefHeight="55.0" prefWidth="195.0" styleClass="header2" text="Welcome back," />
+                        <Label layoutX="93.0" prefHeight="55.0" prefWidth="195.0" styleClass="headerFormular" text="Welcome back," />
                         <Pane layoutY="193.0" prefHeight="289.0" prefWidth="381.0" styleClass="subFormularPane">
                            <children>
                               <JFXButton layoutX="104.0" layoutY="250.0" prefHeight="25.0" prefWidth="173.0" styleClass="buttonFormular" text="View all request" />
@@ -54,7 +54,7 @@
                               </TableView>
                            </children>
                         </Pane>
-                        <Label fx:id="fullnameLabel" layoutX="191.0" layoutY="43.0" prefHeight="55.0" prefWidth="353.0" styleClass="header" text="Doctor Moldovan Daniel-Gabriel" />
+                        <Label fx:id="fullnameLabel" layoutX="191.0" layoutY="43.0" prefHeight="55.0" prefWidth="353.0" styleClass="headerFormular" text="Doctor Moldovan Daniel-Gabriel" />
                      </children>
                   </AnchorPane>
                </children>
@@ -63,58 +63,58 @@
          <top>
             <AnchorPane prefHeight="40.0" prefWidth="740.0" styleClass="formularPane" stylesheets="@../main.css" BorderPane.alignment="CENTER">
                <children>
-                  <FontAwesomeIconView fx:id="closeIcon" fill="WHITE" glyphName="CLOSE" glyphStyle="ARROW_LEFT" layoutX="924.0" layoutY="30.0" onMouseClicked="#closeWindow" size="30" />
+                  <FontAwesomeIconView fx:id="closeIcon" fill="WHITE" glyphName="CLOSE" glyphStyle="ARROW_LEFT" layoutX="924.0" layoutY="24.0" onMouseClicked="#closeWindow" size="30" styleClass="icon" />
                </children></AnchorPane>
          </top>
       </BorderPane>
    </center>
    <left>
-      <AnchorPane fx:id="leftAnchorPane" prefHeight="600.0" prefWidth="215.0" styleClass="loginPane" stylesheets="@../main.css" BorderPane.alignment="CENTER">
+      <AnchorPane fx:id="leftAnchorPane" prefHeight="600.0" prefWidth="195.0" styleClass="secondaryPane" stylesheets="@../main.css" BorderPane.alignment="CENTER">
          <children>
-            <AnchorPane fx:id="meniuPane" layoutX="31.0" layoutY="9.0">
+            <AnchorPane fx:id="meniuPane" layoutX="31.0" layoutY="9.0" prefHeight="586.0" prefWidth="169.0">
                <children>
-                  <VBox layoutX="9.0" layoutY="78.0" prefHeight="359.0" prefWidth="157.0" styleClass="vboxMedic">
+                  <VBox layoutX="9.0" layoutY="78.0" prefHeight="359.0" prefWidth="123.0" styleClass="vboxMedic">
                      <children>
                         <Pane prefHeight="112.0" prefWidth="171.0">
                            <children>
-                              <JFXButton fx:id="homeButton" onMouseClicked="#homeButtonClicked" prefHeight="25.0" prefWidth="156.0" styleClass="buttonFormular" text="Home" />
+                              <JFXButton fx:id="homeButton" onMouseClicked="#homeButtonClicked" prefHeight="31.0" prefWidth="129.0" styleClass="buttonSecondary" text="Home" />
                            </children>
                         </Pane>
                         <Pane prefHeight="112.0" prefWidth="171.0">
                            <children>
-                              <JFXButton fx:id="cerereSangeButton" onMouseClicked="#CerereSangeClicked" prefHeight="25.0" prefWidth="157.0" styleClass="buttonFormular" text="Cerere sange" />
+                              <JFXButton fx:id="cerereSangeButton" onMouseClicked="#CerereSangeClicked" prefHeight="31.0" prefWidth="124.0" styleClass="buttonSecondary" text="Cerere sange" />
                            </children>
                         </Pane>
                         <Pane prefHeight="112.0" prefWidth="171.0">
                            <children>
-                              <JFXButton fx:id="istoricCereriButton" layoutX="-1.0" layoutY="2.0" onMouseClicked="#IstoricCereriClicked" prefHeight="25.0" prefWidth="159.0" styleClass="buttonFormular" text="Vizualizare cereri" />
+                              <JFXButton fx:id="istoricCereriButton" layoutX="-1.0" layoutY="2.0" onMouseClicked="#IstoricCereriClicked" prefHeight="31.0" prefWidth="135.0" styleClass="buttonSecondary" text="Vizualizare cereri" />
                            </children>
                         </Pane>
                         <Pane prefHeight="112.0" prefWidth="171.0">
                            <children>
-                              <JFXButton fx:id="stareActualaButton" onMouseClicked="#stareActualaClicked" prefHeight="25.0" prefWidth="156.0" styleClass="buttonFormular" text="Stare actuala" />
+                              <JFXButton fx:id="stareActualaButton" onMouseClicked="#stareActualaClicked" prefHeight="31.0" prefWidth="128.0" styleClass="buttonSecondary" text="Stare actuala" />
                            </children>
                         </Pane>
                      </children>
                   </VBox>
-                  <JFXButton fx:id="logoutButton" layoutY="554.7142848968506" onMouseClicked="#logout" prefHeight="25.0" prefWidth="173.0" styleClass="buttonFormular" text="Logout" />
-                  <FontAwesomeIconView fill="WHITE" glyphName="ARROW_LEFT" layoutX="151.0" layoutY="24.0" onMouseClicked="#hideLeftMenu" size="30" />
+                  <JFXButton fx:id="logoutButton" layoutY="554.7142848968506" onMouseClicked="#logout" prefHeight="25.0" prefWidth="173.0" styleClass="buttonSecondary" text="Logout" />
+                  <FontAwesomeIconView fill="WHITE" glyphName="ARROW_LEFT" layoutX="146.0" layoutY="18.0" onMouseClicked="#hideLeftMenu" size="30" styleClass="iconSecondary" text="" />
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="burgerPane" layoutX="4.0" layoutY="20.0" prefHeight="572.0" prefWidth="36.0">
+            <AnchorPane fx:id="burgerPane" layoutX="4.0" layoutY="20.0" prefHeight="21.0" prefWidth="36.0">
                <children>
-                  <FontAwesomeIconView fill="WHITE" glyphName="BARS" layoutX="5.0" layoutY="10.0" onMouseClicked="#showLeftMenu" size="30" />
-                  <VBox layoutX="3.0" layoutY="67.28571319580078" spacing="58.0">
-                     <children>
-                        <FontAwesomeIconView fill="WHITE" glyphName="HOME" onMouseClicked="#homeButtonClicked" size="30" />
-                        <FontAwesomeIconView fill="WHITE" glyphName="FILE" onMouseClicked="#CerereSangeClicked" size="30" />
-                        <FontAwesomeIconView fill="WHITE" glyphName="FOLDER_OPEN" onMouseClicked="#IstoricCereriClicked" size="30" />
-                        <FontAwesomeIconView fill="WHITE" glyphName="HEART" onMouseClicked="#stareActualaClicked" size="30" />
-                     </children>
-                  </VBox>
-                  <FontAwesomeIconView fill="WHITE" glyphName="UNLOCK" glyphStyle="UNLOCK" layoutX="3.0" layoutY="570.0" onMouseClicked="#logout" size="30" />
+                  <FontAwesomeIconView fill="WHITE" glyphName="BARS" layoutX="5.0" layoutY="10.0" onMouseClicked="#showLeftMenu" size="30" styleClass="iconSecondary" />
                </children>
             </AnchorPane>
+            <VBox layoutX="6.0" layoutY="89.0" spacing="58.0">
+               <children>
+                  <FontAwesomeIconView fill="WHITE" glyphName="HOME" onMouseClicked="#homeButtonClicked" size="30" styleClass="iconSecondary" />
+                  <FontAwesomeIconView fill="WHITE" glyphName="FILE" onMouseClicked="#CerereSangeClicked" size="30" styleClass="iconSecondary" />
+                  <FontAwesomeIconView fill="WHITE" glyphName="FOLDER_OPEN" onMouseClicked="#IstoricCereriClicked" size="30" styleClass="iconSecondary" />
+                  <FontAwesomeIconView fill="WHITE" glyphName="HEART" onMouseClicked="#stareActualaClicked" size="30" styleClass="iconSecondary" />
+               </children>
+            </VBox>
+            <FontAwesomeIconView fill="WHITE" glyphName="UNLOCK" layoutX="7.0" layoutY="590.0" onMouseClicked="#logout" size="30" styleClass="iconSecondary" />
          </children>
       </AnchorPane>
    </left>

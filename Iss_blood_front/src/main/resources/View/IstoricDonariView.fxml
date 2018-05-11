@@ -13,27 +13,27 @@
 <AnchorPane prefHeight="560.0" prefWidth="800.0" styleClass="formularPane" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.IstoricDonariController">
    <children>
       <VBox layoutX="44.0" layoutY="14.0" />
-      <JFXButton layoutX="28.0" layoutY="469.0" onAction="#dummyTest" prefHeight="25.0" prefWidth="184.0" styleClass="buttonFormular" text="Adaugare dummy donare" />
-      <VBox layoutX="28.0" layoutY="31.0" spacing="3.0">
+      <JFXButton layoutX="33.0" layoutY="469.0" onAction="#dummyTest" prefHeight="25.0" prefWidth="184.0" styleClass="buttonFormular" text="Adaugare dummy donare" />
+      <VBox layoutX="28.0" layoutY="31.0" prefHeight="375.0" prefWidth="193.0" spacing="3.0">
          <children>
             <AnchorPane prefHeight="62.0" prefWidth="184.0" styleClass="headerPaneFormular">
                <children>
-                  <Label layoutX="37.0" layoutY="14.0" styleClass="labelFormularHeader" text="Advanced search" />
+                  <Label layoutX="42.0" layoutY="14.0" styleClass="labelFormularHeader" text="Advanced search" />
                </children>
             </AnchorPane>
             <AnchorPane prefHeight="321.0" prefWidth="184.0" styleClass="subFormularPane">
                <children>
-                  <JFXDatePicker layoutX="11.0" layoutY="38.0" prefHeight="28.0" prefWidth="162.0" />
-                  <Label layoutX="14.0" layoutY="14.0" prefHeight="17.0" prefWidth="32.0" styleClass="labelNormal" text="Data" />
-                  <Label layoutX="11.0" layoutY="95.0" styleClass="labelNormal" text="Centru de donare" />
-                  <JFXTextField layoutX="14.0" layoutY="113.0" prefHeight="25.0" prefWidth="124.0" />
-                  <JFXComboBox layoutX="7.0" layoutY="195.0" prefHeight="25.0" prefWidth="121.0" style="-fx-pref-width: 100;" />
-                  <Label layoutX="14.0" layoutY="177.0" styleClass="labelNormal" text="Status" />
+                  <JFXDatePicker layoutX="16.0" layoutY="34.0" prefHeight="28.0" prefWidth="162.0" />
+                  <Label layoutX="14.0" layoutY="14.0" prefHeight="17.0" prefWidth="32.0" styleClass="labelFormular" text="Data" />
+                  <Label layoutX="11.0" layoutY="95.0" styleClass="labelFormular" text="Centru de donare" />
+                  <JFXTextField layoutX="7.0" layoutY="115.0" prefHeight="25.0" prefWidth="124.0" styleClass="textboxFormular" />
+                  <JFXComboBox layoutX="15.0" layoutY="197.0" prefHeight="25.0" prefWidth="121.0" style="-fx-pref-width: 100;" />
+                  <Label layoutX="14.0" layoutY="177.0" styleClass="labelFormular" text="Status" />
                </children>
             </AnchorPane>
          </children>
       </VBox>
-      <JFXButton layoutX="28.0" layoutY="419.0" prefHeight="25.0" prefWidth="184.0" styleClass="buttonFormular" text="Cauta" />
+      <JFXButton layoutX="33.0" layoutY="420.0" prefHeight="25.0" prefWidth="184.0" styleClass="buttonFormular" text="Cauta" />
       <VBox fx:id="tabelDonari" layoutX="229.0" layoutY="31.0" spacing="3.0">
          <children>
             <HBox spacing="4.0" styleClass="hboxIstoric">

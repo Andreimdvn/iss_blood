@@ -8,6 +8,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.Date;
 
@@ -20,7 +22,10 @@ public class StarePacientiController implements ControlledScreensInterface {
 
     ObservableList<StarePacient> observableList = FXCollections.observableArrayList();
 
+    private Logger logger = LogManager.getLogger(StarePacient.class.getName());
+
     public void populate(){
+
         StarePacient s = new StarePacient("Alin",GrupaSange.O1,RH.POZITIV,1,3,5,3,4, Importanta.MEDIE);
         StarePacient b = new StarePacient("Tudor",GrupaSange.B3,RH.NEGATIV,2,4,1,5,1 , Importanta.RIDICATA);
 

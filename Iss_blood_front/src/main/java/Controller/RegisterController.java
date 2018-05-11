@@ -19,6 +19,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import javafx.util.Pair;
 
 
@@ -49,7 +51,10 @@ public class RegisterController implements ControlledScreensInterface{
     private JFXTextField addressTextField;
 
     @FXML
-    private JFXTextField fullnameTextField;
+    private JFXTextField nameTextField;
+
+    @FXML
+    private JFXTextField surnameTextField;
 
     @FXML
     private JFXTextField cnpTextField;
@@ -97,17 +102,21 @@ public class RegisterController implements ControlledScreensInterface{
 
     }
 
+    private Logger logger = LogManager.getLogger(RegisterController.class.getName());
+
+
     private void addLicentaHBox(){
+        logger.debug("Camp licenta a fost creat");
         licentaHbox = new HBox();
         FontAwesomeIconView a = new FontAwesomeIconView();
         a.setIcon(FontAwesomeIcon.BARCODE);
         a.setSize("22");
-        a.setFill(Paint.valueOf("white"));
+        a.setStyleClass("icon");
 
         licentaTextField = new JFXTextField();
-        licentaTextField.getStyleClass().add("textbox");
-        licentaTextField.setUnFocusColor(Paint.valueOf("white"));
-        licentaTextField.setFocusColor(judetTextField.getFocusColor());
+
+        licentaTextField.getStyleClass().add("textboxPrimary");
+
         licentaTextField.setPromptText("Licenta");
 
         licentaHbox.setSpacing(4);
@@ -146,18 +155,22 @@ public class RegisterController implements ControlledScreensInterface{
         String username = usernameTextField.getText();
         String password = passwordTextField.getText();
         String email = emailTextField.getText();
-        String fullname = fullnameTextField.getText();
+        String name = nameTextField.getText();
+        String surname = surnameTextField.getText();
         String cnp = cnpTextField.getText();
         String judet = judetTextField.getText();
         String localitate = localitateTextField.getText();
         String address = addressTextField.getText();
         String phone = phoneTextField.getText();
+
+        logger.debug("Buton register a fost apasat");
+
         String accountType = accountTypeToggleGroup.getSelectedToggle().toString();
         String license = "";
         if(licentaTextField != null)
             license = licentaTextField.getText();
 
-        RegisterInfo info = new RegisterInfo(username, password, email, fullname, fullname, cnp, judet, localitate, address, phone, accountType, license);
+        RegisterInfo info = new RegisterInfo(username, password, email, name, surname, cnp, judet, localitate, address, phone, accountType, license);
         RegisterValidator validator = new RegisterValidator();
         Pair<Boolean, String> validationResult = validator.Validate(info);
         if(validationResult.getKey())
@@ -184,18 +197,12 @@ public class RegisterController implements ControlledScreensInterface{
 
     @FXML
     private void loginLabelClicked(){
-       controller.setScreen(Screen.LOGIN_SCREEN);
+
+        logger.debug("Buton Go back to login screen a fost apasat");
+        controller.setScreen(Screen.LOGIN_SCREEN);
     }
 
     private void enableStyle(){
-        String focusColor = "#fea02f";
-        judetTextField.setFocusColor(Paint.valueOf(focusColor));
-        passwordTextField.setFocusColor(Paint.valueOf(focusColor));
-        usernameTextField.setFocusColor(Paint.valueOf(focusColor));
-        emailTextField.setFocusColor(Paint.valueOf(focusColor));
-        fullnameTextField.setFocusColor(Paint.valueOf(focusColor));
-        phoneTextField.setFocusColor(Paint.valueOf(focusColor));
-
 
         mainPane.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override

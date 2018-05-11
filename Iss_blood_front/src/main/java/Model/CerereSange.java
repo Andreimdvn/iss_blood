@@ -1,5 +1,8 @@
 package Model;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.sql.Date;
 
 public class CerereSange{
@@ -12,6 +15,8 @@ public class CerereSange{
     private Integer numarPungiPlasma;
     private Date date;
     private Importanta importanta;
+
+    private Logger logger = LogManager.getLogger(CerereSange.class.getName());
 
     public String getNumePacient() {
         return numePacient;
@@ -94,6 +99,24 @@ public class CerereSange{
         this.numarPungiGlobuleRosii = numarPungiGlobuleRosii;
         this.numarPungiPlasma = numarPungiPlasma;
         this.importanta = importanta;
+
+        this.logger.debug(toString());
+
+    }
+
+    @Override
+    public String toString() {
+        return "CerereSange{" +
+                "numePacient='" + numePacient + '\'' +
+                ", cnpPacient='" + cnpPacient + '\'' +
+                ", grupaSange=" + grupaSange +
+                ", rh=" + rh +
+                ", numarPungiTrombocite=" + numarPungiTrombocite +
+                ", numarPungiGlobuleRosii=" + numarPungiGlobuleRosii +
+                ", numarPungiPlasma=" + numarPungiPlasma +
+                ", date=" + date +
+                ", importanta=" +
+                '}';
     }
 
     public CerereSange(String numePacient, String cnpPacient, GrupaSange grupaSange, RH rh, Integer numarPungiTrombocite, Integer numarPungiGlobuleRosii, Integer numarPungiPlasma, Date date, Importanta importanta) {

@@ -1,5 +1,8 @@
 package Model;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class StarePacient {
     String numePacient;
     GrupaSange grupaSange;
@@ -11,6 +14,24 @@ public class StarePacient {
     Integer donatoriPreferentiali;
     Importanta importanta;
 
+
+    private Logger logger = LogManager.getLogger(StarePacient.class.getName());
+
+    @Override
+    public String toString() {
+        return "StarePacient{" +
+                "numePacient='" + numePacient + '\'' +
+                ", grupaSange=" + grupaSange +
+                ", rh=" + rh +
+                ", numarPungiTrombocite=" + numarPungiTrombocite +
+                ", numarPungiGlobuleRosii=" + numarPungiGlobuleRosii +
+                ", numarPungiPlasma=" + numarPungiPlasma +
+                ", numarCereri=" + numarCereri +
+                ", donatoriPreferentiali=" + donatoriPreferentiali +
+                ", importanta=" + importanta +
+                '}';
+    }
+
     public StarePacient(String numePacient, GrupaSange grupaSange, RH rh, Integer numarPungiTrombocite, Integer numarPungiGlobuleRosii, Integer numarPungiPlasma, Integer numarCereri, Integer donatoriPreferentiali, Importanta importanta) {
         this.numePacient = numePacient;
         this.grupaSange = grupaSange;
@@ -21,6 +42,8 @@ public class StarePacient {
         this.numarCereri = numarCereri;
         this.donatoriPreferentiali = donatoriPreferentiali;
         this.importanta = importanta;
+
+        logger.debug(toString());
     }
 
     public String getNumePacient() {

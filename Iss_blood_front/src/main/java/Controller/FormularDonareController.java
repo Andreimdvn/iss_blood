@@ -8,6 +8,8 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class FormularDonareController implements ControlledScreensInterface {
 
@@ -65,6 +67,7 @@ public class FormularDonareController implements ControlledScreensInterface {
     @FXML
     private ComboBox<RH> rhComboBox;
 
+    private Logger logger = LogManager.getLogger(FormularDonareController.class.getName());
 
     @FXML
     private void initialize(){
@@ -73,6 +76,11 @@ public class FormularDonareController implements ControlledScreensInterface {
     }
 
     private ControllerScreens controller;
+
+    @FXML
+    private void trimiteFormular(){
+        logger.debug("Buton trimite formular donare a fost apasat");
+    }
 
     @Override
     public void setScreenParent(ControllerScreens screenParent) {

@@ -1,7 +1,10 @@
 package Communication;
 
+import Controller.FormularDonareController;
 import Model.RegisterInfo;
 import javafx.util.Pair;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.json.JSONObject;
 
 import java.io.*;
@@ -12,6 +15,9 @@ import java.util.Properties;
 public class FlaskClient {
 
     private String urlRoot;
+
+
+    private Logger logger = LogManager.getLogger(FlaskClient.class.getName());
 
     public FlaskClient(Properties properties) {
         this.urlRoot = "http://"+properties.getProperty("serverIp")+":"+properties.getProperty("serverPort");
@@ -84,11 +90,10 @@ public class FlaskClient {
         }
 
         String jsonString = new JSONObject().put("username", user).put("password", password).toString();
-        System.out.println(String.format("Sending %s",jsonString));
 
+        logger.debug("SENDING: " + jsonString);
         JSONObject jsonResponse = this.sendRequest(http, jsonString);
-        System.out.println(jsonResponse);
-
+        logger.debug("RESPONSE : " + jsonResponse);
         if(jsonResponse == null) {
             return new Pair<>(0, "Connection error.");
         }
@@ -114,10 +119,12 @@ public class FlaskClient {
                 .put("phone", info.getPhone()).put("accountType", info.getAccountType().toString())
                 .put("license", info.getLicence()).toString();
 
-        System.out.println("Sending " + jsonString);
+        logger.debug("SENDING: " + jsonString);
 
         JSONObject jsonResponse = sendRequest(connection, jsonString);
-        System.out.println(jsonResponse);
+
+        logger.debug("RESPONSE : " + jsonResponse);
+
         if(jsonResponse == null)
             return new Pair<>(false, "Connection error.");
 
