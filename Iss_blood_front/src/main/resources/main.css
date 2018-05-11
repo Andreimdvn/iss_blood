@@ -107,7 +107,7 @@
 }
 
 .table-view .table-cell{
-    -fx-text-fill: white;
+    -fx-text-fill: -fx-text-background-formular-color;
     -fx-text-alignment: center;
     -fx-alignment: center;
     -fx-border-width: 0;
