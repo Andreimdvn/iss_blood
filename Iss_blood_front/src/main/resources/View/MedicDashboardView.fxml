@@ -69,36 +69,36 @@
       </BorderPane>
    </center>
    <left>
-      <AnchorPane fx:id="leftAnchorPane" prefHeight="600.0" prefWidth="215.0" styleClass="secondaryPane" stylesheets="@../main.css" BorderPane.alignment="CENTER">
+      <AnchorPane fx:id="leftAnchorPane" prefHeight="600.0" prefWidth="195.0" styleClass="secondaryPane" stylesheets="@../main.css" BorderPane.alignment="CENTER">
          <children>
-            <AnchorPane fx:id="meniuPane" layoutX="31.0" layoutY="9.0">
+            <AnchorPane fx:id="meniuPane" layoutX="31.0" layoutY="9.0" prefHeight="586.0" prefWidth="169.0">
                <children>
-                  <VBox layoutX="9.0" layoutY="78.0" prefHeight="359.0" prefWidth="157.0" styleClass="vboxMedic">
+                  <VBox layoutX="9.0" layoutY="78.0" prefHeight="359.0" prefWidth="123.0" styleClass="vboxMedic">
                      <children>
                         <Pane prefHeight="112.0" prefWidth="171.0">
                            <children>
-                              <JFXButton fx:id="homeButton" onMouseClicked="#homeButtonClicked" prefHeight="25.0" prefWidth="156.0" styleClass="buttonSecondary" text="Home" />
+                              <JFXButton fx:id="homeButton" onMouseClicked="#homeButtonClicked" prefHeight="31.0" prefWidth="129.0" styleClass="buttonSecondary" text="Home" />
                            </children>
                         </Pane>
                         <Pane prefHeight="112.0" prefWidth="171.0">
                            <children>
-                              <JFXButton fx:id="cerereSangeButton" onMouseClicked="#CerereSangeClicked" prefHeight="25.0" prefWidth="157.0" styleClass="buttonSecondary" text="Cerere sange" />
+                              <JFXButton fx:id="cerereSangeButton" onMouseClicked="#CerereSangeClicked" prefHeight="31.0" prefWidth="124.0" styleClass="buttonSecondary" text="Cerere sange" />
                            </children>
                         </Pane>
                         <Pane prefHeight="112.0" prefWidth="171.0">
                            <children>
-                              <JFXButton fx:id="istoricCereriButton" layoutX="-1.0" layoutY="2.0" onMouseClicked="#IstoricCereriClicked" prefHeight="25.0" prefWidth="159.0" styleClass="buttonSecondary" text="Vizualizare cereri" />
+                              <JFXButton fx:id="istoricCereriButton" layoutX="-1.0" layoutY="2.0" onMouseClicked="#IstoricCereriClicked" prefHeight="31.0" prefWidth="135.0" styleClass="buttonSecondary" text="Vizualizare cereri" />
                            </children>
                         </Pane>
                         <Pane prefHeight="112.0" prefWidth="171.0">
                            <children>
-                              <JFXButton fx:id="stareActualaButton" onMouseClicked="#stareActualaClicked" prefHeight="25.0" prefWidth="156.0" styleClass="buttonSecondary" text="Stare actuala" />
+                              <JFXButton fx:id="stareActualaButton" onMouseClicked="#stareActualaClicked" prefHeight="31.0" prefWidth="128.0" styleClass="buttonSecondary" text="Stare actuala" />
                            </children>
                         </Pane>
                      </children>
                   </VBox>
                   <JFXButton fx:id="logoutButton" layoutY="554.7142848968506" onMouseClicked="#logout" prefHeight="25.0" prefWidth="173.0" styleClass="buttonSecondary" text="Logout" />
-                  <FontAwesomeIconView fill="WHITE" glyphName="ARROW_LEFT" layoutX="153.0" layoutY="18.0" onMouseClicked="#hideLeftMenu" size="30" styleClass="iconSecondary" />
+                  <FontAwesomeIconView fill="WHITE" glyphName="ARROW_LEFT" layoutX="146.0" layoutY="18.0" onMouseClicked="#hideLeftMenu" size="30" styleClass="iconSecondary" text="" />
                </children>
             </AnchorPane>
             <AnchorPane fx:id="burgerPane" layoutX="4.0" layoutY="20.0" prefHeight="21.0" prefWidth="36.0">
