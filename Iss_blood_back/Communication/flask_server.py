@@ -48,9 +48,9 @@ class FlaskServer:
         user = self.request_data["username"]
         password = self.request_data["password"]
 
-        status = self.controller.login(user, password)
+        status, user_type = self.controller.login(user, password)
 
-        return_dict = {"status": status}
+        return_dict = {"status": status, "user_type": user_type}
         if status == 0:
             return_dict["message"] = "Login cu success!"
         else:

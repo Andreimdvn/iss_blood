@@ -62,7 +62,7 @@ public class FlaskClient {
                 responseStrBuilder.append(inputStr);
             return new JSONObject(responseStrBuilder.toString());
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
@@ -75,12 +75,12 @@ public class FlaskClient {
      * @return <bool,string> true if the login was successfully , false otherwise
      * + a string message describing the status
      */
-    public Pair<Boolean, String> login(String user, String password){
+    public Pair<Integer, String> login(String user, String password){
 
         HttpURLConnection http = getConnection("/login");
 
         if(http == null){
-            return new Pair<>(false, "Client connection request Error");
+            return new Pair<>(0, "Client connection request Error");
         }
 
         String jsonString = new JSONObject().put("username", user).put("password", password).toString();
@@ -90,13 +90,13 @@ public class FlaskClient {
         System.out.println(jsonResponse);
 
         if(jsonResponse == null) {
-            return new Pair<>(false, "Connection error.");
+            return new Pair<>(0, "Connection error.");
         }
         if (jsonResponse.getInt("status")== 0) {
-            return new Pair<>(true, "Success!");
+            return new Pair<>(jsonResponse.getInt("user_type"), "Success!");
         }
         else {
-            return new Pair<>(false, jsonResponse.getString("message"));
+            return new Pair<>(0, jsonResponse.getString("message"));
         }
     }
 

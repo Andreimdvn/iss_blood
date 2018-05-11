@@ -12,7 +12,7 @@ class ServiceCommon(IService):
     def login(self, username, password):
         """
         Checks the databse for the username and password entry
-        :return: int 0(success) 1(error)
+        :return: int 0(success) 1(error) + type of user: 1. donator , 2. medic 3. staff , 4. administrator
         """
         lst = self.db.select("User", ["username", "password"], [username, password])
         if len(lst) == 0:
