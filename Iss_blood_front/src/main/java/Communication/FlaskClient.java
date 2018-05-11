@@ -6,13 +6,14 @@ import org.json.JSONObject;
 import java.io.*;
 import java.net.*;
 import java.nio.charset.StandardCharsets;
+import java.util.Properties;
 
 public class FlaskClient {
 
     private String urlRoot;
 
-    public FlaskClient() {
-        this.urlRoot = "http://172.30.114.116:16000";
+    public FlaskClient(Properties properties) {
+        this.urlRoot = "http://"+properties.getProperty("serverIp")+":"+properties.getProperty("serverPort");
     }
 
     /**

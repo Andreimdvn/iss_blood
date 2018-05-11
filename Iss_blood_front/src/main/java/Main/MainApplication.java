@@ -11,13 +11,23 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.util.Properties;
+
 
 public class MainApplication extends Application {
 
     private  static Stage primaryStage;
-
+    public static Properties properties;
+    public static String propertiesPath = "/Config/defaultProperties.props";
     private void loadScreens(){
-        MainService service = new MainService(new FlaskClient());
+        properties = new Properties();
+        loadProperties(propertiesPath,properties);
+        MainService service = new MainService(new FlaskClient(properties));
         ControllerScreens controller = new ControllerScreens(service);
         controller.loadScreen(Screen.LOGIN_SCREEN, Screen.LOGIN_RESOURCE);
         controller.loadScreen(Screen.REGISTER_SCREEN, Screen.REGISTER_RESOURCE);
@@ -38,9 +48,24 @@ public class MainApplication extends Application {
         this.primaryStage.setScene(scene);
         this.primaryStage.show();
     }
+
+
+    /**
+     * Loads application properties from a given path
+     * @param path the path of the props
+     * @param properties props object
+     */
+    public void loadProperties(String path,Properties properties){
+        try {
+            properties.load(getClass().getResourceAsStream(path));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     @Override
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
+
         loadScreens();
     }
 
