@@ -22,7 +22,7 @@
                         <Insets top="2.0" />
                      </HBox.margin>
                   </FontAwesomeIconView>
-                  <JFXTextField fx:id="usernameTextField" focusColor="#7f7f7f" prefHeight="25.0" prefWidth="182.0" promptText="Username" styleClass="textbox" unFocusColor="WHITE">
+                  <JFXTextField fx:id="usernameTextField" focusColor="#7f7f7f" prefHeight="25.0" prefWidth="182.0" promptText="Username" styleClass="textboxPrimary" unFocusColor="WHITE">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
@@ -36,7 +36,7 @@
                         <Insets top="2.0" />
                      </HBox.margin>
                   </FontAwesomeIconView>
-                  <JFXPasswordField fx:id="passwordTextField" focusColor="#7f7f7f" prefHeight="25.0" prefWidth="182.0" promptText="Password" styleClass="textbox" unFocusColor="WHITE" />
+                  <JFXPasswordField fx:id="passwordTextField" focusColor="#7f7f7f" prefHeight="25.0" prefWidth="182.0" promptText="Password" styleClass="textboxPrimary" unFocusColor="WHITE" />
                </children>
             </HBox>
             <HBox spacing="2.0">

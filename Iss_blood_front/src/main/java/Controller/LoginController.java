@@ -13,6 +13,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import javafx.util.Pair;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.Objects;
 
@@ -67,15 +69,22 @@ public class LoginController implements ControlledScreensInterface {
         enableStyle();
     }
 
+    private Logger logger = LogManager.getLogger(LoginController.class.getName());
+
     @FXML
     private void loginClicked(){
         String username = usernameTextField.getText();
         String password = passwordTextField.getText();
 
+        logger.debug("Login button has been clicked");
+
         if(Objects.equals(username, "donator"))
         controller.setScreen(Screen.DONATOR_SCREEN);
         else if(Objects.equals(username, "medic"))
             controller.setScreen(Screen.MEDIC_SCREEN);
+        else {
+            logger.debug("Credintiale gresite");
+        }
 /*        Pair<Boolean, String> canLogin = mainService.login(username, password);
         if (canLogin.getKey()) {
             controller.setScreen(Screen.DONATOR_SCREEN);
@@ -94,6 +103,7 @@ public class LoginController implements ControlledScreensInterface {
 
     @FXML
     private void registerLabelClicked() {
+        logger.debug("Buton Go to register screen a fost apasat");
         controller.setScreen(Screen.REGISTER_SCREEN);
     }
 
@@ -103,6 +113,7 @@ public class LoginController implements ControlledScreensInterface {
 
     @FXML
     private void closeWindow(){
+        logger.debug("X has been clicked");
         Stage current = getStage();
         current.close();
     }

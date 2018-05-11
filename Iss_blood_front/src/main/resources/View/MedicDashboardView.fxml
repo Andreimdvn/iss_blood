@@ -18,7 +18,7 @@
                <children>
                   <AnchorPane layoutX="61.0" layoutY="38.0">
                      <children>
-                        <Label layoutX="93.0" prefHeight="55.0" prefWidth="195.0" styleClass="header2" text="Welcome back," />
+                        <Label layoutX="93.0" prefHeight="55.0" prefWidth="195.0" styleClass="headerFormular" text="Welcome back," />
                         <Pane layoutY="193.0" prefHeight="289.0" prefWidth="381.0" styleClass="subFormularPane">
                            <children>
                               <JFXButton layoutX="104.0" layoutY="250.0" prefHeight="25.0" prefWidth="173.0" styleClass="buttonFormular" text="View all request" />
@@ -54,7 +54,7 @@
                               </TableView>
                            </children>
                         </Pane>
-                        <Label fx:id="fullnameLabel" layoutX="191.0" layoutY="43.0" prefHeight="55.0" prefWidth="353.0" styleClass="header" text="Doctor Moldovan Daniel-Gabriel" />
+                        <Label fx:id="fullnameLabel" layoutX="191.0" layoutY="43.0" prefHeight="55.0" prefWidth="353.0" styleClass="headerFormular" text="Doctor Moldovan Daniel-Gabriel" />
                      </children>
                   </AnchorPane>
                </children>
@@ -112,7 +112,7 @@
                         <FontAwesomeIconView fill="WHITE" glyphName="HEART" onMouseClicked="#stareActualaClicked" size="30" />
                      </children>
                   </VBox>
-                  <FontAwesomeIconView fill="WHITE" glyphName="UNLOCK" glyphStyle="UNLOCK" layoutX="3.0" layoutY="570.0" onMouseClicked="#logout" size="30" />
+                  <FontAwesomeIconView fill="WHITE" glyphName="UNLOCK" layoutX="3.0" layoutY="570.0" onMouseClicked="#logout" size="30" />
                </children>
             </AnchorPane>
          </children>

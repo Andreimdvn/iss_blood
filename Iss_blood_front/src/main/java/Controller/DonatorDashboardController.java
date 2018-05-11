@@ -19,6 +19,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Timer;
@@ -30,6 +33,9 @@ public class DonatorDashboardController implements ControlledScreensInterface {
     private MainService mainService;
 
     private ControllerScreens controller;
+
+    private Logger logger = LogManager.getLogger(DonatorDashboardController.class.getName());
+
 
     @Override
     public void setScreenParent(ControllerScreens screenParent) {
@@ -270,14 +276,14 @@ public class DonatorDashboardController implements ControlledScreensInterface {
     }
 
     private void loadIstoric() {
-
-
+        logger.debug("Buton istoric a fost apasat");
         borderPane.setBottom(getIstoric());
         fadeIn(getIstoric());
 
     }
 
     private void loadFormular() {
+        logger.debug("Buton formular a fost apasat");
         borderPane.setBottom(getFormular());
     }
 
@@ -314,7 +320,6 @@ public class DonatorDashboardController implements ControlledScreensInterface {
     {
         hideTopBar();
         Timeline timeline = new Timeline();
-        System.out.println(prefBottomPaneHeight);
         double pref = prefBottomPaneHeight;
         timeline.getKeyFrames().addAll(
                 new KeyFrame(Duration.millis(animationSpeed),

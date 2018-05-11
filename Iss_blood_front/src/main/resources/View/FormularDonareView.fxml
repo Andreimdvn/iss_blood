@@ -24,15 +24,15 @@
                         <Label layoutX="121.0" layoutY="14.0" styleClass="labelFormularHeader" text="Date personale" />
                      </children>
                   </AnchorPane>
-                  <JFXTextField fx:id="fullnameTextField" focusColor="#fea02f" layoutX="79.0" layoutY="58.0" promptText="Fullname" styleClass="textbox" unFocusColor="WHITE" />
-                  <Label alignment="TOP_CENTER" contentDisplay="TOP" layoutX="81.0" layoutY="101.0" styleClass="labelNormal" text="Sex" />
+                  <JFXTextField fx:id="fullnameTextField" focusColor="#fea02f" layoutX="79.0" layoutY="58.0" promptText="Fullname" styleClass="textboxFormular" unFocusColor="WHITE" />
+                  <Label alignment="TOP_CENTER" contentDisplay="TOP" layoutX="81.0" layoutY="101.0" styleClass="labelFormular" text="Sex" />
                   <JFXRadioButton layoutX="137.0" layoutY="102.0" styleClass="jfx-radio-button" text="M">
                      <toggleGroup>
                         <ToggleGroup fx:id="sex" />
                      </toggleGroup>
                   </JFXRadioButton>
                   <JFXRadioButton layoutX="195.0" layoutY="102.0" text="F" toggleGroup="$sex" />
-                  <JFXTextField fx:id="phoneTextField" focusColor="#fea02f" layoutX="79.0" layoutY="135.0" promptText="Telefon" styleClass="textbox" unFocusColor="WHITE" />
+                  <JFXTextField fx:id="phoneTextField" focusColor="#fea02f" layoutX="79.0" layoutY="135.0" promptText="Telefon" styleClass="textboxFormular" unFocusColor="WHITE" />
                   <HBox layoutX="58.0" layoutY="211.0" spacing="23.0">
                      <children>
                         <JFXTextField fx:id="DomiciliuLocalitateTextField" focusColor="#fea02f" prefHeight="25.0" prefWidth="135.0" promptText="Localitate" styleClass="textboxSmall" unFocusColor="WHITE" />
@@ -46,10 +46,10 @@
                         <JFXTextField fx:id="ResedintaJudetTextField" focusColor="#fea02f" promptText="Judet" styleClass="textboxSmall" unFocusColor="WHITE" />
                      </children>
                   </HBox>
-                  <Label layoutX="141.0" layoutY="184.0" styleClass="labelNormal" text="Domiciliu" />
-                  <JFXTextField fx:id="DomiciliuAdresaTextField" focusColor="#fea02f" layoutX="80.0" layoutY="247.0" prefHeight="25.0" prefWidth="223.0" promptText="Adresa" styleClass="textbox" unFocusColor="WHITE" />
-                  <Label layoutX="139.0" layoutY="286.0" styleClass="labelNormal" text="Resedinta" />
-                  <JFXTextField fx:id="ResedintaAdresaTextField" focusColor="#fea02f" layoutX="79.0" layoutY="357.0" prefHeight="25.0" prefWidth="223.0" promptText="Adresa" styleClass="textbox" unFocusColor="WHITE" />
+                  <Label layoutX="141.0" layoutY="184.0" styleClass="labelFormular" text="Domiciliu" />
+                  <JFXTextField fx:id="DomiciliuAdresaTextField" focusColor="#fea02f" layoutX="80.0" layoutY="247.0" prefHeight="25.0" prefWidth="223.0" promptText="Adresa" styleClass="textboxFormular" unFocusColor="WHITE" />
+                  <Label layoutX="139.0" layoutY="286.0" styleClass="labelFormular" text="Resedinta" />
+                  <JFXTextField fx:id="ResedintaAdresaTextField" focusColor="#fea02f" layoutX="79.0" layoutY="357.0" prefHeight="25.0" prefWidth="223.0" promptText="Adresa" styleClass="textboxFormular" unFocusColor="WHITE" />
                </children>
             </AnchorPane>
             <AnchorPane prefHeight="242.0" prefWidth="339.0" styleClass="subFormularPane">
@@ -76,9 +76,9 @@
                         <Label layoutX="88.0" layoutY="14.0" styleClass="labelFormularHeader" text="Informatii utile(Optional)" />
                      </children>
                   </AnchorPane>
-                  <Label layoutX="91.0" layoutY="57.0" styleClass="labelNormal" text="Pentru cine vrei sa donezi" />
-                  <JFXTextField fx:id="donatFullnameTextField" focusColor="#fea02f" layoutX="80.0" layoutY="85.0" promptText="Fullname" styleClass="textbox" unFocusColor="WHITE" />
-                  <JFXTextField fx:id="donatCnpTextField" focusColor="#fea02f" layoutX="80.0" layoutY="119.0" promptText="CNP" styleClass="textbox" unFocusColor="WHITE" />
+                  <Label layoutX="91.0" layoutY="57.0" styleClass="labelFormular" text="Pentru cine vrei sa donezi" />
+                  <JFXTextField fx:id="donatFullnameTextField" focusColor="#fea02f" layoutX="80.0" layoutY="85.0" promptText="Fullname" styleClass="textboxFormular" unFocusColor="WHITE" />
+                  <JFXTextField fx:id="donatCnpTextField" focusColor="#fea02f" layoutX="80.0" layoutY="119.0" promptText="CNP" styleClass="textboxFormular" unFocusColor="WHITE" />
                </children>
             </AnchorPane>
             <JFXTextField fx:id="phoneTextField1" focusColor="#fea02f" promptText="Telefon" styleClass="textbox" unFocusColor="WHITE" />

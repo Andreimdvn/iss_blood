@@ -15,6 +15,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 
 public class RegisterController implements ControlledScreensInterface{
@@ -81,7 +83,11 @@ public class RegisterController implements ControlledScreensInterface{
 
     }
 
+    private Logger logger = LogManager.getLogger(RegisterController.class.getName());
+
+
     private void addLicentaHBox(){
+        logger.debug("Camp licenta a fost creat");
         licentaHbox = new HBox();
         FontAwesomeIconView a = new FontAwesomeIconView();
         a.setIcon(FontAwesomeIcon.BARCODE);
@@ -89,9 +95,7 @@ public class RegisterController implements ControlledScreensInterface{
         a.setFill(Paint.valueOf("white"));
 
         licentaTextField = new JFXTextField();
-        licentaTextField.getStyleClass().add("textbox");
-        licentaTextField.setUnFocusColor(Paint.valueOf("white"));
-        licentaTextField.setFocusColor(addressTextField.getFocusColor());
+        licentaTextField.getStyleClass().add("textboxPrimary");
         licentaTextField.setPromptText("Licenta");
 
         licentaHbox.setSpacing(4);
@@ -134,11 +138,14 @@ public class RegisterController implements ControlledScreensInterface{
         String address = addressTextField.getText();
         String phone = phoneTextField.getText();
 
+        logger.debug("Buton register a fost apasat");
     }
 
     @FXML
     private void loginLabelClicked(){
-       controller.setScreen(Screen.LOGIN_SCREEN);
+
+        logger.debug("Buton Go back to login screen a fost apasat");
+        controller.setScreen(Screen.LOGIN_SCREEN);
     }
 
     private void enableStyle(){

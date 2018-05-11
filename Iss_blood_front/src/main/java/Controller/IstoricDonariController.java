@@ -5,12 +5,17 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class IstoricDonariController implements ControlledScreensInterface{
     private MainService mainService;
 
 
     private ControllerScreens controller;
+
+    private Logger logger = LogManager.getLogger(IstoricDonariController.class.getName());
+
 
     @Override
     public void setScreenParent(ControllerScreens screenParent) {
@@ -45,6 +50,8 @@ public class IstoricDonariController implements ControlledScreensInterface{
         }
     }
     private void createHBoxIstoric(int numarDonare,String dataDonare,String numeCentru,String status){
+
+        logger.debug("Buton dummy a fost apasat");
         HBox hBox = new HBox();
         String numeStyle = "hboxIstoric";
         hBox.getStyleClass().add(numeStyle);

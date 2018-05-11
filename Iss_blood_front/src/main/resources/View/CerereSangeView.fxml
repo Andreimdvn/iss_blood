@@ -23,8 +23,8 @@
                         <Label layoutX="115.0" layoutY="15.0" text="Detalii persoana" />
                      </children>
                   </Pane>
-                  <JFXTextField fx:id="numePacientTextField" focusColor="#fea02f" layoutX="82.0" layoutY="67.0" promptText="Nume pacient" styleClass="textbox" unFocusColor="WHITE" />
-                  <JFXTextField fx:id="cnpPacientTextField" focusColor="#fea02f" layoutX="82.0" layoutY="111.0" promptText="CNP Client" styleClass="textbox" unFocusColor="WHITE" />
+                  <JFXTextField fx:id="numePacientTextField" focusColor="#fea02f" layoutX="82.0" layoutY="67.0" promptText="Nume pacient" styleClass="textboxFormular" unFocusColor="WHITE" />
+                  <JFXTextField fx:id="cnpPacientTextField" focusColor="#fea02f" layoutX="82.0" layoutY="111.0" promptText="CNP Client" styleClass="textboxFormular" unFocusColor="WHITE" />
                   <JFXComboBox fx:id="grupaSangeComboBox" focusColor="#fea02f" layoutX="82.0" layoutY="154.0" prefHeight="25.0" prefWidth="180.0" promptText="Grupa de sange" unFocusColor="WHITE" />
                   <JFXComboBox fx:id="rhComboBox" focusColor="#fea02f" layoutX="82.0" layoutY="200.0" prefHeight="25.0" prefWidth="167.0" promptText="RH" unFocusColor="WHITE" />
                </children>
@@ -54,23 +54,23 @@
                            <children>
                               <HBox spacing="10.0">
                                  <children>
-                                    <FontAwesomeIconView fill="WHITE" glyphName="MINUS" glyphStyle="+" onMouseClicked="#trombociteDown" size="30" />
+                                    <FontAwesomeIconView fill="WHITE" glyphName="MINUS" onMouseClicked="#trombociteDown" size="30" />
                                     <JFXTextField fx:id="trombocitetTextField" alignment="CENTER" prefHeight="25.0" prefWidth="36.0" styleClass="textboxTiny" stylesheets="@../main.css" text="0" />
-                                    <FontAwesomeIconView fill="WHITE" glyphName="PLUS" glyphStyle="+" onMouseClicked="#trombociteUp" size="30" />
+                                    <FontAwesomeIconView fill="WHITE" glyphName="PLUS" onMouseClicked="#trombociteUp" size="30" />
                                  </children>
                               </HBox>
                               <HBox spacing="10.0">
                                  <children>
-                                    <FontAwesomeIconView fill="WHITE" glyphName="MINUS" glyphStyle="+" onMouseClicked="#globuleRosiDown" size="30" />
+                                    <FontAwesomeIconView fill="WHITE" glyphName="MINUS" onMouseClicked="#globuleRosiDown" size="30" />
                                     <JFXTextField fx:id="globuleRosiTextField" prefHeight="25.0" prefWidth="36.0" styleClass="textboxTiny" text="0" />
                                     <FontAwesomeIconView fill="WHITE" glyphName="PLUS" glyphStyle="+" onMouseClicked="#globuleRosiUp" size="30" />
                                  </children>
                               </HBox>
                               <HBox spacing="10.0">
                                  <children>
-                                    <FontAwesomeIconView fill="WHITE" glyphName="MINUS" glyphStyle="+" onMouseClicked="#plasmaDown" size="30" />
+                                    <FontAwesomeIconView fill="WHITE" glyphName="MINUS" onMouseClicked="#plasmaDown" size="30" />
                                     <JFXTextField fx:id="plasmaTextField" prefHeight="25.0" prefWidth="36.0" styleClass="textboxTiny" text="0" />
-                                    <FontAwesomeIconView fill="WHITE" glyphName="PLUS" glyphStyle="+" onMouseClicked="#plasmaUp" size="30" />
+                                    <FontAwesomeIconView fill="WHITE" glyphName="PLUS" onMouseClicked="#plasmaUp" size="30" />
                                  </children>
                               </HBox>
                            </children>
