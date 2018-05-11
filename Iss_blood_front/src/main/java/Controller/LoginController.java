@@ -1,6 +1,7 @@
 package Controller;
 
 import Service.MainService;
+import Utils.CustomMessageBox;
 import Utils.Screen;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
@@ -78,23 +79,23 @@ public class LoginController implements ControlledScreensInterface {
 
         logger.debug("Login button has been clicked");
 
-        if(Objects.equals(username, "donator"))
-        controller.setScreen(Screen.DONATOR_SCREEN);
-        else if(Objects.equals(username, "medic"))
-            controller.setScreen(Screen.MEDIC_SCREEN);
-        else {
-            logger.debug("Credintiale gresite");
-        }
-/*        Pair<Boolean, String> canLogin = mainService.login(username, password);
-        if (canLogin.getKey()) {
+
+
+        Pair<Integer, String> canLogin = mainService.login(username, password);
+        if (canLogin.getKey() == 0) {
+            new CustomMessageBox("Login",canLogin.getValue()).show();
+        } else if (canLogin.getKey() == 1){
+
             controller.setScreen(Screen.DONATOR_SCREEN);
-        } else {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Login");
-            alert.setContentText(canLogin.getValue());
-            alert.showAndWait();
         }
-  */
+        else if (canLogin.getKey() == 2) {
+            controller.setScreen(Screen.MEDIC_SCREEN);
+        }
+        else if (canLogin.getKey() == 3) {
+            logger.debug("Credintiale gresite");
+            //controller.setScreen();
+        }
+
     }
 
     /***
@@ -102,7 +103,7 @@ public class LoginController implements ControlledScreensInterface {
      */
 
     @FXML
-    private void registerLabelClicked() {
+    private void registerLabelClicked(){
         logger.debug("Buton Go to register screen a fost apasat");
         controller.setScreen(Screen.REGISTER_SCREEN);
     }

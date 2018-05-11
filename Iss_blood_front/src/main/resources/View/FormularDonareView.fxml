@@ -59,7 +59,7 @@
                         <HBox />
                         <JFXComboBox fx:id="grupaSangeComboBox" prefHeight="25.0" prefWidth="167.0" promptText="Grupa de sange" />
                         <JFXComboBox fx:id="rhComboBox" prefHeight="25.0" prefWidth="167.0" promptText="RH" />
-                        <Label styleClass="labelNormal" text="Ziua cand pot dona" />
+                        <Label styleClass="labelFormular" text="Ziua cand pot dona" />
                         <HBox spacing="4.0">
                            <children>
                               <JFXCheckBox fx:id="luniCheckbox" selected="true" text="Luni" />

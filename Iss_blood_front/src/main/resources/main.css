@@ -28,7 +28,7 @@
 }
 
 .buttonMessageBox{
-    -fx-text-fill: -fx-header-text-formular-color;
+    -fx-text-fill: -fx-header-primary-color;
     -fx-background-color: -fx-button-formular-color;
 
 }
@@ -163,7 +163,7 @@
 
 .check-box{
     -fx-text-fill: -fx-text-background-pane-formular-color;
-    -jfx-checked-color: -fx-background-formular-color;
+    -jfx-checked-color: -fx-button-formular-color;
 }
 
 .combo-box{

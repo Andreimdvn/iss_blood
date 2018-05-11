@@ -1,7 +1,10 @@
 package Controller;
 
+import Model.RegisterInfo;
 import Service.MainService;
+import Utils.CustomMessageBox;
 import Utils.Screen;
+import Validators.RegisterValidator;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
@@ -9,6 +12,7 @@ import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -17,6 +21,7 @@ import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import javafx.util.Pair;
 
 
 public class RegisterController implements ControlledScreensInterface{
@@ -37,10 +42,22 @@ public class RegisterController implements ControlledScreensInterface{
     private JFXTextField phoneTextField;
 
     @FXML
+    private JFXTextField judetTextField;
+
+    @FXML
+    private JFXTextField localitateTextField;
+
+    @FXML
     private JFXTextField addressTextField;
 
     @FXML
-    private JFXTextField fullnameTextField;
+    private JFXTextField nameTextField;
+
+    @FXML
+    private JFXTextField surnameTextField;
+
+    @FXML
+    private JFXTextField cnpTextField;
 
     @FXML
     private ToggleButton donatorToggleButton;
@@ -51,6 +68,8 @@ public class RegisterController implements ControlledScreensInterface{
 
     @FXML
     private ToggleButton transfuzieToggleButton;
+
+    private ToggleGroup accountTypeToggleGroup;
 
     @FXML
     private JFXTextField licentaTextField;
@@ -95,7 +114,9 @@ public class RegisterController implements ControlledScreensInterface{
         a.setFill(Paint.valueOf("white"));
 
         licentaTextField = new JFXTextField();
+
         licentaTextField.getStyleClass().add("textboxPrimary");
+
         licentaTextField.setPromptText("Licenta");
 
         licentaHbox.setSpacing(4);
@@ -134,11 +155,44 @@ public class RegisterController implements ControlledScreensInterface{
         String username = usernameTextField.getText();
         String password = passwordTextField.getText();
         String email = emailTextField.getText();
-        String fullname = fullnameTextField.getText();
+        String name = nameTextField.getText();
+        String surname = surnameTextField.getText();
+        String cnp = cnpTextField.getText();
+        String judet = judetTextField.getText();
+        String localitate = localitateTextField.getText();
         String address = addressTextField.getText();
         String phone = phoneTextField.getText();
 
         logger.debug("Buton register a fost apasat");
+
+        String accountType = accountTypeToggleGroup.getSelectedToggle().toString();
+        String license = "";
+        if(licentaTextField != null)
+            license = licentaTextField.getText();
+
+        RegisterInfo info = new RegisterInfo(username, password, email, name, surname, cnp, judet, localitate, address, phone, accountType, license);
+        RegisterValidator validator = new RegisterValidator();
+        Pair<Boolean, String> validationResult = validator.Validate(info);
+        if(validationResult.getKey())
+        {
+            Pair<Boolean, String> response = mainService.register(info);
+            if(response.getKey())
+            {
+                CustomMessageBox customMessageBox = new CustomMessageBox("info", "Registered successfully", 0);
+                customMessageBox.show();
+                controller.setScreen(Screen.LOGIN_SCREEN);
+            }
+            else
+            {
+                CustomMessageBox messageBox = new CustomMessageBox("Error", response.getValue(), 1);
+                messageBox.show();
+            }
+        }
+        else
+        {
+            CustomMessageBox messageBox = new CustomMessageBox("Error", validationResult.getValue(), 1);
+            messageBox.show();
+        }
     }
 
     @FXML
@@ -149,14 +203,6 @@ public class RegisterController implements ControlledScreensInterface{
     }
 
     private void enableStyle(){
-        String focusColor = "#fea02f";
-        addressTextField.setFocusColor(Paint.valueOf(focusColor));
-        passwordTextField.setFocusColor(Paint.valueOf(focusColor));
-        usernameTextField.setFocusColor(Paint.valueOf(focusColor));
-        emailTextField.setFocusColor(Paint.valueOf(focusColor));
-        fullnameTextField.setFocusColor(Paint.valueOf(focusColor));
-        phoneTextField.setFocusColor(Paint.valueOf(focusColor));
-
 
         mainPane.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
@@ -178,6 +224,7 @@ public class RegisterController implements ControlledScreensInterface{
     @FXML
     private void initialize(){
         enableStyle();
+        accountTypeToggleGroup = donatorToggleButton.getToggleGroup();
     }
 
     public void setMainService(MainService mainService){
