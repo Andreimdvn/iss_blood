@@ -52,7 +52,7 @@
                   <JFXTextField fx:id="ResedintaAdresaTextField" focusColor="#fea02f" layoutX="79.0" layoutY="357.0" prefHeight="25.0" prefWidth="223.0" promptText="Adresa" styleClass="textboxFormular" unFocusColor="WHITE" />
                </children>
             </AnchorPane>
-            <AnchorPane prefHeight="242.0" prefWidth="339.0" styleClass="subFormularPane">
+            <AnchorPane prefHeight="408.0" prefWidth="336.0" styleClass="subFormularPane">
                <children>
                   <VBox alignment="CENTER" fillWidth="false" layoutX="28.0" layoutY="132.0" prefHeight="261.0" prefWidth="284.0" spacing="35.0">
                      <children>
@@ -71,7 +71,7 @@
                         </HBox>
                      </children>
                   </VBox>
-                  <AnchorPane prefHeight="41.0" prefWidth="339.0" styleClass="headerPaneFormular">
+                  <AnchorPane layoutX="1.0" prefHeight="41.0" prefWidth="339.0" styleClass="headerPaneFormular">
                      <children>
                         <Label layoutX="88.0" layoutY="14.0" styleClass="labelFormularHeader" text="Informatii utile(Optional)" />
                      </children>

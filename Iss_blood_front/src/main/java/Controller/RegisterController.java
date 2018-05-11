@@ -111,7 +111,7 @@ public class RegisterController implements ControlledScreensInterface{
         FontAwesomeIconView a = new FontAwesomeIconView();
         a.setIcon(FontAwesomeIcon.BARCODE);
         a.setSize("22");
-        a.setFill(Paint.valueOf("white"));
+        a.setStyleClass("icon");
 
         licentaTextField = new JFXTextField();
 

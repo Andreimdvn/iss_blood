@@ -1,30 +1,34 @@
 
 * {
-    -fx-background-primary-color: linear-gradient(#434343 , #000000 );
-    -fx-text-background-primary-color: white;
-    -fx-header-primary-color: white;
-    -fx-button-primary-color: #fea02f;
+    -fx-background-primary-color: #ECECEC;
+    -fx-text-background-primary-color: black;
+    -fx-header-primary-color: black;
+    -fx-button-primary-color: #E64850;
     -fx-text-button-primary-color: black;
-    -fx-prompt-primary-color: ghostwhite;
+    -fx-prompt-primary-color: dimgrey;
 
-    -fx-background-secondary-color: whitesmoke;
-    -fx-text-background-secondary-color: black;
-    -fx-header-secondary-color: black;
-    -fx-button-secondary-color: #fea02f;
-    -fx-text-button-secondary-color: black;
-    -fx-prompt-secondary-color: ghostwhite;
+    -fx-background-secondary-color: #3D3A4B;
+    -fx-text-background-secondary-color: #DCDCDC;
+    -fx-header-secondary-color: #E63946;
+    -fx-button-secondary-color: transparent;
+    -fx-text-button-secondary-color: #DCDCDC;
+    -fx-prompt-secondary-color: dimgrey;
 
-    -fx-background-formular-color: #344b52;
-    -fx-text-background-formular-color: white;
-    -fx-button-formular-color: #fea02f;
-    -fx-header-formular-color: #fea02f;
+    -fx-background-formular-color: #ECECEC ;
+    -fx-text-background-formular-color: black;
+    -fx-button-formular-color: #E64850;
+    -fx-header-formular-color: #E64850;
     -fx-text-header-formular-color: black;
 
-    -fx-background-pane-formular-color: #587983;
-    -fx-text-background-pane-formular-color: white;
-    -fx-prompt-formular-color:ghostwhite;
+    -fx-background-pane-formular-color: #DCDCDC;
+    -fx-text-background-pane-formular-color: black;
+    -fx-prompt-formular-color:dimgrey;
 
-    -fx-table-selected-row: green;
+    -fx-table-selected-row: #E64850;
+}
+
+.icon{
+    -fx-fill: -fx-button-primary-color;
 }
 
 .buttonMessageBox{
@@ -32,6 +36,21 @@
     -fx-background-color: -fx-button-formular-color;
 
 }
+
+.iconSecondary{
+    -fx-fill: -fx-text-background-secondary-color;
+}
+
+.buttonSecondary{
+
+    -fx-background-color: -fx-button-secondary-color;
+    -fx-text-fill: -fx-text-button-secondary-color;
+    -fx-font-style: italic;
+    -fx-font-size: 15px;
+    -fx-font-weight: 600;
+    -fx-alignment: center-left;
+}
+
 
 .jfx-text-field{
     -jfx-focus-color: -fx-button-formular-color;
@@ -80,7 +99,7 @@
 
 .table-view .column-header-background .label{
     -fx-background-color: transparent;
-    -fx-text-fill: -fx-text-header-formular-color;
+    -fx-text-fill: -fx-text-background-formular-color;
 }
 
 .table-view .column-header {
@@ -225,6 +244,8 @@
 
 .subFormularPane{
     -fx-background-color:  -fx-background-pane-formular-color;
+    -fx-border-width: 1px;
+    -fx-border-color: -fx-text-background-formular-color;
 }
 
 
@@ -238,7 +259,7 @@
 
 .topbar .toggle-button{
     -fx-text-fill: -fx-text-button-primary-color;
-    -fx-opacity: 20%;
+    -fx-opacity: 50%;
     -fx-pref-height: 20px;
 }
 
@@ -294,6 +315,7 @@
     -fx-alignment: top-center;
 }
 
+
 .vboxButtonDashBoard > .label{
     -fx-font-size: 11px;
     -fx-opacity: 80%;
@@ -303,9 +325,6 @@
     /*(-fx-text-fill: -fx-tertiary-text-color;
 
      */
-}
-
-.vboxButtonDashBoard > .buttonDashboard:selected{
 }
 
 .vboxButtonDashBoard:hover{
@@ -318,21 +337,32 @@
     -fx-padding: 2px;
 }
 
-.vboxButtonDashBoardSelected .buttonDashboard{
+.vboxButtonDashBoardSelected > .vboxButton{
    -fx-background-color: red;
 }
 
-.vboxButtonDashBoard > .toggle-button{
-    -fx-background-color: -fx-button-secondary-color ;
+.vboxButton{
+    -fx-text-fill: -fx-text-header-formular-color;
+    -fx-background-color: -fx-header-secondary-color;
+    -fx-border-color: -fx-text-button-secondary-color;
+    -fx-padding: 0.5em;
+}
+
+.vboxButtonDashBoard > .vboxButton{
     -fx-opacity: 100%;
-    -fx-text-fill: -fx-text-button-secondary-color;
     -fx-pref-width: 200px;
     -fx-padding: 10px;
 }
 
+.vboxButtonDashBoard:hover > .vboxButton{
+    -fx-opacity: 100%;
+    -fx-pref-width: 200px;
+    -fx-padding: 10px;
+    -fx-border-width: 0px;
+}
+
 .buttonDashboard{
     -fx-padding: 0.5em;
-    -fx-background-color:-fx-button-secondary-color;
 
 }
 
@@ -382,6 +412,9 @@
     -fx-background-color:-fx-background-primary-color;
 }
 
+.secondaryPane {
+    -fx-background-color:-fx-background-secondary-color;
+}
 
 .labelRegister{
     -fx-text-fill: -fx-text-background-primary-color;
@@ -407,17 +440,13 @@
 }
 
 .toggle-button {
-    -fx-background-color: -fx-button-secondary-color;
     -fx-border-width: 0px;
     -fx-pref-height: 20px;
-    -fx-text-fill: -fx-text-button-secondary-color;
     -fx-opacity: 50%;
 }
 
 .toggle-button:selected {
-    -fx-background-color: -fx-button-secondary-color;
     -fx-border-width: 0px;
-    -fx-text-fill: -fx-text-button-secondary-color;
     -fx-pref-height: 40px;
     -fx-opacity: 100%;
 }

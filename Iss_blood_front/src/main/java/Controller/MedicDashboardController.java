@@ -174,7 +174,7 @@ public class MedicDashboardController implements ControlledScreensInterface {
 
     @FXML
     private void initialize(){
-        animationSpeed = 150;
+        animationSpeed = 200;
         prefLeftPaneWidth = leftAnchorPane.getPrefWidth();
         prefBurgerPaneWidth = burgerPane.getPrefWidth();
         prefBorderPaneWidth = borderPane.getPrefWidth();

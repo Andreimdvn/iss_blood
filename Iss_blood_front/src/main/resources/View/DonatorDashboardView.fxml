@@ -57,11 +57,11 @@
       <AnchorPane fx:id="navBar" prefHeight="36.0" prefWidth="844.0" styleClass="topbar">
          <children>
             <HBox fx:id="navSegmentHbox" layoutX="210.0" layoutY="3.0" prefHeight="20.0" prefWidth="219.0" styleClass="hboxTopBar" />
-            <FontAwesomeIconView fx:id="closeIcon" fill="WHITE" glyphName="CLOSE" layoutX="841.0" layoutY="21.0" onMouseClicked="#closeWindow" size="24" wrappingWidth="14.285722374916077" />
-            <FontAwesomeIconView fill="WHITE" glyphName="BELL_ALT" layoutX="814.0" layoutY="21.0" size="24" wrappingWidth="26.666748046875" />
+            <FontAwesomeIconView fx:id="closeIcon" fill="WHITE" glyphName="CLOSE" layoutX="841.0" layoutY="21.0" onMouseClicked="#closeWindow" size="24" styleClass="icon" wrappingWidth="14.285722374916077" />
+            <FontAwesomeIconView fill="WHITE" glyphName="BELL_ALT" layoutX="814.0" layoutY="21.0" size="24" styleClass="icon" wrappingWidth="26.666748046875" />
             <HBox fx:id="navSegmentHbox1" layoutX="13.0" styleClass="hboxTopBar">
                <children>
-                  <FontAwesomeIconView glyphName="USER" size="24" wrappingWidth="24.00006103515625" />
+                  <FontAwesomeIconView glyphName="USER" size="24" styleClass="icon" wrappingWidth="24.00006103515625" />
                   <Label styleClass="labelPrimary" text="DanielmanRO">
                      <padding>
                         <Insets top="5.0" />
@@ -80,7 +80,7 @@
                <children>
                   <VBox fx:id="formularVBox" onMouseEntered="#mouseEnteredFormularContainer" onMouseExited="#mouseLeftFormularContainer" styleClass="vboxButtonDashBoard">
                      <children>
-                        <ToggleButton fx:id="formularToggleButton" mnemonicParsing="false" onMouseClicked="#animationDashboardButtons" text="Doresc sa donez">
+                        <ToggleButton fx:id="formularToggleButton" mnemonicParsing="false" onMouseClicked="#animationDashboardButtons" styleClass="vboxButton" text="Doresc sa donez">
                            <toggleGroup>
                               <ToggleGroup fx:id="dashboardButtons" />
                            </toggleGroup>
@@ -90,7 +90,7 @@
                   </VBox>
                   <VBox fx:id="istoricVBox" onMouseEntered="#mouseEnteredIstoricContainer" onMouseExited="#mouseLeftIstoricContainer" styleClass="vboxButtonDashBoard">
                      <children>
-                        <ToggleButton fx:id="istoricToggleButton" mnemonicParsing="false" onMouseClicked="#animationDashboardButtons" text="Vizuallizare istoric" toggleGroup="$dashboardButtons" />
+                        <ToggleButton fx:id="istoricToggleButton" mnemonicParsing="false" onMouseClicked="#animationDashboardButtons" styleClass="vboxButton" text="Vizuallizare istoric" toggleGroup="$dashboardButtons" />
                         <Label styleClass="labelInfoButtonDonator" text="Poti sa vizualizezi rezultatele anilizelor precedente" />
                      </children>
                   </VBox>

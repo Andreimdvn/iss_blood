@@ -54,23 +54,23 @@
                            <children>
                               <HBox spacing="10.0">
                                  <children>
-                                    <FontAwesomeIconView fill="WHITE" glyphName="MINUS" onMouseClicked="#trombociteDown" size="30" />
+                                    <FontAwesomeIconView fill="WHITE" glyphName="MINUS" onMouseClicked="#trombociteDown" size="30" styleClass="icon" />
                                     <JFXTextField fx:id="trombocitetTextField" alignment="CENTER" prefHeight="25.0" prefWidth="36.0" styleClass="textboxTiny" stylesheets="@../main.css" text="0" />
-                                    <FontAwesomeIconView fill="WHITE" glyphName="PLUS" onMouseClicked="#trombociteUp" size="30" />
+                                    <FontAwesomeIconView fill="WHITE" glyphName="PLUS" onMouseClicked="#trombociteUp" size="30" styleClass="icon" />
                                  </children>
                               </HBox>
                               <HBox spacing="10.0">
                                  <children>
-                                    <FontAwesomeIconView fill="WHITE" glyphName="MINUS" onMouseClicked="#globuleRosiDown" size="30" />
+                                    <FontAwesomeIconView fill="WHITE" glyphName="MINUS" onMouseClicked="#globuleRosiDown" size="30" styleClass="icon" />
                                     <JFXTextField fx:id="globuleRosiTextField" prefHeight="25.0" prefWidth="36.0" styleClass="textboxTiny" text="0" />
-                                    <FontAwesomeIconView fill="WHITE" glyphName="PLUS" glyphStyle="+" onMouseClicked="#globuleRosiUp" size="30" />
+                                    <FontAwesomeIconView fill="WHITE" glyphName="PLUS" glyphStyle="+" onMouseClicked="#globuleRosiUp" size="30" styleClass="icon" />
                                  </children>
                               </HBox>
                               <HBox spacing="10.0">
                                  <children>
-                                    <FontAwesomeIconView fill="WHITE" glyphName="MINUS" onMouseClicked="#plasmaDown" size="30" />
+                                    <FontAwesomeIconView fill="WHITE" glyphName="MINUS" onMouseClicked="#plasmaDown" size="30" styleClass="icon" />
                                     <JFXTextField fx:id="plasmaTextField" prefHeight="25.0" prefWidth="36.0" styleClass="textboxTiny" text="0" />
-                                    <FontAwesomeIconView fill="WHITE" glyphName="PLUS" onMouseClicked="#plasmaUp" size="30" />
+                                    <FontAwesomeIconView fill="WHITE" glyphName="PLUS" onMouseClicked="#plasmaUp" size="30" styleClass="icon" />
                                  </children>
                               </HBox>
                            </children>
