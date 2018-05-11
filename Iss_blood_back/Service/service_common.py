@@ -16,8 +16,22 @@ class ServiceCommon(IService):
         """
         lst = self.db.select("User", ["username", "password"], [username, password])
         if len(lst) == 0:
-            return 1
-        return 0
+            return 1, None
+        else:
+            user = lst[0]
+            id = user.id
+            donatori = self.db.select("Donator", ["id_user"], [id])
+            if len(donatori) == 1:
+                return 0, 1
+            medici = self.db.select("Medic", ["id_user"], [id])
+            if len(medici) == 1:
+                return 0, 2
+            staff = self.db.select("StaffTransfurzii", ["id_user"], [id])
+            if len(staff) == 1:
+                return 0, 3
+            # administrator select
+
+        return 1, None
 
     def register(self, register_info):
         '''
