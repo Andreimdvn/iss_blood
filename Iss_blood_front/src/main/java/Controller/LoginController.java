@@ -72,11 +72,11 @@ public class LoginController implements ControlledScreensInterface {
         String username = usernameTextField.getText();
         String password = passwordTextField.getText();
 
-        if(Objects.equals(username, "donator"))
-        controller.setScreen(Screen.DONATOR_SCREEN);
-        else if(Objects.equals(username, "medic"))
-            controller.setScreen(Screen.MEDIC_SCREEN);
-/*        Pair<Boolean, String> canLogin = mainService.login(username, password);
+//        if(Objects.equals(username, "donator"))
+//        controller.setScreen(Screen.DONATOR_SCREEN);
+//        else if(Objects.equals(username, "medic"))
+//            controller.setScreen(Screen.MEDIC_SCREEN);
+        Pair<Boolean, String> canLogin = mainService.login(username, password);
         if (canLogin.getKey()) {
             controller.setScreen(Screen.DONATOR_SCREEN);
         } else {
@@ -85,7 +85,7 @@ public class LoginController implements ControlledScreensInterface {
             alert.setContentText(canLogin.getValue());
             alert.showAndWait();
         }
-  */
+
     }
 
     /***

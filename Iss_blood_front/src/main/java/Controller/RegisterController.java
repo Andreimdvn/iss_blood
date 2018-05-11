@@ -1,7 +1,10 @@
 package Controller;
 
+import Model.RegisterInfo;
 import Service.MainService;
+import Utils.CustomMessageBox;
 import Utils.Screen;
+import Validators.RegisterValidator;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
@@ -9,12 +12,14 @@ import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
+import javafx.util.Pair;
 
 
 public class RegisterController implements ControlledScreensInterface{
@@ -35,10 +40,19 @@ public class RegisterController implements ControlledScreensInterface{
     private JFXTextField phoneTextField;
 
     @FXML
+    private JFXTextField judetTextField;
+
+    @FXML
+    private JFXTextField localitateTextField;
+
+    @FXML
     private JFXTextField addressTextField;
 
     @FXML
     private JFXTextField fullnameTextField;
+
+    @FXML
+    private JFXTextField cnpTextField;
 
     @FXML
     private ToggleButton donatorToggleButton;
@@ -49,6 +63,8 @@ public class RegisterController implements ControlledScreensInterface{
 
     @FXML
     private ToggleButton transfuzieToggleButton;
+
+    private ToggleGroup accountTypeToggleGroup;
 
     @FXML
     private JFXTextField licentaTextField;
@@ -91,7 +107,7 @@ public class RegisterController implements ControlledScreensInterface{
         licentaTextField = new JFXTextField();
         licentaTextField.getStyleClass().add("textbox");
         licentaTextField.setUnFocusColor(Paint.valueOf("white"));
-        licentaTextField.setFocusColor(addressTextField.getFocusColor());
+        licentaTextField.setFocusColor(judetTextField.getFocusColor());
         licentaTextField.setPromptText("Licenta");
 
         licentaHbox.setSpacing(4);
@@ -131,9 +147,39 @@ public class RegisterController implements ControlledScreensInterface{
         String password = passwordTextField.getText();
         String email = emailTextField.getText();
         String fullname = fullnameTextField.getText();
+        String cnp = cnpTextField.getText();
+        String judet = judetTextField.getText();
+        String localitate = localitateTextField.getText();
         String address = addressTextField.getText();
         String phone = phoneTextField.getText();
+        String accountType = accountTypeToggleGroup.getSelectedToggle().toString();
+        String license = "";
+        if(licentaTextField != null)
+            license = licentaTextField.getText();
 
+        RegisterInfo info = new RegisterInfo(username, password, email, fullname, fullname, cnp, judet, localitate, address, phone, accountType, license);
+        RegisterValidator validator = new RegisterValidator();
+        Pair<Boolean, String> validationResult = validator.Validate(info);
+        if(validationResult.getKey())
+        {
+            Pair<Boolean, String> response = mainService.register(info);
+            if(response.getKey())
+            {
+                CustomMessageBox customMessageBox = new CustomMessageBox("info", "Registered successfully", 0);
+                customMessageBox.show();
+                controller.setScreen(Screen.LOGIN_SCREEN);
+            }
+            else
+            {
+                CustomMessageBox messageBox = new CustomMessageBox("Error", response.getValue(), 1);
+                messageBox.show();
+            }
+        }
+        else
+        {
+            CustomMessageBox messageBox = new CustomMessageBox("Error", validationResult.getValue(), 1);
+            messageBox.show();
+        }
     }
 
     @FXML
@@ -143,7 +189,7 @@ public class RegisterController implements ControlledScreensInterface{
 
     private void enableStyle(){
         String focusColor = "#fea02f";
-        addressTextField.setFocusColor(Paint.valueOf(focusColor));
+        judetTextField.setFocusColor(Paint.valueOf(focusColor));
         passwordTextField.setFocusColor(Paint.valueOf(focusColor));
         usernameTextField.setFocusColor(Paint.valueOf(focusColor));
         emailTextField.setFocusColor(Paint.valueOf(focusColor));
@@ -171,6 +217,7 @@ public class RegisterController implements ControlledScreensInterface{
     @FXML
     private void initialize(){
         enableStyle();
+        accountTypeToggleGroup = donatorToggleButton.getToggleGroup();
     }
 
     public void setMainService(MainService mainService){

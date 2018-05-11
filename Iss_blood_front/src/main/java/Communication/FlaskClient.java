@@ -1,5 +1,6 @@
 package Communication;
 
+import Model.RegisterInfo;
 import javafx.util.Pair;
 import org.json.JSONObject;
 
@@ -71,7 +72,7 @@ public class FlaskClient {
      * Sends a login request to the server
      * @param user : Username for login
      * @param password : Password for login
-     * @return <bool,string> true if the login was succesfully , false otheewise
+     * @return <bool,string> true if the login was successfully , false otherwise
      * + a string message describing the status
      */
     public Pair<Boolean, String> login(String user, String password){
@@ -99,13 +100,40 @@ public class FlaskClient {
         }
     }
 
+    public Pair<Boolean, String> register(RegisterInfo info)
+    {
+        HttpURLConnection connection = getConnection("/register");
+
+        if(connection == null)
+            return new Pair<>(false, "Client connection request Error");
+
+        String jsonString = new JSONObject().put("username", info.getUsername()).put("password", info.getPassword())
+                .put("email", info.getEmail()).put("nume", info.getNume()).put("prenume", info.getPrenume())
+                .put("cnp", info.getCnp()).put("judet", info.getJudet())
+                .put("localitate", info.getLocalitate()).put("address", info.getAddress())
+                .put("phone", info.getPhone()).put("accountType", info.getAccountType().toString())
+                .put("license", info.getLicence()).toString();
+
+        System.out.println("Sending " + jsonString);
+
+        JSONObject jsonResponse = sendRequest(connection, jsonString);
+        System.out.println(jsonResponse);
+        if(jsonResponse == null)
+            return new Pair<>(false, "Connection error.");
+
+        if(jsonResponse.getString("status").equals("0"))
+            return new Pair<>(true, "Registered successfully");
+
+        return new Pair<>(false, jsonResponse.getString("message"));
+    }
+
     /** Sends a json string to a given relative path
      * @param jsonString : String to be sent to the server
-     * @param urlRelateivePath : Type of request, like /login
+     * @param urlRelativePath : Type of request, like /login
      * @return JsonObject returned from the server
      */
-    public JSONObject send_json_request(String jsonString, String urlRelateivePath) {
-        HttpURLConnection http = getConnection(urlRelateivePath);
+    public JSONObject send_json_request(String jsonString, String urlRelativePath) {
+        HttpURLConnection http = getConnection(urlRelativePath);
 
         if(http == null){
             return null;

@@ -4,6 +4,8 @@ from flask import Flask, request
 import logging
 
 from Controller.back_controller import BackController
+from Model.AccountType import AccountType
+from Model.RegisterInfo import RegisterInfo
 
 
 class FlaskServer:
@@ -33,6 +35,7 @@ class FlaskServer:
     def init_requests(self):
         self.app.add_url_rule("/test", "test_request", self.test_request, methods=["GET", "POST"])
         self.app.add_url_rule("/login", "login_request", self.login_request, methods=["POST"])
+        self.app.add_url_rule("/register", "register_request", self.register_request, methods=["POST"])
 
     def test_request(self):
         self.request_data = request.get_json()
@@ -54,5 +57,24 @@ class FlaskServer:
             return_dict["message"] = "Username sau parola invalide"
 
         self.logger.debug("Returning response for Login Request: {}".format(return_dict))
+
+        return json.dumps(return_dict)
+
+    def register_request(self):
+        self.request_data = request.get_json()
+        self.logger.debug("Got register request JSON: {}".format(self.request_data))
+
+        register_info = RegisterInfo(self.request_data["username"], self.request_data["password"],
+                                    self.request_data["email"], self.request_data["nume"],
+                                    self.request_data["prenume"], self.request_data["cnp"],
+                                    self.request_data["localitate"], self.request_data["judet"],
+                                    self.request_data["address"], self.request_data["phone"],
+                                    AccountType[self.request_data["accountType"]], self.request_data["license"])
+
+        #TO DO: server side validation: sa nu fie medici cu licenta = "", telefonul sa aiba 10 char...
+
+        status_code, status_message = self.controller.register(register_info)
+
+        return_dict = {"status": str(status_code), "message": status_message}
 
         return json.dumps(return_dict)

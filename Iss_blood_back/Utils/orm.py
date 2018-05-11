@@ -1,7 +1,7 @@
 import sys
 
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Column, Integer, String, ForeignKey, Date, SmallInteger, Enum, Float, create_engine
+from sqlalchemy import Column, Integer, String, ForeignKey, Date, SmallInteger, Enum, Float, create_engine, Boolean
 from sqlalchemy.orm import relationship, sessionmaker
 
 
@@ -120,6 +120,13 @@ class Medic(DB):
     user = relationship('User', back_populates='medici')
     locatie = relationship('Locatie', back_populates='medici')
 
+class Licente(DB):
+    __tablename__ = 'Licente'
+
+    id = Column(Integer, autoincrement=True, primary_key=True)
+    tip_licenta = Column(Enum('StaffTransfuzie', 'Medic'), nullable=False)
+    cod_licenta = Column(String(20), nullable=False)
+    folosita = Column(Boolean, nullable=False)
 
 class Analize(DB):
     __tablename__ = 'Analize'
@@ -227,16 +234,21 @@ class ORM:
 
     def select(self, table, columns=None, values=None, first=False):
         """
-        Execute a query on all rows in a table and returnes the results.
+        Execute a query on all rows in a table and returns the results with all the columns.
         :param table: table name to be queried.
-        :param columns: list with required columns.
-        :param values:
-        :param first: first item is returned.
-        :return: a list with objects of table type if not columns were specified, tuples otherwise.
+        :param columns: list with required columns for the WHERE clause.
+        :param values: list with values corresponding to the given columns
+        :param first: only the first item is returned.
+        :return: if first==False, a list with: objects of table type if no columns were specified, tuples<Column> otherwise.
+                 if first==True, a single object is returned instead of a list
         """
         res = None
         if columns:
             if type(columns) not in (list, tuple):
+                raise ValueError('[!] Type [%s] is not allowed for columns!' % type(columns))
+        if values:
+            if type(values) not in (list, tuple):
+                raise ValueError('[!] Type [%s] for values are not allowed! Use list or tuple.' % type(values))
                 raise ValueError('[!] Type [%s] is not allowed for columns!' % type(columns))
         if values:
             if type(values) not in (list, tuple):
