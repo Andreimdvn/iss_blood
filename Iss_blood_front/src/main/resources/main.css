@@ -25,6 +25,89 @@
     -fx-prompt-formular-color:dimgrey;
 
     -fx-table-selected-row: #E64850;
+
+
+    -fx-centru-background-color: #D2D2D2;
+}
+
+.plasmaBox{
+    -fx-background-color: #F8C537;
+    -fx-border-width: 0.03em;
+    -fx-border-color: black;
+}
+
+.globulRosiiBox{
+    -fx-border-width: 0.03em;
+    -fx-border-color: black;
+    -fx-background-color: #E64850;
+}
+
+.bloodBox{
+    -fx-border-width: 0.03em;
+    -fx-border-color: black;
+    -fx-background-color: #8A0707;
+}
+
+.box{
+    -fx-background-color: -fx-background-primary-color;
+
+    -fx-background-radius: 3%;
+    -fx-background-insets: -1 -1 -1 0;
+
+    /*-fx-border-radius: 3%;*/
+    -fx-border-width: 0.04em;
+    -fx-border-color : -fx-text-background-primary-color;
+}
+.buttonSecondaryTiny{
+    -fx-background-color: -fx-button-secondary-color;
+    -fx-text-fill: -fx-text-button-secondary-color;
+    -fx-font-style: italic;
+    -fx-font-size: 13px;
+    -fx-font-weight: 600;
+    -fx-alignment: center-left;
+    -fx-border-width: 0 0 0 1;
+    -fx-border-color: lightgreen;
+}
+
+.buttonSecondaryTiny:hover{
+    -fx-border-width: 0 0 0 15;
+}
+
+
+.trombociteBox{
+    -fx-background-color : #7BB2D9;
+    -fx-border-width: 0.03em;
+    -fx-border-color: black;
+}
+
+.headerTrombocite{
+    -fx-font-weight: bold;
+    -fx-font-size: 15px;
+    -fx-text-fill: #7BB2D9;
+}
+
+.headerPlasma{
+    -fx-font-weight: bold;
+    -fx-font-size: 15px;
+    -fx-text-fill: #F8C537;
+}
+.headerGlobuleRosii{
+    -fx-font-weight: bold;
+    -fx-font-size: 15px;
+    -fx-text-fill: #E64850;
+}
+.headerBlood{
+    -fx-font-weight: bold;
+    -fx-font-size: 15px;
+    -fx-text-fill: #8A0707;
+}
+
+
+.labelBoxes{
+    -fx-text-alignment: center;
+    -fx-alignment: center;
+    -fx-font-weight: 700;
+    -fx-font-size: 24px;
 }
 
 .icon{
@@ -242,9 +325,16 @@
     -fx-fill:  -fx-text-header-formular-color;
 }
 
+.formularCentru{
+
+    -fx-background-color:  -fx-centru-background-color;
+    -fx-border-width: 0.1em;
+    -fx-border-color: -fx-text-background-primary-color;
+}
+
 .subFormularPane{
-    -fx-background-color:  -fx-background-pane-formular-color;
-    -fx-border-width: 1px;
+    -fx-background-color: -fx-background-pane-formular-color;
+    -fx-border-width: 0.03em;
     -fx-border-color: -fx-text-background-formular-color;
 }
 

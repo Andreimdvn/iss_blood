@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import de.jensd.fx.glyphs.octicons.OctIconView?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+
+<BorderPane prefHeight="698.0" prefWidth="1253.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CentruTransfuzieController">
+   <center>
+      <AnchorPane prefHeight="655.0" prefWidth="1031.0" styleClass="formularCentru" stylesheets="@../main.css" BorderPane.alignment="CENTER">
+         <children>
+            <HBox layoutX="46.0" layoutY="26.0" spacing="30.0">
+               <children>
+                  <AnchorPane>
+                     <children>
+                        <Pane prefHeight="104.0" prefWidth="215.0" styleClass="subFormularPane">
+                           <children>
+                              <Pane prefHeight="104.0" prefWidth="75.0" styleClass="globulRosiiBox" />
+                              <Pane layoutX="75.0" prefHeight="104.0" prefWidth="140.0" styleClass="box">
+                                 <children>
+                                    <Label layoutX="3.0" layoutY="14.0" styleClass="headerGlobuleRosii" text="Pungi globule rosii" />
+                                    <Label layoutX="5.0" layoutY="52.0" prefHeight="17.0" prefWidth="129.0" styleClass="labelBoxes" text="12" />
+                                 </children>
+                              </Pane>
+                           </children>
+                        </Pane>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane>
+                     <children>
+                        <Pane prefHeight="104.0" prefWidth="215.0" styleClass="subFormularPane">
+                           <children>
+                              <Pane prefHeight="104.0" prefWidth="75.0" styleClass="plasmaBox" />
+                              <Pane layoutX="75.0" prefHeight="104.0" prefWidth="140.0" styleClass="box">
+                                 <children>
+                                    <Label layoutX="22.0" layoutY="14.0" styleClass="headerPlasma" text="Pungi plasma" />
+                                    <Label layoutX="5.0" layoutY="52.0" prefHeight="17.0" prefWidth="129.0" styleClass="labelBoxes" text="7" />
+                                 </children>
+                              </Pane>
+                           </children>
+                        </Pane>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane>
+                     <children>
+                        <Pane prefHeight="104.0" prefWidth="215.0" styleClass="subFormularPane">
+                           <children>
+                              <Pane prefHeight="104.0" prefWidth="75.0" styleClass="trombociteBox" />
+                              <Pane layoutX="75.0" prefHeight="104.0" prefWidth="140.0" styleClass="box">
+                                 <children>
+                                    <Label layoutX="8.0" layoutY="14.0" styleClass="headerTrombocite" text="Pungi trombocite" />
+                                    <Label layoutX="5.0" layoutY="52.0" prefHeight="17.0" prefWidth="129.0" styleClass="labelBoxes" text="61" />
+                                 </children>
+                              </Pane>
+                           </children>
+                        </Pane>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane>
+                     <children>
+                        <Pane prefHeight="104.0" prefWidth="215.0" styleClass="subFormularPane">
+                           <children>
+                              <Pane prefHeight="104.0" prefWidth="75.0" styleClass="bloodBox" />
+                              <Pane layoutX="75.0" prefHeight="104.0" prefWidth="140.0" styleClass="box">
+                                 <children>
+                                    <Label layoutX="27.0" layoutY="14.0" styleClass="headerBlood" text="Pungi sange" />
+                                    <Label layoutX="5.0" layoutY="52.0" prefHeight="17.0" prefWidth="129.0" styleClass="labelBoxes" text="32" />
+                                 </children>
+                              </Pane>
+                           </children>
+                        </Pane>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </HBox>
+            <PieChart fx:id="stocPieChart" labelLineLength="0.0" labelsVisible="false" layoutX="613.0" layoutY="165.0" legendSide="RIGHT" prefHeight="312.0" prefWidth="383.0" styleClass="backgroundMessageBox" title="Stoc curent" />
+            <AnchorPane layoutX="46.0" layoutY="328.0" prefHeight="148.0" prefWidth="252.0" styleClass="box">
+               <children>
+                  <Label layoutX="14.0" layoutY="76.0" styleClass="labelPrimary" text="Donari de sange facute azi" />
+                  <Label layoutX="193.0" layoutY="68.0" styleClass="labelBoxes" text="13" />
+                  <JFXButton layoutX="1.0" layoutY="121.0" prefHeight="27.0" prefWidth="252.0" styleClass="buttonFormular" text="View them" />
+                  <OctIconView glyphName="BOOK" layoutX="99.0" layoutY="59.0" size="50" wrappingWidth="54.4444580078125" />
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="328.0" layoutY="328.0" prefHeight="148.0" prefWidth="252.0" styleClass="box">
+               <children>
+                  <Label layoutX="14.0" layoutY="76.0" styleClass="labelPrimary" text="Numar cereri sange in asteptare" />
+                  <Label layoutX="224.0" layoutY="68.0" styleClass="labelBoxes" text="2" />
+                  <JFXButton layoutX="1.0" layoutY="121.0" prefHeight="27.0" prefWidth="252.0" styleClass="buttonFormular" text="View them" />
+                  <OctIconView glyphName="CLIPPY" layoutX="106.0" layoutY="52.0" size="50" wrappingWidth="41.11114501953125" />
+               </children>
+            </AnchorPane>
+            <Pane layoutX="46.0" layoutY="165.0" prefHeight="144.0" prefWidth="536.0" styleClass="box">
+               <children>
+                  <Label layoutX="155.0" layoutY="14.0" prefHeight="45.0" prefWidth="227.0" styleClass="headerFormular" text="Centru de transfuzie" />
+                  <Label layoutX="203.0" layoutY="72.0" styleClass="headerPrimary" text="Cluj-Napoca" />
+                  <Pane prefHeight="144.0" prefWidth="13.0" styleClass="trombociteBox" />
+               </children>
+            </Pane>
+         </children>
+      </AnchorPane>
+   </center>
+   <left>
+      <AnchorPane prefHeight="666.0" prefWidth="232.0" styleClass="secondaryPane" stylesheets="@../main.css" BorderPane.alignment="CENTER">
+         <children>
+            <VBox layoutX="31.0" layoutY="217.0" spacing="5.0">
+               <children>
+                  <JFXButton prefHeight="31.0" prefWidth="176.0" styleClass="buttonSecondaryTiny" text="Home" />
+                  <JFXButton prefHeight="31.0" prefWidth="180.0" styleClass="buttonSecondaryTiny" text="Adaugare donare" />
+                  <JFXButton prefHeight="31.0" prefWidth="180.0" styleClass="buttonSecondaryTiny" text="Vizualizare donari" />
+                  <JFXButton prefHeight="31.0" prefWidth="180.0" styleClass="buttonSecondaryTiny" text="Completeaza cerere sange" />
+                  <JFXButton prefHeight="31.0" prefWidth="180.0" styleClass="buttonSecondaryTiny" text="Vizualizare cereri" />
+                  <JFXButton prefHeight="31.0" prefWidth="180.0" styleClass="buttonSecondaryTiny" text="Stoc curent" />
+                  <JFXButton prefHeight="31.0" prefWidth="180.0" styleClass="buttonSecondaryTiny" text="Notificari" />
+               </children>
+            </VBox>
+            <Pane layoutX="12.0" layoutY="6.0" prefHeight="150.0" prefWidth="208.0">
+               <children>
+                  <Label layoutX="5.0" layoutY="96.3125" prefHeight="20.0" prefWidth="198.0" style="-fx-alignment: center;" styleClass="labelSecondary" text="Moldovan Daniel" textAlignment="CENTER" />
+                  <Label layoutY="67.3125" styleClass="labelSecondary" text="Centrul de transfuzie Cluj-Napoca" />
+                  <OctIconView fill="WHITE" glyphName="SHIELD" layoutX="82.0" layoutY="59.0" size="50" wrappingWidth="44.66668701171875" />
+               </children>
+            </Pane>
+            <JFXButton layoutX="33.0" layoutY="596.0" prefHeight="31.0" prefWidth="176.0" styleClass="buttonSecondaryTiny" text="Logout" />
+         </children>
+      </AnchorPane>
+   </left>
+   <top>
+      <AnchorPane prefHeight="32.0" prefWidth="1253.0" style="-fx-border-color: black; -fx-border-width: 0.02em;" styleClass="secondaryPane" stylesheets="@../main.css" BorderPane.alignment="CENTER">
+         <children>
+            <FontAwesomeIconView glyphName="CLOSE" layoutX="1229.0" layoutY="24.0" size="26" styleClass="iconSecondary" text="" />
+         </children>
+      </AnchorPane>
+   </top>
+</BorderPane>

@@ -29,4 +29,7 @@ public class Screen {
     public static String STARE_PACIENTI_SCREEN = "STARE_PACIENTI";
     public static String STARE_PACIENTI_RESOURCE = "/View/StarePacientiView.fxml";
 
+    public static String CENTRU_TRANSFUZIE_SCREEN = "CENTRU_TRANSFUZIE_SCREEN";
+    public static String CENTRU_TRANSFUZIE_RESOURCE = "/View/CentruTransfuzieView.fxml";
+
 }
