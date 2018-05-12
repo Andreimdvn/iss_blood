@@ -13,3 +13,4 @@ class RegisterInfo:
         self.phone = phone
         self.account_type = account_type
         self.license = license
+        self.data_nasterii = None

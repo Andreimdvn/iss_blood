@@ -3,6 +3,7 @@ import datetime
 from Model.AccountType import AccountType
 from Service.i_service import IService
 from Utils.orm import User
+from Validators.validator_register import validator_register
 
 
 class ServiceCommon(IService):
@@ -40,11 +41,15 @@ class ServiceCommon(IService):
         :return: Tuple<int, string> = (status code, status message); status code = 0 on success or >= 1 otherwise
         '''
 
+        validator = validator_register()
+        valid, msg = validator.validate(register_info)
+        if not valid:
+            return 1, msg
+
         use_license_callback = None
 
         # 1. Daca are licenta, valideaz-o
         if register_info.license != "":
-            #self.db.insert('Licente', ['tip_licenta', 'cod_licenta', 'folosita'], [register_info.account_type.name, register_info.license, False])
             license_is_valid, message = self.check_license(register_info.account_type.name, register_info.license)
             if not license_is_valid:
                 return 1, message
@@ -79,16 +84,11 @@ class ServiceCommon(IService):
         specific_col_names = []
         specific_vals = []
         if register_info.account_type == AccountType['Donator']:
-            try:
-                data_nasterii = self.data_nasterii_din_cnp(register_info.cnp)
-            except ValueError:
-                return 1, "CNP invalid"
-
             table_name = 'Donator'
             specific_col_names = ['prenume', 'nume', 'cnp', 'id_domiciliu', 'adresa_domiciliu', 'data_nasterii',
                                   'telefon', 'id_localitate_resedinta', 'adresa_resedinta', 'user']
             specific_vals = [register_info.prenume, register_info.nume, register_info.cnp, id_localitate,
-                             register_info.address, data_nasterii,
+                             register_info.address, register_info.data_nasterii,
                              register_info.phone, id_localitate, register_info.address, new_user_object]
         elif register_info.account_type == AccountType['Medic']:
             table_name = 'Medic'
@@ -153,18 +153,3 @@ class ServiceCommon(IService):
             localitate = self.db.select('Localitate', ['nume', 'id_judet'], [nume, id_judet], True)
         return localitate.id
 
-    def data_nasterii_din_cnp(self, cnp):
-        '''
-        Extrage data nasterii din CNP
-        Arunca ValueError daca rezulta o data invalida
-        :param cnp:
-        :return: datetime.datetime
-        '''
-        #-yymmdd---
-        year = int(cnp[1:3]) + 2000
-        if year > datetime.datetime.now().year:
-            year-=100
-        month = cnp[3:5]
-        day = cnp[5:7]
-        date = datetime.datetime.strptime("{0}-{1}-{2}".format(str(year), month, day), "%Y-%m-%d")
-        return date

@@ -12,23 +12,28 @@ public class RegisterValidator {
     public Pair<Boolean, String> Validate(RegisterInfo info)
     {
 //        return new Pair<>(true, "ok");
+
+        String erori = "";
+
         if(info.getAddress().equals("") || info.getEmail().equals("") || info.getNume().equals("") ||
                 info.getPassword().equals("") || info.getPhone().equals("") || info.getUsername().equals(""))
-            return new Pair<>(false, "Toate campurile sunt obligatorii");
+            erori += "Toate campurile sunt obligatorii\n";
 
         if(info.getPhone().length() != 10)
-            return new Pair<>(false, "Numarul de telefon trebuie a aiba 10 cifre");
+            erori += "Numarul de telefon trebuie a aiba 10 cifre\n";
 
         if(!checkForDigits(info.getPhone()))
-            return new Pair<>(false, "Numarul de telefon nu e valid");
+            erori += "Numarul de telefon nu e valid\n";
 
         if(info.getCnp().length() != 13)
-            return new Pair<>(false, "CNP-ul trebuie sa aiba 13 cifre");
+            erori += "CNP-ul trebuie sa aiba 13 cifre\n";
 
         if(!checkForDigits(info.getCnp()))
-            return new Pair<>(false, "CNP-ul nu e valid");
+            erori += "CNP-ul nu e valid\n";
 
-        return new Pair<>(true, "Ok");
+        if (erori.equals(""))
+            return new Pair<>(true, "Ok");
+        return new Pair<>(false, erori);
     }
 
     /**

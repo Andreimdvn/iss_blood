@@ -71,8 +71,6 @@ class FlaskServer:
                                     self.request_data["address"], self.request_data["phone"],
                                     AccountType[self.request_data["accountType"]], self.request_data["license"])
 
-        #TO DO: server side validation: sa nu fie medici cu licenta = "", telefonul sa aiba 10 char...
-
         status_code, status_message = self.controller.register(register_info)
 
         return_dict = {"status": str(status_code), "message": status_message}
