@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import de.jensd.fx.glyphs.octicons.OctIconView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="655.0" prefWidth="1031.0" styleClass="formularPane" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CentruCereriSangeController">
+   <children>
+      <TableView fx:id="cerereSangeTableView" layoutX="18.0" layoutY="39.0" prefHeight="410.0" prefWidth="975.0" styleClass="box">
+         <columns>
+            <TableColumn fx:id="numePacientColumn" prefWidth="152.88889122009277" text="Nume pacient" />
+            <TableColumn fx:id="grupaSangeColumn" minWidth="3.5555419921875" prefWidth="86.66664123535156" text="Grupa" />
+            <TableColumn fx:id="rhColumn" prefWidth="91.5555419921875" text="RH" />
+            <TableColumn fx:id="trombociteColumn" prefWidth="138.22222900390625" text="Pungi trombocite" />
+            <TableColumn fx:id="globuleColumn" prefWidth="128.88888549804688" text="Pungi globule rosii" />
+            <TableColumn fx:id="plasmaColumn" prefWidth="120.44451904296875" text="Pungi plasma" />
+            <TableColumn fx:id="dateColumn" prefWidth="120.0" text="Data" />
+            <TableColumn fx:id="importantaColumn" prefWidth="139.9998779296875" text="Importanta" />
+         </columns>
+      </TableView>
+      <Label layoutX="73.0" layoutY="458.0" text="Selecteaza o cerere pentru mai multe actiuni" />
+      <OctIconView glyphName="INFO" layoutX="40.0" layoutY="478.0" size="30" wrappingWidth="24.88885498046875" />
+      <AnchorPane layoutX="22.0" layoutY="492.0" prefHeight="132.0" prefWidth="966.0" styleClass="box">
+         <children>
+            <JFXButton layoutX="818.0" layoutY="10.0" prefHeight="110.0" prefWidth="133.0" styleClass="buttonRefuse" text="Send" />
+            <Label layoutX="51.0" layoutY="31.0" prefHeight="17.0" prefWidth="133.0" text="Pungi trombocite cerute" />
+            <Label layoutX="204.0" layoutY="31.0" text="Label" />
+            <Label layoutX="51.0" layoutY="65.0" prefHeight="17.0" prefWidth="133.0" text="Pungi globule rosii" />
+            <Label layoutX="401.0" layoutY="31.0" text="Label" />
+            <Label layoutX="296.0" layoutY="31.0" prefHeight="17.0" prefWidth="77.0" text="Pungi plasma" />
+            <Label layoutX="204.0" layoutY="65.0" text="Label" />
+            <Label layoutX="296.0" layoutY="65.0" prefHeight="17.0" prefWidth="84.0" text="Pungi sange" />
+            <Label layoutX="401.0" layoutY="65.0" text="Label" />
+            <JFXCheckBox layoutX="524.0" layoutY="48.0" text="Esti sigur?" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

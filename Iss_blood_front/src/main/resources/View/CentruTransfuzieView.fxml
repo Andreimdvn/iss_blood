@@ -5,16 +5,16 @@
 <?import de.jensd.fx.glyphs.octicons.OctIconView?>
 <?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-
-<BorderPane prefHeight="698.0" prefWidth="1253.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CentruTransfuzieController">
+<BorderPane fx:id="borderPane" prefHeight="698.0" prefWidth="1253.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CentruTransfuzieController">
    <center>
-      <AnchorPane prefHeight="655.0" prefWidth="1031.0" styleClass="formularCentru" stylesheets="@../main.css" BorderPane.alignment="CENTER">
+      <AnchorPane fx:id="homePane" prefHeight="655.0" prefWidth="1031.0" styleClass="formularCentru" stylesheets="@../main.css" BorderPane.alignment="CENTER">
          <children>
             <HBox layoutX="46.0" layoutY="26.0" spacing="30.0">
                <children>
@@ -80,8 +80,8 @@
                   </AnchorPane>
                </children>
             </HBox>
-            <PieChart fx:id="stocPieChart" labelLineLength="0.0" labelsVisible="false" layoutX="613.0" layoutY="165.0" legendSide="RIGHT" prefHeight="312.0" prefWidth="383.0" styleClass="backgroundMessageBox" title="Stoc curent" />
-            <AnchorPane layoutX="46.0" layoutY="328.0" prefHeight="148.0" prefWidth="252.0" styleClass="box">
+            <PieChart fx:id="stocPieChart" labelLineLength="0.0" labelsVisible="false" layoutX="46.0" layoutY="161.0" legendSide="RIGHT" prefHeight="312.0" prefWidth="369.0" styleClass="backgroundMessageBox" title="Stoc curent" />
+            <AnchorPane layoutX="82.0" layoutY="502.0" prefHeight="148.0" prefWidth="252.0" styleClass="box">
                <children>
                   <Label layoutX="14.0" layoutY="76.0" styleClass="labelPrimary" text="Donari de sange facute azi" />
                   <Label layoutX="193.0" layoutY="68.0" styleClass="labelBoxes" text="13" />
@@ -89,7 +89,7 @@
                   <OctIconView glyphName="BOOK" layoutX="99.0" layoutY="59.0" size="50" wrappingWidth="54.4444580078125" />
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="328.0" layoutY="328.0" prefHeight="148.0" prefWidth="252.0" styleClass="box">
+            <AnchorPane layoutX="383.0" layoutY="502.0" prefHeight="148.0" prefWidth="252.0" styleClass="box">
                <children>
                   <Label layoutX="14.0" layoutY="76.0" styleClass="labelPrimary" text="Numar cereri sange in asteptare" />
                   <Label layoutX="224.0" layoutY="68.0" styleClass="labelBoxes" text="2" />
@@ -97,13 +97,29 @@
                   <OctIconView glyphName="CLIPPY" layoutX="106.0" layoutY="52.0" size="50" wrappingWidth="41.11114501953125" />
                </children>
             </AnchorPane>
-            <Pane layoutX="46.0" layoutY="165.0" prefHeight="144.0" prefWidth="536.0" styleClass="box">
+            <AnchorPane layoutX="677.0" layoutY="502.0" prefHeight="148.0" prefWidth="252.0" styleClass="box">
                <children>
-                  <Label layoutX="155.0" layoutY="14.0" prefHeight="45.0" prefWidth="227.0" styleClass="headerFormular" text="Centru de transfuzie" />
-                  <Label layoutX="203.0" layoutY="72.0" styleClass="headerPrimary" text="Cluj-Napoca" />
-                  <Pane prefHeight="144.0" prefWidth="13.0" styleClass="trombociteBox" />
+                  <Label layoutX="4.0" layoutY="76.0" styleClass="labelPrimary" text="Numar cereri donare in asteptare" />
+                  <Label layoutX="225.0" layoutY="68.0" styleClass="labelBoxes" text="91" />
+                  <JFXButton layoutX="1.0" layoutY="121.0" prefHeight="27.0" prefWidth="252.0" styleClass="buttonFormular" text="View them" />
+                  <OctIconView glyphName="REPO" layoutX="106.0" layoutY="59.0" size="50" wrappingWidth="41.11114501953125" />
                </children>
-            </Pane>
+            </AnchorPane>
+            <ScrollPane layoutX="469.0" layoutY="249.0" prefHeight="227.0" prefWidth="495.0">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="216.0" prefWidth="473.0">
+                     <children>
+                        <Label layoutX="119.0" layoutY="25.0" text="Heads up! A aparut o noua cerere de donare" />
+                        <Label layoutX="135.0" layoutY="51.0" text="Warning! Prea putine pungi de plasma" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </ScrollPane>
+            <AnchorPane layoutX="470.0" layoutY="161.0" prefHeight="88.0" prefWidth="493.0" styleClass="box">
+               <children>
+                  <Label layoutX="198.0" layoutY="26.0" styleClass="headerFormular" text="Notificari" />
+               </children>
+            </AnchorPane>
          </children>
       </AnchorPane>
    </center>
@@ -112,11 +128,10 @@
          <children>
             <VBox layoutX="31.0" layoutY="217.0" spacing="5.0">
                <children>
-                  <JFXButton prefHeight="31.0" prefWidth="176.0" styleClass="buttonSecondaryTiny" text="Home" />
-                  <JFXButton prefHeight="31.0" prefWidth="180.0" styleClass="buttonSecondaryTiny" text="Adaugare donare" />
-                  <JFXButton prefHeight="31.0" prefWidth="180.0" styleClass="buttonSecondaryTiny" text="Vizualizare donari" />
-                  <JFXButton prefHeight="31.0" prefWidth="180.0" styleClass="buttonSecondaryTiny" text="Completeaza cerere sange" />
-                  <JFXButton prefHeight="31.0" prefWidth="180.0" styleClass="buttonSecondaryTiny" text="Vizualizare cereri" />
+                  <JFXButton onMouseClicked="#homeClicked" prefHeight="31.0" prefWidth="176.0" styleClass="buttonSecondaryTiny" text="Home" />
+                  <JFXButton onMouseClicked="#cereriDonariClicked" prefHeight="31.0" prefWidth="180.0" styleClass="buttonSecondaryTiny" text="Vizualizare cereri donari" />
+                  <JFXButton onAction="#cereriSangeClicked" prefHeight="31.0" prefWidth="180.0" styleClass="buttonSecondaryTiny" text="Vizualizare cereri sange" />
+                  <JFXButton prefHeight="31.0" prefWidth="180.0" styleClass="buttonSecondaryTiny" text="Istoric cereri" />
                   <JFXButton prefHeight="31.0" prefWidth="180.0" styleClass="buttonSecondaryTiny" text="Stoc curent" />
                   <JFXButton prefHeight="31.0" prefWidth="180.0" styleClass="buttonSecondaryTiny" text="Notificari" />
                </children>
@@ -133,9 +148,9 @@
       </AnchorPane>
    </left>
    <top>
-      <AnchorPane prefHeight="32.0" prefWidth="1253.0" style="-fx-border-color: black; -fx-border-width: 0.02em;" styleClass="secondaryPane" stylesheets="@../main.css" BorderPane.alignment="CENTER">
+      <AnchorPane fx:id="topBar" prefHeight="32.0" prefWidth="1253.0" style="-fx-border-color: black; -fx-border-width: 0.02em;" styleClass="secondaryPane" stylesheets="@../main.css" BorderPane.alignment="CENTER">
          <children>
-            <FontAwesomeIconView glyphName="CLOSE" layoutX="1229.0" layoutY="24.0" size="26" styleClass="iconSecondary" text="" />
+            <FontAwesomeIconView fx:id="closeIcon" glyphName="CLOSE" layoutX="1229.0" layoutY="24.0" onMouseClicked="#closeWindow" size="26" styleClass="iconSecondary" text="" />
          </children>
       </AnchorPane>
    </top>

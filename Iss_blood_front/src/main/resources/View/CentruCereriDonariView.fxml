@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.octicons.OctIconView?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane prefHeight="655.0" prefWidth="1031.0" styleClass="formularPane" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CentruCereriDonariController">
+   <children>
+      <AnchorPane layoutX="318.0" layoutY="35.0" prefHeight="401.0" prefWidth="681.0" styleClass="box">
+         <children>
+            <TableView prefHeight="338.0" prefWidth="680.0">
+              <columns>
+                <TableColumn prefWidth="126.2222900390625" text="Nume" />
+                <TableColumn prefWidth="146.66661071777344" text="Prenume" />
+                  <TableColumn prefWidth="118.22216796875" text="Grupa" />
+                  <TableColumn prefWidth="83.5555419921875" text="RH" />
+                  <TableColumn prefWidth="207.55548095703125" text="Stare curenta" />
+              </columns>
+            </TableView>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="21.0" layoutY="495.0" prefHeight="132.0" prefWidth="979.0" styleClass="box">
+         <children>
+            <JFXButton layoutX="346.0" layoutY="11.0" prefHeight="110.0" prefWidth="133.0" styleClass="buttonFormular" text="Prelevare" />
+            <JFXButton disable="true" layoutX="545.0" layoutY="11.0" prefHeight="110.0" prefWidth="133.0" styleClass="buttonFormular" text="Pregatirea" />
+            <JFXButton disable="true" layoutX="733.0" layoutY="11.0" prefHeight="110.0" prefWidth="133.0" styleClass="buttonFormular" text="Calificare " />
+            <Label layoutX="37.0" layoutY="48.0" styleClass="headerPrimary" text="Status donator selectat" />
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="38.0" layoutY="35.0" prefHeight="401.0" prefWidth="208.0" styleClass="box">
+         <children>
+            <Pane prefHeight="37.0" prefWidth="207.0" styleClass="headerPaneFormular">
+               <children>
+                  <Label layoutX="84.0" layoutY="15.0" text="Filter" />
+               </children>
+            </Pane>
+            <JFXTextField layoutX="13.0" layoutY="97.0" promptText="Nume donator" styleClass="textboxPrimary" />
+            <JFXTextField layoutX="14.0" layoutY="188.0" promptText="Prenume donator" styleClass="textboxPrimary" />
+            <ComboBox layoutX="14.0" layoutY="281.0" prefWidth="150.0" promptText="Last status" />
+            <JFXButton layoutX="1.0" layoutY="374.0" prefHeight="25.0" prefWidth="205.0" styleClass="buttonFormular" text="Cauta" />
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="21.0" layoutY="387.0" prefHeight="12.0" prefWidth="893.0" />
+      <Label layoutX="76.0" layoutY="457.0" text="Selecteaza un donator pentru a vedea statusul sau" />
+      <OctIconView glyphName="INFO" layoutX="38.0" layoutY="477.0" size="30" wrappingWidth="24.88885498046875" />
+   </children>
+</AnchorPane>

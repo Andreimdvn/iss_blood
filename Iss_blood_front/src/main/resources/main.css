@@ -69,10 +69,21 @@
     -fx-border-color: lightgreen;
 }
 
+
 .buttonSecondaryTiny:hover{
     -fx-border-width: 0 0 0 15;
 }
 
+.buttonRefuse{
+    -fx-background-color: lightgreen;
+    -fx-text-fill: -fx-text-header-formular-color;
+}
+
+.buttonSecondaryTiny:focused{
+    -fx-background-color: lightgreen;
+    -fx-text-fill:  -fx-text-button-primary-color;
+    -fx-border-width: 0 0 0 0;
+}
 
 .trombociteBox{
     -fx-background-color : #7BB2D9;

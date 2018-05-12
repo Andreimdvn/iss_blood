@@ -29,7 +29,15 @@ public class Screen {
     public static String STARE_PACIENTI_SCREEN = "STARE_PACIENTI";
     public static String STARE_PACIENTI_RESOURCE = "/View/StarePacientiView.fxml";
 
-    public static String CENTRU_TRANSFUZIE_SCREEN = "CENTRU_TRANSFUZIE_SCREEN";
+    public static String CENTRU_TRANSFUZIE_SCREEN = "CENTRU_TRANSFUZIE";
     public static String CENTRU_TRANSFUZIE_RESOURCE = "/View/CentruTransfuzieView.fxml";
+
+    public static String CENTRU_CERERI_DONARI_SCREEN = "CENTRU_CERERI_DONARI";
+    public static String CENTRU_CERERI_DONARI_RESOURCE = "/View/CentruCereriDonariView.fxml";
+
+    public static String CENTRU_CERERI_SANGE_SCREEN = "CENTRU_CERERI_SANGE";
+    public static String CENTRU_CERERI_SANGE_RESOURCE = "/View/CentruCereriSangeView.fxml";
+
+
 
 }
