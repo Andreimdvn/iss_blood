@@ -15,7 +15,10 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 
@@ -251,14 +254,14 @@ public class DonatorDashboardController extends ControlledScreen {
     }
 
     private void loadIstoric() {
-
-
+        logger.debug("Buton istoric a fost apasat");
         borderPane.setBottom(getIstoric());
         fadeIn(getIstoric());
 
     }
 
     private void loadFormular() {
+        logger.debug("Buton formular a fost apasat");
         borderPane.setBottom(getFormular());
 
         Formular1Controller controller = (Formular1Controller) getScreenController().getControlledScreen(Screen.FORMULAR_1_SCREEN);
@@ -299,7 +302,6 @@ public class DonatorDashboardController extends ControlledScreen {
     {
         hideTopBar();
         Timeline timeline = new Timeline();
-        System.out.println(prefBottomPaneHeight);
         double pref = prefBottomPaneHeight;
         timeline.getKeyFrames().addAll(
                 new KeyFrame(Duration.millis(animationSpeed),

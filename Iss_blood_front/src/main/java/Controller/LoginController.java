@@ -1,6 +1,7 @@
 package Controller;
 
 import Service.MainService;
+import Utils.CustomMessageBox;
 import Utils.Screen;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
@@ -11,6 +12,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.Objects;
 
@@ -62,25 +65,32 @@ public class LoginController extends ControlledScreen {
         enableStyle();
     }
 
+    private Logger logger = LogManager.getLogger(LoginController.class.getName());
+
     @FXML
     private void loginClicked(){
         String username = usernameTextField.getText();
         String password = passwordTextField.getText();
 
-        if(Objects.equals(username, "donator"))
-        getScreenController().setScreen(Screen.DONATOR_SCREEN);
-        else if(Objects.equals(username, "medic"))
-            getScreenController().setScreen(Screen.MEDIC_SCREEN);
-/*        Pair<Boolean, String> canLogin = mainService.login(username, password);
-        if (canLogin.getKey()) {
+        logger.debug("Login button has been clicked");
+
+
+
+        Pair<Integer, String> canLogin = mainService.login(username, password);
+        if (canLogin.getKey() == 0) {
+            new CustomMessageBox("Login",canLogin.getValue()).show();
+        } else if (canLogin.getKey() == 1){
+
             controller.setScreen(Screen.DONATOR_SCREEN);
-        } else {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Login");
-            alert.setContentText(canLogin.getValue());
-            alert.showAndWait();
         }
-  */
+        else if (canLogin.getKey() == 2) {
+            controller.setScreen(Screen.MEDIC_SCREEN);
+        }
+        else if (canLogin.getKey() == 3) {
+            logger.debug("Credintiale gresite");
+            //controller.setScreen();
+        }
+
     }
 
     /***
@@ -88,7 +98,8 @@ public class LoginController extends ControlledScreen {
      */
 
     @FXML
-    private void registerLabelClicked() {
+    private void registerLabelClicked(){
+        logger.debug("Buton Go to register screen a fost apasat");
         getScreenController().setScreen(Screen.REGISTER_SCREEN);
     }
 
@@ -98,6 +109,7 @@ public class LoginController extends ControlledScreen {
 
     @FXML
     private void closeWindow(){
+        logger.debug("X has been clicked");
         Stage current = getStage();
         current.close();
     }

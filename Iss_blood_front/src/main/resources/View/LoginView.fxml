@@ -17,12 +17,12 @@
          <children>
             <HBox spacing="10.0">
                <children>
-                  <FontAwesomeIconView fill="WHITE" glyphName="USER" size="20">
+                  <FontAwesomeIconView fill="WHITE" glyphName="USER" size="20" styleClass="icon">
                      <HBox.margin>
                         <Insets top="2.0" />
                      </HBox.margin>
                   </FontAwesomeIconView>
-                  <JFXTextField fx:id="usernameTextField" focusColor="#7f7f7f" prefHeight="25.0" prefWidth="182.0" promptText="Username" styleClass="textbox" unFocusColor="WHITE">
+                  <JFXTextField fx:id="usernameTextField" focusColor="#7f7f7f" prefHeight="25.0" prefWidth="182.0" promptText="Username" styleClass="textboxPrimary" unFocusColor="WHITE">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
@@ -31,12 +31,12 @@
             </HBox>
             <HBox spacing="5.5">
                <children>
-                  <FontAwesomeIconView fill="WHITE" glyphName="KEY" size="20">
+                  <FontAwesomeIconView fill="WHITE" glyphName="KEY" size="20" styleClass="icon">
                      <HBox.margin>
                         <Insets top="2.0" />
                      </HBox.margin>
                   </FontAwesomeIconView>
-                  <JFXPasswordField fx:id="passwordTextField" focusColor="#7f7f7f" prefHeight="25.0" prefWidth="182.0" promptText="Password" styleClass="textbox" unFocusColor="WHITE" />
+                  <JFXPasswordField fx:id="passwordTextField" focusColor="#7f7f7f" prefHeight="25.0" prefWidth="182.0" promptText="Password" styleClass="textboxPrimary" unFocusColor="WHITE" />
                </children>
             </HBox>
             <HBox spacing="2.0">
@@ -49,7 +49,7 @@
                   <Label onMouseClicked="#registerLabelClicked" styleClass="labelRegsiterHere" text="here." />
                </children>
             </HBox>
-            <JFXButton buttonType="RAISED" onAction="#loginClicked" prefHeight="25.0" prefWidth="92.0" styleClass="buttonTransparent" text="LOGIN">
+            <JFXButton buttonType="RAISED" onAction="#loginClicked" prefHeight="25.0" prefWidth="92.0" styleClass="buttonFormular" text="LOGIN">
                <VBox.margin>
                   <Insets left="60.0" />
                </VBox.margin>
@@ -59,7 +59,7 @@
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
          </padding>
       </VBox>
-      <FontAwesomeIconView fill="WHITE" glyphName="LOCK" layoutX="128.0" layoutY="89.0" size="50" styleClass="fontIcon" wrappingWidth="36.44439101219177" />
-      <FontAwesomeIconView fx:id="closeIcon" fill="WHITE" glyphName="CLOSE" layoutX="272.0" layoutY="21.0" onMouseClicked="#closeWindow" size="20" wrappingWidth="14.285722374916077" />
+      <FontAwesomeIconView fill="WHITE" glyphName="LOCK" layoutX="128.0" layoutY="89.0" size="50" styleClass="icon" wrappingWidth="36.44439101219177" />
+      <FontAwesomeIconView fx:id="closeIcon" fill="WHITE" glyphName="CLOSE" layoutX="272.0" layoutY="21.0" onMouseClicked="#closeWindow" size="20" styleClass="icon" wrappingWidth="14.285722374916077" />
    </children>
 </AnchorPane>

@@ -19,3 +19,6 @@ class BackController:
 
     def login(self, user, password):
         return self.service_common.login(user, password)
+
+    def register(self, registerInfo):
+        return self.service_common.register(registerInfo)

@@ -11,11 +11,16 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.Date;
 
 public class IstoricCereriController extends ControlledScreen {
     ObservableList<CerereSange> cereriSange = FXCollections.observableArrayList();
+
+    private Logger logger = LogManager.getLogger(IstoricCereriController.class.getName());
+
 
     @FXML
     private TableView<CerereSange> cerereSangeTableView;
@@ -104,6 +109,8 @@ public class IstoricCereriController extends ControlledScreen {
 
 
     public void populate(){
+
+        logger.debug("Buton anulare cerere a fost apasat");
        CerereSange s = new CerereSange("Andrei","11",GrupaSange.O1,RH.POZITIV,1,3,5,Date.valueOf("2000-11-01") , Importanta.MEDIE);
         CerereSange b = new CerereSange("Andrei","21",GrupaSange.B3,RH.NEGATIV,2,4,1,Date.valueOf("2000-01-01") , Importanta.RIDICATA);
 

@@ -21,7 +21,7 @@
             <TableColumn fx:id="importantaColumn" prefWidth="87.55550808376734" text="Importanta" />
          </columns>
       </TableView>
-      <JFXTextField layoutX="32.0" layoutY="69.0" onKeyPressed="#populate" prefHeight="25.0" prefWidth="276.0" promptText="Search pacient by name" styleClass="textbox" />
-      <Label fx:id="fullnameLabel" layoutX="402.0" layoutY="14.0" prefHeight="55.0" prefWidth="144.0" styleClass="header" text="Stare actuala" />
+      <JFXTextField layoutX="32.0" layoutY="69.0" onKeyPressed="#populate" prefHeight="25.0" prefWidth="276.0" promptText="Search pacient by name" styleClass="textboxFormular" />
+      <Label fx:id="fullnameLabel" layoutX="402.0" layoutY="14.0" prefHeight="55.0" prefWidth="144.0" styleClass="headerFormular" text="Stare actuala" />
    </children>
 </AnchorPane>

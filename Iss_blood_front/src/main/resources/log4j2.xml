@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="trace">
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+             <!-- Flow tracing is most useful with a pattern that shows location.
+                 Below pattern outputs class, line number and method name. -->
+            <PatternLayout pattern="[ %-5level ] | %d{DATE} | | %class{36} | %L | %M | %msg%n"/>
+        </Console>
+        <File name="log" fileName="target/iss_blood.log" append="true">
+                <PatternLayout pattern="[ %-5level ] | %d{DATE} | | %class{36} | %L | %M | %msg%n"/>
+        </File>
+    </Appenders>
+    <Loggers>
+        <Root level="trace">
+            <AppenderRef ref="log"/>
+            <AppenderRef ref="Console"/>
+        </Root>
+    </Loggers>
+</Configuration>

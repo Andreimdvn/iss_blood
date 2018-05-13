@@ -35,10 +35,10 @@
                   <TableColumn fx:id="importanta2Column" prefWidth="83.555419921875" text="Importanta" />
                </columns>
             </TableView>
-            <Label layoutX="308.0" layoutY="260.0" styleClass="header2" text="Cereri completate" />
-            <Label layoutX="305.0" styleClass="header2" text="Cereri in asteptare" />
-            <JFXTextField layoutX="14.0" layoutY="285.0" prefHeight="25.0" prefWidth="276.0" promptText="Search pacient by name" styleClass="textbox" unFocusColor="WHITE" />
-            <JFXTextField layoutY="25.0" prefHeight="25.0" prefWidth="276.0" promptText="Search pacient by name" styleClass="textbox" unFocusColor="WHITE" />
+            <Label layoutX="308.0" layoutY="260.0" styleClass="headerFormular" text="Cereri completate" />
+            <Label layoutX="305.0" styleClass="headerFormular" text="Cereri in asteptare" />
+            <JFXTextField layoutX="14.0" layoutY="285.0" prefHeight="25.0" prefWidth="276.0" promptText="Search pacient by name" styleClass="textboxFormular" unFocusColor="WHITE" />
+            <JFXTextField layoutY="25.0" prefHeight="25.0" prefWidth="276.0" promptText="Search pacient by name" styleClass="textboxFormular" unFocusColor="WHITE" />
             <JFXButton layoutX="692.0" layoutY="10.0" onAction="#populate" prefHeight="29.0" prefWidth="107.0" styleClass="buttonDashboard" text="Anulare cerere" />
          </children>
       </AnchorPane>

@@ -16,6 +16,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 import javafx.util.Duration;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class MedicDashboardController extends ControlledScreen {
 
@@ -48,9 +50,11 @@ public class MedicDashboardController extends ControlledScreen {
     private double prefLeftPaneWidth;
     private double animationSpeed;
 
+    private Logger logger = LogManager.getLogger(MedicDashboardController.class.getName());
+
     @FXML
     private void showLeftMenu(){
-
+        logger.debug("Buton show left menu a fost apasat");
         leftAnchorPane.getChildren().remove(burgerPane);
         Timeline timeline = new Timeline();
         double pref = prefLeftPaneWidth;
@@ -77,27 +81,30 @@ public class MedicDashboardController extends ControlledScreen {
     @FXML
     private void CerereSangeClicked(){
 
-        centralPane.setCenter(getScreenController().getScreen("CERERE_SANGE"));
+        logger.debug("Buton cerere sange a fost apasat");
+        centralPane.setCenter(controller.getScreen("CERERE_SANGE"));
 
         mainPane.setPrefWidth(950);
         //resizeCentralPane();
     }
     @FXML
     private void IstoricCereriClicked(){
-
+        logger.debug("Buton istoric cereri a fost apasat");
         centralPane.setCenter(getScreenController().getScreen("ISTORIC_CERERI"));
         mainPane.setPrefWidth(950);
        // resizeCentralPane();
     }
     @FXML
     private void stareActualaClicked(){
-        centralPane.setCenter(getScreenController().getScreen("STARE_PACIENTI"));
+        logger.debug("Buton stare actuala a fost apasat");
+        centralPane.setCenter(controller.getScreen("STARE_PACIENTI"));
         mainPane.setPrefWidth(950);
       //  resizeCentralPane();
     }
 
     @FXML
     private void homeButtonClicked(){
+        logger.debug("Buton home a fost apasat");
         centralPane.setCenter(mainPane);
         mainPane.setPrefWidth(950);
       //  resizeCentralPane();
@@ -106,6 +113,7 @@ public class MedicDashboardController extends ControlledScreen {
     @FXML
     private void hideLeftMenu(){
 
+        logger.debug("Buton hide left menu a fost apasat");
         leftAnchorPane.getChildren().remove(meniuPane);
         Timeline timeline = new Timeline();
         double pref = prefBurgerPaneWidth;
@@ -162,7 +170,7 @@ public class MedicDashboardController extends ControlledScreen {
 
     @FXML
     private void initialize(){
-        animationSpeed = 150;
+        animationSpeed = 200;
         prefLeftPaneWidth = leftAnchorPane.getPrefWidth();
         prefBurgerPaneWidth = burgerPane.getPrefWidth();
         prefBorderPaneWidth = borderPane.getPrefWidth();

@@ -12,6 +12,8 @@ import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class CerereSangeController extends ControlledScreen {
     @FXML
@@ -73,24 +75,31 @@ public class CerereSangeController extends ControlledScreen {
         return false;
     }
 
+    private Logger logger = LogManager.getLogger(CerereSangeController.class.getName());
+
+
     @FXML
     private void trimiteCerere() {
+        logger.debug("Se trimite cerere");
 
         if (verificareCerere()) {
 
             CerereSange a = getCerereSange();
 
+            String x = "Are importanta : " + getImportanta() + " si are nevoie de :"
+                    + a.getNumarPungiTrombocite() + "," + a.getNumarPungiGlobuleRosii() + ","
+                    + a.getNumarPungiPlasma();
 
+            logger.info("Date introduse corecte in cerere de sange. " + x);
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Cerere trimisa");
             alert.setHeaderText(a.getNumePacient() + " "
                     + a.getCnpPacient() + " cu grupa " + a.getGrupaSange() + "si rh " + a.getRh());
-            String x = "Are importanta : " + getImportanta() + " si are nevoie de :"
-                    + a.getNumarPungiTrombocite() + "," + a.getNumarPungiGlobuleRosii() + ","
-                    + a.getNumarPungiPlasma();
             CustomMessageBox e = new CustomMessageBox("Cerere trimisa",x,0);
             e.show();
         }
+        else
+            logger.info("Date introduse gresit in cerere de sange");
 
     }
 
@@ -138,26 +147,34 @@ public class CerereSangeController extends ControlledScreen {
 
     @FXML
     private void trombociteDown(){
+        logger.debug("Buton - pentru trombocite a fost apasat");
         changeResult(trombocitetTextField,-1);
     }
     @FXML
     private void trombociteUp(){
+        logger.debug("Buton + pentru trombocite a fost apasat");
         changeResult(trombocitetTextField,+1);
     }
     @FXML
     private void globuleRosiDown(){
+
+        logger.debug("Buton - pentru globule rosii a fost apasat");
         changeResult(globuleRosiTextField,-1);
     }
     @FXML
     private void globuleRosiUp(){
+
+        logger.debug("Buton + pentru globule rosii a fost apasat");
         changeResult(globuleRosiTextField,+1);
     }
     @FXML
     private void plasmaDown(){
+        logger.debug("Buton - pentru plasma a fost apasat");
         changeResult(plasmaTextField,-1);
     }
     @FXML
     private void plasmaUp(){
+        logger.debug("Buton + pentru plasma a fost apasat");
         changeResult(plasmaTextField,1);
     }
 
