@@ -1,5 +1,6 @@
 import sys
 
+from sqlalchemy.dialects.mysql import VARCHAR
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, String, ForeignKey, Date, SmallInteger, Enum, Float, create_engine, Boolean
 from sqlalchemy.orm import relationship, sessionmaker
@@ -14,9 +15,9 @@ class User(DB):
     __tablename__ = 'User'
 
     id = Column(Integer, autoincrement=True, primary_key=True)
-    username = Column(String(100), nullable=False, unique=True)
-    email = Column(String(100), nullable=False, unique=True)
-    password = Column(String(100), nullable=False)
+    username = Column(VARCHAR(100, collation='utf8_bin'), nullable=False, unique=True)
+    email = Column(VARCHAR(100, collation='utf8_bin'), nullable=False, unique=True)
+    password = Column(VARCHAR(100, collation='utf8_bin'), nullable=False)
 
     donatori = relationship('Donator', back_populates='user')
     staff_transfuzii = relationship('StaffTransfurzii', back_populates='user')
@@ -125,7 +126,7 @@ class Licente(DB):
 
     id = Column(Integer, autoincrement=True, primary_key=True)
     tip_licenta = Column(Enum('StaffTransfuzie', 'Medic'), nullable=False)
-    cod_licenta = Column(String(20), nullable=False)
+    cod_licenta = Column(VARCHAR(100, collation='utf8_bin'), nullable=False)
     folosita = Column(Boolean, nullable=False)
 
 class Analize(DB):
@@ -175,7 +176,7 @@ class ORM:
 
         engine = create_engine(con_string)
         self.session = sessionmaker(bind=engine)
-        # DB.metadata.drop_all(engine)  ### ---> DON'T TOUCH THIS LINE <--- ### (deletes all tables from db)
+        #DB.metadata.drop_all(engine)  ### ---> DON'T TOUCH THIS LINE <--- ### (deletes all tables from db)
         DB.metadata.create_all(engine)
         self.ses = self.session()
 
