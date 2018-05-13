@@ -7,6 +7,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import sun.rmi.runtime.Log;
 
 public class IstoricDonariController extends ControlledScreen {
 
@@ -14,7 +15,7 @@ public class IstoricDonariController extends ControlledScreen {
     private VBox tabelDonari;
 
     private final int MAX_SIZE = 7;
-
+    Logger logger = LogManager.getLogger(IstoricDonariController.class.getName());
     private boolean isFull(){
         return getSize() == MAX_SIZE;
     }

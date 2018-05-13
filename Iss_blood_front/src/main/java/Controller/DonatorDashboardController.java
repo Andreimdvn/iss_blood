@@ -25,7 +25,7 @@ import java.util.ArrayList;
 public class DonatorDashboardController extends ControlledScreen {
     private ArrayList<Label> formularLabel = new ArrayList<>();
     private ArrayList<Label> istoricLabel = new ArrayList<>();
-
+    private Logger logger = LogManager.getLogger(DonatorDashboardController.class.getName());
     private boolean formularLoaded = false;
     private boolean istoricLoaded = false;
 
@@ -458,6 +458,7 @@ public class DonatorDashboardController extends ControlledScreen {
 
     @FXML
     private AnchorPane centerStatsPane;
+
     private void showStats()
     {
 
