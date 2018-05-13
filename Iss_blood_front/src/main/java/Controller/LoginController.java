@@ -7,17 +7,15 @@ import com.jfoenix.controls.JFXTextField;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
-import javafx.util.Pair;
 
 import java.util.Objects;
 
 
-public class LoginController implements ControlledScreensInterface {
+public class LoginController extends ControlledScreen {
 
     @FXML
     private AnchorPane mainPane;
@@ -31,13 +29,10 @@ public class LoginController implements ControlledScreensInterface {
     @FXML
     private JFXPasswordField passwordTextField;
 
-    private MainService mainService;
 
     private double xOffset;
 
     private double yOffset;
-
-    private ControllerScreens controller;
 
     private void enableStyle(){
         String focusColor = "#fea02f";
@@ -73,9 +68,9 @@ public class LoginController implements ControlledScreensInterface {
         String password = passwordTextField.getText();
 
         if(Objects.equals(username, "donator"))
-        controller.setScreen(Screen.DONATOR_SCREEN);
+        getScreenController().setScreen(Screen.DONATOR_SCREEN);
         else if(Objects.equals(username, "medic"))
-            controller.setScreen(Screen.MEDIC_SCREEN);
+            getScreenController().setScreen(Screen.MEDIC_SCREEN);
 /*        Pair<Boolean, String> canLogin = mainService.login(username, password);
         if (canLogin.getKey()) {
             controller.setScreen(Screen.DONATOR_SCREEN);
@@ -94,7 +89,7 @@ public class LoginController implements ControlledScreensInterface {
 
     @FXML
     private void registerLabelClicked() {
-        controller.setScreen(Screen.REGISTER_SCREEN);
+        getScreenController().setScreen(Screen.REGISTER_SCREEN);
     }
 
     private Stage getStage() {
@@ -105,14 +100,5 @@ public class LoginController implements ControlledScreensInterface {
     private void closeWindow(){
         Stage current = getStage();
         current.close();
-    }
-
-    public void setMainService(MainService mainService){
-        this.mainService = mainService;
-    }
-
-    @Override
-    public void setScreenParent(ControllerScreens screenParent) {
-        this.controller = screenParent;
     }
 }

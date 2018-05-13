@@ -11,11 +11,11 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="866.0" styleClass="loginPane" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.DonatorDashboardController">
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="900.0" styleClass="loginPane" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.DonatorDashboardController">
    <center>
       <AnchorPane fx:id="centerPane" prefHeight="337.0" prefWidth="800.0" BorderPane.alignment="CENTER">
          <children>
-            <AnchorPane fx:id="centerStatsPane" layoutX="89.0" layoutY="58.0">
+            <AnchorPane fx:id="centerStatsPane" layoutX="106.0" layoutY="65.0">
                <children>
                   <AnchorPane fx:id="statsPane1" layoutX="13.0" layoutY="2.0" prefHeight="254.0" prefWidth="662.0">
                      <children>
@@ -57,8 +57,8 @@
       <AnchorPane fx:id="navBar" prefHeight="36.0" prefWidth="844.0" styleClass="topbar">
          <children>
             <HBox fx:id="navSegmentHbox" layoutX="210.0" layoutY="3.0" prefHeight="20.0" prefWidth="219.0" styleClass="hboxTopBar" />
-            <FontAwesomeIconView fx:id="closeIcon" fill="WHITE" glyphName="CLOSE" layoutX="841.0" layoutY="21.0" onMouseClicked="#closeWindow" size="24" wrappingWidth="14.285722374916077" />
-            <FontAwesomeIconView fill="WHITE" glyphName="BELL_ALT" layoutX="814.0" layoutY="21.0" size="24" wrappingWidth="26.666748046875" />
+            <FontAwesomeIconView fx:id="closeIcon" fill="WHITE" glyphName="CLOSE" layoutX="875.0" layoutY="21.0" onMouseClicked="#closeWindow" size="24" wrappingWidth="14.285722374916077" />
+            <FontAwesomeIconView fill="WHITE" glyphName="BELL_ALT" layoutX="848.0" layoutY="21.0" size="24" wrappingWidth="26.666748046875" />
             <HBox fx:id="navSegmentHbox1" layoutX="13.0" styleClass="hboxTopBar">
                <children>
                   <FontAwesomeIconView glyphName="USER" size="24" wrappingWidth="24.00006103515625" />
@@ -76,7 +76,7 @@
    <bottom>
       <AnchorPane fx:id="bottomPane" prefHeight="158.0" prefWidth="800.0" styleClass="submeniuDashboard" BorderPane.alignment="CENTER">
          <children>
-            <HBox fx:id="dashboardHBox" layoutX="230.0" layoutY="7.0" prefHeight="143.0" prefWidth="406.0" styleClass="hboxDashBoard">
+            <HBox fx:id="dashboardHBox" layoutX="247.0" layoutY="8.0" prefHeight="143.0" prefWidth="406.0" styleClass="hboxDashBoard">
                <children>
                   <VBox fx:id="formularVBox" onMouseEntered="#mouseEnteredFormularContainer" onMouseExited="#mouseLeftFormularContainer" styleClass="vboxButtonDashBoard">
                      <children>

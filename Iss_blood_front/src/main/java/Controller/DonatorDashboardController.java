@@ -1,15 +1,11 @@
 package Controller;
 
-import Service.MainService;
 import Utils.Screen;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.animation.*;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.input.MouseEvent;
@@ -19,27 +15,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import java.io.IOException;
+
 import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
 
 
-public class DonatorDashboardController implements ControlledScreensInterface {
-
-    private MainService mainService;
-
-    private ControllerScreens controller;
-
-    @Override
-    public void setScreenParent(ControllerScreens screenParent) {
-        this.controller = screenParent;
-    }
-
-    public void setMainService(MainService mainService) {
-        this.mainService = mainService;
-    }
-
+public class DonatorDashboardController extends ControlledScreen {
     private ArrayList<Label> formularLabel = new ArrayList<>();
     private ArrayList<Label> istoricLabel = new ArrayList<>();
 
@@ -107,6 +87,7 @@ public class DonatorDashboardController implements ControlledScreensInterface {
                 label -> istoricVBox.getChildren().add(label)
         );
     }
+
     @FXML
     private void mouseLeftIstoricContainer(){
         istoricLabel.forEach(
@@ -279,10 +260,14 @@ public class DonatorDashboardController implements ControlledScreensInterface {
 
     private void loadFormular() {
         borderPane.setBottom(getFormular());
+
+        Formular1Controller controller = (Formular1Controller) getScreenController().getControlledScreen(Screen.FORMULAR_1_SCREEN);
+        controller.loadTextScreens();
+        controller.displayCurrentScreen();
     }
 
     private AnchorPane getFormular(){
-        return (AnchorPane) controller.getScreen(Screen.FORMULAR_DONARE_SCREEN);
+        return (AnchorPane) getScreenController().getScreen(Screen.FORMULAR_1_SCREEN);
     }
 
     private void unloadFormular(){
@@ -307,7 +292,7 @@ public class DonatorDashboardController implements ControlledScreensInterface {
     }
 
     private AnchorPane getIstoric(){
-        return (AnchorPane) controller.getScreen(Screen.ISTORIC_DONARI_SCREEN);
+        return (AnchorPane) getScreenController().getScreen(Screen.ISTORIC_DONARI_SCREEN);
     }
 
     private void moveBottomDown()
@@ -502,7 +487,7 @@ public class DonatorDashboardController implements ControlledScreensInterface {
     }
 
     private void loadLogin() {
-        controller.setScreen(Screen.LOGIN_SCREEN);
+        getScreenController().setScreen(Screen.LOGIN_SCREEN);
     }
 
 }

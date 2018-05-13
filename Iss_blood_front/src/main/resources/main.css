@@ -1,5 +1,3 @@
-
-
 * {
     -fx-primary-color: linear-gradient(#434343 , #000000 );
     -fx-secondary-color : white;
@@ -21,10 +19,31 @@
     -fx-text-formular-color: white;
 }
 
+.formular-pre-textbox *.text{
+    -fx-text-alignment:left;
+}
+.formular-pre-textbox :focused{
+    outline: none;
+
+}
+.formular-pre-textbox{
+    -fx-font-size: 24px;
+    -fx-text-fill: -fx-primary-text-color;
+    -fx-text-alignment:center;
+    -fx-padding: 0px 0px 0px 40px;
+    -jfx-focus-color: transparent;
+    -jfx-unfocus-color: transparent;
+}
+.formular-pre-textbox-header{
+    -fx-font-size: 25px;
+    -fx-text-fill: -fx-secondary-button-color;
+    -fx-font-style:italic;
+    -fx-font-weight: bold;
+    -fx-text-alignment:center;
+}
 .buttonMessageBox{
     -fx-text-fill: -fx-header-text-formular-color;
     -fx-background-color: -fx-button-formular-color;
-
 }
 
 .backgroundMessageBox{
@@ -371,4 +390,18 @@
     -fx-text-fill: -fx-primary-text-color;
     -fx-pref-height: 40px;
     -fx-opacity: 100%;
+}
+.label-big{
+    -fx-font-size: 30;
+    -fx-fill:  -fx-tertiary-text-color;
+}
+.design-line-formular-thin{
+    -fx-background-color: -fx-button-formular-color;
+    -fx-text-fill: -fx-tertiary-text-color;
+    -fx-pref-height: 10px;
+    -fx-fill: -fx-tertiary-text-color;
+    -fx-text-alignment: center;
+    -fx-alignment: center;
+    -fx-font-size: 15;
+    -fx-font-style: italic;
 }

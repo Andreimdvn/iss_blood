@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="560.0" prefWidth="844.0" styleClass="formularPane" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Formular1Controller">
+   <children>
+      <Label layoutX="161.0" layoutY="14.0" prefHeight="45.0" prefWidth="589.0" styleClass="label-big" text="Condiții de admisibilitate pentru donator" />
+      <AnchorPane layoutY="62.0" prefHeight="9.0" prefWidth="851.0" styleClass="design-line-formular-thin" />
+      <AnchorPane fx:id="pane_conditii" layoutX="7.0" layoutY="69.0" prefHeight="450.0" prefWidth="844.0" />
+      <JFXButton fx:id="button_inapoi" layoutX="50.0" layoutY="519.0" onAction="#previousScreen" prefHeight="29.0" prefWidth="95.0" styleClass="buttonDashboard" stylesheets="@../main.css" text="Înapoi" />
+      <JFXButton fx:id="button_next" layoutX="703.0" layoutY="519.0" onAction="#nextScreen" prefHeight="29.0" prefWidth="95.0" styleClass="buttonDashboard" stylesheets="@../main.css" text="Am înțeles" />
+   </children>
+</AnchorPane>

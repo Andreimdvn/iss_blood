@@ -14,11 +14,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.sql.Date;
 
-public class IstoricCereriController implements  ControlledScreensInterface{
-    private MainService mainService;
-    private ControllerScreens controller;
-
-
+public class IstoricCereriController extends ControlledScreen {
     ObservableList<CerereSange> cereriSange = FXCollections.observableArrayList();
 
     @FXML
@@ -114,14 +110,5 @@ public class IstoricCereriController implements  ControlledScreensInterface{
        cereriSange.addAll(s,b);
        cerereSangeTableView.setItems(cereriSange);
        cerereSangeCompletateTableView.setItems(cereriSange);
-    }
-
-    public void setMainService(MainService mainService){
-        this.mainService = mainService;
-    }
-
-    @Override
-    public void setScreenParent(ControllerScreens screenParent) {
-        this.controller = screenParent;
     }
 }

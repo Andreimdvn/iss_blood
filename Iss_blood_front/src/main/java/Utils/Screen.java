@@ -29,4 +29,21 @@ public class Screen {
     public static String STARE_PACIENTI_SCREEN = "STARE_PACIENTI";
     public static String STARE_PACIENTI_RESOURCE = "/View/StarePacientiView.fxml";
 
+    public static String FORMULAR_1_SCREEN = "FORMULAR_1";
+    public static String FORMULAR_1_RESOURCE = "/View/Formular1.fxml";
+
+    public static String FORMULAR_1_TEXT1_SCREEN = "FORMULAR_1_TEXT1";
+    public static String FORMULAR_1_TEXT1_RESOURCE = "/View/Formular1_text1.fxml";
+
+    public static String FORMULAR_1_TEXT2_SCREEN = "FORMULAR_1_TEXT2";
+    public static String FORMULAR_1_TEXT2_RESOURCE = "/View/Formular1_text2.fxml";
+
+    public static String FORMULAR_1_TEXT3_SCREEN = "FORMULAR_1_TEXT3";
+    public static String FORMULAR_1_TEXT3_RESOURCE = "/View/Formular1_text3.fxml";
+
+    public static String FORMULAR_1_TEXT4_SCREEN = "FORMULAR_1_TEXT4";
+    public static String FORMULAR_1_TEXT4_RESOURCE = "/View/Formular1_text4.fxml";
+
+    public static String FORMULAR_3_SCREEN = "FORMULAR_3";
+    public static String FORMULAR_3_RESOURCE = "/View/Formular3.fxml";
 }

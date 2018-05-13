@@ -4,14 +4,11 @@ import Model.GrupaSange;
 import Model.RH;
 import Service.MainService;
 import com.jfoenix.controls.JFXCheckBox;
-import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 
-public class FormularDonareController implements ControlledScreensInterface {
-
-    private MainService mainService;
+public class FormularDonareController extends ControlledScreen {
 
     @FXML
     private JFXTextField fullnameTextField;
@@ -72,14 +69,4 @@ public class FormularDonareController implements ControlledScreensInterface {
         rhComboBox.getItems().addAll(RH.POZITIV,RH.NEGATIV);
     }
 
-    private ControllerScreens controller;
-
-    @Override
-    public void setScreenParent(ControllerScreens screenParent) {
-        this.controller = screenParent;
-    }
-
-    public void setMainService(MainService service) {
-        this.mainService = service;
-    }
 }

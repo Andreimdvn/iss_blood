@@ -1,7 +1,7 @@
 package Main;
 
 import Communication.FlaskClient;
-import Controller.ControllerScreens;
+import Controller.ScreenController;
 
 import Service.MainService;
 import Utils.Screen;
@@ -18,7 +18,7 @@ public class MainApplication extends Application {
 
     private void loadScreens(){
         MainService service = new MainService(new FlaskClient());
-        ControllerScreens controller = new ControllerScreens(service);
+        ScreenController controller = new ScreenController(service);
         controller.loadScreen(Screen.LOGIN_SCREEN, Screen.LOGIN_RESOURCE);
         controller.loadScreen(Screen.REGISTER_SCREEN, Screen.REGISTER_RESOURCE);
         controller.loadScreen(Screen.DONATOR_SCREEN,Screen.DONATOR_RESOURCE);
@@ -28,6 +28,14 @@ public class MainApplication extends Application {
         controller.loadScreen(Screen.ISTORIC_CERERI_SCREEN,Screen.ISTORIC_CERERI_RESOURCE);
         controller.loadScreen(Screen.STARE_PACIENTI_SCREEN,Screen.STARE_PACIENTI_RESOURCE);
         controller.loadScreen(Screen.CERERE_SANGE_SCREEN,Screen.CERERE_SANGE_RESOURCE);
+
+
+        controller.loadScreen(Screen.FORMULAR_1_TEXT1_SCREEN,Screen.FORMULAR_1_TEXT1_RESOURCE);
+        controller.loadScreen(Screen.FORMULAR_1_TEXT2_SCREEN,Screen.FORMULAR_1_TEXT2_RESOURCE);
+        controller.loadScreen(Screen.FORMULAR_1_TEXT3_SCREEN,Screen.FORMULAR_1_TEXT3_RESOURCE);
+        controller.loadScreen(Screen.FORMULAR_1_TEXT4_SCREEN,Screen.FORMULAR_1_TEXT4_RESOURCE);
+        controller.loadScreen(Screen.FORMULAR_1_SCREEN,Screen.FORMULAR_1_RESOURCE);
+        controller.loadScreen(Screen.FORMULAR_3_SCREEN,Screen.FORMULAR_3_RESOURCE);
 
         controller.setScreen(Screen.LOGIN_SCREEN);
         Group root = new Group();

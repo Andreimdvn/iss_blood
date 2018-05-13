@@ -17,7 +17,7 @@ import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 
 
-public class RegisterController implements ControlledScreensInterface{
+public class RegisterController extends ControlledScreen {
 
     @FXML
     private AnchorPane mainPane;
@@ -66,9 +66,6 @@ public class RegisterController implements ControlledScreensInterface{
 
     private double yOffset;
 
-    private MainService mainService;
-
-    private ControllerScreens controller;
 
     private void removeLicentaHBox(){
         registerPane.getChildren().remove(licentaHbox);
@@ -138,7 +135,7 @@ public class RegisterController implements ControlledScreensInterface{
 
     @FXML
     private void loginLabelClicked(){
-       controller.setScreen(Screen.LOGIN_SCREEN);
+       getScreenController().setScreen(Screen.LOGIN_SCREEN);
     }
 
     private void enableStyle(){
@@ -171,14 +168,5 @@ public class RegisterController implements ControlledScreensInterface{
     @FXML
     private void initialize(){
         enableStyle();
-    }
-
-    public void setMainService(MainService mainService){
-        this.mainService = mainService;
-    }
-
-    @Override
-    public void setScreenParent(ControllerScreens screenParent) {
-        this.controller = screenParent;
     }
 }

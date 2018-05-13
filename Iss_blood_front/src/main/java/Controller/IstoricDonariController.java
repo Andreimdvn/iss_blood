@@ -6,20 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-public class IstoricDonariController implements ControlledScreensInterface{
-    private MainService mainService;
-
-
-    private ControllerScreens controller;
-
-    @Override
-    public void setScreenParent(ControllerScreens screenParent) {
-        this.controller = screenParent;
-    }
-
-    public void setMainService(MainService mainService) {
-        this.mainService = mainService;
-    }
+public class IstoricDonariController extends ControlledScreen {
 
     @FXML
     private VBox tabelDonari;
