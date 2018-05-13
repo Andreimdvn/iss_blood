@@ -172,12 +172,12 @@ public class RegisterController extends ControlledScreen {
         Pair<Boolean, String> validationResult = validator.Validate(info);
         if(validationResult.getKey())
         {
-            Pair<Boolean, String> response = mainService.register(info);
+            Pair<Boolean, String> response = getService().register(info);
             if(response.getKey())
             {
                 CustomMessageBox customMessageBox = new CustomMessageBox("info", "Registered successfully", 0);
                 customMessageBox.show();
-                controller.setScreen(Screen.LOGIN_SCREEN);
+                getScreenController().setScreen(Screen.LOGIN_SCREEN);
             }
             else
             {

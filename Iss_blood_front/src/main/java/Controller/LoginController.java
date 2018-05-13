@@ -12,6 +12,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
+import javafx.util.Pair;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -76,15 +77,15 @@ public class LoginController extends ControlledScreen {
 
 
 
-        Pair<Integer, String> canLogin = mainService.login(username, password);
+        Pair<Integer, String> canLogin = getService().login(username, password);
         if (canLogin.getKey() == 0) {
             new CustomMessageBox("Login",canLogin.getValue()).show();
         } else if (canLogin.getKey() == 1){
 
-            controller.setScreen(Screen.DONATOR_SCREEN);
+            getScreenController().setScreen(Screen.DONATOR_SCREEN);
         }
         else if (canLogin.getKey() == 2) {
-            controller.setScreen(Screen.MEDIC_SCREEN);
+            getScreenController().setScreen(Screen.MEDIC_SCREEN);
         }
         else if (canLogin.getKey() == 3) {
             logger.debug("Credintiale gresite");

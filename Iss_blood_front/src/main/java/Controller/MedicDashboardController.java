@@ -82,7 +82,7 @@ public class MedicDashboardController extends ControlledScreen {
     private void CerereSangeClicked(){
 
         logger.debug("Buton cerere sange a fost apasat");
-        centralPane.setCenter(controller.getScreen("CERERE_SANGE"));
+        centralPane.setCenter(getScreenController().getScreen("CERERE_SANGE"));
 
         mainPane.setPrefWidth(950);
         //resizeCentralPane();
@@ -97,7 +97,7 @@ public class MedicDashboardController extends ControlledScreen {
     @FXML
     private void stareActualaClicked(){
         logger.debug("Buton stare actuala a fost apasat");
-        centralPane.setCenter(controller.getScreen("STARE_PACIENTI"));
+        centralPane.setCenter(getScreenController().getScreen("STARE_PACIENTI"));
         mainPane.setPrefWidth(950);
       //  resizeCentralPane();
     }
