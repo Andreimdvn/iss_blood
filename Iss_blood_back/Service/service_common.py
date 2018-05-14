@@ -1,9 +1,9 @@
 import datetime
 
-from Model.AccountType import AccountType
+from Model.account_type import AccountType
 from Service.i_service import IService
 from Utils.orm import User
-from Validators.validator_register import validator_register
+from Validators.register_validator import register_validator
 
 
 class ServiceCommon(IService):
@@ -41,7 +41,7 @@ class ServiceCommon(IService):
         :return: Tuple<int, string> = (status code, status message); status code = 0 on success or >= 1 otherwise
         '''
 
-        validator = validator_register()
+        validator = register_validator()
         valid, msg = validator.validate(register_info)
         if not valid:
             return 1, msg
