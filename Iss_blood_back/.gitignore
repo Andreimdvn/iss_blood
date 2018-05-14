@@ -1,5 +1,3 @@
-config.json
-
 *.pyc
 *.exe
 ./Logs/*.log
