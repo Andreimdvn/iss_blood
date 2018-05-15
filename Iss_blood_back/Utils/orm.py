@@ -178,7 +178,7 @@ class ORM:
         self.session = sessionmaker(bind=engine)
         #DB.metadata.drop_all(engine)  ### ---> DON'T TOUCH THIS LINE <--- ### (deletes all tables from db)
         DB.metadata.create_all(engine)
-        self.ses = self.session()
+        self.ses = None
 
     def columns_objects(self, table, columns):
         cols = []
@@ -216,6 +216,7 @@ class ORM:
             if type(values) not in (list, tuple):
                 raise ValueError('[!] Type [%s] is not allowed for values!' % type(values))
         tb = self.table_object(table)
+        self.ses = self.session()
         if columns:
             cols = self.columns_objects(tb, columns)
             if len(cols) != len(values):
@@ -233,13 +234,14 @@ class ORM:
             self.ses.commit()
             self.ses.flush()
 
-    def select(self, table, columns=None, values=None, first=False):
+    def select(self, table, columns=None, values=None, first=False, exist_session=None):
         """
         Execute a query on all rows in a table and returns the results with all the columns.
         :param table: table name to be queried.
         :param columns: list with required columns for the WHERE clause.
         :param values: list with values corresponding to the given columns
         :param first: only the first item is returned.
+        :param exist_session: if select is used from another query which already has a session.
         :return: if first==False, a list with: objects of table type if no columns were specified, tuples<Column> otherwise.
                  if first==True, a single object is returned instead of a list
         """
@@ -250,11 +252,12 @@ class ORM:
         if values:
             if type(values) not in (list, tuple):
                 raise ValueError('[!] Type [%s] for values are not allowed! Use list or tuple.' % type(values))
-                raise ValueError('[!] Type [%s] is not allowed for columns!' % type(columns))
         if values:
             if type(values) not in (list, tuple):
                 raise ValueError('[!] Type [%s is not allowed for values!' % type(values))
         tb = self.table_object(table)
+        if not exist_session:
+            self.ses = self.session()
         if not columns:
             res = self.ses.query(tb)
         elif not values:
@@ -312,17 +315,17 @@ class ORM:
         if len(values) != len(columns):
             raise ValueError('[!] There are not enough values/columns!')
 
-        items = self.select(table, columns=columns_where, values=values_where)
         tb = self.table_object(table)
+        self.ses = self.session()
+        items = self.select(table, columns=columns_where, values=values_where, exist_session=True)
 
         cols = [getattr(tb, c) for c in columns]
         if len(cols) != len(values):
             raise ValueError('[!] There are not enough values/columns!')
-        col_val = {e[0].key: e[1] for e in zip(cols, values)}
         for item in items:
-
             for i, col in enumerate(columns):
                 setattr(item, col, values[i])
+        print('[#] %s' % items[0].folosita)
         self.ses.commit()
         self.ses.flush()
 
@@ -334,6 +337,7 @@ class ORM:
         :param values:
         :return:
         """
+        self.ses = self.session()
         if columns:
             if type(columns) not in (list, tuple):
                 raise ValueError('[!] Type [%s] is not allowed for columns!' % type(columns))
@@ -350,7 +354,7 @@ class ORM:
             raise ValueError('[!] Specify values for where clause!')
         if len(values) != len(columns):
             raise ValueError('[!] There are not enough values/columns!')
-        item = self.select(table, columns, values, first=True)
+        item = self.select(table, columns, values, first=True, exist_session=True)
         if not item:
             raise ValueError('[!] Item with specified values doesn\'t exists!')
         self.ses.delete(item)
