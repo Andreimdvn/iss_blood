@@ -223,29 +223,26 @@ class ORM:
                 raise ValueError('[!] Columns and values are not equal!')
             col_val = {e[0]: e[1] for e in zip(columns, values)}
             self.ses.add(tb(**col_val))
-            self.ses.commit()
-            self.ses.flush()
         else:
             cols = [c.key for c in tb.__table__.columns if c.key != 'id']
             if len(cols) != len(values):
                 raise ValueError('[!] Columns and values number are not equal!')
             col_val = {e[0]: e[1] for e in zip(cols, values)}
             self.ses.add(tb(**col_val))
-            self.ses.commit()
-            self.ses.flush()
+        self.ses.commit()
+        self.ses.flush()
+        self.ses = None
 
-    def select(self, table, columns=None, values=None, first=False, exist_session=None):
+    def select(self, table, columns=None, values=None, first=False):
         """
         Execute a query on all rows in a table and returns the results with all the columns.
         :param table: table name to be queried.
         :param columns: list with required columns for the WHERE clause.
         :param values: list with values corresponding to the given columns
         :param first: only the first item is returned.
-        :param exist_session: if select is used from another query which already has a session.
         :return: if first==False, a list with: objects of table type if no columns were specified, tuples<Column> otherwise.
                  if first==True, a single object is returned instead of a list
         """
-        res = None
         if columns:
             if type(columns) not in (list, tuple):
                 raise ValueError('[!] Type [%s] is not allowed for columns!' % type(columns))
@@ -256,8 +253,10 @@ class ORM:
             if type(values) not in (list, tuple):
                 raise ValueError('[!] Type [%s is not allowed for values!' % type(values))
         tb = self.table_object(table)
-        if not exist_session:
+        existing_session = True
+        if not self.ses:
             self.ses = self.session()
+            existing_session = False
         if not columns:
             res = self.ses.query(tb)
         elif not values:
@@ -269,9 +268,11 @@ class ORM:
                 raise ValueError('[!] There are not enough values/columns!')
             col_val = {e[0].key: e[1] for e in zip(cols, values)}
             res = self.ses.query(tb).filter_by(**col_val)
-        if first:
-            return res.first()
-        return res.all()
+        result = res.first() if first else res.all()
+        if not existing_session:
+            self.ses.close()
+            self.ses = None
+        return result
 
     def update(self, table, columns_where=None, values_where=None, columns=None, values=None):
         """
@@ -317,7 +318,7 @@ class ORM:
 
         tb = self.table_object(table)
         self.ses = self.session()
-        items = self.select(table, columns=columns_where, values=values_where, exist_session=True)
+        items = self.select(table, columns=columns_where, values=values_where)
 
         cols = [getattr(tb, c) for c in columns]
         if len(cols) != len(values):
@@ -325,9 +326,10 @@ class ORM:
         for item in items:
             for i, col in enumerate(columns):
                 setattr(item, col, values[i])
-        print('[#] %s' % items[0].folosita)
         self.ses.commit()
         self.ses.flush()
+        self.ses.close()
+        self.ses = None
 
     def delete(self, table, columns=None, values=None):
         """
@@ -354,9 +356,11 @@ class ORM:
             raise ValueError('[!] Specify values for where clause!')
         if len(values) != len(columns):
             raise ValueError('[!] There are not enough values/columns!')
-        item = self.select(table, columns, values, first=True, exist_session=True)
+        item = self.select(table, columns, values, first=True)
         if not item:
             raise ValueError('[!] Item with specified values doesn\'t exists!')
         self.ses.delete(item)
         self.ses.commit()
         self.ses.flush()
+        self.ses.close()
+        self.ses = None
