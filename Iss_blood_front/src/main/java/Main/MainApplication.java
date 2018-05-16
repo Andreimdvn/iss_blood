@@ -41,6 +41,7 @@ public class MainApplication extends Application {
         controller.loadScreen(Screen.CENTRU_TRANSFUZIE_SCREEN,Screen.CENTRU_TRANSFUZIE_RESOURCE);
         controller.loadScreen(Screen.CENTRU_CERERI_DONARI_SCREEN,Screen.CENTRU_CERERI_DONARI_RESOURCE);
         controller.loadScreen(Screen.CENTRU_CERERI_SANGE_SCREEN,Screen.CENTRU_CERERI_SANGE_RESOURCE);
+        controller.loadScreen(Screen.CENTRU_STOC_PUNGI_SCREEN,Screen.CENTRU_STOC_PUNGI_RESOURCE);
 
         controller.setScreen(Screen.CENTRU_TRANSFUZIE_SCREEN);
         Group root = new Group();

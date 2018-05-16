@@ -14,22 +14,22 @@
    <children>
       <AnchorPane layoutX="318.0" layoutY="35.0" prefHeight="401.0" prefWidth="681.0" styleClass="box">
          <children>
-            <TableView prefHeight="338.0" prefWidth="680.0">
+            <TableView fx:id="donareTableView" onMouseClicked="#selectedRow" prefHeight="401.0" prefWidth="680.0">
               <columns>
-                <TableColumn prefWidth="126.2222900390625" text="Nume" />
-                <TableColumn prefWidth="146.66661071777344" text="Prenume" />
-                  <TableColumn prefWidth="118.22216796875" text="Grupa" />
-                  <TableColumn prefWidth="83.5555419921875" text="RH" />
-                  <TableColumn prefWidth="207.55548095703125" text="Stare curenta" />
+                <TableColumn fx:id="numeColumn" prefWidth="126.2222900390625" text="Nume" />
+                <TableColumn fx:id="prenumeColumn" prefWidth="146.66661071777344" text="Prenume" />
+                  <TableColumn fx:id="grupaSangeColumn" prefWidth="118.22216796875" text="Grupa" />
+                  <TableColumn fx:id="rhColumn" prefWidth="83.5555419921875" text="RH" />
+                  <TableColumn fx:id="statusColumn" prefWidth="207.55548095703125" text="Ultimul status completat" />
               </columns>
             </TableView>
          </children>
       </AnchorPane>
       <AnchorPane layoutX="21.0" layoutY="495.0" prefHeight="132.0" prefWidth="979.0" styleClass="box">
          <children>
-            <JFXButton layoutX="346.0" layoutY="11.0" prefHeight="110.0" prefWidth="133.0" styleClass="buttonFormular" text="Prelevare" />
-            <JFXButton disable="true" layoutX="545.0" layoutY="11.0" prefHeight="110.0" prefWidth="133.0" styleClass="buttonFormular" text="Pregatirea" />
-            <JFXButton disable="true" layoutX="733.0" layoutY="11.0" prefHeight="110.0" prefWidth="133.0" styleClass="buttonFormular" text="Calificare " />
+            <JFXButton fx:id="prelevareButton" layoutX="364.0" layoutY="11.0" prefHeight="110.0" prefWidth="133.0" styleClass="buttonFormular" text="Prelevare" />
+            <JFXButton fx:id="pregatireButton" disable="true" layoutX="563.0" layoutY="11.0" prefHeight="110.0" prefWidth="133.0" styleClass="buttonFormular" text="Pregatirea" />
+            <JFXButton fx:id="calificareButton" disable="true" layoutX="751.0" layoutY="11.0" prefHeight="110.0" prefWidth="133.0" styleClass="buttonFormular" text="Calificare " />
             <Label layoutX="37.0" layoutY="48.0" styleClass="headerPrimary" text="Status donator selectat" />
          </children>
       </AnchorPane>
@@ -43,7 +43,7 @@
             <JFXTextField layoutX="13.0" layoutY="97.0" promptText="Nume donator" styleClass="textboxPrimary" />
             <JFXTextField layoutX="14.0" layoutY="188.0" promptText="Prenume donator" styleClass="textboxPrimary" />
             <ComboBox layoutX="14.0" layoutY="281.0" prefWidth="150.0" promptText="Last status" />
-            <JFXButton layoutX="1.0" layoutY="374.0" prefHeight="25.0" prefWidth="205.0" styleClass="buttonFormular" text="Cauta" />
+            <JFXButton layoutX="1.0" layoutY="374.0" onAction="#populateDummy" prefHeight="25.0" prefWidth="205.0" styleClass="buttonFormular" text="Cauta" />
          </children>
       </AnchorPane>
       <AnchorPane layoutX="21.0" layoutY="387.0" prefHeight="12.0" prefWidth="893.0" />

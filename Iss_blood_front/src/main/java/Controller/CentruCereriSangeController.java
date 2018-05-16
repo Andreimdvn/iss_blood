@@ -5,9 +5,11 @@ import Model.GrupaSange;
 import Model.Importanta;
 import Model.RH;
 import Service.MainService;
+import com.jfoenix.controls.JFXTextField;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -66,7 +68,45 @@ public class CentruCereriSangeController implements ControlledScreensInterface{
         importantaColumn.setCellValueFactory(new PropertyValueFactory<>("importanta"));
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
         grupaSangeColumn.setCellValueFactory(new PropertyValueFactory<>("grupaSange"));
+        cerereSangeTableView.setItems(cereriSange);
+    }
 
+    @FXML
+    private Label spitalLabel;
+
+    @FXML
+    private Label doctorLabel;
+
+    @FXML
+    private Label plasmaLabel;
+
+    @FXML
+    private Label trombociteLabel;
+
+    @FXML
+    private Label globuleLabel;
+
+
+    @FXML
+    private void selectedRow(){
+        CerereSange cr =  cerereSangeTableView.getSelectionModel().getSelectedItem();
+
+        if(cr != null) {
+            spitalLabel.setText(cr.getSpital());
+            doctorLabel.setText(cr.getNumeMedic());
+            plasmaLabel.setText(cr.getNumarPungiPlasma().toString());
+            trombociteLabel.setText(cr.getNumarPungiTrombocite().toString());
+            globuleLabel.setText(cr.getNumarPungiGlobuleRosii().toString());
+
+        }
+    }
+
+    @FXML
+    private void populateDummy() {
+        CerereSange cr = new CerereSange("NumePacient", "dsds", GrupaSange.A2, RH.NEGATIV,
+                1,2,3, Date.valueOf("2017-06-13"),
+                Importanta.MEDIE, "Moldovan Andrei", "Tudor's Hospital");
+        this.cereriSange.add(cr);
     }
 
     public void setMainService(MainService mainService){

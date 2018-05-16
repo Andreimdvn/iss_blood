@@ -43,6 +43,11 @@ public class CentruTransfuzieController implements ControlledScreensInterface {
     }
 
     @FXML
+    private void stocCurentClicked(){
+        borderPane.setCenter(controller.getScreen("CENTRU_STOC_PUNGI"));
+    }
+
+    @FXML
     private void cereriSangeClicked(){
         borderPane.setCenter(controller.getScreen("CENTRU_CERERI_SANGE"));
     }

@@ -26,8 +26,8 @@ public class StarePacientiController implements ControlledScreensInterface {
 
     public void populate(){
 
-        StarePacient s = new StarePacient("Alin",GrupaSange.O1,RH.POZITIV,1,3,5,3,4, Importanta.MEDIE);
-        StarePacient b = new StarePacient("Tudor",GrupaSange.B3,RH.NEGATIV,2,4,1,5,1 , Importanta.RIDICATA);
+        StarePacient s = new StarePacient("Alin","1234567890123",GrupaSange.O1,RH.POZITIV,1,3);
+        StarePacient b = new StarePacient("Tudor","1234567890123",GrupaSange.B3,RH.NEGATIV,2,4);
 
         observableList.addAll(s,b);
         starePacientTableView.setItems(observableList);
@@ -39,8 +39,8 @@ public class StarePacientiController implements ControlledScreensInterface {
     @FXML
     private TableColumn<StarePacient,String> numePacientColumn;
 
-    // @FXML
-    //  private TableColumn<CerereSange,String> cnpPacientColumn;
+    @FXML
+    private TableColumn<CerereSange,String> cnpPacientColumn;
 
     @FXML
     private TableColumn<StarePacient, GrupaSange> grupaSangeColumn;
@@ -48,14 +48,6 @@ public class StarePacientiController implements ControlledScreensInterface {
     @FXML
     private TableColumn<StarePacient, RH> rhColumn;
 
-    @FXML
-    private TableColumn<StarePacient, Integer> trombociteColumn;
-
-    @FXML
-    private TableColumn<StarePacient,Integer> globuleColumn;
-
-    @FXML
-    private TableColumn<StarePacient,Integer> plasmaColumn;
 
     @FXML
     private TableColumn<StarePacient,Integer> numarCereriColumn;
@@ -63,18 +55,12 @@ public class StarePacientiController implements ControlledScreensInterface {
     @FXML
     private TableColumn<StarePacient,Integer> donatoriColumn;
 
-    @FXML
-    private TableColumn<StarePacient, Importanta> importantaColumn;
 
     @FXML
     private void initialize(){
         numePacientColumn.setCellValueFactory(new PropertyValueFactory<>("numePacient"));
-        // cnpPacientColumn.setCellValueFactory(new PropertyValueFactory<>("cnpPacient"));
-        globuleColumn.setCellValueFactory(new PropertyValueFactory<>("numarPungiGlobuleRosii"));
-        plasmaColumn.setCellValueFactory(new PropertyValueFactory<>("numarPungiPlasma"));
-        trombociteColumn.setCellValueFactory(new PropertyValueFactory<>("numarPungiTrombocite"));
+        cnpPacientColumn.setCellValueFactory(new PropertyValueFactory<>("cnpPacient"));
         rhColumn.setCellValueFactory(new PropertyValueFactory<>("rh"));
-        importantaColumn.setCellValueFactory(new PropertyValueFactory<>("importanta"));
         donatoriColumn.setCellValueFactory(new PropertyValueFactory<>("donatoriPreferentiali"));
         grupaSangeColumn.setCellValueFactory(new PropertyValueFactory<>("grupaSange"));
         numarCereriColumn.setCellValueFactory(new PropertyValueFactory<>("numarCereri"));

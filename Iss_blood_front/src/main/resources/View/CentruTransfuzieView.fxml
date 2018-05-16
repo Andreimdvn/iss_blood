@@ -16,7 +16,7 @@
    <center>
       <AnchorPane fx:id="homePane" prefHeight="655.0" prefWidth="1031.0" styleClass="formularCentru" stylesheets="@../main.css" BorderPane.alignment="CENTER">
          <children>
-            <HBox layoutX="46.0" layoutY="26.0" spacing="30.0">
+            <HBox layoutX="143.0" layoutY="28.0" spacing="30.0">
                <children>
                   <AnchorPane>
                      <children>
@@ -63,21 +63,7 @@
                         </Pane>
                      </children>
                   </AnchorPane>
-                  <AnchorPane>
-                     <children>
-                        <Pane prefHeight="104.0" prefWidth="215.0" styleClass="subFormularPane">
-                           <children>
-                              <Pane prefHeight="104.0" prefWidth="75.0" styleClass="bloodBox" />
-                              <Pane layoutX="75.0" prefHeight="104.0" prefWidth="140.0" styleClass="box">
-                                 <children>
-                                    <Label layoutX="27.0" layoutY="14.0" styleClass="headerBlood" text="Pungi sange" />
-                                    <Label layoutX="5.0" layoutY="52.0" prefHeight="17.0" prefWidth="129.0" styleClass="labelBoxes" text="32" />
-                                 </children>
-                              </Pane>
-                           </children>
-                        </Pane>
-                     </children>
-                  </AnchorPane>
+                  <AnchorPane />
                </children>
             </HBox>
             <PieChart fx:id="stocPieChart" labelLineLength="0.0" labelsVisible="false" layoutX="46.0" layoutY="161.0" legendSide="RIGHT" prefHeight="312.0" prefWidth="369.0" styleClass="backgroundMessageBox" title="Stoc curent" />
@@ -132,7 +118,7 @@
                   <JFXButton onMouseClicked="#cereriDonariClicked" prefHeight="31.0" prefWidth="180.0" styleClass="buttonSecondaryTiny" text="Vizualizare cereri donari" />
                   <JFXButton onAction="#cereriSangeClicked" prefHeight="31.0" prefWidth="180.0" styleClass="buttonSecondaryTiny" text="Vizualizare cereri sange" />
                   <JFXButton prefHeight="31.0" prefWidth="180.0" styleClass="buttonSecondaryTiny" text="Istoric cereri" />
-                  <JFXButton prefHeight="31.0" prefWidth="180.0" styleClass="buttonSecondaryTiny" text="Stoc curent" />
+                  <JFXButton onAction="#stocCurentClicked" prefHeight="31.0" prefWidth="180.0" styleClass="buttonSecondaryTiny" text="Stoc curent" />
                   <JFXButton prefHeight="31.0" prefWidth="180.0" styleClass="buttonSecondaryTiny" text="Notificari" />
                </children>
             </VBox>
