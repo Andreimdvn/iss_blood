@@ -53,6 +53,15 @@ public class CentruTransfuzieController implements ControlledScreensInterface {
     }
 
     @FXML
+    private void cerereDonareClicked(){
+        borderPane.setCenter(controller.getScreen("FORMULAR_DONARE"));
+        borderPane.getCenter().setTranslateX(85);
+        borderPane.getCenter().setTranslateY(30);
+
+        // borderPane.getCenter().setLayoutY(6500);
+    }
+
+    @FXML
     private void initialize(){
         ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
                 new PieChart.Data("Pungi trombocite",61),

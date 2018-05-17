@@ -115,6 +115,7 @@
             <VBox layoutX="31.0" layoutY="217.0" spacing="5.0">
                <children>
                   <JFXButton onMouseClicked="#homeClicked" prefHeight="31.0" prefWidth="176.0" styleClass="buttonSecondaryTiny" text="Home" />
+                  <JFXButton onMouseClicked="#cerereDonareClicked" prefHeight="31.0" prefWidth="176.0" styleClass="buttonSecondaryTiny" text="Adaugare cerere donare" />
                   <JFXButton onMouseClicked="#cereriDonariClicked" prefHeight="31.0" prefWidth="180.0" styleClass="buttonSecondaryTiny" text="Vizualizare cereri donari" />
                   <JFXButton onAction="#cereriSangeClicked" prefHeight="31.0" prefWidth="180.0" styleClass="buttonSecondaryTiny" text="Vizualizare cereri sange" />
                   <JFXButton prefHeight="31.0" prefWidth="180.0" styleClass="buttonSecondaryTiny" text="Istoric cereri" />
