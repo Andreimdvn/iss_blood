@@ -1,6 +1,5 @@
 package Controller;
 
-import Service.MainService;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -8,29 +7,13 @@ import javafx.scene.layout.VBox;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class IstoricDonariController implements ControlledScreensInterface{
-    private MainService mainService;
-
-
-    private ControllerScreens controller;
-
-    private Logger logger = LogManager.getLogger(IstoricDonariController.class.getName());
-
-
-    @Override
-    public void setScreenParent(ControllerScreens screenParent) {
-        this.controller = screenParent;
-    }
-
-    public void setMainService(MainService mainService) {
-        this.mainService = mainService;
-    }
+public class IstoricDonariController extends ControlledScreen {
 
     @FXML
     private VBox tabelDonari;
 
     private final int MAX_SIZE = 7;
-
+    Logger logger = LogManager.getLogger(IstoricDonariController.class.getName());
     private boolean isFull(){
         return getSize() == MAX_SIZE;
     }

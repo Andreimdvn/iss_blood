@@ -10,11 +10,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-public class CentruCereriDonariController implements ControlledScreensInterface{
-
-
-    private MainService mainService;
-    private ControllerScreens controller;
+public class CentruCereriDonariController extends ControlledScreen{
 
     @FXML
     private TableView<CerereDonare> donareTableView;
@@ -92,15 +88,6 @@ public class CentruCereriDonariController implements ControlledScreensInterface{
     @FXML
     private void selectedRow(){
         updateStatus();
-    }
-
-    public void setMainService(MainService mainService){
-        this.mainService = mainService;
-    }
-
-    @Override
-    public void setScreenParent(ControllerScreens screenParent) {
-        this.controller = screenParent;
     }
 
 }

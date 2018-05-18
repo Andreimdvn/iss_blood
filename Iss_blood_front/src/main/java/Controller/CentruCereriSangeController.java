@@ -18,10 +18,8 @@ import org.apache.logging.log4j.Logger;
 
 import java.sql.Date;
 
-public class CentruCereriSangeController implements ControlledScreensInterface{
+public class CentruCereriSangeController extends ControlledScreen{
 
-    private MainService mainService;
-    private ControllerScreens controller;
     ObservableList<CerereSange> cereriSange = FXCollections.observableArrayList();
 
     private Logger logger = LogManager.getLogger(IstoricCereriController.class.getName());
@@ -107,15 +105,6 @@ public class CentruCereriSangeController implements ControlledScreensInterface{
                 1,2,3, Date.valueOf("2017-06-13"),
                 Importanta.MEDIE, "Moldovan Andrei", "Tudor's Hospital");
         this.cereriSange.add(cr);
-    }
-
-    public void setMainService(MainService mainService){
-        this.mainService = mainService;
-    }
-
-    @Override
-    public void setScreenParent(ControllerScreens screenParent) {
-        this.controller = screenParent;
     }
 
 }

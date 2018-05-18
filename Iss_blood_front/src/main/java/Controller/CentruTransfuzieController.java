@@ -12,20 +12,12 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-public class CentruTransfuzieController implements ControlledScreensInterface {
+public class CentruTransfuzieController extends ControlledScreen {
 
-
-    private MainService mainService;
-    private ControllerScreens controller;
     @FXML
     private PieChart stocPieChart;
     private double xOffset;
     private double yOffset;
-
-
-    public void setMainService(MainService mainService){
-        this.mainService = mainService;
-    }
 
     @FXML
     private BorderPane borderPane;
@@ -39,24 +31,24 @@ public class CentruTransfuzieController implements ControlledScreensInterface {
     }
     @FXML
     private void cereriDonariClicked(){
-        borderPane.setCenter(controller.getScreen("CENTRU_CERERI_DONARI"));
+        borderPane.setCenter(super.getScreenController().getScreen("CENTRU_CERERI_DONARI"));
     }
 
     @FXML
     private void stocCurentClicked(){
-        borderPane.setCenter(controller.getScreen("CENTRU_STOC_PUNGI"));
+        borderPane.setCenter(super.getScreenController().getScreen("CENTRU_STOC_PUNGI"));
     }
 
     @FXML
     private void cereriSangeClicked(){
-        borderPane.setCenter(controller.getScreen("CENTRU_CERERI_SANGE"));
+        borderPane.setCenter(super.getScreenController().getScreen("CENTRU_CERERI_SANGE"));
     }
 
     @FXML
     private void cerereDonareClicked(){
-        borderPane.setCenter(controller.getScreen("FORMULAR_DONARE"));
-        borderPane.getCenter().setTranslateX(85);
-        borderPane.getCenter().setTranslateY(30);
+        borderPane.setCenter(super.getScreenController().getScreen("FORMULAR_DONARE"));
+        //borderPane.getCenter().setTranslateX(85);
+        //borderPane.getCenter().setTranslateY(30);
 
         // borderPane.getCenter().setLayoutY(6500);
     }
@@ -105,8 +97,5 @@ public class CentruTransfuzieController implements ControlledScreensInterface {
         current.close();
     }
 
-    @Override
-    public void setScreenParent(ControllerScreens screenParent) {
-        this.controller = screenParent;
-    }
+
 }

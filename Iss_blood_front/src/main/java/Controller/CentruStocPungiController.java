@@ -7,14 +7,8 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 
-public class CentruStocPungiController implements ControlledScreensInterface {
+public class CentruStocPungiController extends ControlledScreen {
 
-    private MainService mainService;
-    private ControllerScreens controller;
-
-    public void setMainService(MainService mainService){
-        this.mainService = mainService;
-    }
 
     @FXML
     private Label globuleO1PozitivLabel;
@@ -164,17 +158,9 @@ public class CentruStocPungiController implements ControlledScreensInterface {
         calculateTotal();
     }
 
-    private void update(){
-        updateLabels();
-    }
-
     @FXML
     private void initialize(){
         updateLabels();
     }
 
-    @Override
-    public void setScreenParent(ControllerScreens screenParent) {
-        this.controller = screenParent;
-    }
 }

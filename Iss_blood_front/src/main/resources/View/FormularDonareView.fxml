@@ -12,9 +12,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="560.0" prefWidth="866.0" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.FormularDonareController">
-   <children>
-      <JFXButton layoutX="382.0" layoutY="520.0" styleClass="buttonFormular" text="Trimite formular" />
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="866.0" style="-fx-background-color: transparent;" styleClass="formularPane" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.FormularDonareController">
+<children>
+      <JFXButton layoutX="382.0" layoutY="520.0" onAction="#loadPostFormular" styleClass="buttonFormular" text="Trimite formular" />
       <HBox layoutX="89.0" layoutY="101.0" prefHeight="408.0" prefWidth="688.0" spacing="10.0">
          <children>
             <AnchorPane prefHeight="271.0" prefWidth="339.0" styleClass="subFormularPane">

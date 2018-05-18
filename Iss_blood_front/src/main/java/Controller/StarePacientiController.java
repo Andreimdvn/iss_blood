@@ -1,7 +1,6 @@
 package Controller;
 
 import Model.*;
-import Service.MainService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -11,14 +10,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.sql.Date;
-
-public class StarePacientiController implements ControlledScreensInterface {
-
-    private MainService mainService;
-    private ControllerScreens controller;
-
-
+public class StarePacientiController extends ControlledScreen {
 
     ObservableList<StarePacient> observableList = FXCollections.observableArrayList();
 
@@ -65,15 +57,5 @@ public class StarePacientiController implements ControlledScreensInterface {
         grupaSangeColumn.setCellValueFactory(new PropertyValueFactory<>("grupaSange"));
         numarCereriColumn.setCellValueFactory(new PropertyValueFactory<>("numarCereri"));
 
-    }
-
-
-    public void setMainService(MainService mainService){
-        this.mainService = mainService;
-    }
-
-    @Override
-    public void setScreenParent(ControllerScreens screenParent) {
-        this.controller = screenParent;
     }
 }
