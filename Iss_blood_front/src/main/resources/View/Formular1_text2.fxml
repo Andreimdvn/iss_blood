@@ -3,10 +3,10 @@
 <?import com.jfoenix.controls.JFXTextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="firstpage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="866.0" styleClass="formularPane" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ControllerNull">
+<AnchorPane fx:id="firstpage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="866.0" styleClass="formularPane" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ControllerNull">
    <children>
       <JFXTextArea editable="false" layoutX="7.0" layoutY="102.0" prefHeight="258.0" prefWidth="461.0" styleClass="formular-pre-textbox" text="• hepatită (de orice tip) &#10;• TBC &#10;• sifilis &#10;• malarie &#10;• epilepsie si alte boli neurologice&#10;• boli psihice&#10;• bruceloză " />
-      <JFXTextArea editable="false" layoutX="25.0" layoutY="14.0" prefHeight="19.0" prefWidth="926.0" styleClass="formular-pre-textbox-header" text="Donatorul nu trebuie să aibă sau să fi avut una din bolile:" />
+      <JFXTextArea editable="false" layoutX="25.0" layoutY="14.0" prefHeight="65.0" prefWidth="711.0" styleClass="formular-pre-textbox-header" text="Donatorul nu trebuie să aibă sau să fi avut una din bolile:" />
       <JFXTextArea editable="false" layoutX="433.0" layoutY="102.0" prefHeight="258.0" prefWidth="405.0" styleClass="formular-pre-textbox" text="• ulcer &#10;• diabet zaharat &#10;• boli de inimă &#10;• boli de piele: psoriazis, vitiligo &#10;• miopie forte peste (-) 6 dioptrii&#10;• cancer" />
    </children>
 </AnchorPane>

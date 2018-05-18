@@ -4,11 +4,11 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="866.0" styleClass="formularPane" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Formular1Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="866.0" styleClass="formularPane" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Formular1Controller">
    <children>
       <Label layoutX="161.0" layoutY="14.0" prefHeight="45.0" prefWidth="589.0" styleClass="label-big" text="Condiții de admisibilitate pentru donator" />
-      <AnchorPane layoutY="62.0" prefHeight="9.0" prefWidth="866.0" styleClass="design-line-formular-thin" />
-      <AnchorPane fx:id="pane_conditii" layoutX="7.0" layoutY="69.0" prefHeight="450.0" prefWidth="844.0" />
+      <AnchorPane layoutY="62.0" maxWidth="866.0" minWidth="866.0" prefHeight="8.0" styleClass="design-line-formular-thin" />
+      <AnchorPane fx:id="pane_conditii" layoutY="72.0" prefHeight="450.0" prefWidth="844.0" />
       <JFXButton fx:id="button_inapoi" layoutX="39.0" layoutY="515.0" onAction="#previousScreen" prefHeight="29.0" prefWidth="95.0" styleClass="buttonFormular" stylesheets="@../main.css" text="Înapoi" />
       <JFXButton fx:id="button_next" layoutX="735.0" layoutY="515.0" onAction="#nextScreen" prefHeight="29.0" prefWidth="95.0" styleClass="buttonFormular" stylesheets="@../main.css" text="Am înțeles" />
    </children>

@@ -1,8 +1,5 @@
 package Model;
 
-
-import com.sun.org.apache.xpath.internal.operations.Bool;
-
 public class Analiza {
     Integer idAnaliza;
     Integer IdSangeBrut;
