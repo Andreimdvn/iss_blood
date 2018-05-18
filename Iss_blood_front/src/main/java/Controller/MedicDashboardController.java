@@ -1,6 +1,5 @@
 package Controller;
 
-import Service.MainService;
 import Utils.Screen;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.animation.KeyFrame;

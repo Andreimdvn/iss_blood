@@ -4,7 +4,6 @@ import Model.CerereSange;
 import Model.GrupaSange;
 import Model.Importanta;
 import Model.RH;
-import Service.MainService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;

@@ -1,13 +1,11 @@
 package Controller;
 
-import Service.MainService;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import sun.rmi.runtime.Log;
 
 public class IstoricDonariController extends ControlledScreen {
 
