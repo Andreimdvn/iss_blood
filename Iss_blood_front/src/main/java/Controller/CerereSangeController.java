@@ -4,23 +4,17 @@ import Model.CerereSange;
 import Model.GrupaSange;
 import Model.Importanta;
 import Model.RH;
-import Service.MainService;
 import Utils.CustomMessageBox;
 import Utils.FunctiiUtile;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class CerereSangeController implements  ControlledScreensInterface{
-    private MainService mainService;
-    private ControllerScreens controller;
-
+public class CerereSangeController extends ControlledScreen {
     @FXML
     private JFXTextField trombocitetTextField;
     @FXML
@@ -200,15 +194,5 @@ public class CerereSangeController implements  ControlledScreensInterface{
 
     private GrupaSange getGrupaSange(){
         return grupaSangeComboBox.getValue();
-    }
-
-
-    public void setMainService(MainService mainService){
-        this.mainService = mainService;
-    }
-
-    @Override
-    public void setScreenParent(ControllerScreens screenParent) {
-        this.controller = screenParent;
     }
 }

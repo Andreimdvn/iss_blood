@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="866.0" styleClass="formularPane" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Formular3Controller">
+   <children>
+      <AnchorPane layoutY="57.0" prefHeight="12.0" prefWidth="866.0" styleClass="design-line-formular-thin" />
+      <AnchorPane fx:id="pane_conditii" layoutX="7.0" layoutY="69.0" prefHeight="410.0" prefWidth="853.0">
+         <children>
+            <JFXTextArea editable="false" layoutX="32.0" layoutY="10.0" prefHeight="445.0" prefWidth="866.0" styleClass="formular-pre-textbox" text="&#10;&#10;&#10;• E recomandat să luați un mic dejun bogat în glucide și lichide(ceai sau cafea dulce, sandwich, pâine cu dulceață). &#10;• Nu fumați cu o oră înainte şi după donare!&#10;• Nu consumați grăsimi sau bauturi alcoolice cu 24 de ore înainte de donare!&#10;• Veniți odihniți, nu după o noapte pierdută la serviciu, în cluburi sau la calculator.&#10;" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="32.0" AnchorPane.rightAnchor="32.0" AnchorPane.topAnchor="10.0" />
+            <Label layoutX="248.0" layoutY="23.0" prefHeight="42.0" prefWidth="435.0" styleClass="label-big" text="Țineți minte, înainte de a dona " />
+         </children>
+      </AnchorPane>
+      <Button fx:id="button_agree" layoutX="723.0" layoutY="509.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="122.0" styleClass="buttonFormular" text="Am înțeles" />
+   </children>
+</AnchorPane>

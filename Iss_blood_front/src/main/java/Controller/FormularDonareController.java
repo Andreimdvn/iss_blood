@@ -3,17 +3,16 @@ package Controller;
 import Model.GrupaSange;
 import Model.RH;
 import Service.MainService;
+import Utils.Screen;
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
-import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class FormularDonareController implements ControlledScreensInterface {
-
-    private MainService mainService;
+public class FormularDonareController extends ControlledScreen {
 
     @FXML
     private JFXTextField fullnameTextField;
@@ -67,27 +66,20 @@ public class FormularDonareController implements ControlledScreensInterface {
     @FXML
     private ComboBox<RH> rhComboBox;
 
+
     private Logger logger = LogManager.getLogger(FormularDonareController.class.getName());
 
+    /**
+     * Sends a request to the main screen controller to load the post-registration view
+     */
+    public void loadPostFormular(){
+        DonatorDashboardController donatorDashboardController = (DonatorDashboardController)getScreenController().getControlledScreen(Screen.DONATOR_SCREEN);
+        donatorDashboardController.loadPostFormular();
+    }
     @FXML
     private void initialize(){
         grupaSangeComboBox.getItems().addAll(GrupaSange.O1,GrupaSange.A2,GrupaSange.B3,GrupaSange.AB4);
         rhComboBox.getItems().addAll(RH.POZITIV,RH.NEGATIV);
     }
 
-    private ControllerScreens controller;
-
-    @FXML
-    private void trimiteFormular(){
-        logger.debug("Buton trimite formular donare a fost apasat");
-    }
-
-    @Override
-    public void setScreenParent(ControllerScreens screenParent) {
-        this.controller = screenParent;
-    }
-
-    public void setMainService(MainService service) {
-        this.mainService = service;
-    }
 }

@@ -1,9 +1,6 @@
 package Controller;
 
-import Main.MainApplication;
-import Service.MainService;
 import Utils.Screen;
-import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -21,7 +18,7 @@ import javafx.util.Duration;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class MedicDashboardController implements ControlledScreensInterface {
+public class MedicDashboardController extends ControlledScreen {
 
     @FXML
     private Label fullnameLabel;
@@ -51,8 +48,6 @@ public class MedicDashboardController implements ControlledScreensInterface {
     private double prefBurgerPaneWidth;
     private double prefLeftPaneWidth;
     private double animationSpeed;
-    private MainService mainService;
-    private ControllerScreens controller;
 
     private Logger logger = LogManager.getLogger(MedicDashboardController.class.getName());
 
@@ -86,7 +81,7 @@ public class MedicDashboardController implements ControlledScreensInterface {
     private void CerereSangeClicked(){
 
         logger.debug("Buton cerere sange a fost apasat");
-        centralPane.setCenter(controller.getScreen("CERERE_SANGE"));
+        centralPane.setCenter(getScreenController().getScreen("CERERE_SANGE"));
 
         mainPane.setPrefWidth(950);
         //resizeCentralPane();
@@ -94,14 +89,14 @@ public class MedicDashboardController implements ControlledScreensInterface {
     @FXML
     private void IstoricCereriClicked(){
         logger.debug("Buton istoric cereri a fost apasat");
-        centralPane.setCenter(controller.getScreen("ISTORIC_CERERI"));
+        centralPane.setCenter(getScreenController().getScreen("ISTORIC_CERERI"));
         mainPane.setPrefWidth(950);
        // resizeCentralPane();
     }
     @FXML
     private void stareActualaClicked(){
         logger.debug("Buton stare actuala a fost apasat");
-        centralPane.setCenter(controller.getScreen("STARE_PACIENTI"));
+        centralPane.setCenter(getScreenController().getScreen("STARE_PACIENTI"));
         mainPane.setPrefWidth(950);
       //  resizeCentralPane();
     }
@@ -202,22 +197,13 @@ public class MedicDashboardController implements ControlledScreensInterface {
 
     }
 
-    public void setMainService(MainService mainService){
-        this.mainService = mainService;
-    }
-
-    @Override
-    public void setScreenParent(ControllerScreens screenParent) {
-        this.controller = screenParent;
-    }
-
     @FXML
     private void logout(){
         loadLogin();
     }
 
     private void loadLogin() {
-        controller.setScreen(Screen.LOGIN_SCREEN);
+        getScreenController().setScreen(Screen.LOGIN_SCREEN);
     }
 
     @FXML

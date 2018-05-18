@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="firstpage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="866.0" styleClass="formularPane" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ControllerNull">
+   <children>
+      <JFXTextArea editable="false" layoutX="21.0" layoutY="70.0" prefHeight="352.0" prefWidth="449.0" styleClass="formular-pre-textbox" text="• afecţiuni cardiovasculare&#10;• traumatisme craniene cu sechele&#10;• etilism cronic&#10;• schizofrenie&#10;• hepatită cronică&#10;• ciroză hepatică&#10;• pancreatită&#10;• leucemii&#10;• diabet zaharat&#10;" />
+      <JFXTextArea editable="false" layoutX="21.0" layoutY="14.0" prefHeight="65.0" prefWidth="800.0" styleClass="formular-pre-textbox-header" text="Donatorul este exclus permanent datorită următoarelor:" />
+      <JFXTextArea editable="false" layoutX="407.0" layoutY="70.0" prefHeight="352.0" prefWidth="441.0" styleClass="formular-pre-textbox" text="• tuberculoză&#10;• hiperlipidemie&#10;• astm bronşic&#10;• alergia severă&#10;• boli endocrine&#10;• lupus eritematos diseminat şi alte colagenoze&#10;• psoriazis generalizat&#10;" />
+   </children>
+</AnchorPane>

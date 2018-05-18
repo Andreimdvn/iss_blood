@@ -1,4 +1,4 @@
 package Controller;
 
-public class AnalizaController {
+public class AnalizaController extends ControlledScreen{
 }

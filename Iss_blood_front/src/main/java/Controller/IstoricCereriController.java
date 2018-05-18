@@ -4,7 +4,6 @@ import Model.CerereSange;
 import Model.GrupaSange;
 import Model.Importanta;
 import Model.RH;
-import Service.MainService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -16,11 +15,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.sql.Date;
 
-public class IstoricCereriController implements  ControlledScreensInterface{
-    private MainService mainService;
-    private ControllerScreens controller;
-
-
+public class IstoricCereriController extends ControlledScreen {
     ObservableList<CerereSange> cereriSange = FXCollections.observableArrayList();
 
     private Logger logger = LogManager.getLogger(IstoricCereriController.class.getName());
@@ -121,14 +116,5 @@ public class IstoricCereriController implements  ControlledScreensInterface{
        cereriSange.addAll(s,b);
        cerereSangeTableView.setItems(cereriSange);
        cerereSangeCompletateTableView.setItems(cereriSange);
-    }
-
-    public void setMainService(MainService mainService){
-        this.mainService = mainService;
-    }
-
-    @Override
-    public void setScreenParent(ControllerScreens screenParent) {
-        this.controller = screenParent;
     }
 }
