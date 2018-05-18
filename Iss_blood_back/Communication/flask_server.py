@@ -4,8 +4,8 @@ from flask import Flask, request
 import logging
 
 from Controller.back_controller import BackController
-from Model.AccountType import AccountType
-from Model.RegisterInfo import RegisterInfo
+from Model.account_type import AccountType
+from Model.register_info import RegisterInfo
 
 
 class FlaskServer:
@@ -65,13 +65,11 @@ class FlaskServer:
         self.logger.debug("Got register request JSON: {}".format(self.request_data))
 
         register_info = RegisterInfo(self.request_data["username"], self.request_data["password"],
-                                    self.request_data["email"], self.request_data["nume"],
-                                    self.request_data["prenume"], self.request_data["cnp"],
-                                    self.request_data["localitate"], self.request_data["judet"],
-                                    self.request_data["address"], self.request_data["phone"],
-                                    AccountType[self.request_data["accountType"]], self.request_data["license"])
-
-        #TO DO: server side validation: sa nu fie medici cu licenta = "", telefonul sa aiba 10 char...
+                                     self.request_data["email"], self.request_data["nume"],
+                                     self.request_data["prenume"], self.request_data["cnp"],
+                                     self.request_data["localitate"], self.request_data["judet"],
+                                     self.request_data["address"], self.request_data["phone"],
+                                     AccountType[self.request_data["accountType"]], self.request_data["license"])
 
         status_code, status_message = self.controller.register(register_info)
 

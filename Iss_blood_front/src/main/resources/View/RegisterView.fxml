@@ -100,7 +100,7 @@
                   </HBox>
                </children>
             </VBox>
-            <JFXButton layoutX="114.0" layoutY="537.0" onAction="#registerClicked" styleClass="buttonFormular" text="Register" />
+            <JFXButton fx:id="buttonRegister" layoutX="114.0" layoutY="537.0" onAction="#registerClicked" styleClass="buttonFormular" text="Register" />
             <HBox layoutX="38.0" layoutY="519.0" spacing="2.0">
                <children>
                   <Label styleClass="labelRegister" text="You already have an account?Login" />
