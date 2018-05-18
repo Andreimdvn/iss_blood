@@ -18,7 +18,6 @@ import javafx.util.Duration;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 
@@ -223,7 +222,7 @@ public class DonatorDashboardController extends ControlledScreen {
             istoricLoaded = false;
             formularLoaded = true;
             showTopBar();
-            loadFormular();
+            loadPreFormular();
         }
         else if(istoricToggleButton.isSelected() && !istoricLoaded)
         {
@@ -259,20 +258,57 @@ public class DonatorDashboardController extends ControlledScreen {
         fadeIn(getIstoric());
 
     }
-
-    private void loadFormular() {
-        logger.debug("Buton formular a fost apasat");
-        borderPane.setBottom(getFormular());
+    /**
+     * Loads the pre-registration view in the donation registration
+     */
+    private void loadPreFormular() {
+        logger.debug("Buton preformular a fost apasat");
+        borderPane.setBottom(getPreFormular());
 
         Formular1Controller controller = (Formular1Controller) getScreenController().getControlledScreen(Screen.FORMULAR_1_SCREEN);
         controller.loadTextScreens();
-        controller.displayCurrentScreen();
+        controller.displayFirstScreen();
     }
 
-    private AnchorPane getFormular(){
+    /**
+     * Loads the actual registration view in the donation registration
+     */
+    public void loadFormular(){
+        logger.debug("Buton formular a fost apasat");
+        borderPane.setBottom(getFormular());
+    }
+
+    /**
+     * Loads the final view in the donation registration
+     */
+    public void loadPostFormular(){
+        logger.debug("Buton post-formular a fost apasat");
+        borderPane.setBottom(getPostFormular());
+    }
+
+    /**
+     *
+     * @return the post-registration view
+     */
+    private AnchorPane getPostFormular(){
+        return (AnchorPane) getScreenController().getScreen(Screen.FORMULAR_3_SCREEN);
+    }
+
+    /**
+     *
+     * @return the pre-registration view
+     */
+    private AnchorPane getPreFormular(){
         return (AnchorPane) getScreenController().getScreen(Screen.FORMULAR_1_SCREEN);
     }
 
+    /**
+     *
+     * @return the registration view
+     */
+    private AnchorPane getFormular(){
+        return (AnchorPane) getScreenController().getScreen(Screen.FORMULAR_DONARE_SCREEN);
+    }
     private void unloadFormular(){
 
         emptyPane.setPrefHeight(borderPane.getHeight());

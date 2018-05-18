@@ -3,6 +3,8 @@ package Controller;
 import Model.GrupaSange;
 import Model.RH;
 import Service.MainService;
+import Utils.Screen;
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
@@ -64,8 +66,16 @@ public class FormularDonareController extends ControlledScreen {
     @FXML
     private ComboBox<RH> rhComboBox;
 
+
     private Logger logger = LogManager.getLogger(FormularDonareController.class.getName());
 
+    /**
+     * Sends a request to the main screen controller to load the post-registration view
+     */
+    public void loadPostFormular(){
+        DonatorDashboardController donatorDashboardController = (DonatorDashboardController)getScreenController().getControlledScreen(Screen.DONATOR_SCREEN);
+        donatorDashboardController.loadPostFormular();
+    }
     @FXML
     private void initialize(){
         grupaSangeComboBox.getItems().addAll(GrupaSange.O1,GrupaSange.A2,GrupaSange.B3,GrupaSange.AB4);

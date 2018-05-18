@@ -36,7 +36,10 @@ public class Formular1Controller extends ControlledScreen {
         text_panes.add(getScreenController().getScreen(Screen.FORMULAR_1_TEXT3_SCREEN));
         text_panes.add(getScreenController().getScreen(Screen.FORMULAR_1_TEXT4_SCREEN));
     }
-
+    public void displayFirstScreen(){
+        currentScreen = 0;
+        displayCurrentScreen();
+    }
     /**
      * Displays the nth text screen, if it exists
      */
@@ -45,6 +48,16 @@ public class Formular1Controller extends ControlledScreen {
             button_inapoi.setVisible(false);
         else
             button_inapoi.setVisible(true);
+
+        if(currentScreen == text_panes.size()-1) {
+            button_next.setPrefWidth(132);
+            button_next.setText("Completare formular");
+        }
+        else
+        {
+            button_next.setPrefWidth(95);
+            button_next.setText("Am înțeles");
+        }
         pane_conditii.getChildren().clear();
         pane_conditii.getChildren().add(text_panes.get(currentScreen));
     }
@@ -57,6 +70,9 @@ public class Formular1Controller extends ControlledScreen {
         {
             currentScreen++;
             displayCurrentScreen();
+        }else{
+            DonatorDashboardController controller = (DonatorDashboardController) getScreenController().getControlledScreen(Screen.DONATOR_SCREEN);
+            controller.loadFormular();
         }
     }
 
