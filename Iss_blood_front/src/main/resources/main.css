@@ -29,25 +29,26 @@
 .formular-pre-textbox *.text{
     -fx-text-alignment:left;
 }
-.formular-pre-textbox :focused{
-    outline: none;
 
-}
 .formular-pre-textbox{
     -fx-font-size: 24px;
-    -fx-text-fill: -fx-primary-text-color;
+    -fx-text-fill: -fx-text-button-primary-color;
     -fx-text-alignment:center;
     -fx-padding: 0px 0px 0px 40px;
     -jfx-focus-color: transparent;
     -jfx-unfocus-color: transparent;
 }
+
 .formular-pre-textbox-header{
     -fx-font-size: 25px;
-    -fx-text-fill: -fx-secondary-button-color;
+    -fx-text-fill: -fx-text-button-primary-color;
+    -jfx-focus-color: transparent;
+    -jfx-unfocus-color: transparent;
     -fx-font-style:italic;
     -fx-font-weight: bold;
     -fx-text-alignment:center;
 }
+
 .icon{
     -fx-fill: -fx-button-primary-color;
 }
@@ -62,7 +63,6 @@
 }
 
 .buttonSecondary{
-
     -fx-background-color: -fx-button-secondary-color;
     -fx-text-fill: -fx-text-button-secondary-color;
     -fx-font-style: italic;
@@ -244,17 +244,15 @@
     -fx-font-size: 15;
     -fx-font-style: italic;
 }
-
 .headerPaneFormular .labelFormularHeader {
     -fx-fill:  -fx-text-header-formular-color;
     -fx-text-fill: -fx-text-header-formular-color;
     -fx-text-alignment: center;
     -fx-alignment: center;
 }
-
 .buttonFormular {
     -fx-background-color: -fx-button-formular-color;
-    -fx-text-fill: -fx-text-header-formular-color;
+    -fx-text-fill: white;
 }
 .labelFormularHeader{
     -fx-font-size: 15;

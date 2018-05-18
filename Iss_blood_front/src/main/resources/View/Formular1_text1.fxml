@@ -3,9 +3,9 @@
 <?import com.jfoenix.controls.JFXTextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="firstpage" prefHeight="450.0" prefWidth="930.0" styleClass="formularPane" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ControllerNull">
+<AnchorPane fx:id="firstpage" maxHeight="844.0" prefHeight="450.0" prefWidth="930.0" styleClass="formularPane" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ControllerNull">
    <children>
-      <JFXTextArea editable="false" layoutY="85.0" prefHeight="342.0" prefWidth="926.0" styleClass="formular-pre-textbox" text="• Să aibă vârsta cuprinsă în intervalul 18-60 ani &#10;• Sa aibă greutatea peste 50Kg &#10;• Să aibă puls regulat, 60 -100 bătăi/minut.&#10;• Să nu fii suferit în ultimele 6 luni intervenţii chirurgicale.&#10;• În cazul femeillor, să nu fie: însărcinate, în perioada de lăuzie sau în perioada menstruală.&#10;• Să nu fie sub tratament pentru diferite afecțiuni: hipertensiune, boli de inima, boli renale, boli psihice, boli hepatice sau boli endocrine.&#10;• Să nu fie pensionat medical, indiferent de diagnosticul de pensionare." />
-      <JFXTextArea editable="false" layoutX="25.0" layoutY="14.0" prefHeight="18.0" prefWidth="926.0" styleClass="formular-pre-textbox-header" text="Donatorul trebuie să corespundă cu următoarele condiții:" />
+      <JFXTextArea editable="false" layoutY="53.0" prefHeight="374.0" prefWidth="926.0" styleClass="formular-pre-textbox" text="• Să aibă vârsta cuprinsă în intervalul 18-60 ani &#10;• Sa aibă greutatea peste 50Kg &#10;• Să aibă puls regulat, 60 -100 bătăi/minut.&#10;• Să nu fii suferit în ultimele 6 luni intervenţii chirurgicale.&#10;• În cazul femeillor, să nu fie: însărcinate, în perioada de lăuzie sau în perioada menstruală.&#10;• Să nu fie sub tratament pentru diferite afecțiuni: hipertensiune, &#10;boli de inima, boli renale, boli psihice, boli hepatice sau boli endocrine.&#10;• Să nu fie pensionat medical, indiferent de diagnosticul de pensionare." />
+      <JFXTextArea editable="false" layoutX="25.0" layoutY="14.0" prefHeight="65.0" prefWidth="889.0" styleClass="formular-pre-textbox-header" text="Donatorul trebuie să corespundă cu următoarele condiții:" />
    </children>
 </AnchorPane>
