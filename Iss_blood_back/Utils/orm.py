@@ -1,5 +1,6 @@
 import sys
 
+from sqlalchemy.dialects.mysql import VARCHAR
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, String, ForeignKey, Date, SmallInteger, Enum, Float, create_engine, Boolean
 from sqlalchemy.orm import relationship, sessionmaker
@@ -14,9 +15,9 @@ class User(DB):
     __tablename__ = 'User'
 
     id = Column(Integer, autoincrement=True, primary_key=True)
-    username = Column(String(100), nullable=False, unique=True)
-    email = Column(String(100), nullable=False, unique=True)
-    password = Column(String(100), nullable=False)
+    username = Column(VARCHAR(100, collation='utf8_bin'), nullable=False, unique=True)
+    email = Column(VARCHAR(100, collation='utf8_bin'), nullable=False, unique=True)
+    password = Column(VARCHAR(100, collation='utf8_bin'), nullable=False)
 
     donatori = relationship('Donator', back_populates='user')
     staff_transfuzii = relationship('StaffTransfurzii', back_populates='user')
@@ -125,7 +126,7 @@ class Licente(DB):
 
     id = Column(Integer, autoincrement=True, primary_key=True)
     tip_licenta = Column(Enum('StaffTransfuzie', 'Medic'), nullable=False)
-    cod_licenta = Column(String(20), nullable=False)
+    cod_licenta = Column(VARCHAR(100, collation='utf8_bin'), nullable=False)
     folosita = Column(Boolean, nullable=False)
 
 class Analize(DB):
@@ -175,9 +176,9 @@ class ORM:
 
         engine = create_engine(con_string)
         self.session = sessionmaker(bind=engine)
-        # DB.metadata.drop_all(engine)  ### ---> DON'T TOUCH THIS LINE <--- ### (deletes all tables from db)
+        #DB.metadata.drop_all(engine)  ### ---> DON'T TOUCH THIS LINE <--- ### (deletes all tables from db)
         DB.metadata.create_all(engine)
-        self.ses = self.session()
+        self.ses = None
 
     def columns_objects(self, table, columns):
         cols = []
@@ -215,22 +216,22 @@ class ORM:
             if type(values) not in (list, tuple):
                 raise ValueError('[!] Type [%s] is not allowed for values!' % type(values))
         tb = self.table_object(table)
+        self.ses = self.session()
         if columns:
             cols = self.columns_objects(tb, columns)
             if len(cols) != len(values):
                 raise ValueError('[!] Columns and values are not equal!')
             col_val = {e[0]: e[1] for e in zip(columns, values)}
             self.ses.add(tb(**col_val))
-            self.ses.commit()
-            self.ses.flush()
         else:
             cols = [c.key for c in tb.__table__.columns if c.key != 'id']
             if len(cols) != len(values):
                 raise ValueError('[!] Columns and values number are not equal!')
             col_val = {e[0]: e[1] for e in zip(cols, values)}
             self.ses.add(tb(**col_val))
-            self.ses.commit()
-            self.ses.flush()
+        self.ses.commit()
+        self.ses.flush()
+        self.ses = None
 
     def select(self, table, columns=None, values=None, first=False):
         """
@@ -242,18 +243,20 @@ class ORM:
         :return: if first==False, a list with: objects of table type if no columns were specified, tuples<Column> otherwise.
                  if first==True, a single object is returned instead of a list
         """
-        res = None
         if columns:
             if type(columns) not in (list, tuple):
                 raise ValueError('[!] Type [%s] is not allowed for columns!' % type(columns))
         if values:
             if type(values) not in (list, tuple):
                 raise ValueError('[!] Type [%s] for values are not allowed! Use list or tuple.' % type(values))
-                raise ValueError('[!] Type [%s] is not allowed for columns!' % type(columns))
         if values:
             if type(values) not in (list, tuple):
                 raise ValueError('[!] Type [%s is not allowed for values!' % type(values))
         tb = self.table_object(table)
+        existing_session = True
+        if not self.ses:
+            self.ses = self.session()
+            existing_session = False
         if not columns:
             res = self.ses.query(tb)
         elif not values:
@@ -265,9 +268,11 @@ class ORM:
                 raise ValueError('[!] There are not enough values/columns!')
             col_val = {e[0].key: e[1] for e in zip(cols, values)}
             res = self.ses.query(tb).filter_by(**col_val)
-        if first:
-            return res.first()
-        return res.all()
+        result = res.first() if first else res.all()
+        if not existing_session:
+            self.ses.close()
+            self.ses = None
+        return result
 
     def update(self, table, columns_where=None, values_where=None, columns=None, values=None):
         """
@@ -311,19 +316,20 @@ class ORM:
         if len(values) != len(columns):
             raise ValueError('[!] There are not enough values/columns!')
 
-        items = self.select(table, columns=columns_where, values=values_where)
         tb = self.table_object(table)
+        self.ses = self.session()
+        items = self.select(table, columns=columns_where, values=values_where)
 
         cols = [getattr(tb, c) for c in columns]
         if len(cols) != len(values):
             raise ValueError('[!] There are not enough values/columns!')
-        col_val = {e[0].key: e[1] for e in zip(cols, values)}
         for item in items:
-
             for i, col in enumerate(columns):
                 setattr(item, col, values[i])
         self.ses.commit()
         self.ses.flush()
+        self.ses.close()
+        self.ses = None
 
     def delete(self, table, columns=None, values=None):
         """
@@ -333,6 +339,7 @@ class ORM:
         :param values:
         :return:
         """
+        self.ses = self.session()
         if columns:
             if type(columns) not in (list, tuple):
                 raise ValueError('[!] Type [%s] is not allowed for columns!' % type(columns))
@@ -355,3 +362,5 @@ class ORM:
         self.ses.delete(item)
         self.ses.commit()
         self.ses.flush()
+        self.ses.close()
+        self.ses = None

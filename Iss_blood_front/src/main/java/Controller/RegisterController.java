@@ -5,10 +5,12 @@ import Service.MainService;
 import Utils.CustomMessageBox;
 import Utils.Screen;
 import Validators.RegisterValidator;
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.ToggleButton;
@@ -17,7 +19,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -79,6 +80,9 @@ public class RegisterController extends ControlledScreen {
 
     @FXML
     private HBox licentaHbox;
+
+    @FXML
+    private JFXButton buttonRegister;
 
     @FXML
     private FontAwesomeIconView closeIcon;
@@ -159,38 +163,69 @@ public class RegisterController extends ControlledScreen {
         String localitate = localitateTextField.getText();
         String address = addressTextField.getText();
         String phone = phoneTextField.getText();
-
-        logger.debug("Buton register a fost apasat");
-
         String accountType = accountTypeToggleGroup.getSelectedToggle().toString();
         String license = "";
         if(licentaTextField != null)
             license = licentaTextField.getText();
-
         RegisterInfo info = new RegisterInfo(username, password, email, name, surname, cnp, judet, localitate, address, phone, accountType, license);
-        RegisterValidator validator = new RegisterValidator();
-        Pair<Boolean, String> validationResult = validator.Validate(info);
-        if(validationResult.getKey())
+
+        logger.debug("Buton register a fost apasat");
+        buttonRegister.setDisable(true);
+
+        Platform.runLater(()->
         {
-            Pair<Boolean, String> response = getService().register(info);
-            if(response.getKey())
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            RegisterValidator validator = new RegisterValidator();
+            Pair<Boolean, String> validationResult = validator.Validate(info);
+            if(validationResult.getKey())
             {
-                CustomMessageBox customMessageBox = new CustomMessageBox("info", "Registered successfully", 0);
-                customMessageBox.show();
                 getScreenController().setScreen(Screen.LOGIN_SCREEN);
+                Pair<Boolean, String> response = getService().register(info);
+                if(response.getKey())
+                {
+                    CustomMessageBox customMessageBox = new CustomMessageBox("info", "Registered successfully", 0);
+                    customMessageBox.show();
+                    getScreenController().setScreen(Screen.LOGIN_SCREEN);
+                    ClearFields();
+                }
+                else
+                {
+                    CustomMessageBox messageBox = new CustomMessageBox("Error", response.getValue(), 1);
+                    messageBox.show();
+                }
             }
             else
             {
-                CustomMessageBox messageBox = new CustomMessageBox("Error", response.getValue(), 1);
+                CustomMessageBox messageBox = new CustomMessageBox("Error", validationResult.getValue(), 1);
                 messageBox.show();
             }
-        }
-        else
-        {
-            CustomMessageBox messageBox = new CustomMessageBox("Error", validationResult.getValue(), 1);
-            messageBox.show();
-        }
+
+            buttonRegister.setDisable(false);
+        });
     }
+
+    private void ClearFields()
+    {
+        usernameTextField.clear();
+        passwordTextField.clear();
+        emailTextField.clear();
+        nameTextField.clear();
+        surnameTextField.clear();
+        cnpTextField.clear();
+        judetTextField.clear();
+        localitateTextField.clear();
+        addressTextField.clear();
+        phoneTextField.clear();
+        if(licentaTextField != null)
+            licentaTextField.clear();
+
+    }
+
 
     @FXML
     private void loginLabelClicked(){

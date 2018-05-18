@@ -4,6 +4,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Dialog;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -13,13 +14,25 @@ public class CustomMessageBox {
     private Stage stage = new Stage();
     private String titlu;
     private String message;
-    private int type = 1;
+    private int type = 1; //1 = eroare, 0 = info
 
+    /**
+     * Creeaza un error message box
+     * @param titlu
+     * @param message
+     */
     public CustomMessageBox(String titlu,String message)
     {
         this.titlu = titlu;
         this.message = message;
     }
+
+    /**
+     *
+     * @param titlu
+     * @param message
+     * @param type 0 = info, 1=eroare
+     */
     public CustomMessageBox(String titlu,String message,int type)
     {
         this.titlu = titlu;
@@ -33,6 +46,8 @@ public class CustomMessageBox {
         try {
             Parent root = loader.load();
             CustomMessageBoxController controller = loader.getController();
+            if(type == 1)
+                stage.initModality(Modality.APPLICATION_MODAL);
             stage.setResizable(false);
             stage.initStyle(StageStyle.UNDECORATED);
             controller.setMessage(message);
