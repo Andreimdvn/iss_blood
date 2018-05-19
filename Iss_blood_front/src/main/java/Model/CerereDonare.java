@@ -6,6 +6,14 @@ public class CerereDonare {
     private Sex sex;
     private String phone;
     private String domiciliuLocalitate;
+    private String domiciliuJudet;
+    private String domiciliuAdresa;
+    private String resedintaLocalitate;
+    private String resedintaJudet;
+    private String resedintaAdresa;
+    private GrupaSange grupaSange;
+    private RH rh;
+    private Status status;
 
     public CerereDonare(String nume, String prenume, GrupaSange grupaSange, RH rh, Status status) {
         this.nume = nume;
@@ -15,14 +23,6 @@ public class CerereDonare {
         this.status = status;
     }
 
-    private String domiciliuJudet;
-    private String domiciliuAdresa;
-    private String resedintaLocalitate;
-    private String resedintaJudet;
-    private String resedintaAdresa;
-    private GrupaSange grupaSange;
-    private RH rh;
-    private Status status;
 
     public CerereDonare(String nume,String prenume, Sex sex, String phone, String domiciliuLocalitate, String domiciliuJudet, String domiciliuAdresa, String resedintaLocalitate, String resedintaJudet, String resedintaAdresa,Status status) {
         this.nume = nume;

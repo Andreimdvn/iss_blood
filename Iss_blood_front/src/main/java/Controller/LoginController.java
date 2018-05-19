@@ -96,7 +96,9 @@ public class LoginController extends ControlledScreen {
             getScreenController().setScreen(Screen.MEDIC_SCREEN);
         }
         else if (canLogin.getKey() == 3) {
-            logger.debug("Credintiale gresite");
+            getScreenController().setScreen(Screen.CENTRU_TRANSFUZIE_SCREEN);
+
+            //logger.debug("Credintiale gresite");
             //controller.setScreen();
         }
 

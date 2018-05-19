@@ -50,7 +50,7 @@ public class MainApplication extends Application {
         controller.loadScreen(Screen.FORMULAR_3_SCREEN,Screen.FORMULAR_3_RESOURCE);
 
 
-        controller.setScreen(Screen.CENTRU_TRANSFUZIE_SCREEN);
+        controller.setScreen(Screen.LOGIN_SCREEN);
 
         Group root = new Group();
         root.getChildren().addAll(controller);
