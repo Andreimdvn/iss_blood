@@ -29,6 +29,7 @@ public class Screen {
     public static String STARE_PACIENTI_SCREEN = "STARE_PACIENTI";
     public static String STARE_PACIENTI_RESOURCE = "/View/StarePacientiView.fxml";
 
+
     public static String FORMULAR_1_SCREEN = "FORMULAR_1";
     public static String FORMULAR_1_RESOURCE = "/View/Formular1.fxml";
 
@@ -46,4 +47,18 @@ public class Screen {
 
     public static String FORMULAR_3_SCREEN = "FORMULAR_3";
     public static String FORMULAR_3_RESOURCE = "/View/Formular3.fxml";
+
+    public static String CENTRU_TRANSFUZIE_SCREEN = "CENTRU_TRANSFUZIE";
+    public static String CENTRU_TRANSFUZIE_RESOURCE = "/View/CentruTransfuzieView.fxml";
+
+    public static String CENTRU_CERERI_DONARI_SCREEN = "CENTRU_CERERI_DONARI";
+    public static String CENTRU_CERERI_DONARI_RESOURCE = "/View/CentruCereriDonariView.fxml";
+
+    public static String CENTRU_CERERI_SANGE_SCREEN = "CENTRU_CERERI_SANGE";
+    public static String CENTRU_CERERI_SANGE_RESOURCE = "/View/CentruCereriSangeView.fxml";
+
+        public static String CENTRU_STOC_PUNGI_SCREEN = "CENTRU_STOC_PUNGI";
+    public static String CENTRU_STOC_PUNGI_RESOURCE = "/View/CentruStocPungiView.fxml";
+
+
 }

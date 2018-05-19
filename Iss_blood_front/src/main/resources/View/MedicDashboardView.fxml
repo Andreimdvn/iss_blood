@@ -18,8 +18,8 @@
                <children>
                   <AnchorPane layoutX="61.0" layoutY="38.0">
                      <children>
-                        <Label layoutX="93.0" prefHeight="55.0" prefWidth="195.0" styleClass="headerFormular" text="Welcome back," />
-                        <Pane layoutY="193.0" prefHeight="289.0" prefWidth="381.0" styleClass="subFormularPane">
+                        <Label layoutX="41.0" prefHeight="55.0" prefWidth="195.0" styleClass="headerFormular" text="Welcome back," />
+                        <Pane layoutX="115.0" layoutY="186.0" prefHeight="289.0" prefWidth="381.0" styleClass="subFormularPane">
                            <children>
                               <JFXButton layoutX="104.0" layoutY="250.0" prefHeight="25.0" prefWidth="173.0" styleClass="buttonFormular" text="View all request" />
                               <Pane prefHeight="40.0" prefWidth="381.0" styleClass="headerPaneFormular">
@@ -37,33 +37,81 @@
                               </TableView>
                            </children>
                         </Pane>
-                        <Pane layoutX="446.0" layoutY="193.0" prefHeight="290.0" prefWidth="381.0" styleClass="subFormularPane">
-                           <children>
-                              <JFXButton layoutX="104.0" layoutY="251.0" prefHeight="25.0" prefWidth="173.0" styleClass="buttonFormular" text="View all" />
-                              <Pane prefHeight="40.0" prefWidth="381.0" styleClass="headerPaneFormular">
-                                 <children>
-                                    <Label layoutX="98.0" layoutY="15.0" text="Patients who still need blood" />
-                                 </children>
-                              </Pane>
-                              <TableView layoutX="14.0" layoutY="66.0" prefHeight="159.0" prefWidth="353.0">
-                                 <columns>
-                                    <TableColumn prefWidth="129.33334350585938" text="Pacient name" />
-                                    <TableColumn prefWidth="76.0" text="Importanta" />
-                                    <TableColumn prefWidth="144.88873291015625" text="Donatori preferentiali" />
-                                 </columns>
-                              </TableView>
-                           </children>
-                        </Pane>
-                        <Label fx:id="fullnameLabel" layoutX="191.0" layoutY="43.0" prefHeight="55.0" prefWidth="353.0" styleClass="headerFormular" text="Doctor Moldovan Daniel-Gabriel" />
+                        <Label fx:id="fullnameLabel" layoutX="129.0" layoutY="41.0" prefHeight="55.0" prefWidth="353.0" styleClass="headerFormular" text="Doctor Moldovan Daniel-Gabriel" />
                      </children>
                   </AnchorPane>
+                  <VBox layoutX="684.0" layoutY="98.0">
+                     <children>
+                        <AnchorPane>
+                           <children>
+                              <Pane prefHeight="104.0" prefWidth="215.0" styleClass="subFormularPane">
+                                 <children>
+                                    <Pane prefHeight="104.0" prefWidth="75.0" styleClass="globulRosiiBox" />
+                                    <Pane layoutX="75.0" prefHeight="104.0" prefWidth="140.0" styleClass="box">
+                                       <children>
+                                          <Label layoutX="3.0" layoutY="14.0" styleClass="headerGlobuleRosii" text="Pungi globule rosii" />
+                                          <Label layoutX="5.0" layoutY="52.0" prefHeight="17.0" prefWidth="129.0" styleClass="labelBoxes" text="12" />
+                                       </children>
+                                    </Pane>
+                                 </children>
+                              </Pane>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane>
+                           <children>
+                              <Pane prefHeight="104.0" prefWidth="215.0" styleClass="subFormularPane">
+                                 <children>
+                                    <Pane prefHeight="104.0" prefWidth="75.0" styleClass="plasmaBox" />
+                                    <Pane layoutX="75.0" prefHeight="104.0" prefWidth="140.0" styleClass="box">
+                                       <children>
+                                          <Label layoutX="22.0" layoutY="14.0" styleClass="headerPlasma" text="Pungi plasma" />
+                                          <Label layoutX="5.0" layoutY="52.0" prefHeight="17.0" prefWidth="129.0" styleClass="labelBoxes" text="7" />
+                                       </children>
+                                    </Pane>
+                                 </children>
+                              </Pane>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane>
+                           <children>
+                              <Pane prefHeight="104.0" prefWidth="215.0" styleClass="subFormularPane">
+                                 <children>
+                                    <Pane prefHeight="104.0" prefWidth="75.0" styleClass="trombociteBox" />
+                                    <Pane layoutX="75.0" prefHeight="104.0" prefWidth="140.0" styleClass="box">
+                                       <children>
+                                          <Label layoutX="8.0" layoutY="14.0" styleClass="headerTrombocite" text="Pungi trombocite" />
+                                          <Label layoutX="5.0" layoutY="52.0" prefHeight="17.0" prefWidth="129.0" styleClass="labelBoxes" text="61" />
+                                       </children>
+                                    </Pane>
+                                 </children>
+                              </Pane>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane>
+                           <children>
+                              <Pane prefHeight="104.0" prefWidth="215.0" styleClass="subFormularPane">
+                                 <children>
+                                    <Pane prefHeight="104.0" prefWidth="75.0" styleClass="bloodBox" />
+                                    <Pane layoutX="75.0" prefHeight="104.0" prefWidth="140.0" styleClass="box">
+                                       <children>
+                                          <Label layoutX="27.0" layoutY="14.0" styleClass="headerBlood" text="Pungi sange" />
+                                          <Label layoutX="5.0" layoutY="52.0" prefHeight="17.0" prefWidth="129.0" styleClass="labelBoxes" text="32" />
+                                       </children>
+                                    </Pane>
+                                 </children>
+                              </Pane>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </VBox>
+                  <Label layoutX="690.0" layoutY="56.0" text="Stoc centrul de transfuzie Cluj-Napoca" />
                </children>
             </AnchorPane>
          </center>
          <top>
             <AnchorPane prefHeight="40.0" prefWidth="740.0" styleClass="formularPane" stylesheets="@../main.css" BorderPane.alignment="CENTER">
                <children>
-                  <FontAwesomeIconView fx:id="closeIcon" fill="WHITE" glyphName="CLOSE" glyphStyle="ARROW_LEFT" layoutX="924.0" layoutY="24.0" onMouseClicked="#closeWindow" size="30" styleClass="icon" />
+                  <FontAwesomeIconView fx:id="closeIcon" fill="WHITE" glyphName="CLOSE" glyphStyle="ARROW_LEFT" layoutX="935.0" layoutY="24.0" onMouseClicked="#closeWindow" size="30" styleClass="icon" />
                </children></AnchorPane>
          </top>
       </BorderPane>
