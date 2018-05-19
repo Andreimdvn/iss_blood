@@ -118,6 +118,19 @@ class Medic(DB):
 
     user = relationship('User', back_populates='medici')
     locatie = relationship('Locatie', back_populates='medici')
+    pacient = relationship('Pacient', back_populates='medic')
+
+class Pacient(DB):
+    __tablename__ = 'Pacient'
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    nume = Column(String(100), nullable=False)
+    cnp = Column(String(13), nullable=False)
+    rh = Column(Enum('pozitiv', 'negativ'), nullable=False)
+    grupa = Column(Enum('01', 'A2', 'B3', 'AB4'), nullable=False)
+    id_medic = Column(Integer, ForeignKey('Medic.id_user'))
+
+    medic = relationship('Medic', back_populates='pacient')
 
 class Licente(DB):
     __tablename__ = 'Licente'
