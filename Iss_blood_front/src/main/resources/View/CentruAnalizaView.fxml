@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+
+<AnchorPane prefHeight="655.0" prefWidth="1031.0" styleClass="formularCentru" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CentruAnalizaController">
+   <children>
+      <AnchorPane layoutX="47.0" layoutY="27.0" prefHeight="586.0" prefWidth="937.0" styleClass="box">
+         <children>
+            <VBox layoutX="311.0" layoutY="114.0" spacing="30.0">
+               <children>
+                  <Label styleClass="labelBoxes" text="ALT" />
+                  <Label styleClass="labelBoxes" text="SIF" />
+                  <Label prefWidth="119.0" styleClass="labelBoxes" text="ANTIHTLV" />
+                  <Label styleClass="labelBoxes" text="ANTIHIV" />
+                  <Label styleClass="labelBoxes" text="ANTIHCV" />
+                  <Label styleClass="labelBoxes" text="HB" />
+               </children>
+            </VBox>
+            <JFXButton layoutY="560.0" prefHeight="25.0" prefWidth="937.0" styleClass="buttonFormular" text="Trimite rezultat analiza" />
+            <AnchorPane prefHeight="61.0" prefWidth="947.0" styleClass="headerPaneFormular">
+               <children>
+                  <Label layoutX="405.0" layoutY="15.0" text="Completeaza analiza" />
+               </children>
+            </AnchorPane>
+            <VBox fx:id="selectionPane" layoutX="469.0" layoutY="104.0" prefHeight="360.0" prefWidth="191.0" spacing="14.0">
+               <children>
+                  <HBox prefHeight="48.0" prefWidth="152.0" spacing="50.0">
+                     <children>
+                        <ToggleButton mnemonicParsing="false" prefHeight="48.0" prefWidth="61.6" style="-fx-font-size: 24;" styleClass="toggle-button-formular" text="Da">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="grup1" />
+                           </toggleGroup>
+                        </ToggleButton>
+                        <ToggleButton mnemonicParsing="false" selected="true" style="-fx-font-size: 24;" styleClass="toggle-button-formular" text="Nu" toggleGroup="$grup1" />
+                     </children>
+                  </HBox>
+                  <HBox spacing="50.0">
+                     <children>
+                        <ToggleButton mnemonicParsing="false" style="-fx-font-size: 24;" styleClass="toggle-button-formular" text="Da">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="grup2" />
+                           </toggleGroup>
+                        </ToggleButton>
+                        <ToggleButton mnemonicParsing="false" selected="true" style="-fx-font-size: 24;" styleClass="toggle-button-formular" text="Nu" toggleGroup="$grup2" />
+                     </children>
+                  </HBox>
+                  <HBox spacing="50.0">
+                     <children>
+                        <ToggleButton mnemonicParsing="false" style="-fx-font-size: 24;" styleClass="toggle-button-formular" text="Da">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="grup3" />
+                           </toggleGroup>
+                        </ToggleButton>
+                        <ToggleButton mnemonicParsing="false" selected="true" style="-fx-font-size: 24;" styleClass="toggle-button-formular" text="Nu" toggleGroup="$grup3" />
+                     </children>
+                  </HBox>
+                  <HBox spacing="50.0">
+                     <children>
+                        <ToggleButton mnemonicParsing="false" style="-fx-font-size: 24;" styleClass="toggle-button-formular" text="Da">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="grup4" />
+                           </toggleGroup>
+                        </ToggleButton>
+                        <ToggleButton mnemonicParsing="false" selected="true" style="-fx-font-size: 24;" styleClass="toggle-button-formular" text="Nu" toggleGroup="$grup4" />
+                     </children>
+                  </HBox>
+                  <HBox spacing="50.0">
+                     <children>
+                        <ToggleButton mnemonicParsing="false" style="-fx-font-size: 24;" styleClass="toggle-button-formular" text="Da">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="grup5" />
+                           </toggleGroup>
+                        </ToggleButton>
+                        <ToggleButton mnemonicParsing="false" selected="true" style="-fx-font-size: 24;" styleClass="toggle-button-formular" text="Nu" toggleGroup="$grup5" />
+                     </children>
+                  </HBox>
+                  <HBox spacing="50.0">
+                     <children>
+                        <ToggleButton mnemonicParsing="false" style="-fx-font-size: 24;" styleClass="toggle-button-formular" text="Da">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="grup51" />
+                           </toggleGroup>
+                        </ToggleButton>
+                        <ToggleButton mnemonicParsing="false" selected="true" style="-fx-font-size: 24;" styleClass="toggle-button-formular" text="Nu" toggleGroup="$grup51" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

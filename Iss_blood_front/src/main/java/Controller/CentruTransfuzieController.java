@@ -6,6 +6,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.chart.PieChart;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -24,6 +25,11 @@ public class CentruTransfuzieController extends ControlledScreen {
 
     @FXML
     private AnchorPane homePane;
+
+    @FXML
+    protected void setCenter(Node a){
+        borderPane.setCenter(a);
+    }
 
     @FXML
     private void homeClicked(){

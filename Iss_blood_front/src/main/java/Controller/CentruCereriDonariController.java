@@ -6,9 +6,12 @@ import com.jfoenix.controls.JFXButton;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
 public class CentruCereriDonariController extends ControlledScreen{
 
@@ -59,6 +62,21 @@ public class CentruCereriDonariController extends ControlledScreen{
                 "Moldovan","Andrei", GrupaSange.B3, RH.NEGATIV,Status.PREGATIRE
         );
         donareObservableList.addAll(a,b,c);
+    }
+
+    @FXML
+    private void button1Clicked(){
+            CentruTransfuzieController cr = (CentruTransfuzieController) getScreenController().getControlledScreen("CENTRU_TRANSFUZIE");
+            cr.setCenter(getScreenController().getScreen("CENTRU_CHESTIONAR"));
+
+    }
+    @FXML
+    private void button2Clicked(){
+
+    }
+    @FXML
+    private void button3Clicked(){
+
     }
 
     private void updateStatus(){

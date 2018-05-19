@@ -61,4 +61,9 @@ public class Screen {
     public static String CENTRU_STOC_PUNGI_RESOURCE = "/View/CentruStocPungiView.fxml";
 
 
+    public static String CENTRU_CHESTIONAR_SCREEN ="CENTRU_CHESTIONAR";
+    public static String CENTRU_CHESTIONAR_RESOURCE ="/View/CentruPrelevareView.fxml";
+
+
+
 }
