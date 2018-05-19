@@ -167,22 +167,22 @@ class SangePrelucrat(DB):
     sange_brut = relationship('SangeBrut', back_populates='sange_prelucrat')
     locatie = relationship('Locatie', back_populates='sange_prelucrat')
 
-	
-class CereriSange(DB)
-	__tablename__ = 'CereriSange'
-	
-	id = Column(Integer, autoincrement=True, primary_key=True)
-	id_medic = Column(Integer, ForeignKey('Medic.id_user'))
-	nume_pacient = Column(String(50), nullable=False)
-	cnp_pacient = Column(String(13), nullable=False)
-	grupa_sange = Column(Enum('O1', 'A2', 'B3', 'AB4'))
-	rh = Column(Enum('Pozitiv', 'Negativ'))
-	numar_pungi_trombocite = Column(Integer, nullable=False)
-	numar_pungi_globule_rosii = Column(Integer, nullable=False)
-	numar_pungi_plasma = Column(Integer, nullable=False)
-	date = Column(Date, nullable=False)
-	importanta = Column(Enum('Scazuta', 'Medie', 'Ridicata'))
-	
+
+class CereriSange(DB):
+    __tablename__ = 'CereriSange'
+
+    id = Column(Integer, autoincrement=True, primary_key=True)
+    id_medic = Column(Integer, ForeignKey('Medic.id_user'))
+    nume_pacient = Column(String(50), nullable=False)
+    cnp_pacient = Column(String(13), nullable=False)
+    grupa_sange = Column(Enum('O1', 'A2', 'B3', 'AB4'))
+    rh = Column(Enum('Pozitiv', 'Negativ'))
+    numar_pungi_trombocite = Column(Integer, nullable=False)
+    numar_pungi_globule_rosii = Column(Integer, nullable=False)
+    numar_pungi_plasma = Column(Integer, nullable=False)
+    date = Column(Date, nullable=False)
+    importanta = Column(Enum('Scazuta', 'Medie', 'Ridicata'))
+
 
 class ORM:
 

@@ -1,7 +1,7 @@
-from enum import Enum
+import enum
 
-class Importanta(Enum):
-	SCAZUTA = 0
-	MEDIE = 1
-	RIDICATA = 2
-    
+
+class Importanta(enum.Enum):
+    SCAZUTA = 0
+    MEDIE = 1
+    RIDICATA = 2
