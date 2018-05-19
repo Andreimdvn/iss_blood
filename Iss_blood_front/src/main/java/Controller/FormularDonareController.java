@@ -5,6 +5,7 @@ import Model.GrupaSange;
 import Model.RH;
 import Model.Sex;
 import Service.MainService;
+import Utils.CustomMessageBox;
 import Utils.Screen;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
@@ -12,6 +13,7 @@ import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ToggleGroup;
+import javafx.util.Pair;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -95,10 +97,18 @@ public class FormularDonareController extends ControlledScreen {
 
         FormularDonare formularDonare = GetInfoFormular();
 
-
-
-
-        loadPostFormular();
+        Pair<Boolean, String> rez = getService().trimiteFormularDonare(formularDonare);
+        if(rez.getKey())
+        {
+            CustomMessageBox msg = new CustomMessageBox("Info", "Formularul a fost trimis cu succes", 0);
+            msg.show();
+            loadPostFormular();
+        }
+        else
+        {
+            CustomMessageBox msg = new CustomMessageBox("Eroare", rez.getValue(), 1);
+            msg.show();
+        }
     }
 
     private FormularDonare GetInfoFormular()
@@ -107,6 +117,8 @@ public class FormularDonareController extends ControlledScreen {
         String lastName = lastNameTextField.getText();
         String beneficiarFullName = donatFullnameTextField.getText();
         String beneficiarCNP = donatCnpTextField.getText();
+        GrupaSange grupa = grupaSangeComboBox.getValue();
+        RH rh = rhComboBox.getValue();
         String domiciliuLocalitate = DomiciliuLocalitateTextField.getText();
         String domiciliuJudet = DomiciliuJudetTextField.getText();
         String domiciliuAdresa = DomiciliuAdresaTextField.getText();
@@ -121,7 +133,7 @@ public class FormularDonareController extends ControlledScreen {
         else
             sex = Sex.MASCULIN;
 
-        short daysAvailable = 0; //de ex: 00011 = luni, marti
+        short zileDisponibil = 0; //de ex: 00011 = luni si marti
         short currentDayVal = 1;
         JFXCheckBox[] checkBoxes = new JFXCheckBox[]
                 {luniCheckbox, martiCheckbox, miercuriCheckbox, joiCheckbox, vineriCheckbox};
@@ -129,12 +141,12 @@ public class FormularDonareController extends ControlledScreen {
         for(JFXCheckBox checkBox : checkBoxes)
         {
             if(checkBox.isSelected())
-                daysAvailable += currentDayVal;
+                zileDisponibil += currentDayVal;
             currentDayVal *= 2;
         }
 
         return new FormularDonare(firstName, lastName, sex, phone, domiciliuLocalitate, domiciliuJudet, domiciliuAdresa,
-                resedintaLocalitate, resedintaJudet, resedintaAdresa, daysAvailable);
+                resedintaLocalitate, resedintaJudet, resedintaAdresa, beneficiarFullName, beneficiarCNP, grupa, rh, zileDisponibil);
     }
 
     @FXML

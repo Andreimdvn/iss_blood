@@ -1,6 +1,7 @@
 package Service;
 
 import Communication.FlaskClient;
+import Model.FormularDonare;
 import Model.RegisterInfo;
 import javafx.util.Pair;
 
@@ -21,5 +22,5 @@ public class MainService {
         return flaskClient.register(info);
     }
 
-
+    public Pair<Boolean, String> trimiteFormularDonare (FormularDonare formular){return flaskClient.trimiteFormularDonare(formular);}
 }

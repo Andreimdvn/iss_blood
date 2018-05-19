@@ -1,6 +1,6 @@
 package Communication;
 
-import Controller.FormularDonareController;
+import Model.FormularDonare;
 import Model.RegisterInfo;
 import javafx.util.Pair;
 import org.apache.logging.log4j.LogManager;
@@ -132,6 +132,35 @@ public class FlaskClient {
             return new Pair<>(true, "Registered successfully");
 
         return new Pair<>(false, jsonResponse.getString("message"));
+    }
+
+    public Pair<Boolean, String> trimiteFormularDonare(FormularDonare formular)
+    {
+        HttpURLConnection connection = getConnection("/trimiteFormularDonare");
+
+        if(connection == null)
+            return new Pair<>(false, "Client connection request Error");
+
+        String jsonString = new JSONObject().put("nume", formular.getNume()).put("prenume", formular.getPrenume())
+                .put("sex", formular.getSex().toString()).put("telefon", formular.getTelefon())
+                .put("domiciliuLocalitate", formular.getDomiciliuLocalitate())
+                .put("domiciliuJudet", formular.getDomiciliuJudet())
+                .put("domiciliuAdresa", formular.getDomiciliuAdresa())
+                .put("resedintaLocalitate", formular.getResedintaLocalitate())
+                .put("resedintaJudet", formular.getResedintaJudet())
+                .put("resedintaAdresa", formular.getResedintaAdresa())
+                .put("beneficiarFullName", formular.getBeneficiarFullName())
+                .put("beneficiarCNP", formular.getBeneficiarCNP())
+                .put("grupa", formular.getGrupa()).put("rh", formular.getRh().toString())
+                .put("zileDisponibil", formular.getZileDisponibil()).toString();
+
+        logger.debug("SENDING: " + jsonString);
+        JSONObject jsonResponse = sendRequest(connection, jsonString);
+        logger.debug("RESPONSE : " + jsonResponse);
+
+
+        return new Pair<>(true, "Success");
+
     }
 
     /** Sends a json string to a given relative path
