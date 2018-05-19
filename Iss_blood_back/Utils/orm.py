@@ -1,8 +1,7 @@
 import sys
 
-from sqlalchemy.dialects.mysql import VARCHAR
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Column, Integer, String, ForeignKey, Date, SmallInteger, Enum, Float, create_engine, Boolean
+from sqlalchemy import Column, Integer, String, ForeignKey, Date, SmallInteger, Enum, create_engine, Boolean
 from sqlalchemy.orm import relationship, sessionmaker
 
 
@@ -15,9 +14,9 @@ class User(DB):
     __tablename__ = 'User'
 
     id = Column(Integer, autoincrement=True, primary_key=True)
-    username = Column(VARCHAR(100, collation='utf8_bin'), nullable=False, unique=True)
-    email = Column(VARCHAR(100, collation='utf8_bin'), nullable=False, unique=True)
-    password = Column(VARCHAR(100, collation='utf8_bin'), nullable=False)
+    username = Column(String(100), nullable=False, unique=True)
+    email = Column(String(100), nullable=False, unique=True)
+    password = Column(String(100), nullable=False)
 
     donatori = relationship('Donator', back_populates='user')
     staff_transfuzii = relationship('StaffTransfurzii', back_populates='user')
@@ -91,7 +90,6 @@ class StaffTransfurzii(DB):
 
     user = relationship('User', back_populates='staff_transfuzii')
     locatie = relationship('Locatie', back_populates='staff_transfuzii')
-    analize = relationship('Analize', back_populates='staff_transfuzii')
 
 
 class StaffRecoltare(DB):
@@ -126,16 +124,21 @@ class Licente(DB):
 
     id = Column(Integer, autoincrement=True, primary_key=True)
     tip_licenta = Column(Enum('StaffTransfuzie', 'Medic'), nullable=False)
-    cod_licenta = Column(VARCHAR(100, collation='utf8_bin'), nullable=False)
+    cod_licenta = Column(String(100), nullable=False)
     folosita = Column(Boolean, nullable=False)
 
 class Analize(DB):
     __tablename__ = 'Analize'
 
     id = Column(Integer, autoincrement=True, primary_key=True)
-    id_staff_transfuzii = Column(Integer, ForeignKey('StaffTransfurzii.id_user'))
+    id_sange_brut = Column(Integer, ForeignKey('SangeBrut.id'))
+    alt = Column(Boolean, nullable=False)
+    sif = Column(Boolean, nullable=False)
+    antihtlv = Column(Boolean, nullable=False)
+    antihtcv = Column(Boolean, nullable=False)
+    antihiv = Column(Boolean, nullable=False)
+    hb = Column(Boolean, nullable=False)
 
-    staff_transfuzii = relationship('StaffTransfurzii', back_populates='analize')
     sange_brut = relationship('SangeBrut', back_populates='analize')
 
 
@@ -145,9 +148,10 @@ class SangeBrut(DB):
     id = Column(Integer, autoincrement=True, primary_key=True)
     id_donator = Column(Integer, ForeignKey('Donator.id_user'))
     id_locatie_recoltare = Column(Integer, ForeignKey('Locatie.id'))
-    data_donare = Column(Date, nullable=False)
-    id_analize = Column(Integer, ForeignKey('Analize.id'))
-    stadiu = Column(Enum('Recoltata', 'Analizata', 'Impartita', 'Aruncata'), nullable=False)
+    data_recoltare = Column(Date, nullable=False)
+    status = Column(Enum('Recoltata', 'Analizata', 'Impartita', 'Aruncata'), nullable=False)
+    rh = Column(Enum('pozitiv', 'negativ'), nullable=False)
+    grupa = Column(Enum('01', 'A2', 'B3', 'AB4'), nullable=False)
     id_locatie_curenta = Column(Integer, ForeignKey('Locatie.id'))
 
     donator = relationship('Donator', back_populates='sange_brut')
@@ -162,8 +166,8 @@ class SangePrelucrat(DB):
     id_sange_brut = Column(Integer, ForeignKey('SangeBrut.id'))
     tip = Column(Enum('Plasma', 'Trombocite', 'Globule_rosii'))
     id_locatie = Column(Integer, ForeignKey('Locatie.id'))
-    gramaj = Column(Float, nullable=False)
     status = Column(Enum('Depozitat', 'Folosit', 'Expirat'))
+
     sange_brut = relationship('SangeBrut', back_populates='sange_prelucrat')
     locatie = relationship('Locatie', back_populates='sange_prelucrat')
 
