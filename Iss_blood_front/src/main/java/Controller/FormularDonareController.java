@@ -153,6 +153,8 @@ public class FormularDonareController extends ControlledScreen {
     private void initialize(){
         grupaSangeComboBox.getItems().addAll(GrupaSange.O1,GrupaSange.A2,GrupaSange.B3,GrupaSange.AB4);
         rhComboBox.getItems().addAll(RH.POZITIV,RH.NEGATIV);
+
+        //TO DO: umple fieldurile automat
     }
 
 }
