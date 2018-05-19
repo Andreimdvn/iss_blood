@@ -1,14 +1,17 @@
 package Controller;
 
 import Model.GrupaSange;
+import Model.Pacient;
 import Model.RH;
 import Service.MainService;
 import Utils.Screen;
+import Validators.AddPacientValidator;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
+import javafx.util.Pair;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -58,7 +61,6 @@ public class FormularDonareController extends ControlledScreen {
 
     @FXML
     private JFXCheckBox vineriCheckbox;
-
 
     @FXML
     private ComboBox<GrupaSange> grupaSangeComboBox;

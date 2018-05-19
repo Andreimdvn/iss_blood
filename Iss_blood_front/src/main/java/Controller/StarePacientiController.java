@@ -1,12 +1,17 @@
 package Controller;
 
 import Model.*;
+import Utils.CustomMessageBox;
+import Validators.AddPacientValidator;
+import com.jfoenix.controls.JFXTextField;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Pair;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -40,13 +45,23 @@ public class StarePacientiController extends ControlledScreen {
     @FXML
     private TableColumn<StarePacient, RH> rhColumn;
 
-
     @FXML
     private TableColumn<StarePacient,Integer> numarCereriColumn;
 
     @FXML
     private TableColumn<StarePacient,Integer> donatoriColumn;
 
+    @FXML
+    private ComboBox<GrupaSange> grupaSangeComboBox;
+
+    @FXML
+    private ComboBox<RH> rhComboBox;
+
+    @FXML
+    private JFXTextField numePacient;
+
+    @FXML
+    private JFXTextField cnpPacient;
 
     @FXML
     private void initialize(){
@@ -57,5 +72,36 @@ public class StarePacientiController extends ControlledScreen {
         grupaSangeColumn.setCellValueFactory(new PropertyValueFactory<>("grupaSange"));
         numarCereriColumn.setCellValueFactory(new PropertyValueFactory<>("numarCereri"));
 
+        grupaSangeComboBox.getItems().addAll(GrupaSange.O1,GrupaSange.A2,GrupaSange.B3,GrupaSange.AB4);
+        grupaSangeComboBox.getSelectionModel().selectFirst();
+        rhComboBox.getItems().addAll(RH.POZITIV,RH.NEGATIV);
+        rhComboBox.getSelectionModel().selectFirst();
+    }
+
+
+    /**
+     *  Handle add a new pacient
+     *  GrupaSange and RH are filled with first value
+     *
+     *
+     *  Validate name and cnp fields of pacient
+     *  If fields are incorrect with errors will appear
+     */
+    @FXML
+    private void handleAddPacient() {
+        String namePacientFromField = numePacient.getText();
+        String cnpPacientFromField = cnpPacient.getText();
+        GrupaSange grupaPacientFromComboBox = grupaSangeComboBox.getValue();
+        RH rhPacientFromComboBox = rhComboBox.getValue();
+        Pacient pacientForValidation = new Pacient(namePacientFromField, cnpPacientFromField, grupaPacientFromComboBox, rhPacientFromComboBox);
+        Pair<Boolean, String> validationResult = new AddPacientValidator().validate(pacientForValidation);
+        if(!validationResult.getKey()) {
+            logger.debug("Eroare la adaugare pacient \n" + validationResult.getValue());
+            new CustomMessageBox("Eroare adaugare pacient", validationResult.getValue(),1).show();
+        } else {
+            pacientForValidation.setIdMedic(idMedic);
+            Pair<Boolean, String> response = getService().addPacient(pacientForValidation);
+            logger.debug("Adaugare pacient cu mesajul " + response.getValue());
+        }
     }
 }

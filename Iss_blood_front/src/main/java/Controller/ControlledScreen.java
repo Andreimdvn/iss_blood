@@ -7,7 +7,7 @@ import Utils.Observer;
 public class ControlledScreen implements Observer {
     private MainService service;
     private ScreenController screenController;
-
+    protected int idMedic = 1;
     /**
      * Method called after each logout for each controlled screen in the application
      */

@@ -8,7 +8,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="573.0" prefWidth="950.0" styleClass="formularPane" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.StarePacientiController">
+<AnchorPane prefHeight="573.0" prefWidth="950.0" styleClass="formularPane" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.StarePacientiController">
    <children>
       <TableView fx:id="starePacientTableView" layoutX="32.0" layoutY="103.0" prefHeight="448.0" prefWidth="609.0" styleClass="box">
          <columns>
@@ -29,11 +29,11 @@
                   <Label layoutX="54.0" layoutY="14.0" text="Management pacient" />
                </children>
             </AnchorPane>
-            <JFXTextField layoutX="34.0" layoutY="66.0" promptText="Nume pacient" styleClass="textboxFormular" />
-            <JFXTextField layoutX="34.0" layoutY="104.0" promptText="CNP Pacient" styleClass="textboxFormular" />
-            <JFXComboBox layoutX="34.0" layoutY="146.0" promptText="Grupa" />
-            <JFXComboBox layoutX="34.0" layoutY="187.0" promptText="RH" />
-            <JFXButton layoutY="277.0" prefHeight="25.0" prefWidth="245.0" styleClass="buttonFormular" text="Add pacient" />
+            <JFXTextField fx:id="numePacient" layoutX="34.0" layoutY="66.0" promptText="Nume pacient" styleClass="textboxFormular" />
+            <JFXTextField fx:id="cnpPacient" layoutX="34.0" layoutY="104.0" promptText="CNP Pacient" styleClass="textboxFormular" />
+            <JFXComboBox fx:id="grupaSangeComboBox" layoutX="34.0" layoutY="146.0" promptText="Grupa" />
+            <JFXComboBox fx:id="rhComboBox" layoutX="34.0" layoutY="187.0" promptText="RH" />
+            <JFXButton layoutY="277.0" onAction="#handleAddPacient" prefHeight="25.0" prefWidth="245.0" styleClass="buttonFormular" text="Add pacient" />
          </children>
       </AnchorPane>
    </children>

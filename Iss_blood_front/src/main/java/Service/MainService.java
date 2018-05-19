@@ -1,6 +1,7 @@
 package Service;
 
 import Communication.FlaskClient;
+import Model.Pacient;
 import Model.RegisterInfo;
 import javafx.util.Pair;
 
@@ -20,5 +21,7 @@ public class MainService {
     {
         return flaskClient.register(info);
     }
+
+    public Pair<Boolean, String> addPacient(Pacient pacient) { return  flaskClient.addPacient(pacient); }
 
 }

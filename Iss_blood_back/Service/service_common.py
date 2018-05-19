@@ -27,7 +27,7 @@ class ServiceCommon(IService):
             medici = self.db.select("Medic", ["id_user"], [id])
             if len(medici) == 1:
                 return 0, 2
-            staff = self.db.select("StaffTransfurzii", ["id_user"], [id])
+            staff = self.db.select("StaffTransfuzii", ["id_user"], [id])
             if len(staff) == 1:
                 return 0, 3
             # administrator select

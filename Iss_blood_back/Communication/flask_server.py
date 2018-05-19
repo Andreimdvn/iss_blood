@@ -36,11 +36,27 @@ class FlaskServer:
         self.app.add_url_rule("/test", "test_request", self.test_request, methods=["GET", "POST"])
         self.app.add_url_rule("/login", "login_request", self.login_request, methods=["POST"])
         self.app.add_url_rule("/register", "register_request", self.register_request, methods=["POST"])
+        self.app.add_url_rule("/add_pacient", "add_pacient_request", self.add_pacient_request, methods=["POST"])
 
     def test_request(self):
         self.request_data = request.get_json()
         self.logger.debug("Req data: {}".format(self.request_data))
         return json.dumps(self.request_data)
+
+    def add_pacient_request(self):
+        self.request_data = request.get_json()
+        self.logger.debug("Add pacient request JSON: {}".format(self.request_data))
+        id_medic = self.request_data["idMedic"]
+        nume_pacient = self.request_data["numePacient"]
+        cnp_pacient = self.request_data["cnpPacient"]
+        grupa_sange_pacient = self.request_data["grupaSangePacient"]
+        rh_pacient = self.request_data["rhPacient"]
+
+        status, message = self.controller.add_pacient(id_medic, nume_pacient, cnp_pacient, grupa_sange_pacient, rh_pacient)
+
+        return_dict = {"status": str(status), "message": message}
+
+        return json.dumps(return_dict)
 
     def login_request(self):
         self.request_data = request.get_json()

@@ -1,6 +1,7 @@
 package Communication;
 
 import Controller.FormularDonareController;
+import Model.Pacient;
 import Model.RegisterInfo;
 import javafx.util.Pair;
 import org.apache.logging.log4j.LogManager;
@@ -103,6 +104,32 @@ public class FlaskClient {
         else {
             return new Pair<>(0, jsonResponse.getString("message"));
         }
+    }
+
+    public Pair<Boolean, String> addPacient(Pacient pacient) {
+        HttpURLConnection connection = getConnection("/add_pacient");
+
+        if(connection == null)
+            return new Pair<>(false, "Add pacient connection request error");
+
+        String jsonString = new JSONObject().put("idMedic", pacient.getIdMedic())
+                                            .put("numePacient",pacient.getNume())
+                                            .put("cnpPacient", pacient.getCnp())
+                                            .put("grupaSangePacient", pacient.getGrupaSange().toString())
+                                            .put("rhPacient", pacient.getRh().toString()).toString();
+        logger.debug("SENDING ADD PACIENT REQUEST " + jsonString);
+
+        JSONObject jsonResponse = sendRequest(connection, jsonString);
+
+        logger.debug("RESPONSE ADD PACIENT" + jsonResponse);
+
+        if(jsonResponse == null)
+            return new Pair<>(false, "Connection error.");
+        if(jsonResponse.getString("status").equals("0"))
+            return new Pair<>(true, "Added new pacient successfully");
+
+        return new Pair<>(false, jsonResponse.getString("message"));
+
     }
 
     public Pair<Boolean, String> register(RegisterInfo info)
