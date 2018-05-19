@@ -1,7 +1,9 @@
 package Controller;
 
+import Model.FormularDonare;
 import Model.GrupaSange;
 import Model.RH;
+import Model.Sex;
 import Service.MainService;
 import Utils.Screen;
 import com.jfoenix.controls.JFXButton;
@@ -9,6 +11,7 @@ import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.ToggleGroup;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -62,6 +65,9 @@ public class FormularDonareController extends ControlledScreen {
     @FXML
     private JFXCheckBox vineriCheckbox;
 
+    @FXML
+    private ToggleGroup sexToggleGroup;
+
 
     @FXML
     private ComboBox<GrupaSange> grupaSangeComboBox;
@@ -87,6 +93,16 @@ public class FormularDonareController extends ControlledScreen {
         //le trimite la service
         //daca e ok, trece la ecranul urmator
 
+        FormularDonare formularDonare = GetInfoFormular();
+
+
+
+
+        loadPostFormular();
+    }
+
+    private FormularDonare GetInfoFormular()
+    {
         String firstName = firstNameTextField.getText();
         String lastName = lastNameTextField.getText();
         String beneficiarFullName = donatFullnameTextField.getText();
@@ -98,11 +114,27 @@ public class FormularDonareController extends ControlledScreen {
         String resedintaJudet = ResedintaJudetTextField.getText();
         String resedintaAdresa = ResedintaAdresaTextField.getText();
         String phone = phoneTextField.getText();
+        String genderString = sexToggleGroup.getSelectedToggle().toString();
+        Sex sex;
+        if(genderString.toLowerCase().contains("f"))
+            sex = Sex.FEMININ;
+        else
+            sex = Sex.MASCULIN;
 
+        short daysAvailable = 0; //de ex: 00011 = luni, marti
+        short currentDayVal = 1;
+        JFXCheckBox[] checkBoxes = new JFXCheckBox[]
+                {luniCheckbox, martiCheckbox, miercuriCheckbox, joiCheckbox, vineriCheckbox};
 
+        for(JFXCheckBox checkBox : checkBoxes)
+        {
+            if(checkBox.isSelected())
+                daysAvailable += currentDayVal;
+            currentDayVal *= 2;
+        }
 
-
-        loadPostFormular();
+        return new FormularDonare(firstName, lastName, sex, phone, domiciliuLocalitate, domiciliuJudet, domiciliuAdresa,
+                resedintaLocalitate, resedintaJudet, resedintaAdresa, daysAvailable);
     }
 
     @FXML
