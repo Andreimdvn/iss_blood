@@ -14,7 +14,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="866.0" style="-fx-background-color: transparent;" styleClass="formularPane" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.FormularDonareController">
 <children>
-      <JFXButton layoutX="382.0" layoutY="520.0" onAction="#loadPostFormular" styleClass="buttonFormular" text="Trimite formular" />
+      <JFXButton layoutX="382.0" layoutY="520.0" onAction="#trimiteFormular" styleClass="buttonFormular" text="Trimite formular" />
       <HBox layoutX="89.0" layoutY="101.0" prefHeight="408.0" prefWidth="688.0" spacing="10.0">
          <children>
             <AnchorPane prefHeight="271.0" prefWidth="339.0" styleClass="subFormularPane">
@@ -24,7 +24,7 @@
                         <Label layoutX="121.0" layoutY="14.0" styleClass="labelFormularHeader" text="Date personale" />
                      </children>
                   </AnchorPane>
-                  <JFXTextField fx:id="fullnameTextField" focusColor="#fea02f" layoutX="79.0" layoutY="58.0" promptText="Fullname" styleClass="textboxFormular" unFocusColor="WHITE" />
+                  <JFXTextField fx:id="firstNameTextField" focusColor="#fea02f" layoutX="42.0" layoutY="58.0" prefHeight="25.0" prefWidth="121.0" promptText="First name" styleClass="textboxSmall" unFocusColor="WHITE" />
                   <Label alignment="TOP_CENTER" contentDisplay="TOP" layoutX="81.0" layoutY="101.0" styleClass="labelFormular" text="Sex" />
                   <JFXRadioButton layoutX="137.0" layoutY="102.0" styleClass="jfx-radio-button" text="M">
                      <toggleGroup>
@@ -50,6 +50,7 @@
                   <JFXTextField fx:id="DomiciliuAdresaTextField" focusColor="#fea02f" layoutX="80.0" layoutY="247.0" prefHeight="25.0" prefWidth="223.0" promptText="Adresa" styleClass="textboxFormular" unFocusColor="WHITE" />
                   <Label layoutX="139.0" layoutY="286.0" styleClass="labelFormular" text="Resedinta" />
                   <JFXTextField fx:id="ResedintaAdresaTextField" focusColor="#fea02f" layoutX="79.0" layoutY="357.0" prefHeight="25.0" prefWidth="223.0" promptText="Adresa" styleClass="textboxFormular" unFocusColor="WHITE" />
+                  <JFXTextField fx:id="lastNameTextField" focusColor="#fea02f" layoutX="195.0" layoutY="58.0" prefHeight="25.0" prefWidth="149.0" promptText="Last name" styleClass="textboxSmall" unFocusColor="WHITE" />
                </children>
             </AnchorPane>
             <AnchorPane prefHeight="408.0" prefWidth="336.0" styleClass="subFormularPane">
@@ -77,7 +78,7 @@
                      </children>
                   </AnchorPane>
                   <Label layoutX="91.0" layoutY="57.0" styleClass="labelFormular" text="Pentru cine vrei sa donezi" />
-                  <JFXTextField fx:id="donatFullnameTextField" focusColor="#fea02f" layoutX="80.0" layoutY="85.0" promptText="Fullname" styleClass="textboxFormular" unFocusColor="WHITE" />
+                  <JFXTextField fx:id="donatFullnameTextField" focusColor="#fea02f" layoutX="80.0" layoutY="85.0" promptText="Full name" styleClass="textboxFormular" unFocusColor="WHITE" />
                   <JFXTextField fx:id="donatCnpTextField" focusColor="#fea02f" layoutX="80.0" layoutY="119.0" promptText="CNP" styleClass="textboxFormular" unFocusColor="WHITE" />
                </children>
             </AnchorPane>

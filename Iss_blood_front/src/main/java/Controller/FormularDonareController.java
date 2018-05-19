@@ -15,7 +15,10 @@ import org.apache.logging.log4j.Logger;
 public class FormularDonareController extends ControlledScreen {
 
     @FXML
-    private JFXTextField fullnameTextField;
+    private JFXTextField firstNameTextField;
+
+    @FXML
+    private JFXTextField lastNameTextField;
 
     @FXML
     private JFXTextField donatFullnameTextField;
@@ -72,10 +75,36 @@ public class FormularDonareController extends ControlledScreen {
     /**
      * Sends a request to the main screen controller to load the post-registration view
      */
-    public void loadPostFormular(){
+    private void loadPostFormular(){
         DonatorDashboardController donatorDashboardController = (DonatorDashboardController)getScreenController().getControlledScreen(Screen.DONATOR_SCREEN);
         donatorDashboardController.loadPostFormular();
     }
+
+    @FXML
+    public void trimiteFormular()
+    {
+        //ia field-urile
+        //le trimite la service
+        //daca e ok, trece la ecranul urmator
+
+        String firstName = firstNameTextField.getText();
+        String lastName = lastNameTextField.getText();
+        String beneficiarFullName = donatFullnameTextField.getText();
+        String beneficiarCNP = donatCnpTextField.getText();
+        String domiciliuLocalitate = DomiciliuLocalitateTextField.getText();
+        String domiciliuJudet = DomiciliuJudetTextField.getText();
+        String domiciliuAdresa = DomiciliuAdresaTextField.getText();
+        String resedintaLocalitate = ResedintaLocalitateTextField.getText();
+        String resedintaJudet = ResedintaJudetTextField.getText();
+        String resedintaAdresa = ResedintaAdresaTextField.getText();
+        String phone = phoneTextField.getText();
+
+
+
+
+        loadPostFormular();
+    }
+
     @FXML
     private void initialize(){
         grupaSangeComboBox.getItems().addAll(GrupaSange.O1,GrupaSange.A2,GrupaSange.B3,GrupaSange.AB4);
