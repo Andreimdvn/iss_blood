@@ -2,6 +2,7 @@ package Controller;
 
 import Model.*;
 import Service.MainService;
+import Utils.Screen;
 import com.jfoenix.controls.JFXButton;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -46,7 +47,12 @@ public class CentruCereriDonariController extends ControlledScreen{
         pregatireButton.setDisable(!pregatire);
         calificareButton.setDisable(!calificare);
     }
-
+    public void calificare(){
+        CentruAnalizaScreenController controller =
+                (CentruAnalizaScreenController) getScreenController().getControlledScreen(Screen.CENTRU_ANALIZASCREEN_SCREEN);
+        controller.setFields("testSurname","testForename",Sex.FEMININ,25,-1);
+        getScreenController().setScreen(Screen.CENTRU_ANALIZASCREEN_SCREEN);
+    }
     @FXML
     private void populateDummy(){
         CerereDonare a = new CerereDonare(

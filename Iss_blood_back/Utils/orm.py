@@ -134,7 +134,7 @@ class Analize(DB):
 
     id = Column(Integer, autoincrement=True, primary_key=True)
     id_staff_transfuzii = Column(Integer, ForeignKey('StaffTransfurzii.id_user'))
-
+    
     staff_transfuzii = relationship('StaffTransfurzii', back_populates='analize')
     sange_brut = relationship('SangeBrut', back_populates='analize')
 

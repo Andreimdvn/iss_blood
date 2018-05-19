@@ -541,6 +541,29 @@
     -fx-font-style: italic;
 }
 
+.labelAnalizaHeader{
+    -fx-text-fill: white;
+    -fx-font-size: 19px;
+    -fx-opacity: 100%;
+}
+.labelAnaliza{
+    -fx-text-fill: -fx-header-secondary-color;
+    -fx-font-size: 19px;
+    -fx-opacity: 100%;
+    -fx-font-weight:bold;
+}
+.labelAnaliza2{
+    -fx-text-fill:-fx-header-primary-color;
+    -fx-font-size: 19px;
+    -fx-opacity: 100%;
+    -fx-font-weight:bold;
+}
+.labelAnalizaSmall{
+    -fx-text-fill:-fx-header-primary-color;
+    -fx-font-size: 15px;
+    -fx-opacity: 100%;
+    -fx-font-weight:bold;
+}
 .labelRegsiterHere{
     -fx-text-fill: -fx-button-primary-color;
     -fx-opacity: 90%;

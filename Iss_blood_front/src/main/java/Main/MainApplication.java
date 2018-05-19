@@ -48,6 +48,8 @@ public class MainApplication extends Application {
         controller.loadScreen(Screen.FORMULAR_1_TEXT4_SCREEN,Screen.FORMULAR_1_TEXT4_RESOURCE);
         controller.loadScreen(Screen.FORMULAR_1_SCREEN,Screen.FORMULAR_1_RESOURCE);
         controller.loadScreen(Screen.FORMULAR_3_SCREEN,Screen.FORMULAR_3_RESOURCE);
+        controller.loadScreen(Screen.CENTRU_ANALIZASCREEN_SCREEN,Screen.CENTRU_ANALIZASCREEN_RESOURCE);
+
 
 
         controller.setScreen(Screen.LOGIN_SCREEN);
