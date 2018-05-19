@@ -1,7 +1,7 @@
 import sys
 
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Column, Integer, String, ForeignKey, Date, SmallInteger, Enum, create_engine, Boolean
+from sqlalchemy import Column, Integer, String, ForeignKey, Date, Float, Enum, create_engine, Boolean
 from sqlalchemy.orm import relationship, sessionmaker
 
 
@@ -19,8 +19,7 @@ class User(DB):
     password = Column(String(100), nullable=False)
 
     donatori = relationship('Donator', back_populates='user')
-    staff_transfuzii = relationship('StaffTransfurzii', back_populates='user')
-    staff_recoltare = relationship('StaffRecoltare', back_populates='user')
+    staff_transfuzii = relationship('StaffTransfuzii', back_populates='user')
     medici = relationship('Medic', back_populates='user')
 
 
@@ -39,6 +38,8 @@ class Localitate(DB):
     id = Column(Integer, autoincrement=True, primary_key=True)
     id_judet = Column(Integer, ForeignKey('Judet.id'))
     nume = Column(String(50), nullable=False)
+    x_cord = Column(Float, nullable=False)
+    y_cord = Column(Float, nullable=False)
 
     judet = relationship('Judet', back_populates='localitati')
     locatii = relationship('Locatie', back_populates='localitate')
@@ -47,10 +48,10 @@ class Localitate(DB):
 class Donator(DB):
     __tablename__ = 'Donator'
 
-    id_user = Column(Integer, ForeignKey('User.id'), primary_key=True)
+    id_user = Column(Integer, ForeignKey('User.id'), primary_key=True, unique=True)
     prenume = Column(String(50), nullable=False)
     nume = Column(String(50), nullable=False)
-    cnp = Column(String(13), nullable=False)
+    cnp = Column(String(13), nullable=False, unique=True)
     id_domiciliu = Column(Integer, ForeignKey('Localitate.id'))
     adresa_domiciliu = Column(String(100), nullable=False)
     data_nasterii = Column(Date, nullable=False)
@@ -69,50 +70,36 @@ class Locatie(DB):
     nume = Column(String(50), nullable=False)
     adresa = Column(String(100), nullable=False)
     id_localitate = Column(Integer, ForeignKey('Localitate.id'))
-    tip_locatie = Column(SmallInteger, nullable=False)
+    tip_locatie = Column(Enum('Spital', 'CentruTransfuzie'), nullable=False)
 
     localitate = relationship('Localitate', back_populates='locatii')
-    staff_transfuzii = relationship('StaffTransfurzii', back_populates='locatie')
-    staff_recoltare = relationship('StaffRecoltare', back_populates='locatie')
+    staff_transfuzii = relationship('StaffTransfuzii', back_populates='locatie')
     medici = relationship('Medic', back_populates='locatie')
     sange_prelucrat = relationship('SangePrelucrat', back_populates='locatie')
 
 
-class StaffTransfurzii(DB):
-    __tablename__ = 'StaffTransfurzii'
+class StaffTransfuzii(DB):
+    __tablename__ = 'StaffTransfuzii'
 
-    id_user = Column(Integer, ForeignKey('User.id'), primary_key=True)
+    id_user = Column(Integer, ForeignKey('User.id'), primary_key=True, unique=True)
     id_locatie = Column(Integer, ForeignKey('Locatie.id'))
     telefon = Column(String(20), nullable=False)
     prenume = Column(String(50), nullable=False)
     nume = Column(String(50), nullable=False)
-    cnp = Column(String(13), nullable=False)
+    cnp = Column(String(13), nullable=False, unique=True)
 
     user = relationship('User', back_populates='staff_transfuzii')
     locatie = relationship('Locatie', back_populates='staff_transfuzii')
 
 
-class StaffRecoltare(DB):
-    __tablename__ = 'StaffRecoltare'
-
-    id_user = Column(Integer, ForeignKey('User.id'), primary_key=True)
-    id_locatie = Column(Integer, ForeignKey('Locatie.id'))
-    prenume = Column(String(50), nullable=False)
-    nume = Column(String(50), nullable=False)
-    cnp = Column(String(13), nullable=False)
-
-    user = relationship('User', back_populates='staff_recoltare')
-    locatie = relationship('Locatie', back_populates='staff_recoltare')
-
-
 class Medic(DB):
     __tablename__ = 'Medic'
 
-    id_user = Column(Integer, ForeignKey('User.id'), primary_key=True)
+    id_user = Column(Integer, ForeignKey('User.id'), primary_key=True, unique=True)
     id_locatie = Column(Integer, ForeignKey('Locatie.id'))
     prenume = Column(String(50), nullable=False)
     nume = Column(String(50), nullable=False)
-    cnp = Column(String(13), nullable=False)
+    cnp = Column(String(13), nullable=False, unique=True)
     telefon = Column(String(20), nullable=False)
     specializare = Column(String(50), nullable=False)
 
@@ -125,7 +112,7 @@ class Pacient(DB):
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     nume = Column(String(100), nullable=False)
-    cnp = Column(String(13), nullable=False)
+    cnp = Column(String(13), nullable=False, unique=True)
     rh = Column(Enum('pozitiv', 'negativ'), nullable=False)
     grupa = Column(Enum('01', 'A2', 'B3', 'AB4'), nullable=False)
     id_medic = Column(Integer, ForeignKey('Medic.id_user'))
@@ -168,8 +155,8 @@ class SangeBrut(DB):
     id_locatie_curenta = Column(Integer, ForeignKey('Locatie.id'))
 
     donator = relationship('Donator', back_populates='sange_brut')
-    analize = relationship('Analize', back_populates='sange_brut')
     sange_prelucrat = relationship('SangePrelucrat', back_populates='sange_brut')
+    analize = relationship('Analize', back_populates='sange_brut')
 
 
 class SangePrelucrat(DB):
@@ -191,11 +178,15 @@ class ORM:
         con_string = MYSQL_CON_STRING % (config['mysql_username'], config['mysql_password'], config['mysql_server'],
                                          config['mysql_port'], config['mysql_database'])
 
-        engine = create_engine(con_string)
-        self.session = sessionmaker(bind=engine)
-        #DB.metadata.drop_all(engine)  ### ---> DON'T TOUCH THIS LINE <--- ### (deletes all tables from db)
-        DB.metadata.create_all(engine)
+        self.engine = create_engine(con_string)
+        self.session = sessionmaker(bind=self.engine)
         self.ses = None
+
+    def create_database(self):
+        DB.metadata.create_all(self.engine)
+
+    def drop_databse(self):
+        DB.metadata.drop_all(self.engine)
 
     def columns_objects(self, table, columns):
         cols = []
