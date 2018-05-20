@@ -176,16 +176,20 @@ class CereriSange(DB):
     __tablename__ = 'CereriSange'
 
     id = Column(Integer, autoincrement=True, primary_key=True)
-    id_medic = Column(Integer, ForeignKey('Medic.id_user'))
-    nume_pacient = Column(String(50), nullable=False)
-    cnp_pacient = Column(String(13), nullable=False)
-    grupa_sange = Column(Enum('O1', 'A2', 'B3', 'AB4'))
-    rh = Column(Enum('Pozitiv', 'Negativ'))
+    id_medic = Column(Integer, ForeignKey('Medic.id_user'), nullable=False)
+    id_pacient = Column(Integer, ForeignKey('Paciet.id'), nullable=False)
+
+    grupa_sange = Column(Enum('O1', 'A2', 'B3', 'AB4'), nullable=False)
+    rh = Column(Enum('Pozitiv', 'Negativ'), nullable=False)
+
     numar_pungi_trombocite = Column(Integer, nullable=False)
     numar_pungi_globule_rosii = Column(Integer, nullable=False)
     numar_pungi_plasma = Column(Integer, nullable=False)
     date = Column(Date, nullable=False)
     importanta = Column(Enum('Scazuta', 'Medie', 'Ridicata'))
+
+    medic = relationship('Medic', back_populates='cereri_sange')
+    pacient = relationship('Pacient', back_populates='cereri_sange')
 
 
 class ORM:
