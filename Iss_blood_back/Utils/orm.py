@@ -176,6 +176,7 @@ class CereriSange(DB):
     __tablename__ = 'CereriSange'
 
     id = Column(Integer, autoincrement=True, primary_key=True)
+
     id_medic = Column(Integer, ForeignKey('Medic.id_user'), nullable=False)
     id_pacient = Column(Integer, ForeignKey('Paciet.id'), nullable=False)
 
@@ -190,7 +191,6 @@ class CereriSange(DB):
 
     medic = relationship('Medic', back_populates='cereri_sange')
     pacient = relationship('Pacient', back_populates='cereri_sange')
-
 
 class ORM:
 

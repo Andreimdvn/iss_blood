@@ -7,5 +7,3 @@ class CerereSange:
         self.numar_pungi_trombocite = numar_pungi_trombocite
         self.numar_pungi_globule_rosii = numar_pungi_globule_rosii
         self.numar_pungi_plasma = numar_pungi_plasma
-        self.date = date
-        self.importanta = importanta
