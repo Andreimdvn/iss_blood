@@ -75,15 +75,15 @@ public class LoginController extends ControlledScreen {
         logger.debug("Login button has been clicked");
 
 
-        Pair<Integer, String> canLogin;
-        //Pair<Integer, String> canLogin = getService().login(username, password);
+//        Pair<Integer, String> canLogin;
+        Pair<Integer, String> canLogin = getService().login(username, password);
         // Login for debug
-        if(username.equals("donator"))
-            canLogin = new Pair<>(1,"");
-        else if(username.equals("medic"))
-            canLogin = new Pair<>(2,"");
-        else
-            canLogin = new Pair<>(3,"");
+//        if(username.equals("donator"))
+//            canLogin = new Pair<>(1,"");
+//        else if(username.equals("medic"))
+//            canLogin = new Pair<>(2,"");
+//        else
+//            canLogin = new Pair<>(3,"");
         //remove this ^^^ on production
 
         if (canLogin.getKey() == 0) {

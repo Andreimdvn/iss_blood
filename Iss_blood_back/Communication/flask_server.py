@@ -51,13 +51,15 @@ class FlaskServer:
         user = self.request_data["username"]
         password = self.request_data["password"]
 
-        status, user_type = self.controller.login(user, password)
+        status, user_type, user_info = self.controller.login(user, password)
 
-        return_dict = {"status": status, "user_type": user_type}
         if status == 0:
+            return_dict = user_info  # refolosim user_info care deja e dictionar
+            return_dict["status"] = 0
             return_dict["message"] = "Login cu success!"
+            return_dict["user_type"] = user_type
         else:
-            return_dict["message"] = "Username sau parola invalide"
+            return_dict = {"status": status, "message": "Username sau parola invalide"}
 
         self.logger.debug("Returning response for Login Request: {}".format(return_dict))
 
@@ -84,8 +86,6 @@ class FlaskServer:
         self.request_data = request.get_json()
         self.logger.debug("Got register request JSON: {}".format(self.request_data))
 
-        # nume, prenume, sex, telefon, domiciliu_localitate, domiciliu_judet, domiciliu_adresa, resedinta_localitate,
-        # resedinta_judet, resedinta_adresa, beneficiar_full_name, beneficiar_CNP, grupa, rh, zile_disponibil
         formular_donare = FormularDonare(self.request_data["nume"], self.request_data["prenume"],
                                          self.request_data["sex"], self.request_data["telefon"],
                                          self.request_data["domiciliuLocalitate"],
