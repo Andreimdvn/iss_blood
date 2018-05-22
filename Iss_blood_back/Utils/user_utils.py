@@ -40,9 +40,9 @@ def get_info_donator(db, donator, user):
             'prenume': donator.prenume,
             'cnp': donator.cnp,
             'telefon': donator.telefon,
-            'localitate_domiciliu': localitate_domiciliu.nume,
-            'judet_domiciliu': judet_domiciliu.nume,
-            'adresa_domiciliu': donator.adresa_domiciliu,
-            'localitate_resedinta': localitate_resedinta.nume,
-            'judet_resedinta': judet_resedinta.nume,
-            'adresa_resedinta': donator.adresa_resedinta}
+            'domiciliu_localitate': localitate_domiciliu.nume,
+            'domiciliu_judet': judet_domiciliu.nume,
+            'domiciliu_adresa': donator.adresa_domiciliu,
+            'resedinta_localitate': localitate_resedinta.nume,
+            'resedinta_judet': judet_resedinta.nume,
+            'resedinta_adresa': donator.adresa_resedinta}

@@ -3,6 +3,7 @@ package Service;
 import Communication.FlaskClient;
 import Model.FormularDonare;
 import Model.RegisterInfo;
+import Model.UserInfo;
 import javafx.util.Pair;
 
 public class MainService {
@@ -13,7 +14,7 @@ public class MainService {
         this.flaskClient = flaskClient;
     }
 
-    public Pair<Integer, String> login(String user, String pass) {
+    public Pair<UserInfo, String> login(String user, String pass) {
         return flaskClient.login(user, pass);
     }
 

@@ -2,6 +2,8 @@ package Communication;
 
 import Model.FormularDonare;
 import Model.RegisterInfo;
+import Model.UserInfo;
+import Utils.UserUtils;
 import javafx.util.Pair;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -78,15 +80,16 @@ public class FlaskClient {
      * Sends a login request to the server
      * @param user : Username for login
      * @param password : Password for login
-     * @return <bool,string> true if the login was successfully , false otherwise
+     * @return <UserInfo,string> If the login request was unsuccessful,
+     *        UserInfo will be set to null and the string will contain an error message
      * + a string message describing the status
      */
-    public Pair<Integer, String> login(String user, String password){
+    public Pair<UserInfo, String> login(String user, String password){
 
         HttpURLConnection http = getConnection("/login");
 
         if(http == null){
-            return new Pair<>(0, "Client connection request Error");
+            return new Pair<>(null, "Client connection request Error");
         }
 
         String jsonString = new JSONObject().put("username", user).put("password", password).toString();
@@ -95,13 +98,13 @@ public class FlaskClient {
         JSONObject jsonResponse = this.sendRequest(http, jsonString);
         logger.debug("RESPONSE : " + jsonResponse);
         if(jsonResponse == null) {
-            return new Pair<>(0, "Connection error.");
+            return new Pair<>(null, "Connection error.");
         }
         if (jsonResponse.getInt("status")== 0) {
-            return new Pair<>(jsonResponse.getInt("user_type"), "Success!");
+            return new Pair<>(UserUtils.GetUserInfoFromResponse(jsonResponse), "Success!");
         }
         else {
-            return new Pair<>(0, jsonResponse.getString("message"));
+            return new Pair<>(null, jsonResponse.getString("message"));
         }
     }
 

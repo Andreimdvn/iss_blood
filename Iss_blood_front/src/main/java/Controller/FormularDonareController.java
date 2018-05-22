@@ -1,9 +1,6 @@
 package Controller;
 
-import Model.FormularDonare;
-import Model.GrupaSange;
-import Model.RH;
-import Model.Sex;
+import Model.*;
 import Service.MainService;
 import Utils.CustomMessageBox;
 import Utils.Screen;
@@ -153,8 +150,28 @@ public class FormularDonareController extends ControlledScreen {
     private void initialize(){
         grupaSangeComboBox.getItems().addAll(GrupaSange.O1,GrupaSange.A2,GrupaSange.B3,GrupaSange.AB4);
         rhComboBox.getItems().addAll(RH.POZITIV,RH.NEGATIV);
+    }
 
-        //TO DO: umple fieldurile automat
+    @Override
+    public void setScreenController(ScreenController screenController) {
+        super.setScreenController(screenController);
+
+        autoFillTextFields();
+    }
+
+
+    private void autoFillTextFields()
+    {
+        DonatorInfo info = (DonatorInfo) getScreenController().userInfo;
+        firstNameTextField.setText(info.getPrenume());
+        lastNameTextField.setText(info.getNume());
+        DomiciliuJudetTextField.setText(info.getDomiciliuJudet());
+        DomiciliuLocalitateTextField.setText(info.getDomiciliuLocalitate());
+        DomiciliuAdresaTextField.setText(info.getDomiciliuAdresa());
+        ResedintaJudetTextField.setText(info.getResedintaJudet());
+        ResedintaLocalitateTextField.setText(info.getResedintaLocalitate());
+        ResedintaAdresaTextField.setText(info.getResedintaAdresa());
+        phoneTextField.setText(info.getTelefon());
     }
 
 }
