@@ -155,7 +155,8 @@ public class FlaskClient {
                 .put("beneficiarFullName", formular.getBeneficiarFullName())
                 .put("beneficiarCNP", formular.getBeneficiarCNP())
                 .put("grupa", formular.getGrupa()).put("rh", formular.getRh().toString())
-                .put("zileDisponibil", formular.getZileDisponibil()).toString();
+                .put("zileDisponibil", formular.getZileDisponibil())
+                .put("username", formular.getUsername()).toString();
 
         logger.debug("SENDING: " + jsonString);
         JSONObject jsonResponse = sendRequest(connection, jsonString);

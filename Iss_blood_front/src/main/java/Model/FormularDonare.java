@@ -1,6 +1,7 @@
 package Model;
 
 public class FormularDonare {
+    private String username;
     private String nume;
     private String prenume;
     private Sex sex;
@@ -17,7 +18,12 @@ public class FormularDonare {
     RH rh;
     private short zileDisponibil; //de ex: 00011 = luni si marti
 
-    public FormularDonare(String nume, String prenume, Sex sex, String telefon, String domiciliuLocalitate, String domiciliuJudet, String domiciliuAdresa, String resedintaLocalitate, String resedintaJudet, String resedintaAdresa, String beneficiarFullName, String beneficiarCNP, GrupaSange grupa, RH rh, short zileDisponibil) {
+    public FormularDonare(String username, String nume, String prenume, Sex sex, String telefon,
+                          String domiciliuLocalitate, String domiciliuJudet, String domiciliuAdresa,
+                          String resedintaLocalitate, String resedintaJudet, String resedintaAdresa,
+                          String beneficiarFullName, String beneficiarCNP, GrupaSange grupa, RH rh,
+                          short zileDisponibil) {
+        this.username = username;
         this.nume = nume;
         this.prenume = prenume;
         this.sex = sex;
@@ -93,5 +99,9 @@ public class FormularDonare {
 
     public short getZileDisponibil() {
         return zileDisponibil;
+    }
+
+    public String getUsername() {
+        return username;
     }
 }

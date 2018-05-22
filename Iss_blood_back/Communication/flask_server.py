@@ -87,8 +87,11 @@ class FlaskServer:
         self.logger.debug("Got register request JSON: {}".format(self.request_data))
 
         #TO DO: astea cu _
-        formular_donare = FormularDonare(self.request_data["nume"], self.request_data["prenume"],
-                                         self.request_data["sex"], self.request_data["telefon"],
+        formular_donare = FormularDonare(self.request_data["username"],
+                                         self.request_data["nume"],
+                                         self.request_data["prenume"],
+                                         self.request_data["sex"],
+                                         self.request_data["telefon"],
                                          self.request_data["domiciliuLocalitate"],
                                          self.request_data["domiciliuJudet"],
                                          self.request_data["domiciliuAdresa"],

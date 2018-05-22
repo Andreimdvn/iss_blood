@@ -93,6 +93,13 @@ public class FormularDonareController extends ControlledScreen {
         //daca e ok, trece la ecranul urmator
 
         FormularDonare formularDonare = GetInfoFormular();
+        if(formularDonare == null)
+        {
+            CustomMessageBox msg = new CustomMessageBox("Eroare", "Formularul nu a fost completat corect. " +
+                    "\nVerificati daca ati completat toate campurile obligatorii", 1);
+            msg.show();
+            return;
+        }
 
         Pair<Boolean, String> rez = getService().trimiteFormularDonare(formularDonare);
         if(rez.getKey())
@@ -108,14 +115,24 @@ public class FormularDonareController extends ControlledScreen {
         }
     }
 
+    /**
+     *
+     * @return Informatiile sau null daca un camp obligatoriu nu a fost completat
+     */
     private FormularDonare GetInfoFormular()
     {
+        //TO DO: verifica sa nu fie campuri goale. return null
+        String username = getScreenController().userInfo.getUsername();
         String firstName = firstNameTextField.getText();
         String lastName = lastNameTextField.getText();
         String beneficiarFullName = donatFullnameTextField.getText();
         String beneficiarCNP = donatCnpTextField.getText();
         GrupaSange grupa = grupaSangeComboBox.getValue();
+        if(grupa == null)
+            grupa = GrupaSange.UNKNOWN;
         RH rh = rhComboBox.getValue();
+        if(rh == null)
+            rh = RH.UNKNOWN;
         String domiciliuLocalitate = DomiciliuLocalitateTextField.getText();
         String domiciliuJudet = DomiciliuJudetTextField.getText();
         String domiciliuAdresa = DomiciliuAdresaTextField.getText();
@@ -123,6 +140,10 @@ public class FormularDonareController extends ControlledScreen {
         String resedintaJudet = ResedintaJudetTextField.getText();
         String resedintaAdresa = ResedintaAdresaTextField.getText();
         String phone = phoneTextField.getText();
+        if(sexToggleGroup.getSelectedToggle() == null)
+        {
+            return null;
+        }
         String genderString = sexToggleGroup.getSelectedToggle().toString();
         Sex sex;
         if(genderString.toLowerCase().contains("f"))
@@ -142,7 +163,7 @@ public class FormularDonareController extends ControlledScreen {
             currentDayVal *= 2;
         }
 
-        return new FormularDonare(firstName, lastName, sex, phone, domiciliuLocalitate, domiciliuJudet, domiciliuAdresa,
+        return new FormularDonare(username, lastName, firstName, sex, phone, domiciliuLocalitate, domiciliuJudet, domiciliuAdresa,
                 resedintaLocalitate, resedintaJudet, resedintaAdresa, beneficiarFullName, beneficiarCNP, grupa, rh, zileDisponibil);
     }
 

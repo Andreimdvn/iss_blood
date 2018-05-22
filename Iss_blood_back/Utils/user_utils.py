@@ -16,7 +16,7 @@ def data_nasterii_din_cnp(cnp):
     date = datetime.datetime.strptime("{0}-{1}-{2}".format(str(year), month, day), "%Y-%m-%d")
     return date
 
-def get_info_donator(db, donator, user):
+def get_info_donator(db, user, donator = None):
     '''
     Returneaza toate informatiile despre donator, inclusiv cele din alte tabele(localitate, judet...)
     :param db: Utils.orm.ORM - Baza de date care va fi interogata
@@ -25,6 +25,9 @@ def get_info_donator(db, donator, user):
     :return: Un dictionar cu: username, nume, prenume, cnp, telefon, domiciliu_localitate, domiciliu_judet,
                 domiciliu_adresa, resedinta_localitate, resedinta_judet, resedinta_adresa
     '''
+
+    if donator is None:
+        donator = db.select("Donator", ["id_user"], [user.id], True)
 
     #id_domiciliu te duce la o localitate care apartine de un judet
     #cauta localitatea
