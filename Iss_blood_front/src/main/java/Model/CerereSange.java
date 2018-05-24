@@ -16,6 +16,40 @@ public class CerereSange{
     private Date date;
     private Importanta importanta;
 
+    public CerereSange(String numePacient, String cnpPacient, GrupaSange grupaSange, RH rh, Integer numarPungiTrombocite, Integer numarPungiGlobuleRosii, Integer numarPungiPlasma, Date date, Importanta importanta, String numeMedic, String spital) {
+        this.cnpPacient = cnpPacient;
+        this.grupaSange = grupaSange;
+        this.numePacient = numePacient;
+        this.rh = rh;
+        this.numarPungiTrombocite = numarPungiTrombocite;
+        this.numarPungiGlobuleRosii = numarPungiGlobuleRosii;
+        this.numarPungiPlasma = numarPungiPlasma;
+        this.date = date;
+        this.importanta = importanta;
+        this.numeMedic = numeMedic;
+        this.spital = spital;
+    }
+
+    public String getNumeMedic() {
+
+        return numeMedic;
+    }
+
+    public void setNumeMedic(String numeMedic) {
+        this.numeMedic = numeMedic;
+    }
+
+    public String getSpital() {
+        return spital;
+    }
+
+    public void setSpital(String spital) {
+        this.spital = spital;
+    }
+
+    private String numeMedic;
+    private String spital;
+
     private Logger logger = LogManager.getLogger(CerereSange.class.getName());
 
     public String getNumePacient() {

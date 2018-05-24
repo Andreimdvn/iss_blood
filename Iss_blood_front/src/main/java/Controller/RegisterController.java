@@ -1,7 +1,6 @@
 package Controller;
 
 import Model.RegisterInfo;
-import Service.MainService;
 import Utils.CustomMessageBox;
 import Utils.Screen;
 import Validators.RegisterValidator;
@@ -25,7 +24,7 @@ import org.apache.logging.log4j.Logger;
 import javafx.util.Pair;
 
 
-public class RegisterController implements ControlledScreensInterface{
+public class RegisterController extends ControlledScreen {
 
     @FXML
     private AnchorPane mainPane;
@@ -91,9 +90,6 @@ public class RegisterController implements ControlledScreensInterface{
 
     private double yOffset;
 
-    private MainService mainService;
-
-    private ControllerScreens controller;
 
     private void removeLicentaHBox(){
         registerPane.getChildren().remove(licentaHbox);
@@ -187,12 +183,13 @@ public class RegisterController implements ControlledScreensInterface{
             Pair<Boolean, String> validationResult = validator.Validate(info);
             if(validationResult.getKey())
             {
-                Pair<Boolean, String> response = mainService.register(info);
+                getScreenController().setScreen(Screen.LOGIN_SCREEN);
+                Pair<Boolean, String> response = getService().register(info);
                 if(response.getKey())
                 {
                     CustomMessageBox customMessageBox = new CustomMessageBox("info", "Registered successfully", 0);
                     customMessageBox.show();
-                    controller.setScreen(Screen.LOGIN_SCREEN);
+                    getScreenController().setScreen(Screen.LOGIN_SCREEN);
                     ClearFields();
                 }
                 else
@@ -231,9 +228,8 @@ public class RegisterController implements ControlledScreensInterface{
 
     @FXML
     private void loginLabelClicked(){
-
+       getScreenController().setScreen(Screen.LOGIN_SCREEN);
         logger.debug("Buton Go back to login screen a fost apasat");
-        controller.setScreen(Screen.LOGIN_SCREEN);
     }
 
     private void enableStyle(){
@@ -259,14 +255,5 @@ public class RegisterController implements ControlledScreensInterface{
     private void initialize(){
         enableStyle();
         accountTypeToggleGroup = donatorToggleButton.getToggleGroup();
-    }
-
-    public void setMainService(MainService mainService){
-        this.mainService = mainService;
-    }
-
-    @Override
-    public void setScreenParent(ControllerScreens screenParent) {
-        this.controller = screenParent;
     }
 }

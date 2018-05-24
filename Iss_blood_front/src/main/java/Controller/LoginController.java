@@ -1,6 +1,5 @@
 package Controller;
 
-import Service.MainService;
 import Utils.CustomMessageBox;
 import Utils.Screen;
 import com.jfoenix.controls.JFXPasswordField;
@@ -8,7 +7,6 @@ import com.jfoenix.controls.JFXTextField;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Paint;
@@ -20,7 +18,7 @@ import org.apache.logging.log4j.Logger;
 import java.util.Objects;
 
 
-public class LoginController implements ControlledScreensInterface {
+public class LoginController extends ControlledScreen {
 
     @FXML
     private AnchorPane mainPane;
@@ -34,13 +32,10 @@ public class LoginController implements ControlledScreensInterface {
     @FXML
     private JFXPasswordField passwordTextField;
 
-    private MainService mainService;
 
     private double xOffset;
 
     private double yOffset;
-
-    private ControllerScreens controller;
 
     private void enableStyle(){
         String focusColor = "#fea02f";
@@ -80,19 +75,30 @@ public class LoginController implements ControlledScreensInterface {
         logger.debug("Login button has been clicked");
 
 
+        Pair<Integer, String> canLogin;
+        //Pair<Integer, String> canLogin = getService().login(username, password);
+        // Login for debug
+        if(username.equals("donator"))
+            canLogin = new Pair<>(1,"");
+        else if(username.equals("medic"))
+            canLogin = new Pair<>(2,"");
+        else
+            canLogin = new Pair<>(3,"");
+        //remove this ^^^ on production
 
-        Pair<Integer, String> canLogin = mainService.login(username, password);
         if (canLogin.getKey() == 0) {
             new CustomMessageBox("Login",canLogin.getValue()).show();
         } else if (canLogin.getKey() == 1){
 
-            controller.setScreen(Screen.DONATOR_SCREEN);
+            getScreenController().setScreen(Screen.DONATOR_SCREEN);
         }
         else if (canLogin.getKey() == 2) {
-            controller.setScreen(Screen.MEDIC_SCREEN);
+            getScreenController().setScreen(Screen.MEDIC_SCREEN);
         }
-        else if (canLogin.getKey() == 3) {
-            logger.debug("Credintiale gresite");
+        else  {
+            getScreenController().setScreen(Screen.CENTRU_TRANSFUZIE_SCREEN);
+
+            //logger.debug("Credintiale gresite");
             //controller.setScreen();
         }
 
@@ -105,7 +111,7 @@ public class LoginController implements ControlledScreensInterface {
     @FXML
     private void registerLabelClicked(){
         logger.debug("Buton Go to register screen a fost apasat");
-        controller.setScreen(Screen.REGISTER_SCREEN);
+        getScreenController().setScreen(Screen.REGISTER_SCREEN);
     }
 
     private Stage getStage() {
@@ -117,14 +123,5 @@ public class LoginController implements ControlledScreensInterface {
         logger.debug("X has been clicked");
         Stage current = getStage();
         current.close();
-    }
-
-    public void setMainService(MainService mainService){
-        this.mainService = mainService;
-    }
-
-    @Override
-    public void setScreenParent(ControllerScreens screenParent) {
-        this.controller = screenParent;
     }
 }

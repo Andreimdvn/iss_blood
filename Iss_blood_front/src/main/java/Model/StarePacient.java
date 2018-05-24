@@ -4,15 +4,12 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class StarePacient {
-    String numePacient;
-    GrupaSange grupaSange;
-    RH rh;
-    Integer numarPungiTrombocite;
-    Integer numarPungiGlobuleRosii;
-    Integer numarPungiPlasma;
-    Integer numarCereri;
-    Integer donatoriPreferentiali;
-    Importanta importanta;
+    private String numePacient;
+    private String cnpPacient;
+    private GrupaSange grupaSange;
+    private RH rh;
+    private Integer numarCereri;
+    private Integer donatoriPreferentiali;
 
 
     private Logger logger = LogManager.getLogger(StarePacient.class.getName());
@@ -21,38 +18,28 @@ public class StarePacient {
     public String toString() {
         return "StarePacient{" +
                 "numePacient='" + numePacient + '\'' +
+                ", cnpPacient='" + cnpPacient + '\'' +
                 ", grupaSange=" + grupaSange +
                 ", rh=" + rh +
-                ", numarPungiTrombocite=" + numarPungiTrombocite +
-                ", numarPungiGlobuleRosii=" + numarPungiGlobuleRosii +
-                ", numarPungiPlasma=" + numarPungiPlasma +
                 ", numarCereri=" + numarCereri +
                 ", donatoriPreferentiali=" + donatoriPreferentiali +
-                ", importanta=" + importanta +
                 '}';
     }
 
-    public StarePacient(String numePacient, GrupaSange grupaSange, RH rh, Integer numarPungiTrombocite, Integer numarPungiGlobuleRosii, Integer numarPungiPlasma, Integer numarCereri, Integer donatoriPreferentiali, Importanta importanta) {
-        this.numePacient = numePacient;
-        this.grupaSange = grupaSange;
-        this.rh = rh;
-        this.numarPungiTrombocite = numarPungiTrombocite;
-        this.numarPungiGlobuleRosii = numarPungiGlobuleRosii;
-        this.numarPungiPlasma = numarPungiPlasma;
-        this.numarCereri = numarCereri;
-        this.donatoriPreferentiali = donatoriPreferentiali;
-        this.importanta = importanta;
-
-        logger.debug(toString());
-    }
-
     public String getNumePacient() {
-
         return numePacient;
     }
 
     public void setNumePacient(String numePacient) {
         this.numePacient = numePacient;
+    }
+
+    public String getCnpPacient() {
+        return cnpPacient;
+    }
+
+    public void setCnpPacient(String cnpPacient) {
+        this.cnpPacient = cnpPacient;
     }
 
     public GrupaSange getGrupaSange() {
@@ -71,30 +58,6 @@ public class StarePacient {
         this.rh = rh;
     }
 
-    public Integer getNumarPungiTrombocite() {
-        return numarPungiTrombocite;
-    }
-
-    public void setNumarPungiTrombocite(Integer numarPungiTrombocite) {
-        this.numarPungiTrombocite = numarPungiTrombocite;
-    }
-
-    public Integer getNumarPungiGlobuleRosii() {
-        return numarPungiGlobuleRosii;
-    }
-
-    public void setNumarPungiGlobuleRosii(Integer numarPungiGlobuleRosii) {
-        this.numarPungiGlobuleRosii = numarPungiGlobuleRosii;
-    }
-
-    public Integer getNumarPungiPlasma() {
-        return numarPungiPlasma;
-    }
-
-    public void setNumarPungiPlasma(Integer numarPungiPlasma) {
-        this.numarPungiPlasma = numarPungiPlasma;
-    }
-
     public Integer getNumarCereri() {
         return numarCereri;
     }
@@ -111,11 +74,12 @@ public class StarePacient {
         this.donatoriPreferentiali = donatoriPreferentiali;
     }
 
-    public Importanta getImportanta() {
-        return importanta;
-    }
-
-    public void setImportanta(Importanta importanta) {
-        this.importanta = importanta;
+    public StarePacient(String numePacient, String cnpPacient, GrupaSange grupaSange, RH rh, Integer numarCereri, Integer donatoriPreferentiali) {
+        this.numePacient = numePacient;
+        this.cnpPacient = cnpPacient;
+        this.grupaSange = grupaSange;
+        this.rh = rh;
+        this.numarCereri = numarCereri;
+        this.donatoriPreferentiali = donatoriPreferentiali;
     }
 }
