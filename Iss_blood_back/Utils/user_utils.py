@@ -29,6 +29,9 @@ def get_info_donator(db, user, donator = None):
     if donator is None:
         donator = db.select("Donator", ["id_user"], [user.id], True)
 
+    if donator is None: #daca inca e None, nu exista inregistrarea
+        raise ValueError("Userul nu apare in tabela de donatori")
+
     #id_domiciliu te duce la o localitate care apartine de un judet
     #cauta localitatea
     localitate_domiciliu = db.select('Localitate', ['id'], [donator.id_domiciliu], True)
@@ -38,8 +41,7 @@ def get_info_donator(db, user, donator = None):
     localitate_resedinta = db.select('Localitate', ['id'], [donator.id_localitate_resedinta], True)
     judet_resedinta = db.select('Judet', ['id'], [localitate_resedinta.id_judet], True)
 
-    return {'username': user.username,
-            'nume': donator.nume,
+    return {'nume': donator.nume,
             'prenume': donator.prenume,
             'cnp': donator.cnp,
             'telefon': donator.telefon,
@@ -49,3 +51,41 @@ def get_info_donator(db, user, donator = None):
             'resedinta_localitate': localitate_resedinta.nume,
             'resedinta_judet': judet_resedinta.nume,
             'resedinta_adresa': donator.adresa_resedinta}
+
+
+def get_info_medic(db, user, medic = None):
+    '''
+    Nume, prenume, ID locatie
+    :param db:
+    :param user:
+    :param medic:
+    :return:
+    '''
+    if medic is None:
+        medic = db.select("Medic", ["id_user"], [user.id])
+
+    if medic is None: #daca inca e None, nu exista inregistrarea
+        raise ValueError("Userul nu apare in tabela de medici")
+
+    return {"nume": medic.nume,
+            "prenume": medic.prenume,
+            "id_locatie": medic.id_locatie}
+
+
+def get_info_staff(db, user, staff = None):
+    '''
+    Nume, prenume, ID locatie
+    :param db:
+    :param user:
+    :param staff:
+    :return:
+    '''
+    if staff is None:
+        staff = db.select("StaffTransfuzii", ["id_user"], [user.id])
+
+    if staff is None: #daca inca e None, nu exista inregistrarea
+        raise ValueError("Userul nu apare in tabela de StaffTransfuzii")
+
+    return {"nume": staff.nume,
+            "prenume": staff.prenume,
+            "id_locatie": staff.id_locatie}

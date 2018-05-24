@@ -9,6 +9,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.json.JSONObject;
 
+import javax.naming.directory.InvalidAttributesException;
 import java.io.*;
 import java.net.*;
 import java.nio.charset.StandardCharsets;
@@ -101,7 +102,11 @@ public class FlaskClient {
             return new Pair<>(null, "Connection error.");
         }
         if (jsonResponse.getInt("status")== 0) {
-            return new Pair<>(UserUtils.GetUserInfoFromResponse(jsonResponse), "Success!");
+            try {
+                return new Pair<>(UserUtils.GetUserInfoFromResponse(jsonResponse, user), "Success!");
+            } catch (InvalidAttributesException e) {
+                return new Pair<>(null, e.getMessage());
+            }
         }
         else {
             return new Pair<>(null, jsonResponse.getString("message"));

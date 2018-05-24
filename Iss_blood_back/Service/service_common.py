@@ -4,7 +4,7 @@ from Model.account_type import AccountType
 from Service.i_service import IService
 from Utils.orm import User
 from Validators.register_validator import register_validator
-from Utils.user_utils import get_info_donator
+from Utils.user_utils import get_info_donator, get_info_medic, get_info_staff
 from Utils import locatii_utils
 
 
@@ -30,10 +30,10 @@ class ServiceCommon(IService):
                 return 0, 1, get_info_donator(self.db, user, donator)
             medic = self.db.select("Medic", ["id_user"], [id], True)
             if medic is not None:
-                return 0, 2
-            staff = self.db.select("StaffTransfurzii", ["id_user"], [id], True)
+                return 0, 2, get_info_medic(self.db, user, medic)
+            staff = self.db.select("StaffTransfuzii", ["id_user"], [id], True)
             if staff is not None:
-                return 0, 3
+                return 0, 3, get_info_staff(self.db, user, staff)
             # administrator select
 
         return 1, None
