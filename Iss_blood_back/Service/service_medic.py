@@ -23,9 +23,9 @@ class ServiceMedic(IService):
         table_name = 'Pacient'
         columns_to_add = ['nume', 'cnp', 'rh', 'grupa', 'id_medic']
         values_to_add = [nume_pacient, cnp_pacient, rh_pacient, grupa_sange_pacient, id_medic]
-        #try:
-        self.db.insert(table=table_name, columns=columns_to_add, values=values_to_add)
-        #except:
-         #   return 1, "Database error"
+        try:
+            self.db.insert(table=table_name, columns=columns_to_add, values=values_to_add)
+        except:
+            return 1, "Database error"
 
         return  0, "Pacient added successfully"

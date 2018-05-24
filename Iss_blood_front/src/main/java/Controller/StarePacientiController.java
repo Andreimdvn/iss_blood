@@ -101,6 +101,7 @@ public class StarePacientiController extends ControlledScreen {
         } else {
             pacientForValidation.setIdMedic(idMedic);
             Pair<Boolean, String> response = getService().addPacient(pacientForValidation);
+            new CustomMessageBox("Adaugare pacient", response.getValue(), response.getKey() ? 0 : 1).show();
             logger.debug("Adaugare pacient cu mesajul " + response.getValue());
         }
     }
