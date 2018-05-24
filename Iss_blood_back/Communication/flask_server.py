@@ -86,23 +86,22 @@ class FlaskServer:
         self.request_data = request.get_json()
         self.logger.debug("Got register request JSON: {}".format(self.request_data))
 
-        #TO DO: astea cu _
         formular_donare = FormularDonare(self.request_data["username"],
                                          self.request_data["nume"],
                                          self.request_data["prenume"],
                                          self.request_data["sex"],
                                          self.request_data["telefon"],
-                                         self.request_data["domiciliuLocalitate"],
-                                         self.request_data["domiciliuJudet"],
-                                         self.request_data["domiciliuAdresa"],
-                                         self.request_data["resedintaLocalitate"],
-                                         self.request_data["resedintaJudet"],
-                                         self.request_data["resedintaAdresa"],
-                                         self.request_data["beneficiarFullName"],
-                                         self.request_data["beneficiarCNP"],
+                                         self.request_data["domiciliu_localitate"],
+                                         self.request_data["domiciliu_judet"],
+                                         self.request_data["domiciliu_adresa"],
+                                         self.request_data["resedinta_localitate"],
+                                         self.request_data["resedinta_judet"],
+                                         self.request_data["resedinta_adresa"],
+                                         self.request_data["beneficiar_full_name"],
+                                         self.request_data["beneficiar_CNP"],
                                          self.request_data["grupa"],
                                          self.request_data["rh"],
-                                         self.request_data["zileDisponibil"])
+                                         self.request_data["zile_disponibil"])
 
         self.controller.trimite_formular(formular_donare)
 

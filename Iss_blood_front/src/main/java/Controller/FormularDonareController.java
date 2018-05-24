@@ -9,6 +9,7 @@ import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.util.Pair;
 import org.apache.logging.log4j.LogManager;
@@ -121,7 +122,6 @@ public class FormularDonareController extends ControlledScreen {
      */
     private FormularDonare GetInfoFormular()
     {
-        //TO DO: verifica sa nu fie campuri goale. return null
         String username = getScreenController().userInfo.getUsername();
         String firstName = firstNameTextField.getText();
         String lastName = lastNameTextField.getText();
@@ -144,7 +144,7 @@ public class FormularDonareController extends ControlledScreen {
         {
             return null;
         }
-        String genderString = sexToggleGroup.getSelectedToggle().toString();
+        String genderString = ((RadioButton)sexToggleGroup.getSelectedToggle()).getText();
         Sex sex;
         if(genderString.toLowerCase().contains("f"))
             sex = Sex.FEMININ;
@@ -162,6 +162,11 @@ public class FormularDonareController extends ControlledScreen {
                 zileDisponibil += currentDayVal;
             currentDayVal *= 2;
         }
+
+        if(firstName.equals("") || lastName.equals("") || phone.equals("") ||
+                domiciliuAdresa.equals("") || domiciliuJudet.equals("") || domiciliuLocalitate.equals("") ||
+                resedintaAdresa.equals("") || resedintaLocalitate.equals("") || resedintaJudet.equals(""))
+            return null;
 
         return new FormularDonare(username, lastName, firstName, sex, phone, domiciliuLocalitate, domiciliuJudet, domiciliuAdresa,
                 resedintaLocalitate, resedintaJudet, resedintaAdresa, beneficiarFullName, beneficiarCNP, grupa, rh, zileDisponibil);

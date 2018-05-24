@@ -151,16 +151,16 @@ public class FlaskClient {
 
         String jsonString = new JSONObject().put("nume", formular.getNume()).put("prenume", formular.getPrenume())
                 .put("sex", formular.getSex().toString()).put("telefon", formular.getTelefon())
-                .put("domiciliuLocalitate", formular.getDomiciliuLocalitate())
-                .put("domiciliuJudet", formular.getDomiciliuJudet())
-                .put("domiciliuAdresa", formular.getDomiciliuAdresa())
-                .put("resedintaLocalitate", formular.getResedintaLocalitate())
-                .put("resedintaJudet", formular.getResedintaJudet())
-                .put("resedintaAdresa", formular.getResedintaAdresa())
-                .put("beneficiarFullName", formular.getBeneficiarFullName())
-                .put("beneficiarCNP", formular.getBeneficiarCNP())
+                .put("domiciliu_localitate", formular.getDomiciliuLocalitate())
+                .put("domiciliu_judet", formular.getDomiciliuJudet())
+                .put("domiciliu_adresa", formular.getDomiciliuAdresa())
+                .put("resedinta_localitate", formular.getResedintaLocalitate())
+                .put("resedinta_judet", formular.getResedintaJudet())
+                .put("resedinta_adresa", formular.getResedintaAdresa())
+                .put("beneficiar_full_name", formular.getBeneficiarFullName())
+                .put("beneficiar_CNP", formular.getBeneficiarCNP())
                 .put("grupa", formular.getGrupa()).put("rh", formular.getRh().toString())
-                .put("zileDisponibil", formular.getZileDisponibil())
+                .put("zile_disponibil", formular.getZileDisponibil())
                 .put("username", formular.getUsername()).toString();
 
         logger.debug("SENDING: " + jsonString);

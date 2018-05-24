@@ -14,9 +14,6 @@ class ServiceDonator(IService):
         :return: status_code, message
                 status_code = 0 pentru succes, != 0 altfel
         '''
-        # TO DO: daca datele din formular difera fata de alea din BD, update
-        # TO DO: front end-ul trebuie sa trimita username sau ID pt indentificare
-
         # 1. Afla ID-ul
         user = self.db.select("User", ["username"], [formular.username], True)
         if user is None:
