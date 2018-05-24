@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class CentruAnalizaScreenController extends ControlledScreen{
+public class DonatorAnalizaScreenController extends ControlledScreen{
 
     @FXML
     JFXComboBox cb_rh;

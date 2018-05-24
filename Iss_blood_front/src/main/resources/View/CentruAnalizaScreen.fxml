@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXComboBox?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -25,21 +24,20 @@
                   <Label styleClass="labelAnaliza" text="AC. HBs" />
                </children>
             </VBox>
-            <VBox layoutX="282.0" layoutY="150.0" prefHeight="283.0" prefWidth="208.0" spacing="12.0">
+            <Label layoutX="83.0" layoutY="55.0" styleClass="labelAnaliza" text="Responsabil tehnic:" />
+            <Label fx:id="label_responsabil" layoutX="272.0" layoutY="55.0" styleClass="labelAnaliza2" text="MAREAN" />
+            <VBox layoutX="272.0" layoutY="151.0" prefHeight="294.0" prefWidth="208.0" spacing="10.0">
                <children>
-                  <JFXComboBox fx:id="cb_rh" />
-                  <JFXComboBox fx:id="cb_gr" />
-                  <JFXComboBox fx:id="cb_alt" />
-                  <JFXComboBox fx:id="cb_sif" />
-                  <JFXComboBox fx:id="cb_htlv" />
-                  <JFXComboBox fx:id="cb_hcv" />
-                  <JFXComboBox fx:id="cb_hiv" />
-                  <JFXComboBox fx:id="cb_hbs" />
+                  <Label fx:id="l_rh" styleClass="labelAnaliza2" text="POZITIV" />
+                  <Label fx:id="l_gr" styleClass="labelAnaliza2" text="01" />
+                  <Label fx:id="l_alt" styleClass="labelAnaliza2" text="NEGATIV" />
+                  <Label fx:id="l_sif" styleClass="labelAnaliza2" text="NEGATIV" />
+                  <Label fx:id="l_htlv" styleClass="labelAnaliza2" text="NEGATIV" />
+                  <Label fx:id="l_hcv" styleClass="labelAnaliza2" text="NEGATIV" />
+                  <Label fx:id="l_hiv" styleClass="labelAnaliza2" text="NEGATIV" />
+                  <Label fx:id="l_hbs" styleClass="labelAnaliza2" text="NEGATIV" />
                </children>
             </VBox>
-            <Label layoutX="83.0" layoutY="55.0" styleClass="labelAnaliza" text="Responsabil tehnic:" />
-            <Label fx:id="label_responsabil" layoutX="272.0" layoutY="55.0" styleClass="labelAnaliza2" text="Nume utilizator" />
-            <JFXButton layoutX="314.0" layoutY="581.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#back" prefHeight="31.0" prefWidth="176.0" styleClass="buttonFormular" text="Finalizare fișă" />
          </children>
       </AnchorPane>
       <AnchorPane layoutX="19.0" layoutY="45.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="641.0" prefWidth="292.0" styleClass="secondaryPane" stylesheets="@../main.css">
@@ -48,29 +46,31 @@
             <JFXButton layoutX="12.0" layoutY="596.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#back" prefHeight="31.0" prefWidth="176.0" styleClass="buttonSecondaryTiny" text="Înapoi" />
             <AnchorPane fx:id="topBar1" layoutX="13.0" layoutY="25.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="84.0" prefWidth="270.0" style="-fx-border-color: black; -fx-border-width: 0.02em;" styleClass="secondaryPane" stylesheets="@../main.css">
                <children>
-                  <FontAwesomeIconView fill="WHITE" glyphName="FLASK" layoutX="115.0" layoutY="55.0" size="40" text="" wrappingWidth="38.000006035308616" />
+                  <FontAwesomeIconView fill="WHITE" glyphName="FILE_TEXT_ALT" layoutX="118.0" layoutY="55.0" size="40" />
                </children>
             </AnchorPane>
             <AnchorPane layoutX="12.0" layoutY="124.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="459.0" prefWidth="270.0" styleClass="box">
                <children>
-                  <Label layoutX="14.0" layoutY="68.0" styleClass="labelAnaliza" text="Nume:" />
-                  <Label alignment="CENTER" layoutX="-52.0" layoutY="8.0" prefHeight="35.0" prefWidth="339.0" styleClass="formular-pre-textbox" text="Detalii donator" textAlignment="CENTER" />
-                  <Label fx:id="label_nume" layoutX="78.0" layoutY="72.0" prefHeight="25.0" prefWidth="196.0" styleClass="labelAnalizaSmall" text="undefined" />
-                  <Label layoutX="14.0" layoutY="97.0" prefHeight="28.0" prefWidth="88.0" styleClass="labelAnaliza" text="Prenume:" />
-                  <Label layoutX="14.0" layoutY="189.0" styleClass="labelAnaliza" text="Cod donare:" />
-                  <Label layoutX="14.0" layoutY="128.0" styleClass="labelAnaliza" text="Sex:" />
-                  <Label layoutX="14.0" layoutY="160.0" styleClass="labelAnaliza" text="Vârsta:" />
-                  <Label fx:id="label_prenume" layoutX="105.0" layoutY="99.0" prefHeight="25.0" prefWidth="169.0" styleClass="labelAnalizaSmall" text="undefined" />
-                  <Label fx:id="label_sex" layoutX="58.0" layoutY="130.0" prefHeight="25.0" prefWidth="208.0" styleClass="labelAnalizaSmall" text="undefined" />
-                  <Label fx:id="label_varsta" layoutX="83.0" layoutY="162.0" prefHeight="25.0" prefWidth="188.0" styleClass="labelAnalizaSmall" text="undefined" />
-                  <Label fx:id="label_cod" layoutX="129.0" layoutY="191.0" prefHeight="25.0" prefWidth="141.0" styleClass="labelAnalizaSmall" text="undefined" />
+                  <Label layoutX="14.0" layoutY="81.0" styleClass="labelAnaliza" text="Nume:" />
+                  <Label alignment="CENTER" layoutX="-52.0" layoutY="8.0" prefHeight="35.0" prefWidth="339.0" styleClass="formular-pre-textbox" text="Detalii donare" textAlignment="CENTER" />
+                  <Label fx:id="label_nume" layoutX="78.0" layoutY="85.0" prefHeight="25.0" prefWidth="196.0" styleClass="labelAnalizaSmall" text="undefined" />
+                  <Label layoutX="14.0" layoutY="110.0" prefHeight="28.0" prefWidth="88.0" styleClass="labelAnaliza" text="Prenume:" />
+                  <Label layoutX="14.0" layoutY="202.0" styleClass="labelAnaliza" text="Cod donare:" />
+                  <Label layoutX="14.0" layoutY="141.0" styleClass="labelAnaliza" text="Sex:" />
+                  <Label layoutX="14.0" layoutY="173.0" styleClass="labelAnaliza" text="Vârsta:" />
+                  <Label fx:id="label_prenume" layoutX="105.0" layoutY="112.0" prefHeight="25.0" prefWidth="169.0" styleClass="labelAnalizaSmall" text="undefined" />
+                  <Label fx:id="label_sex" layoutX="58.0" layoutY="143.0" prefHeight="25.0" prefWidth="208.0" styleClass="labelAnalizaSmall" text="undefined" />
+                  <Label fx:id="label_varsta" layoutX="83.0" layoutY="175.0" prefHeight="25.0" prefWidth="188.0" styleClass="labelAnalizaSmall" text="undefined" />
+                  <Label fx:id="label_cod" layoutX="129.0" layoutY="204.0" prefHeight="25.0" prefWidth="141.0" styleClass="labelAnalizaSmall" text="undefined" />
+                  <Label layoutX="14.0" layoutY="56.0" styleClass="labelAnaliza" text="Data recoltării:" />
+                  <Label fx:id="label_cod1" layoutX="147.0" layoutY="57.0" prefHeight="25.0" prefWidth="120.0" styleClass="labelAnalizaSmall" text="undefined" />
                </children>
             </AnchorPane>
          </children>
       </AnchorPane>
       <AnchorPane fx:id="topBar" layoutX="19.0" layoutY="17.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="41.0" prefWidth="759.0" style="-fx-border-color: black; -fx-border-width: 0.02em;" styleClass="secondaryPane" stylesheets="@../main.css">
          <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="195.0" layoutY="3.0" prefHeight="35.0" prefWidth="369.0" styleClass="labelAnalizaHeader" text="Completare fisă analiză" textAlignment="CENTER" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="195.0" layoutY="3.0" prefHeight="35.0" prefWidth="369.0" styleClass="labelAnalizaHeader" text="Fișă analize sânge" textAlignment="CENTER" />
             <FontAwesomeIconView fx:id="closeIcon1" glyphName="CLOSE" layoutX="728.0" layoutY="29.0" size="26" styleClass="iconSecondary" text="" />
          </children>
       </AnchorPane>

@@ -1,7 +1,6 @@
 package Controller;
 
 import Model.*;
-import Service.MainService;
 import Utils.Screen;
 import com.jfoenix.controls.JFXButton;
 import javafx.collections.FXCollections;
@@ -48,8 +47,8 @@ public class CentruCereriDonariController extends ControlledScreen{
         calificareButton.setDisable(!calificare);
     }
     public void calificare(){
-        CentruAnalizaScreenController controller =
-                (CentruAnalizaScreenController) getScreenController().getControlledScreen(Screen.CENTRU_ANALIZASCREEN_SCREEN);
+        DonatorAnalizaScreenController controller =
+                (DonatorAnalizaScreenController) getScreenController().getControlledScreen(Screen.CENTRU_ANALIZASCREEN_SCREEN);
         controller.setFields("testSurname","testForename",Sex.FEMININ,25,-1);
         getScreenController().setScreen(Screen.CENTRU_ANALIZASCREEN_SCREEN);
     }
