@@ -72,7 +72,8 @@ public class CentruCereriDonariController extends ControlledScreen{
     }
     @FXML
     private void button2Clicked(){
-
+        CentruTransfuzieController cr = (CentruTransfuzieController) getScreenController().getControlledScreen("CENTRU_TRANSFUZIE");
+        cr.setCenter(getScreenController().getScreen("CENTRU_ANALIZA"));
     }
     @FXML
     private void button3Clicked(){

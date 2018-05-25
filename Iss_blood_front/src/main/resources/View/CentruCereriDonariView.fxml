@@ -27,10 +27,10 @@
       </AnchorPane>
       <AnchorPane layoutX="21.0" layoutY="495.0" prefHeight="132.0" prefWidth="979.0" styleClass="box">
          <children>
-            <JFXButton fx:id="prelevareButton" layoutX="364.0" layoutY="11.0" onMouseClicked="#button1Clicked" prefHeight="110.0" prefWidth="133.0" styleClass="buttonFormular" text="Prelevare" />
-            <JFXButton fx:id="pregatireButton" disable="true" layoutX="563.0" layoutY="11.0" onMouseClicked="#button2Clicked" prefHeight="110.0" prefWidth="133.0" styleClass="buttonFormular" text="Pregatirea" />
-            <JFXButton fx:id="calificareButton" disable="true" layoutX="751.0" layoutY="11.0" onMouseClicked="#button3Clicked" prefHeight="110.0" prefWidth="133.0" styleClass="buttonFormular" text="Calificare " />
-            <Label layoutX="37.0" layoutY="48.0" styleClass="headerPrimary" text="Status donator selectat" />
+            <JFXButton fx:id="prelevareButton" layoutX="347.0" layoutY="30.0" onMouseClicked="#button1Clicked" prefHeight="73.0" prefWidth="180.0" styleClass="buttonFormular" text="Completeaza chestionar" />
+            <JFXButton fx:id="pregatireButton" disable="true" layoutX="540.0" layoutY="30.0" onMouseClicked="#button2Clicked" prefHeight="73.0" prefWidth="205.0" styleClass="buttonFormular" text="Sangele a fost prelucrat" />
+            <JFXButton fx:id="calificareButton" disable="true" layoutX="758.0" layoutY="30.0" onMouseClicked="#button3Clicked" prefHeight="73.0" prefWidth="190.0" styleClass="buttonFormular" text="Completeaza analiza donatie" />
+            <Label layoutX="39.0" layoutY="49.0" styleClass="headerPrimary" text="Status donator selectat" />
          </children>
       </AnchorPane>
       <AnchorPane layoutX="38.0" layoutY="35.0" prefHeight="401.0" prefWidth="208.0" styleClass="box">

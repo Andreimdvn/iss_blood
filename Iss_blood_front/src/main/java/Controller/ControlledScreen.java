@@ -2,6 +2,8 @@ package Controller;
 
 import Service.MainService;
 import Utils.Observer;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 
 
 public class ControlledScreen implements Observer {
@@ -29,6 +31,7 @@ public class ControlledScreen implements Observer {
     }
 
 
+
     public MainService getService() {
         return service;
     }
@@ -44,6 +47,5 @@ public class ControlledScreen implements Observer {
     public void setScreenController(ScreenController screenController) {
         this.screenController = screenController;
     }
-
 
 }

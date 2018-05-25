@@ -17,43 +17,76 @@ public class CentruPrelevareController extends ControlledScreen{
 
     }
 
+    private final String ERROR="ERROR";
+    private final String VALID="VALID";
+    private final String INVALID="INVALID";
+
     @FXML
     private void validareClicked(){
-        boolean ok = validate();
+        String ok = validate();
+        String titlu = null;
+        String mesaj =  null;
+        boolean goBack = true;
+        int type = 0;
+        if(ok.equals(INVALID)) {
+            titlu = "Nu poate dona";
+            mesaj = "Persoana nu poate dona";
+            type = 0;
+        }
+        else if(ok.equals(ERROR)) {
+            titlu="Campuri gresite";
+            mesaj = "Nu ai raspuns la toate intrebarile";
+            type = 1;
 
-        if(!ok)
-            new CustomMessageBox("Nu poate dona","Pacient nu poate dona",1).show();
-        else
-            new CustomMessageBox("Poate dona","Donatorul poate dona",0).show();
+            goBack = false;
+        }
+        else {
+            titlu = "Poate dona";
+            mesaj = "Donatorul poate dona" ;
+            type = 0;
+        }
+        new CustomMessageBox(titlu,mesaj,type).show();
+        if(goBack)
+            goBack();
+    }
 
+    private void goBack(){
+        ((CentruTransfuzieController)getScreenController().getControlledScreen("CENTRU_TRANSFUZIE")).setCenter(
+                getScreenController().getScreen("CENTRU_CERERI_DONARI"));
     }
 
     @FXML
-    private boolean validate(){
+    private String validate(){
         boolean counter = false;
-        int bothSelected = 0;
+        int contorIntrebari = 0;
+        String mesaj = VALID;
+
         for (Node node : selectionPane.getChildren()) {
             if(node instanceof HBox)
             {
                 HBox box = (HBox) node;
-                for (Node a : box.getChildren())
-                if(a instanceof ToggleButton) {
-                    if (((ToggleButton) a).isSelected() && counter)
-                        return false;
-                    if(((ToggleButton) a).isSelected())
-                        bothSelected++;
-                    if(bothSelected == 0)
-                        return false;
+                ToggleButton a = (ToggleButton) box.getChildren().get(0);
+                ToggleButton b = (ToggleButton) box.getChildren().get(1);
 
-                    counter = !counter;
-                    if(counter == false)
-                    {
-                        bothSelected = 0;
+                if(a.isSelected() || b.isSelected())
+                {
+
+                    if(contorIntrebari <  3) {
+                        if(b.isSelected())
+                            mesaj = INVALID;
                     }
+                    else if(a.isSelected())
+                        mesaj = INVALID;
                 }
+                else {
+                    mesaj = ERROR;
+                    break;
+                }
+                contorIntrebari++;
             }
         }
-        return true;
+
+        return mesaj;
     }
 
     @FXML

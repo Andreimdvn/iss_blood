@@ -64,6 +64,8 @@ public class Screen {
     public static String CENTRU_CHESTIONAR_SCREEN ="CENTRU_CHESTIONAR";
     public static String CENTRU_CHESTIONAR_RESOURCE ="/View/CentruPrelevareView.fxml";
 
+    public static String CENTRU_ANALIZA_SCREEN = "CENTRU_ANALIZA";
+    public static String CENTRU_ANALIZA_RESOURCE="/View/CentruAnalizaView.fxml";
 
 
 }
