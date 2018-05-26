@@ -1,6 +1,6 @@
 package Controller;
 
-import Model.CerereDonare;
+import Model.FormularDonare;
 import Model.Status;
 import Utils.CustomMessageBox;
 import com.jfoenix.controls.JFXTextField;
@@ -20,7 +20,7 @@ public class CentruPrelevareController extends ControlledScreen{
 
     }
 
-    private CerereDonare cerereDonare;
+    private FormularDonare formularDonare;
 
     @FXML
     private Label numeLabel;
@@ -53,18 +53,18 @@ public class CentruPrelevareController extends ControlledScreen{
     private Label resedintaAdresaLabel;
 
 
-    void setCerereDonare(CerereDonare cerereDonare) {
-        this.cerereDonare = cerereDonare;
-        numeLabel.setText(cerereDonare.getNume());
-        prenumeLabel.setText(cerereDonare.getPrenume());
-        sexLabel.setText(cerereDonare.getSex().toString());
-        telefonLabel.setText(cerereDonare.getPhone());
-        domiciliuAdresaLabel.setText(cerereDonare.getDomiciliuAdresa());
-        domiciliuJudetLabel.setText(cerereDonare.getDomiciliuJudet());
-        domiciliuLocalitateLabel.setText(cerereDonare.getDomiciliuLocalitate());
-        resedintaAdresaLabel.setText(cerereDonare.getResedintaAdresa());
-        resedintaJudetLabel.setText(cerereDonare.getResedintaJudet());
-        resedintaLocalitateLabel.setText(cerereDonare.getResedintaLocalitate());
+    void setFormularDonare(FormularDonare formularDonare) {
+        this.formularDonare = formularDonare;
+        numeLabel.setText(formularDonare.getNume());
+        prenumeLabel.setText(formularDonare.getPrenume());
+        sexLabel.setText(formularDonare.getSex().toString());
+        telefonLabel.setText(formularDonare.getPhone());
+        domiciliuAdresaLabel.setText(formularDonare.getDomiciliuAdresa());
+        domiciliuJudetLabel.setText(formularDonare.getDomiciliuJudet());
+        domiciliuLocalitateLabel.setText(formularDonare.getDomiciliuLocalitate());
+        resedintaAdresaLabel.setText(formularDonare.getResedintaAdresa());
+        resedintaJudetLabel.setText(formularDonare.getResedintaJudet());
+        resedintaLocalitateLabel.setText(formularDonare.getResedintaLocalitate());
 
     }
 
@@ -87,7 +87,7 @@ public class CentruPrelevareController extends ControlledScreen{
             titlu = "Nu poate dona";
             mesaj = "Persoana nu poate dona";
             type = 0;
-            cerereDonare.setStatus(Status.NONCONFORM);
+            formularDonare.setStatus(Status.NONCONFORM);
         }
         else if(ok.equals(ERROR)) {
             titlu="Campuri gresite";
@@ -99,7 +99,7 @@ public class CentruPrelevareController extends ControlledScreen{
         else {
             titlu = "Poate dona";
             mesaj = "Donatorul poate dona" ;
-            cerereDonare.setStatus(Status.PRELEVARE);
+            formularDonare.setStatus(Status.PRELEVARE);
             type = 0;
         }
         new CustomMessageBox(titlu,mesaj,type).show();

@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="655.0" prefWidth="1031.0" styleClass="formularPane" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CentruCereriSangeController">
+<AnchorPane prefHeight="655.0" prefWidth="1031.0" styleClass="formularCentru" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CentruCereriSangeController">
    <children>
       <TableView fx:id="cerereSangeTableView" layoutX="18.0" layoutY="39.0" onMouseClicked="#selectedRow" prefHeight="410.0" prefWidth="975.0" styleClass="box">
          <columns>

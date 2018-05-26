@@ -15,20 +15,20 @@ import java.util.List;
 public class CentruCereriDonariController extends ControlledScreen{
 
     @FXML
-    private TableView<CerereDonare> donareTableView;
+    private TableView<FormularDonare> donareTableView;
 
-    private ObservableList<CerereDonare> donareObservableList = FXCollections.observableArrayList();
+    private ObservableList<FormularDonare> donareObservableList = FXCollections.observableArrayList();
 
     @FXML
-    private TableColumn<CerereDonare,String> numeColumn;
+    private TableColumn<FormularDonare,String> numeColumn;
     @FXML
-    private TableColumn<CerereDonare,String> prenumeColumn;
+    private TableColumn<FormularDonare,String> prenumeColumn;
     @FXML
-    private TableColumn<CerereDonare, GrupaSange> grupaSangeColumn;
+    private TableColumn<FormularDonare, GrupaSange> grupaSangeColumn;
     @FXML
-    private TableColumn<CerereDonare, RH> rhColumn;
+    private TableColumn<FormularDonare, RH> rhColumn;
     @FXML
-    private TableColumn<CerereDonare, Status> statusColumn;
+    private TableColumn<FormularDonare, Status> statusColumn;
 
     @FXML
     private void initialize(){
@@ -39,7 +39,7 @@ public class CentruCereriDonariController extends ControlledScreen{
         statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
         donareTableView.setItems(donareObservableList);
     }
-    private CerereDonare getSelectedItem(){
+    private FormularDonare getSelectedItem(){
         return donareTableView.getSelectionModel().getSelectedItem();
     }
 
@@ -55,7 +55,7 @@ public class CentruCereriDonariController extends ControlledScreen{
      */
     void updateThis(){
 
-        List<CerereDonare> list = new ArrayList<>();
+        List<FormularDonare> list = new ArrayList<>();
         list.addAll(donareObservableList);
         donareObservableList.setAll(list);
         //donareTableView.getSelectionModel().select(null);
@@ -65,11 +65,11 @@ public class CentruCereriDonariController extends ControlledScreen{
     @FXML
     private void populateDummy(){
 
-        CerereDonare a = new CerereDonare("Moldovan","Daniel",Sex.MASCULIN, "0744176894", "Arad", "Arad", "Str.Scoalei", "Cluj", "Cluj-Napoca", "Str. Iustin",GrupaSange.UNKNOWN,RH.UNKNOWN,Status.IN_ASTEPTARE);
+        FormularDonare a = new FormularDonare("Moldovan","Daniel",Sex.MASCULIN, "0744176894", "Arad", "Arad", "Str.Scoalei", "Cluj", "Cluj-Napoca", "Str. Iustin",GrupaSange.UNKNOWN,RH.UNKNOWN,Status.IN_ASTEPTARE);
         donareObservableList.add(a);
     }
 
-    private CerereDonare getSelected(){
+    private FormularDonare getSelected(){
         return donareTableView.getSelectionModel().getSelectedItem();
     }
 
@@ -77,7 +77,7 @@ public class CentruCereriDonariController extends ControlledScreen{
     private void button1Clicked(){
         CentruTransfuzieController cr = (CentruTransfuzieController) getScreenController().getControlledScreen("CENTRU_TRANSFUZIE");
         CentruPrelevareController cv = (CentruPrelevareController) getScreenController().getControlledScreen("CENTRU_CHESTIONAR");
-        cv.setCerereDonare(getSelected());
+        cv.setFormularDonare(getSelected());
         cr.setCenter(getScreenController().getScreen("CENTRU_CHESTIONAR"));
 
     }
@@ -91,11 +91,11 @@ public class CentruCereriDonariController extends ControlledScreen{
         CentruTransfuzieController cr = (CentruTransfuzieController) getScreenController().getControlledScreen("CENTRU_TRANSFUZIE");
         cr.setCenter(getScreenController().getScreen("CENTRU_ANALIZA"));
         CentruAnalizaController ca = (CentruAnalizaController) getScreenController().getControlledScreen("CENTRU_ANALIZA");
-        ca.setCerereDonare(getSelected());
+        ca.setFormularDonare(getSelected());
     }
 
     private void updateStatus(){
-        CerereDonare cr = getSelectedItem();
+        FormularDonare cr = getSelectedItem();
         if(cr == null) {
             changeStatus(false,false,false);
         }
