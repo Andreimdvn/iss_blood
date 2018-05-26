@@ -106,6 +106,8 @@ class Medic(DB):
     user = relationship('User', back_populates='medici')
     locatie = relationship('Locatie', back_populates='medici')
     pacient = relationship('Pacient', back_populates='medic')
+    cereri_sange = relationship('CereriSange', back_populates='medic')
+
 
 class Pacient(DB):
     __tablename__ = 'Pacient'
@@ -118,6 +120,8 @@ class Pacient(DB):
     id_medic = Column(Integer, ForeignKey('Medic.id_user'))
 
     medic = relationship('Medic', back_populates='pacient')
+    cereri_sange = relationship('CereriSange', back_populates='pacient')
+
 
 class Licente(DB):
     __tablename__ = 'Licente'
@@ -178,7 +182,7 @@ class CereriSange(DB):
     id = Column(Integer, autoincrement=True, primary_key=True)
 
     id_medic = Column(Integer, ForeignKey('Medic.id_user'), nullable=False)
-    id_pacient = Column(Integer, ForeignKey('Paciet.id'), nullable=False)
+    id_pacient = Column(Integer, ForeignKey('Pacient.id'), nullable=False)
 
     grupa_sange = Column(Enum('O1', 'A2', 'B3', 'AB4'), nullable=False)
     rh = Column(Enum('Pozitiv', 'Negativ'), nullable=False)
@@ -191,6 +195,7 @@ class CereriSange(DB):
 
     medic = relationship('Medic', back_populates='cereri_sange')
     pacient = relationship('Pacient', back_populates='cereri_sange')
+
 
 class ORM:
 
