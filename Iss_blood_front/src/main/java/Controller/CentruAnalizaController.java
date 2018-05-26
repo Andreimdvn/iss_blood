@@ -1,5 +1,9 @@
 package Controller;
 
+import Model.CerereDonare;
+import Model.GrupaSange;
+import Model.RH;
+import Model.Status;
 import Utils.CustomMessageBox;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -53,9 +57,42 @@ public class CentruAnalizaController extends ControlledScreen{
 
     }
 
+    private CerereDonare cerereDonare;
+
+    public void setCerereDonare(CerereDonare cerereDonare) {
+        this.cerereDonare = cerereDonare;
+    }
+
     private final String VALID = "VALID";
     private final String INVALID = "INVALID";
     private final String MESSAGE_ERROR="ERROR";
+
+    private void setGrupaAndRH(GrupaSange gs, RH rh){
+        cerereDonare.setGrupaSange(gs);
+        cerereDonare.setRh(rh);
+    }
+
+    private GrupaSange getGrupaSange(){
+
+        GrupaSange grupaSange;
+
+        if(grupa1.isSelected())
+            grupaSange = GrupaSange.O1;
+        else if(grupa2.isSelected())
+            grupaSange = GrupaSange.A2;
+        else if(grupa3.isSelected())
+            grupaSange = GrupaSange.B3;
+        else
+            grupaSange =GrupaSange.AB4;
+
+        return grupaSange;
+    }
+
+    private RH getRHAnaliza(){
+        if(rhNegativToggleButton.isSelected())
+            return RH.NEGATIV;
+        return RH.POZITIV;
+    }
 
     @FXML
     private void validateAnaliza(){
@@ -65,13 +102,21 @@ public class CentruAnalizaController extends ControlledScreen{
             new CustomMessageBox("Error analiza", MESSAGE_ERROR, 1).show();
         }
         else {
-            if(result.equals(VALID))
-                new CustomMessageBox("Analiza valida", VALID,0).show();
-            else
-                new CustomMessageBox("Analiza invalida",INVALID,0).show();
+            if (result.equals(VALID)) {
+                new CustomMessageBox("Analiza valida", VALID, 0).show();
+                cerereDonare.setStatus(Status.DISTRIBUIRE);
+            } else {
+                new CustomMessageBox("Analiza invalida", INVALID, 0).show();
+                cerereDonare.setStatus(Status.NONCONFORM);
+            }
+            setGrupaAndRH(getGrupaSange(),getRHAnaliza());
 
-            ((CentruTransfuzieController)getScreenController().getControlledScreen("CENTRU_TRANSFUZIE")).setCenter(
+            CentruTransfuzieController cr =(CentruTransfuzieController)getScreenController().getControlledScreen("CENTRU_TRANSFUZIE");
+            cr.setCenter(
                     getScreenController().getScreen("CENTRU_CERERI_DONARI"));
+
+            CentruCereriDonariController cd =(CentruCereriDonariController) getScreenController().getControlledScreen("CENTRU_CERERI_DONARI");
+            cd.updateThis();
 
         }
     }

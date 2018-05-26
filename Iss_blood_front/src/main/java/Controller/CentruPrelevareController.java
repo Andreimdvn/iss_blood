@@ -1,9 +1,12 @@
 package Controller;
 
+import Model.CerereDonare;
+import Model.Status;
 import Utils.CustomMessageBox;
 import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -14,6 +17,58 @@ public class CentruPrelevareController extends ControlledScreen{
 
     @FXML
     private void initialize(){
+
+    }
+
+    private CerereDonare cerereDonare;
+
+    @FXML
+    private Label numeLabel;
+
+    @FXML
+    private Label prenumeLabel;
+
+    @FXML
+    private Label sexLabel;
+
+    @FXML
+    private Label telefonLabel;
+
+    @FXML
+    private Label domiciliuLocalitateLabel;
+
+    @FXML
+    private Label domiciliuJudetLabel;
+
+    @FXML
+    private Label domiciliuAdresaLabel;
+
+    @FXML
+    private Label resedintaLocalitateLabel;
+
+    @FXML
+    private Label resedintaJudetLabel;
+
+    @FXML
+    private Label resedintaAdresaLabel;
+
+
+    void setCerereDonare(CerereDonare cerereDonare) {
+        this.cerereDonare = cerereDonare;
+        numeLabel.setText(cerereDonare.getNume());
+        prenumeLabel.setText(cerereDonare.getPrenume());
+        sexLabel.setText(cerereDonare.getSex().toString());
+        telefonLabel.setText(cerereDonare.getPhone());
+        domiciliuAdresaLabel.setText(cerereDonare.getDomiciliuAdresa());
+        domiciliuJudetLabel.setText(cerereDonare.getDomiciliuJudet());
+        domiciliuLocalitateLabel.setText(cerereDonare.getDomiciliuLocalitate());
+        resedintaAdresaLabel.setText(cerereDonare.getResedintaAdresa());
+        resedintaJudetLabel.setText(cerereDonare.getResedintaJudet());
+        resedintaLocalitateLabel.setText(cerereDonare.getResedintaLocalitate());
+
+    }
+
+    private void loadData(){
 
     }
 
@@ -32,6 +87,7 @@ public class CentruPrelevareController extends ControlledScreen{
             titlu = "Nu poate dona";
             mesaj = "Persoana nu poate dona";
             type = 0;
+            cerereDonare.setStatus(Status.NONCONFORM);
         }
         else if(ok.equals(ERROR)) {
             titlu="Campuri gresite";
@@ -43,6 +99,7 @@ public class CentruPrelevareController extends ControlledScreen{
         else {
             titlu = "Poate dona";
             mesaj = "Donatorul poate dona" ;
+            cerereDonare.setStatus(Status.PRELEVARE);
             type = 0;
         }
         new CustomMessageBox(titlu,mesaj,type).show();
@@ -53,7 +110,9 @@ public class CentruPrelevareController extends ControlledScreen{
     private void goBack(){
         ((CentruTransfuzieController)getScreenController().getControlledScreen("CENTRU_TRANSFUZIE")).setCenter(
                 getScreenController().getScreen("CENTRU_CERERI_DONARI"));
-    }
+        CentruCereriDonariController cd =(CentruCereriDonariController) getScreenController().getControlledScreen("CENTRU_CERERI_DONARI");
+        cd.updateThis();
+    }               
 
     @FXML
     private String validate(){

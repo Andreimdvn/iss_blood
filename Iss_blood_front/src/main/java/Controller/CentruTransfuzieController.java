@@ -9,6 +9,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.chart.PieChart;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -28,6 +29,35 @@ public class CentruTransfuzieController extends ControlledScreen {
     private AnchorPane homePane;
 
     @FXML
+    private ToggleButton t1;
+
+
+    @FXML
+    private ToggleButton t2;
+
+
+    @FXML
+    private ToggleButton t3;
+
+
+    @FXML
+    private ToggleButton t4;
+
+
+    @FXML
+    private ToggleButton t5;
+
+    private void checkSelected(ToggleButton toggleButton){
+        if(!anySelected()) {
+            toggleButton.setSelected(true);
+        }
+    }
+
+    private boolean anySelected(){
+        return t1.isSelected() || t2.isSelected() || t3.isSelected() || t4.isSelected() || t5.isSelected();
+    }
+
+    @FXML
     protected void setCenter(Node a){
         borderPane.setCenter(a);
     }
@@ -35,25 +65,31 @@ public class CentruTransfuzieController extends ControlledScreen {
     @FXML
     private void homeClicked(){
         borderPane.setCenter(homePane);
+        checkSelected(t1);
     }
+
     @FXML
     private void cereriDonariClicked(){
         borderPane.setCenter(super.getScreenController().getScreen("CENTRU_CERERI_DONARI"));
+        checkSelected(t3);
     }
 
     @FXML
     private void stocCurentClicked(){
         borderPane.setCenter(super.getScreenController().getScreen("CENTRU_STOC_PUNGI"));
+        checkSelected(t5);
     }
 
     @FXML
     private void cereriSangeClicked(){
         borderPane.setCenter(super.getScreenController().getScreen("CENTRU_CERERI_SANGE"));
+        checkSelected(t4);
     }
 
     @FXML
     private void cerereDonareClicked(){
         borderPane.setCenter(super.getScreenController().getScreen("FORMULAR_DONARE"));
+        checkSelected(t2);
         //borderPane.getCenter().setTranslateX(85);
         //borderPane.getCenter().setTranslateY(30);
 

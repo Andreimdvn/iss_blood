@@ -1,17 +1,16 @@
 package Controller;
 
 import Model.*;
-import Service.MainService;
 import com.jfoenix.controls.JFXButton;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Stage;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CentruCereriDonariController extends ControlledScreen{
 
@@ -50,34 +49,49 @@ public class CentruCereriDonariController extends ControlledScreen{
         calificareButton.setDisable(!calificare);
     }
 
+    /***
+     *  Remove on production
+     *  70% Yes
+     */
+    void updateThis(){
+
+        List<CerereDonare> list = new ArrayList<>();
+        list.addAll(donareObservableList);
+        donareObservableList.setAll(list);
+        //donareTableView.getSelectionModel().select(null);
+        updateStatus();
+    }
+
     @FXML
     private void populateDummy(){
-        CerereDonare a = new CerereDonare(
-                "Moldovan","Daniel", GrupaSange.UNKNOWN, RH.UNKNOWN,Status.IN_ASTEPTARE
-        );
-        CerereDonare b = new CerereDonare(
-                "Oancea","Alin", GrupaSange.O1, RH.POZITIV,Status.PRELEVARE
-        );
-        CerereDonare c = new CerereDonare(
-                "Moldovan","Andrei", GrupaSange.B3, RH.NEGATIV,Status.PREGATIRE
-        );
-        donareObservableList.addAll(a,b,c);
+
+        CerereDonare a = new CerereDonare("Moldovan","Daniel",Sex.MASCULIN, "0744176894", "Arad", "Arad", "Str.Scoalei", "Cluj", "Cluj-Napoca", "Str. Iustin",GrupaSange.UNKNOWN,RH.UNKNOWN,Status.IN_ASTEPTARE);
+        donareObservableList.add(a);
+    }
+
+    private CerereDonare getSelected(){
+        return donareTableView.getSelectionModel().getSelectedItem();
     }
 
     @FXML
     private void button1Clicked(){
-            CentruTransfuzieController cr = (CentruTransfuzieController) getScreenController().getControlledScreen("CENTRU_TRANSFUZIE");
-            cr.setCenter(getScreenController().getScreen("CENTRU_CHESTIONAR"));
+        CentruTransfuzieController cr = (CentruTransfuzieController) getScreenController().getControlledScreen("CENTRU_TRANSFUZIE");
+        CentruPrelevareController cv = (CentruPrelevareController) getScreenController().getControlledScreen("CENTRU_CHESTIONAR");
+        cv.setCerereDonare(getSelected());
+        cr.setCenter(getScreenController().getScreen("CENTRU_CHESTIONAR"));
 
     }
     @FXML
     private void button2Clicked(){
-        CentruTransfuzieController cr = (CentruTransfuzieController) getScreenController().getControlledScreen("CENTRU_TRANSFUZIE");
-        cr.setCenter(getScreenController().getScreen("CENTRU_ANALIZA"));
+        getSelected().setStatus(Status.PREGATIRE);
+        updateThis();
     }
     @FXML
     private void button3Clicked(){
-
+        CentruTransfuzieController cr = (CentruTransfuzieController) getScreenController().getControlledScreen("CENTRU_TRANSFUZIE");
+        cr.setCenter(getScreenController().getScreen("CENTRU_ANALIZA"));
+        CentruAnalizaController ca = (CentruAnalizaController) getScreenController().getControlledScreen("CENTRU_ANALIZA");
+        ca.setCerereDonare(getSelected());
     }
 
     private void updateStatus(){
@@ -89,9 +103,11 @@ public class CentruCereriDonariController extends ControlledScreen{
             if(cr.getStatus() == Status.IN_ASTEPTARE)
                 changeStatus(true,false,false);
             else if(cr.getStatus() == Status.PRELEVARE)
-                changeStatus(true,true,false);
+                changeStatus(false,true,false);
             else if(cr.getStatus() == Status.PREGATIRE)
-                changeStatus(true,true,true);
+                changeStatus(false,false,true);
+            else
+                changeStatus(false,false,false);
         }
     }
 

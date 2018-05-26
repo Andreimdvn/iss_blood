@@ -10,7 +10,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-
 <AnchorPane prefHeight="655.0" prefWidth="1031.0" styleClass="toggle" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CentruPrelevareController">
    <children>
       <AnchorPane layoutX="337.0" layoutY="31.0" prefHeight="497.0" prefWidth="656.0" styleClass="box">
@@ -145,25 +144,25 @@
                   <HBox spacing="15.0">
                      <children>
                         <Label text="Nume" />
-                        <Label text="Nume donator" />
+                        <Label fx:id="numeLabel" text="Nume donator" />
                      </children>
                   </HBox>
                   <HBox spacing="15.0">
                      <children>
                         <Label text="Prenume" />
-                        <Label text="Nume donator" />
+                        <Label fx:id="prenumeLabel" text="Nume donator" />
                      </children>
                   </HBox>
                   <HBox spacing="15.0">
                      <children>
                         <Label text="Sex" />
-                        <Label text="Nume donator" />
+                        <Label fx:id="sexLabel" text="Nume donator" />
                      </children>
                   </HBox>
                   <HBox spacing="15.0">
                      <children>
                         <Label text="Telefon" />
-                        <Label text="Nume donator" />
+                        <Label fx:id="telefonLabel" text="Nume donator" />
                      </children>
                   </HBox>
                </children>
@@ -173,19 +172,19 @@
                   <HBox spacing="15.0">
                      <children>
                         <Label text="Localitate" />
-                        <Label text="Nume donator" />
+                        <Label fx:id="domiciliuLocalitateLabel" text="Nume donator" />
                      </children>
                   </HBox>
                   <HBox spacing="15.0">
                      <children>
                         <Label text="Judet" />
-                        <Label text="Nume donator" />
+                        <Label fx:id="domiciliuJudetLabel" text="Nume donator" />
                      </children>
                   </HBox>
                   <HBox spacing="15.0">
                      <children>
                         <Label text="Adresa" />
-                        <Label text="Nume donator" />
+                        <Label fx:id="domiciliuAdresaLabel" text="Nume donator" />
                      </children>
                   </HBox>
                </children>
@@ -195,19 +194,19 @@
                   <HBox spacing="15.0">
                      <children>
                         <Label text="Localitate" />
-                        <Label text="Nume donator" />
+                        <Label fx:id="resedintaLocalitateLabel" text="Nume donator" />
                      </children>
                   </HBox>
                   <HBox spacing="15.0">
                      <children>
                         <Label text="Judet" />
-                        <Label text="Nume donator" />
+                        <Label fx:id="resedintaJudetLabel" text="Nume donator" />
                      </children>
                   </HBox>
                   <HBox spacing="15.0">
                      <children>
                         <Label text="Adresa" />
-                        <Label text="Nume donator" />
+                        <Label fx:id="resedintaAdresaLabel" text="Nume donator" />
                      </children>
                   </HBox>
                </children>

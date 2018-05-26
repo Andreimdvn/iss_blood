@@ -116,15 +116,15 @@
          <children>
             <VBox layoutX="31.0" layoutY="217.0" spacing="5.0">
                <children>
-                  <ToggleButton mnemonicParsing="false" onAction="#homeClicked" prefHeight="29.0" prefWidth="178.0" selected="true" styleClass="buttonSecondaryTiny" text="Home">
+                  <ToggleButton fx:id="t1" mnemonicParsing="false" onAction="#homeClicked" prefHeight="29.0" prefWidth="178.0" selected="true" styleClass="buttonSecondaryTiny" text="Home">
                      <toggleGroup>
                         <ToggleGroup fx:id="leftGroup" />
                      </toggleGroup>
                   </ToggleButton>
-                  <ToggleButton mnemonicParsing="false" onAction="#cerereDonareClicked" prefHeight="29.0" prefWidth="178.0" styleClass="buttonSecondaryTiny" text="Adaugare cerere donare" toggleGroup="$leftGroup" />
-                  <ToggleButton mnemonicParsing="false" onMouseClicked="#cereriDonariClicked" prefHeight="29.0" prefWidth="178.0" styleClass="buttonSecondaryTiny" text="Vizualizare cereri donari" toggleGroup="$leftGroup" />
-                  <ToggleButton mnemonicParsing="false" onAction="#cereriSangeClicked" prefHeight="29.0" prefWidth="178.0" styleClass="buttonSecondaryTiny" text="Vizualizare cereri sange" toggleGroup="$leftGroup" />
-                  <ToggleButton mnemonicParsing="false" onAction="#stocCurentClicked" prefHeight="29.0" prefWidth="178.0" styleClass="buttonSecondaryTiny" text="Stoc curent" toggleGroup="$leftGroup" />
+                  <ToggleButton fx:id="t2" mnemonicParsing="false" onAction="#cerereDonareClicked" prefHeight="29.0" prefWidth="178.0" styleClass="buttonSecondaryTiny" text="Adaugare cerere donare" toggleGroup="$leftGroup" />
+                  <ToggleButton fx:id="t3" mnemonicParsing="false" onMouseClicked="#cereriDonariClicked" prefHeight="29.0" prefWidth="178.0" styleClass="buttonSecondaryTiny" text="Vizualizare cereri donari" toggleGroup="$leftGroup" />
+                  <ToggleButton fx:id="t4" mnemonicParsing="false" onAction="#cereriSangeClicked" prefHeight="29.0" prefWidth="178.0" styleClass="buttonSecondaryTiny" text="Vizualizare cereri sange" toggleGroup="$leftGroup" />
+                  <ToggleButton fx:id="t5" mnemonicParsing="false" onAction="#stocCurentClicked" prefHeight="29.0" prefWidth="178.0" styleClass="buttonSecondaryTiny" text="Stoc curent" toggleGroup="$leftGroup" />
                </children>
             </VBox>
             <Pane layoutX="12.0" layoutY="6.0" prefHeight="150.0" prefWidth="208.0">
