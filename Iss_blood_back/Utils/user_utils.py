@@ -50,7 +50,8 @@ def get_info_donator(db, user, donator = None):
             'domiciliu_adresa': donator.adresa_domiciliu,
             'resedinta_localitate': localitate_resedinta.nume,
             'resedinta_judet': judet_resedinta.nume,
-            'resedinta_adresa': donator.adresa_resedinta}
+            'resedinta_adresa': donator.adresa_resedinta,
+            'sex': donator.sex}
 
 
 def get_info_medic(db, user, medic = None):
@@ -67,9 +68,12 @@ def get_info_medic(db, user, medic = None):
     if medic is None: #daca inca e None, nu exista inregistrarea
         raise ValueError("Userul nu apare in tabela de medici")
 
+    locatie = db.select("Locatie", ["id"], [medic.id_locatie], True)
+
     return {"nume": medic.nume,
             "prenume": medic.prenume,
-            "id_locatie": medic.id_locatie}
+            "id_locatie": medic.id_locatie,
+            "nume_locatie": locatie.nume}
 
 
 def get_info_staff(db, user, staff = None):
@@ -86,6 +90,10 @@ def get_info_staff(db, user, staff = None):
     if staff is None: #daca inca e None, nu exista inregistrarea
         raise ValueError("Userul nu apare in tabela de StaffTransfuzii")
 
+    locatie = db.select("Locatie", ["id"], [staff.id_locatie], True)
+
+
     return {"nume": staff.nume,
             "prenume": staff.prenume,
-            "id_locatie": staff.id_locatie}
+            "id_locatie": staff.id_locatie,
+            "nume_locatie": locatie.nume}

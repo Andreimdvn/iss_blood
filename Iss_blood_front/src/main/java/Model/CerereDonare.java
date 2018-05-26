@@ -1,5 +1,10 @@
 package Model;
 
+
+/**
+ * Folositi FormularDonare
+ */
+@Deprecated
 public class CerereDonare {
     private String nume;
     private String prenume;

@@ -4,12 +4,15 @@ import Model.*;
 import Service.MainService;
 import Utils.CustomMessageBox;
 import Utils.Screen;
+import Validators.FormularValidator;
+import Validators.ValidationException;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.util.Pair;
 import org.apache.logging.log4j.LogManager;
@@ -68,6 +71,12 @@ public class FormularDonareController extends ControlledScreen {
     @FXML
     private ToggleGroup sexToggleGroup;
 
+    @FXML
+    private ToggleButton masculinToggle;
+
+    @FXML
+    private ToggleButton femininToggle;
+
 
     @FXML
     private ComboBox<GrupaSange> grupaSangeComboBox;
@@ -93,11 +102,12 @@ public class FormularDonareController extends ControlledScreen {
         //le trimite la service
         //daca e ok, trece la ecranul urmator
 
-        FormularDonare formularDonare = GetInfoFormular();
-        if(formularDonare == null)
-        {
+        FormularDonare formularDonare = null;
+        try {
+            formularDonare = GetInfoFormular();
+        } catch (ValidationException e) {
             CustomMessageBox msg = new CustomMessageBox("Eroare", "Formularul nu a fost completat corect. " +
-                    "\nVerificati daca ati completat toate campurile obligatorii", 1);
+                    "\n" + e.getMessage(), 1);
             msg.show();
             return;
         }
@@ -120,8 +130,7 @@ public class FormularDonareController extends ControlledScreen {
      *
      * @return Informatiile sau null daca un camp obligatoriu nu a fost completat
      */
-    private FormularDonare GetInfoFormular()
-    {
+    private FormularDonare GetInfoFormular() throws ValidationException {
         String username = getScreenController().userInfo.getUsername();
         String firstName = firstNameTextField.getText();
         String lastName = lastNameTextField.getText();
@@ -142,7 +151,7 @@ public class FormularDonareController extends ControlledScreen {
         String phone = phoneTextField.getText();
         if(sexToggleGroup.getSelectedToggle() == null)
         {
-            return null;
+            throw new ValidationException("Nu ati selectat sexul");
         }
         String genderString = ((RadioButton)sexToggleGroup.getSelectedToggle()).getText();
         Sex sex;
@@ -163,13 +172,15 @@ public class FormularDonareController extends ControlledScreen {
             currentDayVal *= 2;
         }
 
-        if(firstName.equals("") || lastName.equals("") || phone.equals("") ||
-                domiciliuAdresa.equals("") || domiciliuJudet.equals("") || domiciliuLocalitate.equals("") ||
-                resedintaAdresa.equals("") || resedintaLocalitate.equals("") || resedintaJudet.equals(""))
-            return null;
+        FormularDonare formularDonare = new FormularDonare(username, lastName, firstName, sex, phone,
+                domiciliuLocalitate, domiciliuJudet, domiciliuAdresa,
+                resedintaLocalitate, resedintaJudet, resedintaAdresa,
+                beneficiarFullName, beneficiarCNP, grupa, rh, zileDisponibil);
 
-        return new FormularDonare(username, lastName, firstName, sex, phone, domiciliuLocalitate, domiciliuJudet, domiciliuAdresa,
-                resedintaLocalitate, resedintaJudet, resedintaAdresa, beneficiarFullName, beneficiarCNP, grupa, rh, zileDisponibil);
+        FormularValidator validator = new FormularValidator();
+        validator.Validate(formularDonare);
+
+        return formularDonare;
     }
 
     @FXML
@@ -198,6 +209,7 @@ public class FormularDonareController extends ControlledScreen {
         ResedintaLocalitateTextField.setText(info.getResedintaLocalitate());
         ResedintaAdresaTextField.setText(info.getResedintaAdresa());
         phoneTextField.setText(info.getTelefon());
+        sexToggleGroup.selectToggle(info.getSex() == Sex.FEMININ ? femininToggle : masculinToggle);
     }
 
 }

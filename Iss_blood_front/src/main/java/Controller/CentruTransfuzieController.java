@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.StaffInfo;
 import Service.MainService;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.collections.FXCollections;
@@ -79,6 +80,17 @@ public class CentruTransfuzieController extends ControlledScreen {
                 primaryStage.setY(event.getScreenY() - yOffset);
             }
         });
+    }
+
+    @Override
+    public void setScreenController(ScreenController ctr)
+    {
+        super.setScreenController(ctr);
+
+        StaffInfo info = (StaffInfo)ctr.userInfo;
+//
+//        labelUsername.setText(info.getUsername());
+//        labelFullName.setText(info.getNume() + " " + info.getPrenume());
     }
 
     @FXML

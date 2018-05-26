@@ -58,6 +58,7 @@ class Donator(DB):
     telefon = Column(String(20), nullable=False)
     id_localitate_resedinta = Column(Integer, ForeignKey('Localitate.id'))
     adresa_resedinta = Column(String(100), nullable=False)
+    sex = Column(Enum('MASCULIN', 'FEMININ'))
 
     user = relationship('User', back_populates='donatori')
     sange_brut = relationship('SangeBrut', back_populates='donator')
@@ -182,6 +183,7 @@ class FormularDonare(DB):
     grupa = Column(Enum("O1", "A2", "B3", "AB4", "UNKNOWN"))
     rh = Column(Enum("pozitiv", "negativ", "UNKNOWN"))
     zile_disponibil = Column(Integer)
+    status = Column(Enum('IN_ASTEPTARE','PRELEVARE','PREGATIRE','CALIFICARE','DISTRIBUIRE','NONCONFORM'), default='IN_ASTEPTARE')
 
 
 class ORM:
