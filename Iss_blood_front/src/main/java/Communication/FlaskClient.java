@@ -1,12 +1,15 @@
 package Communication;
 
-import Controller.FormularDonareController;
+import Model.FormularDonare;
 import Model.RegisterInfo;
+import Model.UserInfo;
+import Utils.UserUtils;
 import javafx.util.Pair;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.json.JSONObject;
 
+import javax.naming.directory.InvalidAttributesException;
 import java.io.*;
 import java.net.*;
 import java.nio.charset.StandardCharsets;
@@ -78,15 +81,16 @@ public class FlaskClient {
      * Sends a login request to the server
      * @param user : Username for login
      * @param password : Password for login
-     * @return <bool,string> true if the login was successfully , false otherwise
+     * @return <UserInfo,string> If the login request was unsuccessful,
+     *        UserInfo will be set to null and the string will contain an error message
      * + a string message describing the status
      */
-    public Pair<Integer, String> login(String user, String password){
+    public Pair<UserInfo, String> login(String user, String password){
 
         HttpURLConnection http = getConnection("/login");
 
         if(http == null){
-            return new Pair<>(0, "Client connection request Error");
+            return new Pair<>(null, "Client connection request Error");
         }
 
         String jsonString = new JSONObject().put("username", user).put("password", password).toString();
@@ -95,13 +99,17 @@ public class FlaskClient {
         JSONObject jsonResponse = this.sendRequest(http, jsonString);
         logger.debug("RESPONSE : " + jsonResponse);
         if(jsonResponse == null) {
-            return new Pair<>(0, "Connection error.");
+            return new Pair<>(null, "Connection error.");
         }
         if (jsonResponse.getInt("status")== 0) {
-            return new Pair<>(jsonResponse.getInt("user_type"), "Success!");
+            try {
+                return new Pair<>(UserUtils.GetUserInfoFromResponse(jsonResponse, user), "Success!");
+            } catch (InvalidAttributesException e) {
+                return new Pair<>(null, e.getMessage());
+            }
         }
         else {
-            return new Pair<>(0, jsonResponse.getString("message"));
+            return new Pair<>(null, jsonResponse.getString("message"));
         }
     }
 
@@ -132,6 +140,36 @@ public class FlaskClient {
             return new Pair<>(true, "Registered successfully");
 
         return new Pair<>(false, jsonResponse.getString("message"));
+    }
+
+    public Pair<Boolean, String> trimiteFormularDonare(FormularDonare formular)
+    {
+        HttpURLConnection connection = getConnection("/trimiteFormularDonare");
+
+        if(connection == null)
+            return new Pair<>(false, "Client connection request Error");
+
+        String jsonString = new JSONObject().put("nume", formular.getNume()).put("prenume", formular.getPrenume())
+                .put("sex", formular.getSex().toString()).put("telefon", formular.getTelefon())
+                .put("domiciliu_localitate", formular.getDomiciliuLocalitate())
+                .put("domiciliu_judet", formular.getDomiciliuJudet())
+                .put("domiciliu_adresa", formular.getDomiciliuAdresa())
+                .put("resedinta_localitate", formular.getResedintaLocalitate())
+                .put("resedinta_judet", formular.getResedintaJudet())
+                .put("resedinta_adresa", formular.getResedintaAdresa())
+                .put("beneficiar_full_name", formular.getBeneficiarFullName())
+                .put("beneficiar_CNP", formular.getBeneficiarCNP())
+                .put("grupa", formular.getGrupa()).put("rh", formular.getRh().toString())
+                .put("zile_disponibil", formular.getZileDisponibil())
+                .put("username", formular.getUsername()).toString();
+
+        logger.debug("SENDING: " + jsonString);
+        JSONObject jsonResponse = sendRequest(connection, jsonString);
+        logger.debug("RESPONSE : " + jsonResponse);
+
+
+        return new Pair<>(true, "Success");
+
     }
 
     /** Sends a json string to a given relative path

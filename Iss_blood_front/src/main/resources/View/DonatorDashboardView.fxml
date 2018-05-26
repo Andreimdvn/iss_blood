@@ -26,7 +26,7 @@
                   <AnchorPane fx:id="statsPane" prefHeight="258.0" prefWidth="688.0">
                      <children>
                         <Label layoutX="14.0" layoutY="30.0" prefHeight="30.0" prefWidth="163.0" styleClass="headerPrimary" text="Welcome back," />
-                        <Label layoutX="133.0" layoutY="58.0" styleClass="headerPrimary" text="Moldovan Daniel-Gabriel" />
+                        <Label layoutX="133.0" layoutY="58.0" styleClass="headerPrimary" text="UNKNOWN"  fx:id="labelFullName"/>
                         <AnchorPane layoutX="51.0" layoutY="183.0" prefHeight="51.0" prefWidth="585.0">
                            <children>
                               <Label styleClass="labelPrimary" text="Ultima data cand ai donat:" />
@@ -62,7 +62,7 @@
             <HBox fx:id="navSegmentHbox1" layoutX="13.0" styleClass="hboxTopBar">
                <children>
                   <FontAwesomeIconView glyphName="USER" size="24" styleClass="icon" wrappingWidth="24.00006103515625" />
-                  <Label styleClass="labelPrimary" text="DanielmanRO">
+                  <Label styleClass="labelPrimary" text="UNKNOWN" fx:id="labelUsername">
                      <padding>
                         <Insets top="5.0" />
                      </padding>

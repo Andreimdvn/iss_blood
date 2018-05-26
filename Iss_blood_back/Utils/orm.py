@@ -175,6 +175,18 @@ class SangePrelucrat(DB):
     sange_brut = relationship('SangeBrut', back_populates='sange_prelucrat')
     locatie = relationship('Locatie', back_populates='sange_prelucrat')
 
+class FormularDonare(DB):
+    __tablename__ = 'FormularDonare'
+
+    id = Column(Integer, autoincrement=True, primary_key=True)
+    id_donator = Column(Integer, ForeignKey('Donator.id_user'))
+    sex = Column(Enum('MASCULIN', 'FEMININ'))
+    beneficiar_full_name = Column(String(50))
+    beneficiar_CNP = Column(String(13))
+    grupa = Column(Enum("O1", "A2", "B3", "AB4", "UNKNOWN"))
+    rh = Column(Enum("pozitiv", "negativ", "UNKNOWN"))
+    zile_disponibil = Column(Integer)
+
 
 class CereriSange(DB):
     __tablename__ = 'CereriSange'
