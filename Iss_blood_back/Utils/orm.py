@@ -124,7 +124,7 @@ class Licente(DB):
 
     id = Column(Integer, autoincrement=True, primary_key=True)
     tip_licenta = Column(Enum('StaffTransfuzie', 'Medic'), nullable=False)
-    cod_licenta = Column(String(100), nullable=False)
+    cod_licenta = Column(String(100), nullable=False, unique=True)
     folosita = Column(Boolean, nullable=False)
 
 class Analize(DB):
