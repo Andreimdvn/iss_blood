@@ -1,6 +1,6 @@
 package Controller;
 
-import Model.CerereDonare;
+import Model.FormularDonare;
 import Model.GrupaSange;
 import Model.RH;
 import Model.Status;
@@ -57,9 +57,9 @@ public class CentruAnalizaController extends ControlledScreen{
 
     }
 
-    private CerereDonare cerereDonare;
+    private FormularDonare cerereDonare;
 
-    public void setCerereDonare(CerereDonare cerereDonare) {
+    public void setFormularDonare(FormularDonare cerereDonare) {
         this.cerereDonare = cerereDonare;
     }
 
@@ -68,7 +68,7 @@ public class CentruAnalizaController extends ControlledScreen{
     private final String MESSAGE_ERROR="ERROR";
 
     private void setGrupaAndRH(GrupaSange gs, RH rh){
-        cerereDonare.setGrupaSange(gs);
+        cerereDonare.setGrupa(gs);
         cerereDonare.setRh(rh);
     }
 

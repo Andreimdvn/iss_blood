@@ -1,6 +1,6 @@
 package Controller;
 
-import Model.CerereDonare;
+import Model.FormularDonare;
 import Model.Status;
 import Utils.CustomMessageBox;
 import com.jfoenix.controls.JFXTextField;
@@ -20,7 +20,7 @@ public class CentruPrelevareController extends ControlledScreen{
 
     }
 
-    private CerereDonare cerereDonare;
+    private FormularDonare cerereDonare;
 
     @FXML
     private Label numeLabel;
@@ -53,12 +53,12 @@ public class CentruPrelevareController extends ControlledScreen{
     private Label resedintaAdresaLabel;
 
 
-    void setCerereDonare(CerereDonare cerereDonare) {
+    void setFormularDonare(FormularDonare cerereDonare) {
         this.cerereDonare = cerereDonare;
         numeLabel.setText(cerereDonare.getNume());
         prenumeLabel.setText(cerereDonare.getPrenume());
         sexLabel.setText(cerereDonare.getSex().toString());
-        telefonLabel.setText(cerereDonare.getPhone());
+        telefonLabel.setText(cerereDonare.getTelefon());
         domiciliuAdresaLabel.setText(cerereDonare.getDomiciliuAdresa());
         domiciliuJudetLabel.setText(cerereDonare.getDomiciliuJudet());
         domiciliuLocalitateLabel.setText(cerereDonare.getDomiciliuLocalitate());

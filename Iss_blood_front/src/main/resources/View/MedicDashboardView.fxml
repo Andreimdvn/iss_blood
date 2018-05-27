@@ -90,7 +90,9 @@
                         <AnchorPane />
                      </children>
                   </VBox>
-                  <Label layoutX="690.0" layoutY="154.0" text="Stoc centrul de transfuzie Cluj-Napoca" />
+
+                  <Label layoutX="690.0" layoutY="56.0" text="Loading..." fx:id="numeSpitalLabel"/>
+
                </children>
             </AnchorPane>
          </center>

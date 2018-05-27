@@ -129,8 +129,8 @@
             </VBox>
             <Pane layoutX="12.0" layoutY="6.0" prefHeight="150.0" prefWidth="208.0">
                <children>
-                  <Label layoutX="5.0" layoutY="96.3125" prefHeight="20.0" prefWidth="198.0" style="-fx-alignment: center;" styleClass="labelSecondary" text="Moldovan Daniel" textAlignment="CENTER" />
-                  <Label layoutY="67.3125" styleClass="labelSecondary" text="Centrul de transfuzie Cluj-Napoca" />
+                  <Label layoutX="5.0" layoutY="96.3125" prefHeight="20.0" prefWidth="198.0" style="-fx-alignment: center;" styleClass="labelSecondary" text="Loading..." textAlignment="CENTER" fx:id="numeStaffLabel" />
+                  <Label fx:id="numeCentruLabel" layoutY="67.3125" styleClass="labelSecondary" text="Loading..."/>
                   <OctIconView fill="WHITE" glyphName="SHIELD" layoutX="82.0" layoutY="59.0" size="50" wrappingWidth="44.66668701171875" />
                </children>
             </Pane>

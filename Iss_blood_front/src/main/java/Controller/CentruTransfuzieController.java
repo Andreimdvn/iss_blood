@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.StaffInfo;
 import Service.MainService;
 import Utils.Screen;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
@@ -10,12 +11,18 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 public class CentruTransfuzieController extends ControlledScreen {
+
+    @FXML
+    private Label numeStaffLabel;
+    @FXML
+    private Label numeCentruLabel;
 
     @FXML
     private PieChart stocPieChart;
@@ -132,6 +139,10 @@ public class CentruTransfuzieController extends ControlledScreen {
         });
     }
 
+    @Override
+    public void setScreenController(ScreenController ctr)
+    {
+        super.setScreenController(ctr);
     @FXML
     private AnchorPane topBar;
 

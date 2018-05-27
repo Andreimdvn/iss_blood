@@ -1,5 +1,8 @@
 package Controller;
 
+import Model.DonatorInfo;
+import Model.MedicInfo;
+import Model.UserInfo;
 import Utils.CustomMessageBox;
 import Utils.Screen;
 import com.jfoenix.controls.JFXPasswordField;
@@ -75,27 +78,39 @@ public class LoginController extends ControlledScreen {
         logger.debug("Login button has been clicked");
 
 
-        Pair<Integer, String> canLogin;
-        //Pair<Integer, String> canLogin = getService().login(username, password);
+//        Pair<Integer, String> canLogin;
+        Pair<UserInfo, String> canLogin = getService().login(username, password);
         // Login for debug
-        if(username.equals("donator"))
-            canLogin = new Pair<>(1,"");
-        else if(username.equals("medic"))
-            canLogin = new Pair<>(2,"");
-        else
-            canLogin = new Pair<>(3,"");
+//        if(username.equals("donator"))
+//            canLogin = new Pair<>(1,"");
+//        else if(username.equals("medic"))
+//            canLogin = new Pair<>(2,"");
+//        else
+//            canLogin = new Pair<>(3,"");
         //remove this ^^^ on production
 
-        if (canLogin.getKey() == 0) {
+        if (canLogin.getKey() == null) { //failed
             new CustomMessageBox("Login",canLogin.getValue()).show();
-        } else if (canLogin.getKey() == 1){
-
-            getScreenController().setScreen(Screen.DONATOR_SCREEN);
+            return;
         }
-        else if (canLogin.getKey() == 2) {
+
+        ScreenController screenController = getScreenController();
+
+        screenController.userInfo = canLogin.getKey();
+
+        if (canLogin.getKey() instanceof DonatorInfo){
+            loadScreensDonator();
+
+            screenController.setScreen(Screen.DONATOR_SCREEN);
+        }
+        else if (canLogin.getKey() instanceof MedicInfo) {
+            loadScreensMedic();
+
             getScreenController().setScreen(Screen.MEDIC_SCREEN);
         }
         else  {
+            loadScreensCentru();
+
             getScreenController().setScreen(Screen.CENTRU_TRANSFUZIE_SCREEN);
 
             //logger.debug("Credintiale gresite");
@@ -123,5 +138,44 @@ public class LoginController extends ControlledScreen {
         logger.debug("X has been clicked");
         Stage current = getStage();
         current.close();
+    }
+
+
+    private void loadScreensDonator()
+    {
+        ScreenController screenController = getScreenController();
+
+        screenController.loadScreen(Screen.DONATOR_SCREEN,Screen.DONATOR_RESOURCE);
+        screenController.loadScreen(Screen.FORMULAR_DONARE_SCREEN, Screen.FORMULAR_DONARE_RESOURCE);
+        screenController.loadScreen(Screen.ISTORIC_DONARI_SCREEN,Screen.ISTORIC_DONARI_RESOURCE);
+
+        screenController.loadScreen(Screen.FORMULAR_1_TEXT1_SCREEN,Screen.FORMULAR_1_TEXT1_RESOURCE);
+        screenController.loadScreen(Screen.FORMULAR_1_TEXT2_SCREEN,Screen.FORMULAR_1_TEXT2_RESOURCE);
+        screenController.loadScreen(Screen.FORMULAR_1_TEXT3_SCREEN,Screen.FORMULAR_1_TEXT3_RESOURCE);
+        screenController.loadScreen(Screen.FORMULAR_1_TEXT4_SCREEN,Screen.FORMULAR_1_TEXT4_RESOURCE);
+        screenController.loadScreen(Screen.FORMULAR_1_SCREEN,Screen.FORMULAR_1_RESOURCE);
+        screenController.loadScreen(Screen.FORMULAR_3_SCREEN,Screen.FORMULAR_3_RESOURCE);
+    }
+
+    private void loadScreensMedic()
+    {
+        ScreenController screenController = getScreenController();
+
+        screenController.loadScreen(Screen.MEDIC_SCREEN,Screen.MEDIC_RESOURCE);
+        screenController.loadScreen(Screen.ISTORIC_CERERI_SCREEN,Screen.ISTORIC_CERERI_RESOURCE);
+        screenController.loadScreen(Screen.STARE_PACIENTI_SCREEN,Screen.STARE_PACIENTI_RESOURCE);
+        screenController.loadScreen(Screen.CERERE_SANGE_SCREEN,Screen.CERERE_SANGE_RESOURCE);
+    }
+
+    private void loadScreensCentru()
+    {
+        ScreenController screenController = getScreenController();
+
+        screenController.loadScreen(Screen.CENTRU_TRANSFUZIE_SCREEN,Screen.CENTRU_TRANSFUZIE_RESOURCE);
+        screenController.loadScreen(Screen.CENTRU_CERERI_DONARI_SCREEN,Screen.CENTRU_CERERI_DONARI_RESOURCE);
+        screenController.loadScreen(Screen.CENTRU_ANALIZA_SCREEN,Screen.CENTRU_ANALIZA_RESOURCE);
+        screenController.loadScreen(Screen.CENTRU_CHESTIONAR_SCREEN,Screen.CENTRU_CHESTIONAR_RESOURCE);
+        screenController.loadScreen(Screen.CENTRU_CERERI_SANGE_SCREEN,Screen.CENTRU_CERERI_SANGE_RESOURCE);
+        screenController.loadScreen(Screen.CENTRU_STOC_PUNGI_SCREEN,Screen.CENTRU_STOC_PUNGI_RESOURCE);
     }
 }
