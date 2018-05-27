@@ -1,6 +1,6 @@
 package Model;
 
-public class FormularDonare {
+public class CerereDonare {
     private String nume;
     private String prenume;
     private Sex sex;
@@ -15,7 +15,7 @@ public class FormularDonare {
     private RH rh;
     private Status status;
 
-    public FormularDonare(String nume, String prenume, GrupaSange grupaSange, RH rh, Status status) {
+    public CerereDonare(String nume, String prenume, GrupaSange grupaSange, RH rh, Status status) {
         this.nume = nume;
         this.prenume = prenume;
         this.grupaSange = grupaSange;
@@ -24,7 +24,7 @@ public class FormularDonare {
     }
 
 
-    public FormularDonare(String nume, String prenume, Sex sex, String phone, String domiciliuLocalitate, String domiciliuJudet, String domiciliuAdresa, String resedintaLocalitate, String resedintaJudet, String resedintaAdresa, Status status) {
+    public CerereDonare(String nume,String prenume, Sex sex, String phone, String domiciliuLocalitate, String domiciliuJudet, String domiciliuAdresa, String resedintaLocalitate, String resedintaJudet, String resedintaAdresa,Status status) {
         this.nume = nume;
         this.prenume = prenume;
         this.sex = sex;
@@ -48,7 +48,7 @@ public class FormularDonare {
         this.status = status;
     }
 
-    public FormularDonare(String nume, String prenume, Sex sex, String phone, String domiciliuLocalitate, String domiciliuJudet, String domiciliuAdresa, String resedintaLocalitate, String resedintaJudet, String resedintaAdresa, GrupaSange grupaSange, RH rh, Status status) {
+    public CerereDonare(String nume, String prenume, Sex sex, String phone, String domiciliuLocalitate, String domiciliuJudet, String domiciliuAdresa, String resedintaLocalitate, String resedintaJudet, String resedintaAdresa, GrupaSange grupaSange, RH rh, Status status) {
 
         this.nume = nume;
         this.prenume = prenume;
