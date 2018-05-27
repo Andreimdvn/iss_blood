@@ -18,6 +18,33 @@ public class FormularDonare {
     RH rh;
     private short zileDisponibil; //de ex: 00011 = luni si marti
 
+    private Status status;
+
+
+    public FormularDonare(String username, String nume, String prenume, Sex sex, String telefon,
+                          String domiciliuLocalitate, String domiciliuJudet, String domiciliuAdresa,
+                          String resedintaLocalitate, String resedintaJudet, String resedintaAdresa,
+                          String beneficiarFullName, String beneficiarCNP, GrupaSange grupa,
+                          RH rh, short zileDisponibil, Status status) {
+        this.username = username;
+        this.nume = nume;
+        this.prenume = prenume;
+        this.sex = sex;
+        this.telefon = telefon;
+        this.domiciliuLocalitate = domiciliuLocalitate;
+        this.domiciliuJudet = domiciliuJudet;
+        this.domiciliuAdresa = domiciliuAdresa;
+        this.resedintaLocalitate = resedintaLocalitate;
+        this.resedintaJudet = resedintaJudet;
+        this.resedintaAdresa = resedintaAdresa;
+        this.beneficiarFullName = beneficiarFullName;
+        this.beneficiarCNP = beneficiarCNP;
+        this.grupa = grupa;
+        this.rh = rh;
+        this.zileDisponibil = zileDisponibil;
+        this.status = status;
+    }
+
     public FormularDonare(String username, String nume, String prenume, Sex sex, String telefon,
                           String domiciliuLocalitate, String domiciliuJudet, String domiciliuAdresa,
                           String resedintaLocalitate, String resedintaJudet, String resedintaAdresa,
@@ -39,6 +66,7 @@ public class FormularDonare {
         this.grupa = grupa;
         this.rh = rh;
         this.zileDisponibil = zileDisponibil;
+        this.status = Status.IN_ASTEPTARE;
     }
 
     public String getBeneficiarFullName() {
@@ -103,5 +131,9 @@ public class FormularDonare {
 
     public String getUsername() {
         return username;
+    }
+
+    public Status getStatus() {
+        return status;
     }
 }
