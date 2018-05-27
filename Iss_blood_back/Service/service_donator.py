@@ -51,7 +51,8 @@ class ServiceDonator(IService):
                 valori_noi.append(valori_formular[i])
 
         # Vezi daca difera domiciliul
-        if donator_info['domiciliu_localitate'] != formular.domiciliu_localitate:  # daca localitatea domiciliu difera
+        if donator_info['domiciliu_localitate'] != formular.domiciliu_localitate or \
+                donator_info['domiciliu_judet'] != formular.domiciliu_judet:  # daca domiciliul difera
             # nu conteaza daca e un judet nou sau e acelasi
             id_judet = locatii_utils.get_id_judet(self.db, formular.domiciliu_judet)  # cauta sau insereaza judetul nou
 
@@ -64,7 +65,8 @@ class ServiceDonator(IService):
             valori_noi.append(formular.domiciliu_adresa)
 
         # la fel pentru resedinta
-        if donator_info['resedinta_localitate'] != formular.resedinta_localitate:  # daca localitatea resedinta difera
+        if donator_info['resedinta_localitate'] != formular.resedinta_localitate or \
+                donator_info['resedinta_judet'] != formular.resedinta_judet:  # daca resedinta difera
             # nu conteaza daca e un judet nou sau e acelasi
             id_judet = locatii_utils.get_id_judet(self.db, formular.resedinta_judet)  # cauta sau insereaza judetul nou
 
