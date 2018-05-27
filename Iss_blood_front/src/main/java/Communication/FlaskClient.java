@@ -141,7 +141,7 @@ public class FlaskClient {
         return new Pair<>(false, jsonResponse.getString("message"));
     }
 
-    public Pair<Boolean, String> trimiteFormularDonare(FormularDonare formular, String username)
+    public Pair<Boolean, String> userTrimiteFormularDonare(FormularDonare formular, String username)
     {
         HttpURLConnection connection = getConnection("/userTrimiteFormularDonare");
 
@@ -169,6 +169,34 @@ public class FlaskClient {
 
         return new Pair<>(true, "Success");
 
+    }
+
+    public Pair<Boolean, String> staffTrimiteFormularDonare(FormularDonare formular)
+    {
+        HttpURLConnection connection = getConnection("/staffTrimiteFormularDonare");
+
+        if(connection == null)
+            return new Pair<>(false, "Client connection request Error");
+
+        String jsonString = new JSONObject().put("nume", formular.getNume()).put("prenume", formular.getPrenume())
+                .put("sex", formular.getSex().toString()).put("telefon", formular.getTelefon())
+                .put("domiciliu_localitate", formular.getDomiciliuLocalitate())
+                .put("domiciliu_judet", formular.getDomiciliuJudet())
+                .put("domiciliu_adresa", formular.getDomiciliuAdresa())
+                .put("resedinta_localitate", formular.getResedintaLocalitate())
+                .put("resedinta_judet", formular.getResedintaJudet())
+                .put("resedinta_adresa", formular.getResedintaAdresa())
+                .put("beneficiar_full_name", formular.getBeneficiarFullName())
+                .put("beneficiar_CNP", formular.getBeneficiarCNP())
+                .put("grupa", formular.getGrupa()).put("rh", formular.getRh().toString())
+                .put("zile_disponibil", formular.getZileDisponibil()).toString();
+
+        logger.debug("SENDING: " + jsonString);
+        JSONObject jsonResponse = sendRequest(connection, jsonString);
+        logger.debug("RESPONSE : " + jsonResponse);
+
+
+        return new Pair<>(true, "Success");
     }
 
     /** Sends a json string to a given relative path

@@ -1,7 +1,6 @@
 
 class FormularDonare:
-    def __init__(self, username, nume, prenume, sex, telefon, domiciliu_localitate, domiciliu_judet, domiciliu_adresa, resedinta_localitate, resedinta_judet, resedinta_adresa, beneficiar_full_name, beneficiar_CNP, grupa, rh, zile_disponibil):
-        self.username = username
+    def __init__(self, nume, prenume, sex, telefon, domiciliu_localitate, domiciliu_judet, domiciliu_adresa, resedinta_localitate, resedinta_judet, resedinta_adresa, beneficiar_full_name, beneficiar_CNP, grupa, rh, zile_disponibil):
         self.zile_disponibil = zile_disponibil
         self.rh = rh
         self.grupa = grupa

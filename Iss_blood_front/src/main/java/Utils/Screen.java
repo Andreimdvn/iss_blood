@@ -14,6 +14,10 @@ public class Screen {
     public static String FORMULAR_DONARE_SCREEN = "FORMULAR_DONARE";
     public static String FORMULAR_DONARE_RESOURCE = "/View/FormularDonareView.fxml";
 
+    public static String CENTRU_FORMULAR_SCREEN = "CENTRU_FORMULAR";
+    public static String CENTRU_FORMULAR_RESOURCE = "/View/CentruFormularView.fxml";
+
+
     public static String ISTORIC_DONARI_SCREEN = "ISTORIC";
     public static String ISTORIC_DONARI_RESOURCE = "/View/IstoricDonariView.fxml";
 
