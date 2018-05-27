@@ -62,11 +62,17 @@ public class CentruCereriDonariController extends ControlledScreen{
         updateStatus();
     }
 
+    private StaffInfo getInfo(){
+        return (StaffInfo) getScreenController().userInfo;
+    }
+
     @FXML
     private void populateDummy(){
 
-        FormularDonare a = new FormularDonare("Moldovan","Daniel",Sex.MASCULIN, "0744176894", "Arad", "Arad", "Str.Scoalei", "Cluj", "Cluj-Napoca", "Str. Iustin","Ciprian","1234567890123",GrupaSange.UNKNOWN,RH.UNKNOWN,Status.IN_ASTEPTARE);
-        donareObservableList.add(a);
+       // FormularDonare a = new FormularDonare("Moldovan","Daniel",Sex.MASCULIN, "0744176894", "Arad", "Arad", "Str.Scoalei", "Cluj", "Cluj-Napoca", "Str. Iustin","Ciprian","1234567890123",GrupaSange.UNKNOWN,RH.UNKNOWN,Status.IN_ASTEPTARE);
+        //donareObservableList.add(a);
+        List<FormularDonare> list = getService().getFormulareDonariDupaLocatie(getInfo().getIdLocatie());
+        donareObservableList.setAll(list);
     }
 
     private FormularDonare getSelected(){

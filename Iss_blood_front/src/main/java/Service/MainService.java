@@ -6,6 +6,8 @@ import Model.RegisterInfo;
 import Model.UserInfo;
 import javafx.util.Pair;
 
+import java.util.List;
+
 public class MainService {
 
     FlaskClient flaskClient;
@@ -26,4 +28,9 @@ public class MainService {
     public Pair<Boolean, String> userTrimiteFormularDonare(FormularDonare formular, String username){return flaskClient.userTrimiteFormularDonare(formular, username);}
 
     public Pair<Boolean, String> staffTrimiteFormularDonare (FormularDonare formularDonare) { return flaskClient.staffTrimiteFormularDonare(formularDonare);}
+
+    public List<FormularDonare> getFormulareDonariDupaLocatie(int i){
+        return flaskClient.getFormulareDonariDupaLocatie(i);
+
+    }
 }

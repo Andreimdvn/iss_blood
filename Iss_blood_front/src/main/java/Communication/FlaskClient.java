@@ -1,18 +1,19 @@
 package Communication;
 
-import Model.FormularDonare;
-import Model.RegisterInfo;
-import Model.UserInfo;
+import Model.*;
 import Utils.UserUtils;
 import javafx.util.Pair;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import javax.naming.directory.InvalidAttributesException;
 import java.io.*;
 import java.net.*;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 public class FlaskClient {
@@ -170,6 +171,58 @@ public class FlaskClient {
         return new Pair<>(true, "Success");
 
     }
+
+    public List<FormularDonare> getFormulareDonariDupaLocatie(int id_locatie)
+    {
+        List<FormularDonare> list = new ArrayList<>();
+        HttpURLConnection connection = getConnection("/staffCereFormulareDonari");
+
+        if(connection == null)
+            System.out.println("Pula");
+
+        String jsonString = new JSONObject().put("id_locatie", id_locatie).toString();
+
+        logger.debug("SENDING: " + jsonString);
+        JSONObject jsonResponse = sendRequest(connection, jsonString);
+        logger.debug("RESPONSE : " + jsonResponse);
+
+        if(jsonResponse != null)
+        {
+            JSONArray formularDonares = jsonResponse.getJSONArray("entities");
+            System.out.println(formularDonares.length());
+            for(int i = 0; i < formularDonares.length() ;i++)
+            {
+                JSONObject x = formularDonares.getJSONObject(i);
+                int id = x.getInt("id");
+                String nume = x.getString("nume");
+                String prenume = x.getString("prenume");
+                Sex sex = Sex.valueOf(x.getString("sex"));
+                String telefon = x.getString("telefon");
+                String domiciliuLocalitate = x.getString("domiciliuLocalitate");
+                String domiciliuJudet = x.getString("domiciliuJudet");
+                String domiciliuAdresa = x.getString("domiciliuAdresa");
+                String resedintaLocalitate = x.getString("resedintaLocalitate");
+                String resedintaJudet = x.getString("resedintaJudet");
+                String resedintaAdresa = x.getString("resedintaAdresa");
+                String beneficiarFullName = x.get("beneficiar_full_name").toString();
+                String beneficiarCNP = x.get("beneficiar_cnp").toString();
+                GrupaSange grupa = GrupaSange.valueOf(x.getString("grupa"));
+                RH rh = RH.valueOf(x.getString("rh"));
+                Status status = Status.valueOf(x.getString("status"));
+                FormularDonare a = new FormularDonare(id,nume,prenume,sex,telefon,
+                        domiciliuLocalitate,domiciliuJudet,domiciliuAdresa,
+                        resedintaLocalitate,resedintaJudet,resedintaAdresa,
+                        beneficiarFullName,beneficiarCNP,grupa,rh,status);
+
+                list.add(a);
+            }
+        }
+
+        return list;
+
+
+    }
+
 
     public Pair<Boolean, String> staffTrimiteFormularDonare(FormularDonare formular)
     {

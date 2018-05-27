@@ -65,10 +65,14 @@ def insert_dumy_data(orm):
                                                                           'transfuzie1'))
     orm.insert('User', columns=('username', 'email', 'password'), values=('transfuzie2', 'transfuzie2@gmail.com',
                                                                           'transfuzie2'))
+    orm.insert('User', columns=('username', 'email', 'password'), values=('transfuzie3', 'transfuzie3@gmail.com',
+                                                                          'transfuzie3'))
     orm.insert('StaffTransfuzii', columns=('id_user', 'id_locatie', 'telefon', 'prenume', 'nume', 'cnp'),
                values=(5, 4, '0987654321', 'PrenumeTransfuzie1', 'NumeTransfuzie1', '1122334455667'))
     orm.insert('StaffTransfuzii', columns=('id_user', 'id_locatie', 'telefon', 'prenume', 'nume', 'cnp'),
                values=(6, 6, '0987651234', 'PrenumeTransfuzie2', 'NumeTransfuzie2', '1122734455667'))
+    orm.insert('StaffTransfuzii', columns=('id_user', 'id_locatie', 'telefon', 'prenume', 'nume', 'cnp'),
+               values=(7, 1, '0987651234', 'PrenumeTransfuzie2', 'NumeTransfuzie2', '1112734455667'))
 
     # licente
     orm.insert('Licente', columns=('tip_licenta', 'cod_licenta', 'folosita'), values=('StaffTransfuzie', 'transf1', 0))

@@ -41,7 +41,8 @@ class FlaskServer:
                               methods=["POST"])
         self.app.add_url_rule("/staffTrimiteFormularDonare", "staff_trimite_formular_donare", self.staff_trimite_formular_donare,
                               methods=["POST"])
-
+        self.app.add_url_rule("/staffCereFormulareDonari", "staff_cere_formulare_donari",self.staff_cere_formular_donari,
+                              methods=["POST"])
     def test_request(self):
         self.request_data = request.get_json()
         self.logger.debug("Req data: {}".format(self.request_data))
@@ -107,6 +108,34 @@ class FlaskServer:
         status, message = self.controller.user_trimite_formular(formular_donare, self.request_data["username"])
 
         return_dict = {"status": str(status), "message": message}
+        return json.dumps(return_dict)
+
+    def staff_cere_formular_donari(self):
+        self.request_data = request.get_json()
+        self.logger.debug("Got register request JSON: {}".format(self.request_data))
+        id_locatie = self.request_data["id_locatie"]
+
+        lista = self.controller.service_transfuzie.get_cereri(id_locatie)
+        lista_dictionare =[]
+        for x in lista:
+            dict_list = {"id": x[0], "nume": x[1], "prenume": x[2], "sex": x[3],
+                     "telefon": x[4], "domiciliuLocalitate" : x[5],
+                     "domiciliuJudet" : x[6],
+                     "domiciliuAdresa" : x[7],
+                         "resedintaLocalitate": x[8],
+                         "resedintaJudet": x[9],
+                         "resedintaAdresa": x[10],
+                         "beneficiar_full_name": x[11],
+                         "beneficiar_cnp": x[12],
+                         "grupa" : x[13],
+                         "rh" : x[14],
+                         "status" : x[15]}
+
+            lista_dictionare.append(dict_list)
+
+        return_dict = {"entities": lista_dictionare}
+        self.logger.debug(return_dict)
+
         return json.dumps(return_dict)
 
     def staff_trimite_formular_donare(self):
