@@ -37,7 +37,7 @@ class FlaskServer:
         self.app.add_url_rule("/test", "test_request", self.test_request, methods=["GET", "POST"])
         self.app.add_url_rule("/login", "login_request", self.login_request, methods=["POST"])
         self.app.add_url_rule("/register", "register_request", self.register_request, methods=["POST"])
-        self.app.add_url_rule("/trimiteFormularDonare", "trimite_formular_donare", self.trimite_formular_donare,
+        self.app.add_url_rule("/userTrimiteFormularDonare", "user_trimite_formular_donare", self.user_trimite_formular_donare,
                               methods=["POST"])
 
     def test_request(self):
@@ -82,7 +82,7 @@ class FlaskServer:
 
         return json.dumps(return_dict)
 
-    def trimite_formular_donare(self):
+    def user_trimite_formular_donare(self):
         self.request_data = request.get_json()
         self.logger.debug("Got register request JSON: {}".format(self.request_data))
 

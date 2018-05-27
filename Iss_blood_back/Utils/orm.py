@@ -181,7 +181,6 @@ class FormularDonare(DB):
 
     id = Column(Integer, autoincrement=True, primary_key=True)
     id_donator = Column(Integer, ForeignKey('Donator.id_user'))
-    sex = Column(Enum('MASCULIN', 'FEMININ'))
     beneficiar_full_name = Column(String(50))
     beneficiar_CNP = Column(String(13))
     grupa = Column(Enum("O1", "A2", "B3", "AB4", "UNKNOWN"))

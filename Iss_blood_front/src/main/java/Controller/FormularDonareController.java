@@ -112,7 +112,9 @@ public class FormularDonareController extends ControlledScreen {
             return;
         }
 
-        Pair<Boolean, String> rez = getService().trimiteFormularDonare(formularDonare);
+        String username = getScreenController().userInfo.getUsername();
+
+        Pair<Boolean, String> rez = getService().trimiteFormularDonare(formularDonare, username);
         if(rez.getKey())
         {
             CustomMessageBox msg = new CustomMessageBox("Info", "Formularul a fost trimis cu succes", 0);
@@ -172,7 +174,7 @@ public class FormularDonareController extends ControlledScreen {
             currentDayVal *= 2;
         }
 
-        FormularDonare formularDonare = new FormularDonare(username, lastName, firstName, sex, phone,
+        FormularDonare formularDonare = new FormularDonare(lastName, firstName, sex, phone,
                 domiciliuLocalitate, domiciliuJudet, domiciliuAdresa,
                 resedintaLocalitate, resedintaJudet, resedintaAdresa,
                 beneficiarFullName, beneficiarCNP, grupa, rh, zileDisponibil);

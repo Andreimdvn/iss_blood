@@ -20,8 +20,8 @@ class ServiceDonator(IService):
         user_id = user.id
 
         # 1. Insereaza in DB
-        nume_coloane = ["id_donator", "sex", "zile_disponibil"]
-        valori_coloane = [user.id, formular.sex, formular.zile_disponibil]
+        nume_coloane = ["id_donator", "zile_disponibil"]
+        valori_coloane = [user.id, formular.zile_disponibil]
         if formular.beneficiar_full_name != "":
             nume_coloane.append("beneficiar_full_name")
             valori_coloane.append(formular.beneficiar_full_name)

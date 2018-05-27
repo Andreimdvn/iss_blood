@@ -10,7 +10,6 @@ public class FormularValidator {
         //Campurile sa nu fie goale sau sa contina doar caractere de 'umplutura'
         if(formularDonare.getNume().replaceAll("[-\\.\\s]", "").equals("") ||
                 formularDonare.getPrenume().replaceAll("[-\\.\\s]", "").equals("") ||
-                formularDonare.getUsername().replaceAll("[-\\.\\s]", "").equals("") ||
                 formularDonare.getTelefon().replaceAll("[-\\.\\s]", "").equals("") ||
                 formularDonare.getDomiciliuAdresa().replaceAll("[-\\.\\s]", "").equals("") ||
                 formularDonare.getDomiciliuJudet().replaceAll("[-\\.\\s]", "").equals("") ||

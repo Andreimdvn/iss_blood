@@ -142,9 +142,9 @@ public class FlaskClient {
         return new Pair<>(false, jsonResponse.getString("message"));
     }
 
-    public Pair<Boolean, String> trimiteFormularDonare(FormularDonare formular)
+    public Pair<Boolean, String> trimiteFormularDonare(FormularDonare formular, String username)
     {
-        HttpURLConnection connection = getConnection("/trimiteFormularDonare");
+        HttpURLConnection connection = getConnection("/userTrimiteFormularDonare");
 
         if(connection == null)
             return new Pair<>(false, "Client connection request Error");
@@ -161,7 +161,7 @@ public class FlaskClient {
                 .put("beneficiar_CNP", formular.getBeneficiarCNP())
                 .put("grupa", formular.getGrupa()).put("rh", formular.getRh().toString())
                 .put("zile_disponibil", formular.getZileDisponibil())
-                .put("username", formular.getUsername()).toString();
+                .put("username", username).toString();
 
         logger.debug("SENDING: " + jsonString);
         JSONObject jsonResponse = sendRequest(connection, jsonString);

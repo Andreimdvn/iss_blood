@@ -23,5 +23,5 @@ public class MainService {
         return flaskClient.register(info);
     }
 
-    public Pair<Boolean, String> trimiteFormularDonare (FormularDonare formular){return flaskClient.trimiteFormularDonare(formular);}
+    public Pair<Boolean, String> trimiteFormularDonare (FormularDonare formular, String username){return flaskClient.trimiteFormularDonare(formular, username);}
 }
