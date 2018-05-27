@@ -143,6 +143,13 @@ public class CentruTransfuzieController extends ControlledScreen {
     public void setScreenController(ScreenController ctr)
     {
         super.setScreenController(ctr);
+
+        StaffInfo info = (StaffInfo)ctr.userInfo;
+
+        numeStaffLabel.setText(info.getNume());
+        numeCentruLabel.setText(info.getNumeLocatie());
+    }
+
     @FXML
     private AnchorPane topBar;
 
