@@ -96,5 +96,5 @@ class ServiceDonator(IService):
         :param user: Utils.orm.User
         :return:
         '''
-
+        pass
 

@@ -208,8 +208,8 @@ public class MedicDashboardController extends ControlledScreen {
 
         MedicInfo info = (MedicInfo)ctr.userInfo;
 
-//        labelUsername.setText(info.getUsername());
         fullnameLabel.setText(info.getNume() + " " + info.getPrenume());
+        numeSpitalLabel.setText("Stoc " + info.getNumeLocatie());
     }
 
     @FXML

@@ -8,12 +8,18 @@ import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.chart.PieChart;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 public class CentruTransfuzieController extends ControlledScreen {
+
+    @FXML
+    private Label numeStaffLabel;
+    @FXML
+    private Label numeCentruLabel;
 
     @FXML
     private PieChart stocPieChart;
@@ -88,9 +94,9 @@ public class CentruTransfuzieController extends ControlledScreen {
         super.setScreenController(ctr);
 
         StaffInfo info = (StaffInfo)ctr.userInfo;
-//
-//        labelUsername.setText(info.getUsername());
-//        labelFullName.setText(info.getNume() + " " + info.getPrenume());
+
+        numeStaffLabel.setText(info.getNume());
+        numeCentruLabel.setText(info.getNumeLocatie());
     }
 
     @FXML

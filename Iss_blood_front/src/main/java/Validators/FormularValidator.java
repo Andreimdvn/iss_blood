@@ -10,13 +10,15 @@ public class FormularValidator {
         //Campurile sa nu fie goale sau sa contina doar caractere de 'umplutura'
         if(formularDonare.getNume().replaceAll("[-\\.\\s]", "").equals("") ||
                 formularDonare.getPrenume().replaceAll("[-\\.\\s]", "").equals("") ||
+                formularDonare.getUsername().replaceAll("[-\\.\\s]", "").equals("") ||
                 formularDonare.getTelefon().replaceAll("[-\\.\\s]", "").equals("") ||
                 formularDonare.getDomiciliuAdresa().replaceAll("[-\\.\\s]", "").equals("") ||
                 formularDonare.getDomiciliuJudet().replaceAll("[-\\.\\s]", "").equals("") ||
                 formularDonare.getDomiciliuLocalitate().replaceAll("[-\\.\\s]", "").equals("") ||
                 formularDonare.getResedintaAdresa().replaceAll("[-\\.\\s]", "").equals("") ||
                 formularDonare.getResedintaLocalitate().replaceAll("[-\\.\\s]", "").equals("") ||
-                formularDonare.getResedintaJudet().replaceAll("[-\\.\\s]", "").equals(""))
+                formularDonare.getResedintaJudet().replaceAll("[-\\.\\s]", "").equals("") ||
+                formularDonare.getSex() == null)
             throw new ValidationException("Toate campurile obligatorii trebuie completate");
 
         String errors = "";
