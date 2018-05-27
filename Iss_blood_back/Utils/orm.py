@@ -107,6 +107,8 @@ class Medic(DB):
     user = relationship('User', back_populates='medici')
     locatie = relationship('Locatie', back_populates='medici')
     pacient = relationship('Pacient', back_populates='medic')
+    cereri_sange = relationship('CereriSange', back_populates='medic')
+
 
 class Pacient(DB):
     __tablename__ = 'Pacient'
@@ -119,6 +121,8 @@ class Pacient(DB):
     id_medic = Column(Integer, ForeignKey('Medic.id_user'))
 
     medic = relationship('Medic', back_populates='pacient')
+    cereri_sange = relationship('CereriSange', back_populates='pacient')
+
 
 class Licente(DB):
     __tablename__ = 'Licente'
@@ -184,6 +188,27 @@ class FormularDonare(DB):
     rh = Column(Enum("pozitiv", "negativ", "UNKNOWN"))
     zile_disponibil = Column(Integer)
     status = Column(Enum('IN_ASTEPTARE','PRELEVARE','PREGATIRE','CALIFICARE','DISTRIBUIRE','NONCONFORM'), default='IN_ASTEPTARE')
+
+
+class CereriSange(DB):
+    __tablename__ = 'CereriSange'
+
+    id = Column(Integer, autoincrement=True, primary_key=True)
+
+    id_medic = Column(Integer, ForeignKey('Medic.id_user'), nullable=False)
+    id_pacient = Column(Integer, ForeignKey('Pacient.id'), nullable=False)
+
+    grupa_sange = Column(Enum('O1', 'A2', 'B3', 'AB4'), nullable=False)
+    rh = Column(Enum('Pozitiv', 'Negativ'), nullable=False)
+
+    numar_pungi_trombocite = Column(Integer, nullable=False)
+    numar_pungi_globule_rosii = Column(Integer, nullable=False)
+    numar_pungi_plasma = Column(Integer, nullable=False)
+    date = Column(Date, nullable=False)
+    importanta = Column(Enum('Scazuta', 'Medie', 'Ridicata'))
+
+    medic = relationship('Medic', back_populates='cereri_sange')
+    pacient = relationship('Pacient', back_populates='cereri_sange')
 
 
 class ORM:
