@@ -6,16 +6,6 @@ class ServiceDonator(IService):
     def __init__(self, repo_manager, db):
         super().__init__(repo_manager, db)
 
-    def insert_formular_staff(self, formular):
-        '''
-        Insereaza datele din formular in BD pentru o persoana care nu are cont
-        :param formular: Model.FormularDonare
-        :return: status, message
-        '''
-
-
-        return 0, "Formular inregistrat cu succes"
-
     def insert_formular_user(self, formular, username):
         '''
         Insereaza datele din formular in BD pentru un user deja existent
@@ -32,37 +22,12 @@ class ServiceDonator(IService):
             return 2, "Donator not found"
 
         # 1. Insereaza in formular ce e de inserat
-        self.__insert_formular(formular, donator.id_donator)
+        user_utils.insert_formular(self.db, formular, donator.id_donator)
 
         #2. Fa update pe datele userului daca e cazul
         return self.__update_user(formular, user)
 
-    def __insert_formular(self, formular, donator_id):
-        '''
-        Insereaza in tabelul FormularDonare campurile completate din formular
-        :param formular: Model.FormularDonare
-        :param donator_id: int; folosit pentru foreign key catre tabela de donatori
-        :return: -
-        '''
-        nume_coloane = ["id_donator", "zile_disponibil"]
-        valori_coloane = [donator_id, formular.zile_disponibil]
-        if formular.beneficiar_full_name != "":
-            nume_coloane.append("beneficiar_full_name")
-            valori_coloane.append(formular.beneficiar_full_name)
 
-        if formular.beneficiar_CNP != "":
-            nume_coloane.append("beneficiar_CNP")
-            valori_coloane.append(formular.beneficiar_CNP)
-
-        if formular.grupa != "":
-            nume_coloane.append("grupa")
-            valori_coloane.append(formular.grupa)
-
-        if formular.rh != "":
-            nume_coloane.append("rh")
-            valori_coloane.append(formular.rh)
-
-        self.db.insert("FormularDonare", nume_coloane, valori_coloane)
 
     def __update_user(self, formular, user):
         '''
