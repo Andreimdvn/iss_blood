@@ -1,18 +1,15 @@
 package Validators;
 
-import Model.RegisterInfo;
+import Model.CerereSange;
 import javafx.util.Pair;
 
-public class RegisterValidator extends Validator<RegisterInfo> {
+public class CerereSangeValidator extends Validator<CerereSange> {
 
-    /**
-     * @param info - the RegisterInfo to be validated
-     * @return True if the info is valid, false otherwise
-     */
-    public Pair<Boolean, String> validate(RegisterInfo info)
-    {
-
+    @Override
+    public Pair<Boolean, String> validate(CerereSange cerere) {
         String erori = "";
+
+        if(cerere.getNumePacient().equals(""))
 
         if(info.getAddress().equals("") || info.getEmail().equals("") || info.getNume().equals("") ||
                 info.getPassword().equals("") || info.getPhone().equals("") || info.getUsername().equals(""))
@@ -35,4 +32,3 @@ public class RegisterValidator extends Validator<RegisterInfo> {
         return new Pair<>(false, erori);
     }
 }
-
