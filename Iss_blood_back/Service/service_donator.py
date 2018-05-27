@@ -6,13 +6,12 @@ class ServiceDonator(IService):
     def __init__(self, repo_manager, db):
         super().__init__(repo_manager, db)
 
-    def trimite_formular(self, formular):
+    def insert_formular_user(self, formular):
         '''
-        Inregistreaza formularul in BD.
-        Face update la datele utilizatorului daca e cazul.
+        Insereaza datele din formular in BD pentru un user deja existent
         :param formular: Model.FormularDonare
-        :return: status_code, message
-                status_code = 0 pentru succes, != 0 altfel
+        :param user: Utils.orm.User
+        :return:
         '''
         user = self.db.select("User", ["username"], [formular.username], True)
         if user is None:
@@ -41,8 +40,18 @@ class ServiceDonator(IService):
 
         self.db.insert("FormularDonare", nume_coloane, valori_coloane)
 
-        # 2. Update pe user cu valorile noi(nume, tel, locuinta)
-        # 2.1 Vezi ce difera
+        #2. Fa update pe datele userului daca e cazul
+        self.__update_user(formular, user)
+
+    def __update_user(self, formular, user):
+        '''
+        Verifica daca formularul contine date diferite despre user fata de cele din DB
+        Daca da, face update
+        :param formular: Model.FormularDonare
+        :param user Utils.orm.User
+        :return:
+        '''
+        # 1 Vezi ce difera
         donator_info = user_utils.get_info_donator(self.db, user)
 
         coloane_noi = []  # denumirile coloanelor care trebuie modifiate
@@ -81,20 +90,9 @@ class ServiceDonator(IService):
             coloane_noi.append('adresa_resedinta')
             valori_noi.append(formular.resedinta_adresa)
 
-        # 2.2 Fa modificarile efectiv
+        # 2 Fa modificarile efectiv
         if coloane_noi:
-            self.db.update("Donator", columns_where=["id_user"], values_where=[user_id], columns=coloane_noi,
+            self.db.update("Donator", columns_where=["id_user"], values_where=[user.id], columns=coloane_noi,
                            values=valori_noi)
 
         return 0, "Formular inregistrat cu succes"
-
-
-    def __insert_formular_user(self, formular, user):
-        '''
-        Insereaza datele din formular in BD pentru un user deja existent
-        :param formular: Model.FormularDonare
-        :param user: Utils.orm.User
-        :return:
-        '''
-        pass
-
