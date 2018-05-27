@@ -1,14 +1,12 @@
 package Controller;
 
-import Model.CerereDonare;
+import Model.FormularDonare;
 import Model.GrupaSange;
 import Model.RH;
 import Model.Status;
 import Utils.CustomMessageBox;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.ToggleButton;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 public class CentruAnalizaController extends ControlledScreen{
@@ -57,10 +55,10 @@ public class CentruAnalizaController extends ControlledScreen{
 
     }
 
-    private CerereDonare cerereDonare;
+    private FormularDonare formularDonare;
 
-    public void setCerereDonare(CerereDonare cerereDonare) {
-        this.cerereDonare = cerereDonare;
+    public void setFormularDonare(FormularDonare formularDonare) {
+        this.formularDonare = formularDonare;
     }
 
     private final String VALID = "VALID";
@@ -68,8 +66,8 @@ public class CentruAnalizaController extends ControlledScreen{
     private final String MESSAGE_ERROR="ERROR";
 
     private void setGrupaAndRH(GrupaSange gs, RH rh){
-        cerereDonare.setGrupaSange(gs);
-        cerereDonare.setRh(rh);
+        formularDonare.setGrupaSange(gs);
+        formularDonare.setRh(rh);
     }
 
     private GrupaSange getGrupaSange(){
@@ -104,10 +102,10 @@ public class CentruAnalizaController extends ControlledScreen{
         else {
             if (result.equals(VALID)) {
                 new CustomMessageBox("Analiza valida", VALID, 0).show();
-                cerereDonare.setStatus(Status.DISTRIBUIRE);
+                formularDonare.setStatus(Status.DISTRIBUIRE);
             } else {
                 new CustomMessageBox("Analiza invalida", INVALID, 0).show();
-                cerereDonare.setStatus(Status.NONCONFORM);
+                formularDonare.setStatus(Status.NONCONFORM);
             }
             setGrupaAndRH(getGrupaSange(),getRHAnaliza());
 
