@@ -6,22 +6,46 @@ class ServiceDonator(IService):
     def __init__(self, repo_manager, db):
         super().__init__(repo_manager, db)
 
-    def insert_formular_user(self, formular):
+    def insert_formular_staff(self, formular):
+        '''
+        Insereaza datele din formular in BD pentru o persoana care nu are cont
+        :param formular: Model.FormularDonare
+        :return: status, message
+        '''
+
+
+        return 0, "Formular inregistrat cu succes"
+
+    def insert_formular_user(self, formular, username):
         '''
         Insereaza datele din formular in BD pentru un user deja existent
         :param formular: Model.FormularDonare
         :param user: Utils.orm.User
-        :return:
+        :return: status, message
         '''
-        user = self.db.select("User", ["username"], [formular.username], True)
+        user = self.db.select("User", ["username"], [username], True)
         if user is None:
             return 1, "User not found"
 
-        user_id = user.id
+        donator = self.db.select("Donator", ["id_user"], [user.id], True)
+        if donator is None:
+            return 2, "Donator not found"
 
-        # 1. Insereaza in DB
+        # 1. Insereaza in formular ce e de inserat
+        self.__insert_formular(formular, donator.id_donator)
+
+        #2. Fa update pe datele userului daca e cazul
+        return self.__update_user(formular, user)
+
+    def __insert_formular(self, formular, donator_id):
+        '''
+        Insereaza in tabelul FormularDonare campurile completate din formular
+        :param formular: Model.FormularDonare
+        :param donator_id: int; folosit pentru foreign key catre tabela de donatori
+        :return: -
+        '''
         nume_coloane = ["id_donator", "zile_disponibil"]
-        valori_coloane = [user.id, formular.zile_disponibil]
+        valori_coloane = [donator_id, formular.zile_disponibil]
         if formular.beneficiar_full_name != "":
             nume_coloane.append("beneficiar_full_name")
             valori_coloane.append(formular.beneficiar_full_name)
@@ -40,16 +64,13 @@ class ServiceDonator(IService):
 
         self.db.insert("FormularDonare", nume_coloane, valori_coloane)
 
-        #2. Fa update pe datele userului daca e cazul
-        self.__update_user(formular, user)
-
     def __update_user(self, formular, user):
         '''
         Verifica daca formularul contine date diferite despre user fata de cele din DB
         Daca da, face update
         :param formular: Model.FormularDonare
         :param user Utils.orm.User
-        :return:
+        :return: status, message
         '''
         # 1 Vezi ce difera
         donator_info = user_utils.get_info_donator(self.db, user)

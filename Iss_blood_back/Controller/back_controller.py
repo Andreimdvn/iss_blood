@@ -23,5 +23,8 @@ class BackController:
     def register(self, register_info):
         return self.service_common.register(register_info)
 
-    def trimite_formular(self, formular):
-        return self.service_donator.insert_formular_user(formular)
+    def user_trimite_formular(self, formular, username):
+        return self.service_donator.insert_formular_user(formular, username)
+
+    def staff_trimite_formular(self, formular):
+        return self.service_donator.insert_formular_staff(formular)

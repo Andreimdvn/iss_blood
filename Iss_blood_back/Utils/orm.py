@@ -48,7 +48,8 @@ class Localitate(DB):
 class Donator(DB):
     __tablename__ = 'Donator'
 
-    id_user = Column(Integer, ForeignKey('User.id'), primary_key=True, unique=True)
+    id_donator = Column(Integer, autoincrement=True, primary_key=True)
+    id_user = Column(Integer, ForeignKey('User.id'), unique=True, nullable=True)
     prenume = Column(String(50), nullable=False)
     nume = Column(String(50), nullable=False)
     cnp = Column(String(13), nullable=False, unique=True)
@@ -151,7 +152,7 @@ class SangeBrut(DB):
     __tablename__ = 'SangeBrut'
 
     id = Column(Integer, autoincrement=True, primary_key=True)
-    id_donator = Column(Integer, ForeignKey('Donator.id_user'))
+    id_donator = Column(Integer, ForeignKey('Donator.id_donator'))
     id_locatie_recoltare = Column(Integer, ForeignKey('Locatie.id'))
     data_recoltare = Column(Date, nullable=False)
     status = Column(Enum('Recoltata', 'Analizata', 'Impartita', 'Aruncata'), nullable=False)
@@ -180,7 +181,7 @@ class FormularDonare(DB):
     __tablename__ = 'FormularDonare'
 
     id = Column(Integer, autoincrement=True, primary_key=True)
-    id_donator = Column(Integer, ForeignKey('Donator.id_user'))
+    id_donator = Column(Integer, ForeignKey('Donator.id_donator'))
     beneficiar_full_name = Column(String(50))
     beneficiar_CNP = Column(String(13))
     grupa = Column(Enum("O1", "A2", "B3", "AB4", "UNKNOWN"))
