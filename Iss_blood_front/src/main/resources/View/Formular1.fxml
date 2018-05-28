@@ -4,7 +4,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="866.0" styleClass="formularPane" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Formular1Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="866.0" styleClass="formularPane" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.FormularDonare.Formular1Controller">
    <children>
       <Label layoutX="161.0" layoutY="14.0" prefHeight="45.0" prefWidth="589.0" styleClass="label-big" text="Condiții de admisibilitate pentru donator" />
       <AnchorPane layoutY="62.0" maxWidth="866.0" minWidth="866.0" prefHeight="8.0" styleClass="design-line-formular-thin" />

@@ -1,6 +1,8 @@
-package Controller;
+package Controller.FormularDonare;
 
+import Controller.ScreenController;
 import Model.FormularDonare;
+import Model.StaffInfo;
 import Utils.CustomMessageBox;
 import Validators.ValidationException;
 import javafx.util.Pair;
@@ -33,6 +35,22 @@ public class CentruFormularController extends AbstractFormularDonareController {
             msg.show();
         }
 
+    }
+
+    @Override
+    public void setScreenController(ScreenController ctrl)
+    {
+        super.setScreenController(ctrl);
+
+        autofill();
+    }
+
+    private void autofill()
+    {
+        StaffInfo info = (StaffInfo)getScreenController().userInfo;
+
+        DomiciliuJudetTextField.setText(info.getNumeJudet());
+        ResedintaJudetTextField.setText(info.getNumeJudet());
     }
 
 }

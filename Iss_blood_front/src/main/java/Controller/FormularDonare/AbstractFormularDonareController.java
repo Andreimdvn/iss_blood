@@ -1,7 +1,8 @@
-package Controller;
+package Controller.FormularDonare;
 
+import Controller.ControlledScreen;
+import Controller.DonatorDashboardController;
 import Model.*;
-import Utils.CustomMessageBox;
 import Utils.Screen;
 import Validators.FormularValidator;
 import Validators.ValidationException;
@@ -12,11 +13,10 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
-import javafx.util.Pair;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public abstract class AbstractFormularDonareController extends ControlledScreen{
+public abstract class AbstractFormularDonareController extends ControlledScreen {
     @FXML
     protected JFXTextField firstNameTextField;
 

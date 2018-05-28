@@ -27,13 +27,13 @@ class ServiceCommon(IService):
             id = user.id
             donator = self.db.select("Donator", ["id_user"], [id], True)
             if donator is not None:
-                return 0, 1, get_info_donator(self.db, user, donator)
+                return 0, 1, get_info_donator(self.db, user.id, donator)
             medic = self.db.select("Medic", ["id_user"], [id], True)
             if medic is not None:
-                return 0, 2, get_info_medic(self.db, user, medic)
+                return 0, 2, get_info_medic(self.db, user.id, medic)
             staff = self.db.select("StaffTransfuzii", ["id_user"], [id], True)
             if staff is not None:
-                return 0, 3, get_info_staff(self.db, user, staff)
+                return 0, 3, get_info_staff(self.db, user.id, staff)
             # administrator select
 
         return 1, None

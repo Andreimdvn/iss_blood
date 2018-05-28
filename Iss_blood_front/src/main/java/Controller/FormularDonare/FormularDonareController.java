@@ -1,5 +1,6 @@
-package Controller;
+package Controller.FormularDonare;
 
+import Controller.ScreenController;
 import Model.*;
 import Utils.CustomMessageBox;
 import Validators.ValidationException;
