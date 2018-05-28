@@ -97,3 +97,32 @@ def get_info_staff(db, user, staff = None):
             "prenume": staff.prenume,
             "id_locatie": staff.id_locatie,
             "nume_locatie": locatie.nume}
+
+
+def insert_formular(db, formular, donator_id):
+    '''
+    Insereaza in tabelul FormularDonare campurile completate din formular
+    :param db - ORM
+    :param formular: Model.FormularDonare
+    :param donator_id: int; folosit pentru foreign key catre tabela de donatori
+    :return: -
+    '''
+    nume_coloane = ["id_donator", "zile_disponibil"]
+    valori_coloane = [donator_id, formular.zile_disponibil]
+    if formular.beneficiar_full_name != "":
+        nume_coloane.append("beneficiar_full_name")
+        valori_coloane.append(formular.beneficiar_full_name)
+
+    if formular.beneficiar_CNP != "":
+        nume_coloane.append("beneficiar_CNP")
+        valori_coloane.append(formular.beneficiar_CNP)
+
+    if formular.grupa != "":
+        nume_coloane.append("grupa")
+        valori_coloane.append(formular.grupa)
+
+    if formular.rh != "":
+        nume_coloane.append("rh")
+        valori_coloane.append(formular.rh)
+
+    db.insert("FormularDonare", nume_coloane, valori_coloane)

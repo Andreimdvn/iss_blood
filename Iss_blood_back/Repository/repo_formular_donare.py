@@ -5,31 +5,6 @@ class RepositoryFormularDonari(IRepository):
     def __init__(self, db):
         super().__init__(db)
 
-    def add(self, formular_donare):
-        """
-        Adds a new blood needed to the database
-        :param cerere_sange: CerereSange;
-        :return: Tuple<int, string> = (status code, status message); status code = 0 on success or >= 1 otherwise
-        """
-        """
-        
-        table_name = 'FormularDonare'
-        specific_col_names = ['id_donator', 'beneficiar_full_name', 'beneficiar_CNP', 'grupa',
-                              'rh', 'zile_disponibil', 'status']
-
-        
-        specific_vals = [formular_donare.id_donator, 
-                        formular_donare., cerere_sange.grupa_sange, cerere_sange.rh,
-                         cerere_sange.numar_pungi_trombocite, cerere_sange.numar_pungi_globule_rosii,
-                         cerere_sange.numar_pungi_plasma, cerere_sange.date, cerere_sange.importanta]
-        try:
-            self.db.insert(table_name, specific_col_names, specific_vals)
-        except...:
-            return 2, "Database error"
-        """
-
-        return 0, "Added successfully"
-
     def update(self, formular_donare):
         table_name = "FormularDonare"
         coloane_noi = ['beneficiar_full_name', 'beneficiar_CNP', 'grupa',
@@ -51,20 +26,6 @@ class RepositoryFormularDonari(IRepository):
 
         return 0, "Updated successfuly"
 
-    def delete(self, cerere_sange):
-        """
-        Delete a blood needed from the database
-        :param cerere_sange: CerereSange;
-        :return: Tuple<int, string> = (status code, status message); status code = 0 on success or >= 1 otherwise
-        """
-        id_pacient = self.get_id_pacient(cerere_sange.nume_pacient)
-        try:
-            self.db.delete('CereriSange', columns=['id_pacient'], values=[id_pacient])
-        except...:
-            return 2, "Database error"
-
-        return 0, "Deleted successfully"
-
     def get_all(self,id_locatie):
         """
         Get all blood needed from the database
@@ -75,13 +36,21 @@ class RepositoryFormularDonari(IRepository):
         specific_col_names = ['id', 'id_donator', 'beneficiar_full_name', 'beneficiar_CNP', 'grupa',
                               'rh', 'zile_disponibil', 'status']
 
+        localitateCentru = self.get_localitate(id_locatie)
+        judetCentruCod = self.get_judet(localitateCentru.id_judet).id
         try:
             rezultat = []
 
             for formular in self.db.select(table_name, columns=specific_col_names, values=[]):
 
                 donator = self.get_donator(formular.id_donator)
-                if donator.id_domiciliu == id_locatie:
+                localitate = self.get_localitate(donator.id_domiciliu)
+                judet = self.get_judet(localitate.id_judet)
+
+                self.logger.debug(localitate.id_judet)
+                self.logger.debug(judetCentruCod)
+
+                if localitate.id_judet == judetCentruCod:
                     id = formular.id
                     beneficiar_full_name = formular.beneficiar_full_name
                     beneficiar_cnp = formular.beneficiar_CNP
@@ -92,10 +61,6 @@ class RepositoryFormularDonari(IRepository):
                     prenume = donator.prenume
                     sex = donator.sex
                     telefon = donator.telefon
-
-                    localitate = self.get_localitate(donator.id_domiciliu)
-                    judet = self.get_judet(localitate.id_judet)
-
                     domiciliuLocalitate = localitate.nume
                     domiciliuJudet = judet.nume
                     domiciliuAdresa = donator.adresa_domiciliu
