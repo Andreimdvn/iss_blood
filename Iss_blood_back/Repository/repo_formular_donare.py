@@ -19,8 +19,11 @@ class RepositoryFormularDonari(IRepository):
         value_where = [formular_donare.id]
 
         try:
-            self.db.update(table_name, columns_where=coloane_where,
-                         values_where=value_where, columns=coloane_noi, values=value_noi)
+            self.db.update(table_name,
+                           columns_where=coloane_where,
+                           values_where=value_where,
+                           columns=coloane_noi,
+                           values=value_noi)
         except...:
             return 2, "Database error"
 
@@ -31,8 +34,8 @@ class RepositoryFormularDonari(IRepository):
         specific_col_names = ['id', 'id_donator', 'beneficiar_full_name', 'beneficiar_CNP', 'grupa',
                               'rh', 'zile_disponibil', 'status']
 
-        localitateCentru = self.get_localitate(id_locatie)
-        judetCentruCod = self.get_judet(localitateCentru.id_judet).id
+        localitate_centru = self.get_localitate(id_locatie)
+        judet_centru_cod = self.get_judet(localitate_centru.id_judet).id
         try:
             rezultat = []
 
@@ -42,10 +45,7 @@ class RepositoryFormularDonari(IRepository):
                 localitate = self.get_localitate(donator.id_domiciliu)
                 judet = self.get_judet(localitate.id_judet)
 
-                self.logger.debug(localitate.id_judet)
-                self.logger.debug(judetCentruCod)
-
-                if localitate.id_judet == judetCentruCod:
+                if localitate.id_judet == judet_centru_cod:
                     id = formular.id
                     beneficiar_full_name = formular.beneficiar_full_name
                     beneficiar_cnp = formular.beneficiar_CNP

@@ -11,6 +11,8 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
+import java.util.Objects;
+
 public class CentruPrelevareController extends ControlledScreen{
     @FXML
     private VBox selectionPane;
@@ -65,11 +67,11 @@ public class CentruPrelevareController extends ControlledScreen{
         resedintaAdresaLabel.setText(cerereDonare.getResedintaAdresa());
         resedintaJudetLabel.setText(cerereDonare.getResedintaJudet());
         resedintaLocalitateLabel.setText(cerereDonare.getResedintaLocalitate());
-        if(!cerereDonare.getBeneficiarFullName().isEmpty())
+        if(!(Objects.equals(cerereDonare.getBeneficiarFullName(), "null")))
             donatFullnameTextField.setText(cerereDonare.getBeneficiarFullName());
         else
             donatFullnameTextField.setText("");
-        if(!cerereDonare.getBeneficiarCNP().isEmpty())
+        if(!(Objects.equals(cerereDonare.getBeneficiarCNP(), "null")))
             donatCnpTextField.setText(cerereDonare.getBeneficiarCNP());
         else
             donatCnpTextField.setText("");
@@ -96,6 +98,8 @@ public class CentruPrelevareController extends ControlledScreen{
             mesaj = "Persoana nu poate dona";
             type = 0;
             cerereDonare.setStatus(Status.NONCONFORM);
+            getService().staffUpdateFormularDonare(cerereDonare);
+
         }
         else if(ok.equals(ERROR)) {
             titlu="Campuri gresite";
