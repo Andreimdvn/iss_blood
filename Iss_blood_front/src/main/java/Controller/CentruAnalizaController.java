@@ -110,6 +110,7 @@ public class CentruAnalizaController extends ControlledScreen{
                 cerereDonare.setStatus(Status.NONCONFORM);
             }
             setGrupaAndRH(getGrupaSange(),getRHAnaliza());
+            getService().staffUpdateFormularDonare(cerereDonare);
 
             CentruTransfuzieController cr =(CentruTransfuzieController)getScreenController().getControlledScreen("CENTRU_TRANSFUZIE");
             cr.setCenter(

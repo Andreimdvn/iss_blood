@@ -30,6 +30,27 @@ class RepositoryFormularDonari(IRepository):
 
         return 0, "Added successfully"
 
+    def update(self, formular_donare):
+        table_name = "FormularDonare"
+        coloane_noi = ['beneficiar_full_name', 'beneficiar_CNP', 'grupa',
+                              'rh', 'status']
+        value_noi = [formular_donare.beneficiar_full_name,
+                     formular_donare.beneficiar_CNP,
+                     formular_donare.grupa,
+                     formular_donare.rh,
+                     formular_donare.status]
+
+        coloane_where = ['id']
+        value_where = [formular_donare.id]
+
+        try:
+            self.db.update(table_name, columns_where=coloane_where,
+                         values_where=value_where, columns=coloane_noi, values=value_noi)
+        except...:
+            return 2, "Database error"
+
+        return 0, "Updated successfuly"
+
     def delete(self, cerere_sange):
         """
         Delete a blood needed from the database

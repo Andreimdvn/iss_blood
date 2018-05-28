@@ -2,15 +2,18 @@ package Controller;
 
 import Model.*;
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTextField;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class CentruCereriDonariController extends ControlledScreen{
 
@@ -38,6 +41,9 @@ public class CentruCereriDonariController extends ControlledScreen{
         rhColumn.setCellValueFactory(new PropertyValueFactory<>("rh"));
         statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
         donareTableView.setItems(donareObservableList);
+        statusCombo.getItems().addAll(
+                "ANY STATUS",Status.IN_ASTEPTARE.toString(),Status.PREGATIRE.toString()
+                ,Status.CALIFICARE.toString());
     }
     private FormularDonare getSelectedItem(){
         return donareTableView.getSelectionModel().getSelectedItem();
@@ -53,13 +59,18 @@ public class CentruCereriDonariController extends ControlledScreen{
      *  Remove on production
      *  70% Yes
      */
+
+    void getElements(){
+
+    }
+
     void updateThis(){
 
-        List<FormularDonare> list = new ArrayList<>();
-        list.addAll(donareObservableList);
+        List<FormularDonare> list = getService().getFormulareDonariDupaLocatie(getInfo().getIdLocatie());
         donareObservableList.setAll(list);
         //donareTableView.getSelectionModel().select(null);
         updateStatus();
+        filter();
     }
 
     private StaffInfo getInfo(){
@@ -67,12 +78,40 @@ public class CentruCereriDonariController extends ControlledScreen{
     }
 
     @FXML
-    private void populateDummy(){
+    private JFXTextField searchNume;
 
-       // FormularDonare a = new FormularDonare("Moldovan","Daniel",Sex.MASCULIN, "0744176894", "Arad", "Arad", "Str.Scoalei", "Cluj", "Cluj-Napoca", "Str. Iustin","Ciprian","1234567890123",GrupaSange.UNKNOWN,RH.UNKNOWN,Status.IN_ASTEPTARE);
-        //donareObservableList.add(a);
-        List<FormularDonare> list = getService().getFormulareDonariDupaLocatie(getInfo().getIdLocatie());
-        donareObservableList.setAll(list);
+    @FXML
+    private JFXTextField searchPrenume;
+
+    @FXML
+    private ComboBox<String> statusCombo;
+
+    @FXML
+    private void filter(){
+        List<FormularDonare> donare = new ArrayList<>();
+        donareObservableList.forEach(
+                x -> {
+                    boolean ok = true;
+                    if(!searchNume.getText().isEmpty())
+                        if(!x.getNume().contains(searchNume.getText()))
+                            ok = false;
+                    if(!searchPrenume.getText().isEmpty())
+                        if(!x.getNume().contains(searchPrenume.getText()))
+                            ok = false;
+
+                    if(!statusCombo.getSelectionModel().isEmpty()) {
+                        if (!Objects.equals(statusCombo.getSelectionModel().getSelectedItem(),
+                                x.getStatus().toString()))
+                            ok = false;
+                        if (!statusCombo.getSelectionModel().isSelected(0))
+                            ok = true;
+                    }
+
+                    if(ok)
+                        donare.add(x);
+                }
+        );
+        donareObservableList.setAll(donare);
     }
 
     private FormularDonare getSelected(){
@@ -90,6 +129,7 @@ public class CentruCereriDonariController extends ControlledScreen{
     @FXML
     private void button2Clicked(){
         getSelected().setStatus(Status.PREGATIRE);
+        getService().staffUpdateFormularDonare(getSelected());
         updateThis();
     }
     @FXML

@@ -65,7 +65,8 @@ public class CentruPrelevareController extends ControlledScreen{
         resedintaAdresaLabel.setText(cerereDonare.getResedintaAdresa());
         resedintaJudetLabel.setText(cerereDonare.getResedintaJudet());
         resedintaLocalitateLabel.setText(cerereDonare.getResedintaLocalitate());
-
+        donatFullnameTextField.setText(cerereDonare.getBeneficiarFullName());
+        donatCnpTextField.setText(cerereDonare.getBeneficiarCNP());
     }
 
     private void loadData(){
@@ -100,6 +101,10 @@ public class CentruPrelevareController extends ControlledScreen{
             titlu = "Poate dona";
             mesaj = "Donatorul poate dona" ;
             cerereDonare.setStatus(Status.PRELEVARE);
+            cerereDonare.setBeneficiarFullName(donatFullnameTextField.getText());
+            cerereDonare.setBeneficiarCNP(donatCnpTextField.getText());
+            getService().staffUpdateFormularDonare(cerereDonare);
+
             type = 0;
         }
         new CustomMessageBox(titlu,mesaj,type).show();

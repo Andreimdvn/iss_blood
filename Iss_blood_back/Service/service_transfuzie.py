@@ -15,3 +15,6 @@ class ServiceTransfuzie(IService):
             self.logger.debug(x)
 
         return lista
+
+    def update_formular(self, formular_donare):
+        return self.repo_manager.repo_formular_donare.update(formular_donare)

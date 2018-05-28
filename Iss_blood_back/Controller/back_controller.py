@@ -29,5 +29,8 @@ class BackController:
     def staff_trimite_formular(self, formular):
         return self.service_donator.insert_formular_staff(formular)
 
-    def staff_cerere_formulare_donari(self):
-        return self.service_transfuzie.get_all()
+    def staff_cerere_formulare_donari(self,id_locatie):
+        return self.service_transfuzie.get_cereri(id_locatie)
+
+    def staff_update_formular_donare(self, formular_donare):
+        return self.service_transfuzie.update_formular(formular_donare)

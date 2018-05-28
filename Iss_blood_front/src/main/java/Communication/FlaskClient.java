@@ -172,6 +172,37 @@ public class FlaskClient {
 
     }
 
+    public Pair<Boolean,String> staffUpdateFormularDonare(FormularDonare formular)
+    {
+        HttpURLConnection connection = getConnection("/staffUpdateFormularDonare");
+
+        if(connection == null)
+            return new Pair<>(false, "Client connection request Error");
+
+        String jsonString = new JSONObject().put("nume", formular.getNume()).put("prenume", formular.getPrenume())
+                .put("sex", formular.getSex().toString()).put("telefon", formular.getTelefon())
+                .put("domiciliu_localitate", formular.getDomiciliuLocalitate())
+                .put("domiciliu_judet", formular.getDomiciliuJudet())
+                .put("domiciliu_adresa", formular.getDomiciliuAdresa())
+                .put("resedinta_localitate", formular.getResedintaLocalitate())
+                .put("resedinta_judet", formular.getResedintaJudet())
+                .put("resedinta_adresa", formular.getResedintaAdresa())
+                .put("beneficiar_full_name", formular.getBeneficiarFullName())
+                .put("beneficiar_CNP", formular.getBeneficiarCNP())
+                .put("grupa", formular.getGrupa())
+                .put("rh", formular.getRh().toString())
+                .put("zile_disponibil", formular.getZileDisponibil())
+                .put("id",formular.getId())
+                .put("status",formular.getStatus()).toString();
+
+        logger.debug("SENDING: " + jsonString);
+        JSONObject jsonResponse = sendRequest(connection, jsonString);
+        logger.debug("RESPONSE : " + jsonResponse);
+
+
+        return new Pair<>(true, "Success");
+    }
+
     public List<FormularDonare> getFormulareDonariDupaLocatie(int id_locatie)
     {
         List<FormularDonare> list = new ArrayList<>();
@@ -206,8 +237,8 @@ public class FlaskClient {
                 String resedintaAdresa = x.getString("resedintaAdresa");
                 String beneficiarFullName = x.get("beneficiar_full_name").toString();
                 String beneficiarCNP = x.get("beneficiar_cnp").toString();
-                GrupaSange grupa = GrupaSange.valueOf(x.getString("grupa"));
-                RH rh = RH.valueOf(x.getString("rh"));
+                GrupaSange grupa = GrupaSange.valueOf(x.getString("grupa").toUpperCase());
+                RH rh = RH.valueOf(x.getString("rh").toUpperCase());
                 Status status = Status.valueOf(x.getString("status"));
                 FormularDonare a = new FormularDonare(id,nume,prenume,sex,telefon,
                         domiciliuLocalitate,domiciliuJudet,domiciliuAdresa,
