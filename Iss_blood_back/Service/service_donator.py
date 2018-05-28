@@ -38,7 +38,7 @@ class ServiceDonator(IService):
         :return: status, message
         '''
         # 1 Vezi ce difera
-        donator_info = user_utils.get_info_donator(self.db, user)
+        donator_info = user_utils.get_info_donator(self.db, user.id)
 
         coloane_noi = []  # denumirile coloanelor care trebuie modifiate
         valori_noi = []  # valorile coloanelor coresp denumirilor din coloane_noi

@@ -41,7 +41,9 @@ public class UserUtils {
                     loginResponse.getString("nume"),
                     loginResponse.getString("prenume"),
                     loginResponse.getInt("id_locatie"),
-                    loginResponse.getString("nume_locatie"));
+                    loginResponse.getString("nume_locatie"),
+                    loginResponse.getString("nume_judet"),
+                    loginResponse.getInt("id_judet"));
         }
         else
         {

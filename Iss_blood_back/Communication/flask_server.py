@@ -6,7 +6,7 @@ import logging
 from Controller.back_controller import BackController
 from Model.account_type import AccountType
 from Model.register_info import RegisterInfo
-from Model.FormularDonare import FormularDonare
+from Model.formular_donare import FormularDonare
 
 
 class FlaskServer:
