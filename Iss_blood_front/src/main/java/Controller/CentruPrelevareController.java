@@ -65,8 +65,15 @@ public class CentruPrelevareController extends ControlledScreen{
         resedintaAdresaLabel.setText(cerereDonare.getResedintaAdresa());
         resedintaJudetLabel.setText(cerereDonare.getResedintaJudet());
         resedintaLocalitateLabel.setText(cerereDonare.getResedintaLocalitate());
-        donatFullnameTextField.setText(cerereDonare.getBeneficiarFullName());
-        donatCnpTextField.setText(cerereDonare.getBeneficiarCNP());
+        if(!cerereDonare.getBeneficiarFullName().isEmpty())
+            donatFullnameTextField.setText(cerereDonare.getBeneficiarFullName());
+        else
+            donatFullnameTextField.setText("");
+        if(!cerereDonare.getBeneficiarCNP().isEmpty())
+            donatCnpTextField.setText(cerereDonare.getBeneficiarCNP());
+        else
+            donatCnpTextField.setText("");
+
     }
 
     private void loadData(){

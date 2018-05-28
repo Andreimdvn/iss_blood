@@ -14,6 +14,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class CentruCereriDonariController extends ControlledScreen{
 
@@ -32,6 +33,7 @@ public class CentruCereriDonariController extends ControlledScreen{
     private TableColumn<FormularDonare, RH> rhColumn;
     @FXML
     private TableColumn<FormularDonare, Status> statusColumn;
+    private List<FormularDonare> list = new ArrayList<>();
 
     @FXML
     private void initialize(){
@@ -42,8 +44,8 @@ public class CentruCereriDonariController extends ControlledScreen{
         statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
         donareTableView.setItems(donareObservableList);
         statusCombo.getItems().addAll(
-                "ANY STATUS",Status.IN_ASTEPTARE.toString(),Status.PREGATIRE.toString()
-                ,Status.CALIFICARE.toString());
+                "ANY STATUS",Status.IN_ASTEPTARE.toString(),Status.PRELEVARE.toString()
+                ,Status.PREGATIRE.toString());
     }
     private FormularDonare getSelectedItem(){
         return donareTableView.getSelectionModel().getSelectedItem();
@@ -66,7 +68,7 @@ public class CentruCereriDonariController extends ControlledScreen{
 
     void updateThis(){
 
-        List<FormularDonare> list = getService().getFormulareDonariDupaLocatie(getInfo().getIdLocatie());
+        list = getService().getFormulareDonariDupaLocatie(getInfo().getIdLocatie());
         donareObservableList.setAll(list);
         //donareTableView.getSelectionModel().select(null);
         updateStatus();
@@ -87,30 +89,29 @@ public class CentruCereriDonariController extends ControlledScreen{
     private ComboBox<String> statusCombo;
 
     @FXML
+    private void reset(){
+        searchPrenume.setText("");
+        searchNume.setText("");
+        statusCombo.getSelectionModel().select(0);
+        filter();
+    }
+
+    @FXML
     private void filter(){
-        List<FormularDonare> donare = new ArrayList<>();
-        donareObservableList.forEach(
-                x -> {
-                    boolean ok = true;
-                    if(!searchNume.getText().isEmpty())
-                        if(!x.getNume().contains(searchNume.getText()))
-                            ok = false;
-                    if(!searchPrenume.getText().isEmpty())
-                        if(!x.getNume().contains(searchPrenume.getText()))
-                            ok = false;
 
-                    if(!statusCombo.getSelectionModel().isEmpty()) {
-                        if (!Objects.equals(statusCombo.getSelectionModel().getSelectedItem(),
-                                x.getStatus().toString()))
-                            ok = false;
-                        if (!statusCombo.getSelectionModel().isSelected(0))
-                            ok = true;
-                    }
+        List<FormularDonare> donare = list.stream().filter(
+                p -> p.getNume().toLowerCase().contains(searchNume.getText().toLowerCase()))
+                .collect(Collectors.toList());
 
-                    if(ok)
-                        donare.add(x);
-                }
-        );
+        donare = donare.stream().filter(
+                p -> p.getPrenume().toLowerCase().contains(searchPrenume.getText().toLowerCase()))
+                .collect(Collectors.toList());
+
+        if(!statusCombo.getSelectionModel().isSelected(0) && !statusCombo.getSelectionModel().isEmpty())
+        donare = donare.stream().filter(
+                p -> Objects.equals(p.getStatus().toString(),
+                        statusCombo.getSelectionModel().getSelectedItem())).collect(Collectors.toList());
+
         donareObservableList.setAll(donare);
     }
 
