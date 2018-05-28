@@ -27,11 +27,6 @@ class RepositoryFormularDonari(IRepository):
         return 0, "Updated successfuly"
 
     def get_all(self,id_locatie):
-        """
-        Get all blood needed from the database
-        :param
-        :return: all elements from table
-        """
         table_name = 'FormularDonare'
         specific_col_names = ['id', 'id_donator', 'beneficiar_full_name', 'beneficiar_CNP', 'grupa',
                               'rh', 'zile_disponibil', 'status']
@@ -83,11 +78,6 @@ class RepositoryFormularDonari(IRepository):
             return "Database error"
 
     def get_donator(self, id_donator):
-        """
-        Pula lui Alin
-        :param: id_domiciliu:
-        :return:
-        """
         table_name = 'Donator'
         specific_col_names = ['id_donator']
         values = [id_donator]
