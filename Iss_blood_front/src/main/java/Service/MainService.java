@@ -1,8 +1,12 @@
 package Service;
 
 import Communication.FlaskClient;
+import Model.FormularDonare;
 import Model.RegisterInfo;
+import Model.UserInfo;
 import javafx.util.Pair;
+
+import java.util.List;
 
 public class MainService {
 
@@ -12,7 +16,7 @@ public class MainService {
         this.flaskClient = flaskClient;
     }
 
-    public Pair<Integer, String> login(String user, String pass) {
+    public Pair<UserInfo, String> login(String user, String pass) {
         return flaskClient.login(user, pass);
     }
 
@@ -21,4 +25,15 @@ public class MainService {
         return flaskClient.register(info);
     }
 
+    public Pair<Boolean, String> userTrimiteFormularDonare(FormularDonare formular, String username){return flaskClient.userTrimiteFormularDonare(formular, username);}
+
+    public Pair<Boolean, String> staffTrimiteFormularDonare (FormularDonare formularDonare) { return flaskClient.staffTrimiteFormularDonare(formularDonare);}
+
+    public List<FormularDonare> getFormulareDonariDupaLocatie(int i){
+        return flaskClient.getFormulareDonariDupaLocatie(i);
+
+    }
+    public Pair<Boolean, String> staffUpdateFormularDonare(FormularDonare formularDonare){
+        return flaskClient.staffUpdateFormularDonare(formularDonare);
+    }
 }

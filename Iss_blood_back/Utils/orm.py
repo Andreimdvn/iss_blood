@@ -48,16 +48,18 @@ class Localitate(DB):
 class Donator(DB):
     __tablename__ = 'Donator'
 
-    id_user = Column(Integer, ForeignKey('User.id'), primary_key=True, unique=True)
+    id_donator = Column(Integer, autoincrement=True, primary_key=True)
+    id_user = Column(Integer, ForeignKey('User.id'), unique=True, nullable=True)
     prenume = Column(String(50), nullable=False)
     nume = Column(String(50), nullable=False)
-    cnp = Column(String(13), nullable=False, unique=True)
+    cnp = Column(String(13), nullable=True, unique=True)
     id_domiciliu = Column(Integer, ForeignKey('Localitate.id'))
     adresa_domiciliu = Column(String(100), nullable=False)
-    data_nasterii = Column(Date, nullable=False)
+    data_nasterii = Column(Date, nullable=True)
     telefon = Column(String(20), nullable=False)
     id_localitate_resedinta = Column(Integer, ForeignKey('Localitate.id'))
     adresa_resedinta = Column(String(100), nullable=False)
+    sex = Column(Enum('MASCULIN', 'FEMININ'))
 
     user = relationship('User', back_populates='donatori')
     sange_brut = relationship('SangeBrut', back_populates='donator')
@@ -150,7 +152,7 @@ class SangeBrut(DB):
     __tablename__ = 'SangeBrut'
 
     id = Column(Integer, autoincrement=True, primary_key=True)
-    id_donator = Column(Integer, ForeignKey('Donator.id_user'))
+    id_donator = Column(Integer, ForeignKey('Donator.id_donator'))
     id_locatie_recoltare = Column(Integer, ForeignKey('Locatie.id'))
     data_recoltare = Column(Date, nullable=False)
     status = Column(Enum('Recoltata', 'Analizata', 'Impartita', 'Aruncata'), nullable=False)
@@ -174,6 +176,18 @@ class SangePrelucrat(DB):
 
     sange_brut = relationship('SangeBrut', back_populates='sange_prelucrat')
     locatie = relationship('Locatie', back_populates='sange_prelucrat')
+
+class FormularDonare(DB):
+    __tablename__ = 'FormularDonare'
+
+    id = Column(Integer, autoincrement=True, primary_key=True)
+    id_donator = Column(Integer, ForeignKey('Donator.id_donator'))
+    beneficiar_full_name = Column(String(50))
+    beneficiar_CNP = Column(String(13))
+    grupa = Column(Enum("O1", "A2", "B3", "AB4", "UNKNOWN"))
+    rh = Column(Enum("pozitiv", "negativ", "UNKNOWN"))
+    zile_disponibil = Column(Integer)
+    status = Column(Enum('IN_ASTEPTARE','PRELEVARE','PREGATIRE','CALIFICARE','DISTRIBUIRE','NONCONFORM'), default='IN_ASTEPTARE')
 
 
 class CereriSange(DB):
