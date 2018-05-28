@@ -144,7 +144,7 @@ public class FlaskClient {
 
     public Pair<Boolean, String> userTrimiteFormularDonare(FormularDonare formular, String username)
     {
-        HttpURLConnection connection = getConnection("/userTrimiteFormularDonare");
+        HttpURLConnection connection = getConnection("/user_trimite_formular_donare");
 
         if(connection == null)
             return new Pair<>(false, "Client connection request Error");
@@ -174,7 +174,7 @@ public class FlaskClient {
 
     public Pair<Boolean,String> staffUpdateFormularDonare(FormularDonare formular)
     {
-        HttpURLConnection connection = getConnection("/staffUpdateFormularDonare");
+        HttpURLConnection connection = getConnection("/staff_update_formular_donare");
 
         if(connection == null)
             return new Pair<>(false, "Client connection request Error");
@@ -206,7 +206,7 @@ public class FlaskClient {
     public List<FormularDonare> getFormulareDonariDupaLocatie(int id_locatie)
     {
         List<FormularDonare> list = new ArrayList<>();
-        HttpURLConnection connection = getConnection("/staffCereFormulareDonari");
+        HttpURLConnection connection = getConnection("/staff_cere_formulare_donari");
 
         if(connection == null)
             System.out.println("Pula");
@@ -257,7 +257,7 @@ public class FlaskClient {
 
     public Pair<Boolean, String> staffTrimiteFormularDonare(FormularDonare formular)
     {
-        HttpURLConnection connection = getConnection("/staffTrimiteFormularDonare");
+        HttpURLConnection connection = getConnection("/staff_trimite_formular_donare");
 
         if(connection == null)
             return new Pair<>(false, "Client connection request Error");

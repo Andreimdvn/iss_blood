@@ -6,7 +6,7 @@ import logging
 from Controller.back_controller import BackController
 from Model.account_type import AccountType
 from Model.register_info import RegisterInfo
-from Model.FormularDonare import FormularDonare
+from Model.formular_donare import FormularDonare
 
 
 class FlaskServer:
@@ -37,13 +37,17 @@ class FlaskServer:
         self.app.add_url_rule("/test", "test_request", self.test_request, methods=["GET", "POST"])
         self.app.add_url_rule("/login", "login_request", self.login_request, methods=["POST"])
         self.app.add_url_rule("/register", "register_request", self.register_request, methods=["POST"])
-        self.app.add_url_rule("/userTrimiteFormularDonare", "user_trimite_formular_donare", self.user_trimite_formular_donare,
+        self.app.add_url_rule("/user_trimite_formular_donare", "user_trimite_formular_donare",
+                              self.user_trimite_formular_donare,
                               methods=["POST"])
-        self.app.add_url_rule("/staffTrimiteFormularDonare", "staff_trimite_formular_donare", self.staff_trimite_formular_donare,
+        self.app.add_url_rule("/staff_trimite_formular_donare", "staff_trimite_formular_donare",
+                              self.staff_trimite_formular_donare,
                               methods=["POST"])
-        self.app.add_url_rule("/staffCereFormulareDonari", "staff_cere_formulare_donari",self.staff_cere_formular_donari,
+        self.app.add_url_rule("/staff_cere_formulare_donari", "staff_cere_formulare_donari",
+                              self.staff_cere_formular_donari,
                               methods=["POST"])
-        self.app.add_url_rule("/staffUpdateFormularDonare", "staff_update_fomrular_donare",self.staff_update_formular_donare,
+        self.app.add_url_rule("/staff_update_formular_donare", "staff_update_fomrular_donare",
+                              self.staff_update_formular_donare,
                               methods=["POST"])
 
     def test_request(self):

@@ -24,6 +24,7 @@ public class CentruFormularController extends AbstractFormularDonareController {
         {
             CustomMessageBox msg = new CustomMessageBox("Info", "Formularul a fost trimis cu succes", 0);
             msg.show();
+            ((CentruCereriDonariController)getScreenController().getControlledScreen("CENTRU_CERERI_DONARI")).updateThis();
 //            loadPostFormular();
         }
         else
