@@ -173,6 +173,9 @@ public class LoginController extends ControlledScreen {
 
         screenController.loadScreen(Screen.CENTRU_TRANSFUZIE_SCREEN,Screen.CENTRU_TRANSFUZIE_RESOURCE);
         screenController.loadScreen(Screen.CENTRU_CERERI_DONARI_SCREEN,Screen.CENTRU_CERERI_DONARI_RESOURCE);
+        ((CentruCereriDonariController)screenController.getControlledScreen("CENTRU_CERERI_DONARI")).updateThis();
+        screenController.loadScreen(Screen.CENTRU_ANALIZA_SCREEN,Screen.CENTRU_ANALIZA_RESOURCE);
+        screenController.loadScreen(Screen.CENTRU_CHESTIONAR_SCREEN,Screen.CENTRU_CHESTIONAR_RESOURCE);
         screenController.loadScreen(Screen.CENTRU_CERERI_SANGE_SCREEN,Screen.CENTRU_CERERI_SANGE_RESOURCE);
         screenController.loadScreen(Screen.CENTRU_STOC_PUNGI_SCREEN,Screen.CENTRU_STOC_PUNGI_RESOURCE);
         screenController.loadScreen(Screen.FORMULAR_DONARE_SCREEN, Screen.CENTRU_FORMULAR_RESOURCE);

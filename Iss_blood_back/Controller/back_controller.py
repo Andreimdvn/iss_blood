@@ -2,6 +2,7 @@ from Repository.repository_manager import RepoManager
 from Service.service_common import ServiceCommon
 from Service.service_donator import ServiceDonator
 from Service.service_medic import ServiceMedic
+
 from Service.service_staff_transfuzie import ServiceStaffTransfuzie
 from Utils.orm import ORM
 
@@ -15,7 +16,6 @@ class BackController:
         self.service_donator = ServiceDonator(self.repo_manager, orm)
         self.service_medic = ServiceMedic(self.repo_manager, orm)
         self.service_transfuzie = ServiceStaffTransfuzie(self.repo_manager, orm)
-
         self.service_administrator = None
 
     def login(self, user, password):
@@ -29,3 +29,9 @@ class BackController:
 
     def staff_trimite_formular(self, formular):
         return self.service_transfuzie.insert_formular_staff(formular)
+
+    def staff_cerere_formulare_donari(self,id_locatie):
+        return self.service_transfuzie.get_cereri(id_locatie)
+
+    def staff_update_formular_donare(self, formular_donare):
+        return self.service_transfuzie.update_formular(formular_donare)

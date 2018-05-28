@@ -34,3 +34,13 @@ class ServiceStaffTransfuzie(IService):
         user_utils.insert_formular(self.db, formular, donator.id_donator)
 
         return 0, "Formular inregistrat cu succes"
+
+    def get_cereri(self, id_locatie):
+        """
+        Get all pula lui Ciprian
+        """
+        lista = self.repo_manager.repo_formular_donare.get_all(id_locatie)
+        return lista
+
+    def update_formular(self, formular_donare):
+            return self.repo_manager.repo_formular_donare.update(formular_donare)
