@@ -89,7 +89,7 @@ class FlaskServer:
         register_info = RegisterInfo(self.request_data["username"], self.request_data["password"],
                                      self.request_data["email"], self.request_data["nume"],
                                      self.request_data["prenume"], self.request_data["cnp"],
-                                     self.request_data["localitate"], self.request_data["judet"],
+                                     self.request_data["judet"], self.request_data["localitate"],
                                      self.request_data["address"], self.request_data["phone"],
                                      AccountType[self.request_data["accountType"]], self.request_data["license"])
 
