@@ -5,7 +5,12 @@ class RepositorySangePrelucrat(IRepository):
     def __init__(self, db):
         super().__init__(db)
 
-    def add(self, sange_prelucrat):
+    def get_id_judet(self,id_locatie):
+        locatie = self.db.select('Locatie', ['id'], [id_locatie], first=True)
+        return self.db.select('Localitate', ['id'], [locatie.id_localitate], first=True).id_judet
+
+
+    def insert(self, sange_prelucrat):
         table_name = 'SangePrelucrat'
         specific_col_names = ['id_sange_brut', 'tip', 'id_locatie', 'status']
         specific_vals = [sange_prelucrat.id_sange_brut,
@@ -24,7 +29,7 @@ class RepositorySangePrelucrat(IRepository):
 
         table_name='SangePrelucrat'
         try:
-            self.db.delete('CereriSange', columns=['id_sange_brut'], values=[id_sange_brut])
+            self.db.delete(table_name, columns=['id_sange_brut'], values=[id_sange_brut])
         except...:
             return 2,"Database error"
 
@@ -33,25 +38,36 @@ class RepositorySangePrelucrat(IRepository):
     def get_stoc_curent_by_grupa_rh(self, id_locatie, grupa_ceruta, rh_cerut):
 
         # Index : 0 -  Plasma, 1 - Tromobocite , 2 - Globule_rosii
-        rezultat = [0,0,0]
+        rezultat = [0, 0, 0]
 
+        # remove on production
+        id_judet = self.get_id_judet(id_locatie)
+        self.logger.debug(id_judet)
         sange_brut_locatie = self.db.select('SangeBrut',
-                                            columns=['id_locatie_recoltare', 'grupa', 'rh'],
-                                            values=[id_locatie, grupa_ceruta, rh_cerut])
+                                            columns=['status', 'grupa', 'rh'],
+                                            values=['Impartita', grupa_ceruta, rh_cerut])
         for sange_brut in sange_brut_locatie:
-            lista_pungi = self.db.select('SangePrelucrat',
-                                         columns=['id_sange_brut', 'status'],
-                                         values=[sange_brut.id, 'Depozitat']
-                                         )
-            for punga in lista_pungi:
-                if punga.tip == 'Plasma':
-                    rezultat[0] += 1
-                elif punga.tip == 'Trombocite':
-                    rezultat[1] += 1
-                else:
-                    rezultat[2] += 1
+            if id_judet == self.get_id_judet(sange_brut.id_locatie_recoltare):
+                lista_pungi = self.db.select('SangePrelucrat',
+                                             columns=['id_sange_brut', 'status'],
+                                             values=[sange_brut.id, 'Depozitat']
+                                            )
+                for punga in lista_pungi:
+                    # remove if on production
+                    id_judet_punga = self.get_id_judet(punga.id_locatie)
+                    self.logger.debug(id_judet_punga)
+                    if id_judet == id_judet_punga:
+                        if punga.tip == 'Plasma':
+                            rezultat[0] += 1
+                        elif punga.tip == 'Trombocite':
+                            rezultat[1] += 1
+                        else:
+                            rezultat[2] += 1
 
-        return rezultat
+        dictionar = {"Plasma": rezultat[0],
+                     "Trombocite": rezultat[1],
+                     "Globule_rosii": rezultat[2]}
+        return dictionar
 
     def update_status_by_id_sange_brut(self,id_sange_brut, status):
 

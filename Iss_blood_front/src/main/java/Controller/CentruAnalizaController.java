@@ -94,6 +94,24 @@ public class CentruAnalizaController extends ControlledScreen{
         return (StaffInfo) getScreenController().userInfo;
     }
 
+    private Analiza getAnaliza()
+    {
+        Boolean ALT;
+        Boolean SIF;
+        Boolean ANTIHTLV;
+        Boolean ANTIHCV;
+        Boolean ANTIHIV;
+        Boolean HB;
+
+        ALT = altPozitivToggleButton.isSelected();
+        SIF = sifPozitivToggleButton.isSelected();
+        ANTIHTLV = hltvPozitivToggleButton.isSelected();
+        ANTIHCV = hcvPozitivToggleButton.isSelected();
+        ANTIHIV = hivPozitivToggleButton.isSelected();
+        HB = hbPozitivToggleButton.isSelected();
+
+        return new Analiza(-1,ALT,SIF,ANTIHTLV,ANTIHCV,ANTIHIV,HB);
+    }
     @FXML
     private void validateAnaliza(){
         String result = validate();
@@ -109,9 +127,10 @@ public class CentruAnalizaController extends ControlledScreen{
                 new CustomMessageBox("Analiza invalida", INVALID, 0).show();
                 cerereDonare.setStatus(Status.NONCONFORM);
             }
-            setGrupaAndRH(getGrupaSange(),getRHAnaliza());
-            getService().staffUpdateFormularDonare(cerereDonare,getInfo().getIdLocatie());
 
+            setGrupaAndRH(getGrupaSange(),getRHAnaliza());
+            //getService().staffUpdateFormularDonare(cerereDonare,getInfo().getIdLocatie());
+            getService().staffTrimiteAnaliza(getInfo().getIdLocatie(),cerereDonare,getAnaliza());
             CentruTransfuzieController cr =(CentruTransfuzieController)getScreenController().getControlledScreen("CENTRU_TRANSFUZIE");
             cr.setCenter(
                     getScreenController().getScreen("CENTRU_CERERI_DONARI"));

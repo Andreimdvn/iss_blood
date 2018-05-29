@@ -24,7 +24,7 @@ class ServiceSange(IService):
         rh = 'unknown'
         grupa = 'unknown'
         sange_brut = SangeBrut(id_donator, id_locatie, current_date, status, grupa, rh, id_locatie)
-        status = self.repo_manager.repo_sange.insert(sange_brut)
+        status = self.repo_manager.repo_sange_brut.insert(sange_brut)
 
         # to do / check status
 
@@ -44,10 +44,12 @@ class ServiceSange(IService):
         sange_brut.status = 'Prelucrata'
         self.repo_manager.repo_sange_brut.update(sange_brut)
 
-    def create_analiza(self, id_donator, alt, sif, antihtlv, antihtcv, antihiv, hb):
+    def create_analiza(self, id_donator,grupa,rh, alt, sif, antihtlv, antihtcv, antihiv, hb):
         status = 'Prelucrata'
         sange_brut = self.repo_manager.repo_sange_brut.get_first_element(id_donator, status)
-        analiza = Analiza(sange_brut.id_sange_brut, alt, sif, antihtlv, antihtcv, antihiv, hb)
+        sange_brut.grupa = grupa
+        sange_brut.rh = rh
+        analiza = Analiza(sange_brut.id, alt, sif, antihtlv, antihtcv, antihiv, hb)
 
         self.repo_manager.repo_analiza.insert(analiza)
 
@@ -58,10 +60,11 @@ class ServiceSange(IService):
             sange_brut.status = 'Aruncata'
             self.delete_sange_prelucrat(sange_brut.id)
 
+        self.logger.debug(sange_brut.status)
         self.repo_manager.repo_sange_brut.update(sange_brut)
 
     def check_analiza(self, analiza):
-        return analiza.alt or analiza.sif or analiza.antihiv or analiza.antihtlv or analiza.antihtcv or analiza.hb
+        return not(analiza.alt or analiza.sif or analiza.antihiv or analiza.antihtlv or analiza.antihtcv or analiza.hb)
 
     def update_sange_prelucrat(self, id_sange_brut, status):
         self.repo_manager.repo_sange_prelucrat.update_status_by_id_sange_brut(id_sange_brut, status)

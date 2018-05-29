@@ -11,14 +11,14 @@ class RepositorySangeBrut(IRepository):
 
         sange_brut.status = "Recoltata"
         specific_vals = [sange_brut.id_donator,
-                         sange_brut.id_locatie,
+                         sange_brut.id_locatie_recoltare,
                          sange_brut.data_recoltare,
                          sange_brut.status,
                          sange_brut.grupa,
                          sange_brut.rh,
                          sange_brut.id_locatie_curenta]
 
-        specific_col_names = ['id_donator', 'id_locatie', 'data_recoltare',
+        specific_col_names = ['id_donator', 'id_locatie_recoltare', 'data_recoltare',
                               'status', 'grupa', 'rh', 'id_locatie_curenta']
 
         try:
@@ -32,21 +32,21 @@ class RepositorySangeBrut(IRepository):
         table_name = 'SangeBrut'
 
         specific_vals = [sange_brut.id_donator,
-                         sange_brut.id_locatie,
+                         sange_brut.id_locatie_recoltare,
                          sange_brut.data_recoltare,
                          sange_brut.status,
                          sange_brut.grupa,
                          sange_brut.rh,
                          sange_brut.id_locatie_curenta]
 
-        specific_col_names = ['id_donator', 'id_locatie', 'data_recoltare',
+        specific_col_names = ['id_donator', 'id_locatie_recoltare', 'data_recoltare',
                               'status', 'grupa', 'rh', 'id_locatie_curenta']
 
         columns_where = ['id']
         values_where = [sange_brut.id]
 
         try:
-            self.db.update(table_name, columns_where = columns_where,
+            self.db.update(table_name, columns_where=columns_where,
                            values_where=values_where, columns=specific_col_names,
                            values=specific_vals)
         except...:
@@ -62,7 +62,7 @@ class RepositorySangeBrut(IRepository):
         :return:
         """
         specific_col_names = ['id_donator', 'status']
-        cols_values = [id_donator,status]
+        cols_values = [id_donator, status]
         sange_brut = self.db.select('SangeBrut', columns=specific_col_names, values=cols_values, first=True)
         return sange_brut
 

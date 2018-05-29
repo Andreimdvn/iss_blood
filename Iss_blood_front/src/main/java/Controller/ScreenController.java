@@ -19,7 +19,7 @@ public class ScreenController extends StackPane {
 
     private HashMap<String, ViewDetails> screenViews = new HashMap<>();
     MainService mainService;
-    public UserInfo userInfo;
+        public UserInfo userInfo;
 
     public ScreenController(MainService service) {
         super();

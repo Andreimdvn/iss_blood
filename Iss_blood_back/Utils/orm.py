@@ -403,10 +403,11 @@ class ORM:
             raise ValueError('[!] Specify values for where clause!')
         if len(values) != len(columns):
             raise ValueError('[!] There are not enough values/columns!')
-        item = self.select(table, columns, values, first=True)
-        if not item:
+        items = self.select(table, columns, values)
+        if not items:
             raise ValueError('[!] Item with specified values doesn\'t exists!')
-        self.ses.delete(item)
+        for item in items:
+            self.ses.delete(item)
         self.ses.commit()
         self.ses.flush()
         self.ses.close()

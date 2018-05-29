@@ -7,7 +7,8 @@ class ServiceStaffTransfuzie(IService):
         super().__init__(repo_manager, db)
 
     def get_id_donator(self, formular):
-        return self.repo_manager.db.select('FormularDonare', ['id'], formular.id, first=True).id_donator
+        return self.repo_manager.repo_formular_donare.db.select(
+            'FormularDonare', ['id'], [formular.id], first=True).id_donator
 
     def insert_formular_staff(self, formular):
         '''
