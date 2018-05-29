@@ -172,7 +172,7 @@ public class FlaskClient {
 
     }
 
-    public Pair<Boolean,String> staffUpdateFormularDonare(FormularDonare formular)
+    public Pair<Boolean,String> staffUpdateFormularDonare(FormularDonare formular, int id_locatie)
     {
         HttpURLConnection connection = getConnection("/staff_update_formular_donare");
 
@@ -193,7 +193,8 @@ public class FlaskClient {
                 .put("rh", formular.getRh().toString())
                 .put("zile_disponibil", formular.getZileDisponibil())
                 .put("id",formular.getId())
-                .put("status",formular.getStatus()).toString();
+                .put("status",formular.getStatus())
+                .put("id_locatie",id_locatie).toString();
 
         logger.debug("SENDING: " + jsonString);
         JSONObject jsonResponse = sendRequest(connection, jsonString);

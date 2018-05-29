@@ -1,9 +1,6 @@
 package Controller;
 
-import Model.FormularDonare;
-import Model.GrupaSange;
-import Model.RH;
-import Model.Status;
+import Model.*;
 import Utils.CustomMessageBox;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -93,6 +90,9 @@ public class CentruAnalizaController extends ControlledScreen{
             return RH.NEGATIV;
         return RH.POZITIV;
     }
+    private StaffInfo getInfo(){
+        return (StaffInfo) getScreenController().userInfo;
+    }
 
     @FXML
     private void validateAnaliza(){
@@ -110,7 +110,7 @@ public class CentruAnalizaController extends ControlledScreen{
                 cerereDonare.setStatus(Status.NONCONFORM);
             }
             setGrupaAndRH(getGrupaSange(),getRHAnaliza());
-            getService().staffUpdateFormularDonare(cerereDonare);
+            getService().staffUpdateFormularDonare(cerereDonare,getInfo().getIdLocatie());
 
             CentruTransfuzieController cr =(CentruTransfuzieController)getScreenController().getControlledScreen("CENTRU_TRANSFUZIE");
             cr.setCenter(

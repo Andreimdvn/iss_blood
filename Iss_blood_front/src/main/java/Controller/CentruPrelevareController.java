@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.FormularDonare;
+import Model.StaffInfo;
 import Model.Status;
 import Utils.CustomMessageBox;
 import com.jfoenix.controls.JFXTextField;
@@ -86,6 +87,10 @@ public class CentruPrelevareController extends ControlledScreen{
     private final String VALID="VALID";
     private final String INVALID="INVALID";
 
+    private StaffInfo getInfo(){
+        return (StaffInfo) getScreenController().userInfo;
+    }
+
     @FXML
     private void validareClicked(){
         String ok = validate();
@@ -98,7 +103,7 @@ public class CentruPrelevareController extends ControlledScreen{
             mesaj = "Persoana nu poate dona";
             type = 0;
             cerereDonare.setStatus(Status.NONCONFORM);
-            getService().staffUpdateFormularDonare(cerereDonare);
+            getService().staffUpdateFormularDonare(cerereDonare,getInfo().getIdLocatie());
 
         }
         else if(ok.equals(ERROR)) {
@@ -114,7 +119,7 @@ public class CentruPrelevareController extends ControlledScreen{
             cerereDonare.setStatus(Status.PRELEVARE);
             cerereDonare.setBeneficiarFullName(donatFullnameTextField.getText());
             cerereDonare.setBeneficiarCNP(donatCnpTextField.getText());
-            getService().staffUpdateFormularDonare(cerereDonare);
+            getService().staffUpdateFormularDonare(cerereDonare,getInfo().getIdLocatie());
 
             type = 0;
         }

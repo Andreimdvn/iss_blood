@@ -130,7 +130,7 @@ public class CentruCereriDonariController extends ControlledScreen{
     @FXML
     private void button2Clicked(){
         getSelected().setStatus(Status.PREGATIRE);
-        getService().staffUpdateFormularDonare(getSelected());
+        getService().staffUpdateFormularDonare(getSelected(),getInfo().getIdLocatie());
         updateThis();
     }
     @FXML

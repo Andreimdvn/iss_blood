@@ -33,7 +33,7 @@ public class MainService {
         return flaskClient.getFormulareDonariDupaLocatie(i);
 
     }
-    public Pair<Boolean, String> staffUpdateFormularDonare(FormularDonare formularDonare){
-        return flaskClient.staffUpdateFormularDonare(formularDonare);
+    public Pair<Boolean, String> staffUpdateFormularDonare(FormularDonare formularDonare,int id_locatie){
+        return flaskClient.staffUpdateFormularDonare(formularDonare,id_locatie);
     }
 }
