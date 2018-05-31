@@ -180,10 +180,9 @@ class FlaskServer:
         self.request_data = request.get_json()
         self.logger.debug("Got register request JSON: {}".format(self.request_data))
         id_locatie = self.request_data["id_locatie"]
-        self.logger.debug(id_locatie)
 
         return_dict = self.controller.get_stoc_curent(id_locatie)
-        self.logger.debug(return_dict)
+        self.logger.debug("Returning response: {}".format(return_dict))
 
         return json.dumps(return_dict)
 

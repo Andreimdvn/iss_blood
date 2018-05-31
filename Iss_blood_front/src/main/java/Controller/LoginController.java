@@ -99,7 +99,6 @@ public class LoginController extends ControlledScreen {
         screenController.userInfo = canLogin.getKey();
 
         loadAfterLogin();
-
     }
 
     /***

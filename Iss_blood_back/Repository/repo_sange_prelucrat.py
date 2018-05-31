@@ -9,7 +9,6 @@ class RepositorySangePrelucrat(IRepository):
         locatie = self.db.select('Locatie', ['id'], [id_locatie], first=True)
         return self.db.select('Localitate', ['id'], [locatie.id_localitate], first=True).id_judet
 
-
     def insert(self, sange_prelucrat):
         table_name = 'SangePrelucrat'
         specific_col_names = ['id_sange_brut', 'tip', 'id_locatie', 'status']
@@ -62,7 +61,6 @@ class RepositorySangePrelucrat(IRepository):
                             globule_rosii -= 1
                             self.update_status_by_id_punga(punga.id, 'Folosit', id_locatie_noua)
 
-
     def get_stoc_curent_by_grupa_rh(self, id_locatie, grupa_ceruta, rh_cerut):
 
         # Index : 0 -  Plasma, 1 - Tromobocite , 2 - Globule_rosii
@@ -70,10 +68,10 @@ class RepositorySangePrelucrat(IRepository):
 
         # remove on production
         id_judet = self.get_id_judet(id_locatie)
-        self.logger.debug(id_judet)
         sange_brut_locatie = self.db.select('SangeBrut',
                                             columns=['status', 'grupa', 'rh'],
                                             values=['Impartita', grupa_ceruta, rh_cerut])
+        self.logger.debug("Got Sange brut: {}".format(sange_brut_locatie))
         for sange_brut in sange_brut_locatie:
             if id_judet == self.get_id_judet(sange_brut.id_locatie_recoltare):
                 lista_pungi = self.db.select('SangePrelucrat',
@@ -95,6 +93,8 @@ class RepositorySangePrelucrat(IRepository):
         dictionar = {"Plasma": rezultat[0],
                      "Trombocite": rezultat[1],
                      "Globule_rosii": rezultat[2]}
+        self.logger.debug("Return stoc curent pentru locatie {} grupa {} rh {}: {}".format(id_locatie, grupa_ceruta,
+                                                                                           rh_cerut, dictionar))
         return dictionar
 
     def update_status_by_id_sange_brut(self, id_sange_brut, status):

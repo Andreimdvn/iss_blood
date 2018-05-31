@@ -200,9 +200,7 @@ public class FlaskClient {
         JSONObject jsonResponse = sendRequest(connection, jsonString);
         logger.debug("RESPONSE : " + jsonResponse);
 
-        ;
         return new Pair<>(true, "Success");
-
     }
 
     public Pair<Boolean,String> staffUpdateFormularDonare(FormularDonare formular, int id_locatie)
