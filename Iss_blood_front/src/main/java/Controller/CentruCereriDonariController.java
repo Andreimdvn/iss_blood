@@ -1,43 +1,53 @@
 package Controller;
 
 import Model.*;
-import Utils.Screen;
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTextField;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
+
 public class CentruCereriDonariController extends ControlledScreen{
 
     @FXML
-    private TableView<CerereDonare> donareTableView;
+    private TableView<FormularDonare> donareTableView;
 
-    private ObservableList<CerereDonare> donareObservableList = FXCollections.observableArrayList();
+    private ObservableList<FormularDonare> donareObservableList = FXCollections.observableArrayList();
 
     @FXML
-    private TableColumn<CerereDonare,String> numeColumn;
+    private TableColumn<FormularDonare,String> numeColumn;
     @FXML
-    private TableColumn<CerereDonare,String> prenumeColumn;
+    private TableColumn<FormularDonare,String> prenumeColumn;
     @FXML
-    private TableColumn<CerereDonare, GrupaSange> grupaSangeColumn;
+    private TableColumn<FormularDonare, GrupaSange> grupaSangeColumn;
     @FXML
-    private TableColumn<CerereDonare, RH> rhColumn;
+    private TableColumn<FormularDonare, RH> rhColumn;
     @FXML
-    private TableColumn<CerereDonare, Status> statusColumn;
+    private TableColumn<FormularDonare, Status> statusColumn;
+    private List<FormularDonare> list = new ArrayList<>();
 
     @FXML
     private void initialize(){
         numeColumn.setCellValueFactory(new PropertyValueFactory<>("nume"));
         prenumeColumn.setCellValueFactory(new PropertyValueFactory<>("prenume"));
-        grupaSangeColumn.setCellValueFactory(new PropertyValueFactory<>("grupaSange"));
+        grupaSangeColumn.setCellValueFactory(new PropertyValueFactory<>("grupa"));
         rhColumn.setCellValueFactory(new PropertyValueFactory<>("rh"));
         statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
         donareTableView.setItems(donareObservableList);
+        statusCombo.getItems().addAll(
+                "ANY STATUS",Status.IN_ASTEPTARE.toString(),Status.PRELEVARE.toString()
+                ,Status.PREGATIRE.toString());
     }
-    private CerereDonare getSelectedItem(){
+    private FormularDonare getSelectedItem(){
         return donareTableView.getSelectionModel().getSelectedItem();
     }
 
@@ -46,28 +56,93 @@ public class CentruCereriDonariController extends ControlledScreen{
         pregatireButton.setDisable(!pregatire);
         calificareButton.setDisable(!calificare);
     }
-    public void calificare(){
-        DonatorAnalizaScreenController controller =
-                (DonatorAnalizaScreenController) getScreenController().getControlledScreen(Screen.CENTRU_ANALIZASCREEN_SCREEN);
-        controller.setFields("testSurname","testForename",Sex.FEMININ,25,-1);
-        getScreenController().setScreen(Screen.CENTRU_ANALIZASCREEN_SCREEN);
+
+    /***
+     *  Remove on production
+     *  70% Yes
+     */
+
+    void getElements(){
+
+    }
+
+    public void updateThis(){
+
+        list = getService().getFormulareDonariDupaLocatie(getInfo().getIdLocatie());
+        donareObservableList.setAll(list);
+        //donareTableView.getSelectionModel().select(null);
+        updateStatus();
+        filter();
+    }
+
+    private StaffInfo getInfo(){
+        return (StaffInfo) getScreenController().userInfo;
+    }
+
+    @FXML
+    private JFXTextField searchNume;
+
+    @FXML
+    private JFXTextField searchPrenume;
+
+    @FXML
+    private ComboBox<String> statusCombo;
+
+    @FXML
+    private void reset(){
+        searchPrenume.setText("");
+        searchNume.setText("");
+        statusCombo.getSelectionModel().select(0);
+        filter();
+    }
+
+    @FXML
+    private void filter(){
+
+        List<FormularDonare> donare = list.stream().filter(
+                p -> p.getNume().toLowerCase().contains(searchNume.getText().toLowerCase()))
+                .collect(Collectors.toList());
+
+        donare = donare.stream().filter(
+                p -> p.getPrenume().toLowerCase().contains(searchPrenume.getText().toLowerCase()))
+                .collect(Collectors.toList());
+
+        if(!statusCombo.getSelectionModel().isSelected(0) && !statusCombo.getSelectionModel().isEmpty())
+        donare = donare.stream().filter(
+                p -> Objects.equals(p.getStatus().toString(),
+                        statusCombo.getSelectionModel().getSelectedItem())).collect(Collectors.toList());
+
+        donareObservableList.setAll(donare);
+    }
+
+    private FormularDonare getSelected(){
+        return donareTableView.getSelectionModel().getSelectedItem();
+    }
+
+    @FXML
+    private void button1Clicked(){
+        CentruTransfuzieController cr = (CentruTransfuzieController) getScreenController().getControlledScreen("CENTRU_TRANSFUZIE");
+        CentruPrelevareController cv = (CentruPrelevareController) getScreenController().getControlledScreen("CENTRU_CHESTIONAR");
+        cv.setFormularDonare(getSelected());
+        cr.setCenter(getScreenController().getScreen("CENTRU_CHESTIONAR"));
+
     }
     @FXML
-    private void populateDummy(){
-        CerereDonare a = new CerereDonare(
-                "Moldovan","Daniel", GrupaSange.UNKNOWN, RH.UNKNOWN,Status.IN_ASTEPTARE
-        );
-        CerereDonare b = new CerereDonare(
-                "Oancea","Alin", GrupaSange.O1, RH.POZITIV,Status.PRELEVARE
-        );
-        CerereDonare c = new CerereDonare(
-                "Moldovan","Andrei", GrupaSange.B3, RH.NEGATIV,Status.PREGATIRE
-        );
-        donareObservableList.addAll(a,b,c);
+    private void button2Clicked(){
+        getSelected().setStatus(Status.PREGATIRE);
+        getService().staffUpdateFormularDonare(getSelected());
+        updateThis();
+    }
+    @FXML
+    private void button3Clicked(){
+        CentruTransfuzieController cr = (CentruTransfuzieController) getScreenController().getControlledScreen("CENTRU_TRANSFUZIE");
+        cr.setCenter(getScreenController().getScreen("CENTRU_ANALIZA"));
+        CentruAnalizaController ca = (CentruAnalizaController) getScreenController().getControlledScreen("CENTRU_ANALIZA");
+        ca.setFormularDonare(getSelected());
     }
 
     private void updateStatus(){
-        CerereDonare cr = getSelectedItem();
+        FormularDonare cr = getSelectedItem();
         if(cr == null) {
             changeStatus(false,false,false);
         }
@@ -75,9 +150,11 @@ public class CentruCereriDonariController extends ControlledScreen{
             if(cr.getStatus() == Status.IN_ASTEPTARE)
                 changeStatus(true,false,false);
             else if(cr.getStatus() == Status.PRELEVARE)
-                changeStatus(true,true,false);
+                changeStatus(false,true,false);
             else if(cr.getStatus() == Status.PREGATIRE)
-                changeStatus(true,true,true);
+                changeStatus(false,false,true);
+            else
+                changeStatus(false,false,false);
         }
     }
 

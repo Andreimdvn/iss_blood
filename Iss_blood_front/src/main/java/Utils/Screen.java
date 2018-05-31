@@ -14,6 +14,10 @@ public class Screen {
     public static String FORMULAR_DONARE_SCREEN = "FORMULAR_DONARE";
     public static String FORMULAR_DONARE_RESOURCE = "/View/FormularDonareView.fxml";
 
+    public static String CENTRU_FORMULAR_SCREEN = "CENTRU_FORMULAR";
+    public static String CENTRU_FORMULAR_RESOURCE = "/View/CentruFormularView.fxml";
+
+
     public static String ISTORIC_DONARI_SCREEN = "ISTORIC";
     public static String ISTORIC_DONARI_RESOURCE = "/View/IstoricDonariView.fxml";
 
@@ -62,6 +66,13 @@ public class Screen {
 
     public static String CENTRU_ANALIZASCREEN_SCREEN = "CENTRU_ANALIZA_SCREEN";
     public static String CENTRU_ANALIZASCREEN_RESOURCE = "/View/DonatorAnalizaScreen.fxml";
+
+
+    public static String CENTRU_CHESTIONAR_SCREEN ="CENTRU_CHESTIONAR";
+    public static String CENTRU_CHESTIONAR_RESOURCE ="/View/CentruPrelevareView.fxml";
+
+    public static String CENTRU_ANALIZA_SCREEN = "CENTRU_ANALIZA";
+    public static String CENTRU_ANALIZA_RESOURCE="/View/CentruAnalizaView.fxml";
 
 
 }

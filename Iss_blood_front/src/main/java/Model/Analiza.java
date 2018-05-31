@@ -2,7 +2,6 @@ package Model;
 
 public class Analiza {
     private Integer idAnaliza;
-    private Integer idSangeBrut;
     private Boolean ALT;
     private Boolean SIF;
     private Boolean ANTIHTLV;
@@ -10,9 +9,8 @@ public class Analiza {
     private Boolean ANTIHIV;
     private Boolean HB;
 
-    public Analiza(Integer idAnaliza, Integer idSangeBrut, Boolean ALT, Boolean SIF, Boolean ANTIHTLV, Boolean ANTIHCV, Boolean ANTIHIV, Boolean HB) {
+    public Analiza(Integer idAnaliza, Boolean ALT, Boolean SIF, Boolean ANTIHTLV, Boolean ANTIHCV, Boolean ANTIHIV, Boolean HB) {
         this.idAnaliza = idAnaliza;
-        this.idSangeBrut = idSangeBrut;
         this.ALT = ALT;
         this.SIF = SIF;
         this.ANTIHTLV = ANTIHTLV;
@@ -27,14 +25,6 @@ public class Analiza {
 
     public void setIdAnaliza(Integer idAnaliza) {
         this.idAnaliza = idAnaliza;
-    }
-
-    public Integer getIdSangeBrut() {
-        return idSangeBrut;
-    }
-
-    public void setIdSangeBrut(Integer idSangeBrut) {
-        this.idSangeBrut = idSangeBrut;
     }
 
     public Boolean getALT() {

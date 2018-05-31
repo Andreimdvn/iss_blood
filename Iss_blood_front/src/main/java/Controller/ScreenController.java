@@ -1,6 +1,7 @@
 package Controller;
 
 import Main.MainApplication;
+import Model.UserInfo;
 import Service.MainService;
 import Utils.ViewDetails;
 import javafx.fxml.FXMLLoader;
@@ -18,6 +19,7 @@ public class ScreenController extends StackPane {
 
     private HashMap<String, ViewDetails> screenViews = new HashMap<>();
     MainService mainService;
+    public UserInfo userInfo;
 
     public ScreenController(MainService service) {
         super();
@@ -86,6 +88,7 @@ public class ScreenController extends StackPane {
             if(!getChildren().isEmpty()) {
                 getChildren().remove(0);
                 getChildren().add(0, screenViews.get(name).getNode());
+
                 MainApplication.resizeScreen();
             } else
                 getChildren().add(screenViews.get(name).getNode());

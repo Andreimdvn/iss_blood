@@ -6,6 +6,7 @@ import logging
 from Controller.back_controller import BackController
 from Model.account_type import AccountType
 from Model.register_info import RegisterInfo
+from Model.formular_donare import FormularDonare
 
 
 class FlaskServer:
@@ -36,6 +37,18 @@ class FlaskServer:
         self.app.add_url_rule("/test", "test_request", self.test_request, methods=["GET", "POST"])
         self.app.add_url_rule("/login", "login_request", self.login_request, methods=["POST"])
         self.app.add_url_rule("/register", "register_request", self.register_request, methods=["POST"])
+        self.app.add_url_rule("/user_trimite_formular_donare", "user_trimite_formular_donare",
+                              self.user_trimite_formular_donare,
+                              methods=["POST"])
+        self.app.add_url_rule("/staff_trimite_formular_donare", "staff_trimite_formular_donare",
+                              self.staff_trimite_formular_donare,
+                              methods=["POST"])
+        self.app.add_url_rule("/staff_cere_formulare_donari", "staff_cere_formulare_donari",
+                              self.staff_cere_formular_donari,
+                              methods=["POST"])
+        self.app.add_url_rule("/staff_update_formular_donare", "staff_update_fomrular_donare",
+                              self.staff_update_formular_donare,
+                              methods=["POST"])
 
     def test_request(self):
         self.request_data = request.get_json()
@@ -48,13 +61,15 @@ class FlaskServer:
         user = self.request_data["username"]
         password = self.request_data["password"]
 
-        status, user_type = self.controller.login(user, password)
+        status, user_type, user_info = self.controller.login(user, password)
 
-        return_dict = {"status": status, "user_type": user_type}
         if status == 0:
+            return_dict = user_info  # refolosim user_info care deja e dictionar
+            return_dict["status"] = 0
             return_dict["message"] = "Login cu success!"
+            return_dict["user_type"] = user_type
         else:
-            return_dict["message"] = "Username sau parola invalide"
+            return_dict = {"status": status, "message": "Username sau parola invalide"}
 
         self.logger.debug("Returning response for Login Request: {}".format(return_dict))
 
@@ -74,5 +89,114 @@ class FlaskServer:
         status_code, status_message = self.controller.register(register_info)
 
         return_dict = {"status": str(status_code), "message": status_message}
+
+        return json.dumps(return_dict)
+
+    def user_trimite_formular_donare(self):
+        self.request_data = request.get_json()
+        self.logger.debug("Got register request JSON: {}".format(self.request_data))
+
+        formular_donare = FormularDonare(self.request_data["nume"],
+                                         self.request_data["prenume"],
+                                         self.request_data["sex"],
+                                         self.request_data["telefon"],
+                                         self.request_data["domiciliu_localitate"],
+                                         self.request_data["domiciliu_judet"],
+                                         self.request_data["domiciliu_adresa"],
+                                         self.request_data["resedinta_localitate"],
+                                         self.request_data["resedinta_judet"],
+                                         self.request_data["resedinta_adresa"],
+                                         self.request_data["beneficiar_full_name"],
+                                         self.request_data["beneficiar_CNP"],
+                                         self.request_data["grupa"],
+                                         self.request_data["rh"],
+                                         self.request_data["zile_disponibil"])
+
+        status, message = self.controller.user_trimite_formular(formular_donare, self.request_data["username"])
+
+        return_dict = {"status": str(status), "message": message}
+        return json.dumps(return_dict)
+
+    def staff_cere_formular_donari(self):
+        self.request_data = request.get_json()
+        self.logger.debug("Got register request JSON: {}".format(self.request_data))
+        id_locatie = self.request_data["id_locatie"]
+
+        lista = self.controller.staff_cerere_formulare_donari(id_locatie)
+        lista_dictionare =[]
+        for x in lista:
+            dict_list = {"id": x[0],
+                         "nume": x[1],
+                         "prenume": x[2],
+                         "sex": x[3],
+                         "telefon": x[4],
+                         "domiciliuLocalitate": x[5],
+                         "domiciliuJudet": x[6],
+                         "domiciliuAdresa": x[7],
+                         "resedintaLocalitate": x[8],
+                         "resedintaJudet": x[9],
+                         "resedintaAdresa": x[10],
+                         "beneficiar_full_name": x[11],
+                         "beneficiar_cnp": x[12],
+                         "grupa": x[13],
+                         "rh": x[14],
+                         "status": x[15]}
+
+            lista_dictionare.append(dict_list)
+
+        return_dict = {"entities": lista_dictionare}
+
+        return json.dumps(return_dict)
+
+    def staff_update_formular_donare(self):
+        self.request_data = request.get_json()
+        self.logger.debug("Got register request JSON: {}".format(self.request_data))
+
+        formular_donare = FormularDonare(self.request_data["nume"],
+                                         self.request_data["prenume"],
+                                         self.request_data["sex"],
+                                         self.request_data["telefon"],
+                                         self.request_data["domiciliu_localitate"],
+                                         self.request_data["domiciliu_judet"],
+                                         self.request_data["domiciliu_adresa"],
+                                         self.request_data["resedinta_localitate"],
+                                         self.request_data["resedinta_judet"],
+                                         self.request_data["resedinta_adresa"],
+                                         self.request_data["beneficiar_full_name"],
+                                         self.request_data["beneficiar_CNP"],
+                                         self.request_data["grupa"],
+                                         self.request_data["rh"],
+                                         self.request_data["zile_disponibil"],
+                                         self.request_data["status"],
+                                         self.request_data["id"])
+
+        status, message = self.controller.staff_update_formular_donare(formular_donare)
+        return_dict = {"status": str(status), "message": message}
+
+        return json.dumps(return_dict)
+
+    def staff_trimite_formular_donare(self):
+        self.request_data = request.get_json()
+        self.logger.debug("Got register request JSON: {}".format(self.request_data))
+
+        formular_donare = FormularDonare(self.request_data["nume"],
+                                         self.request_data["prenume"],
+                                         self.request_data["sex"],
+                                         self.request_data["telefon"],
+                                         self.request_data["domiciliu_localitate"],
+                                         self.request_data["domiciliu_judet"],
+                                         self.request_data["domiciliu_adresa"],
+                                         self.request_data["resedinta_localitate"],
+                                         self.request_data["resedinta_judet"],
+                                         self.request_data["resedinta_adresa"],
+                                         self.request_data["beneficiar_full_name"],
+                                         self.request_data["beneficiar_CNP"],
+                                         self.request_data["grupa"],
+                                         self.request_data["rh"],
+                                         self.request_data["zile_disponibil"])
+
+        status, message = self.controller.staff_trimite_formular(formular_donare)
+
+        return_dict = {"status": str(status), "message": message}
 
         return json.dumps(return_dict)

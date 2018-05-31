@@ -47,6 +47,8 @@
     -fx-background-color: #8A0707;
 }
 
+
+
 .box{
     -fx-background-color: -fx-background-primary-color;
 
@@ -68,6 +70,13 @@
     -fx-border-color: lightgreen;
 }
 
+.toggle-button-formular{
+    -fx-background-color: transparent;
+}
+.toggle-button-formular:selected{
+    -fx-background-color: -fx-button-primary-color;
+    -fx-text-fill:  -fx-text-button-secondary-color;
+}
 
 .buttonSecondaryTiny:hover{
     -fx-border-width: 0 0 0 15;
@@ -78,7 +87,7 @@
     -fx-text-fill: -fx-text-header-formular-color;
 }
 
-.buttonSecondaryTiny:focused{
+.buttonSecondaryTiny:selected{
     -fx-background-color: lightgreen;
     -fx-text-fill:  -fx-text-button-primary-color;
     -fx-border-width: 0 0 0 0;
@@ -581,13 +590,13 @@
     -fx-background-color: transparent;
 }
 
-.toggle-button {
+.toggle-button-custom {
     -fx-border-width: 0px;
     -fx-pref-height: 20px;
     -fx-opacity: 50%;
 }
 
-.toggle-button:selected {
+.toggle-button-custom:selected {
     -fx-border-width: 0px;
     -fx-pref-height: 40px;
     -fx-opacity: 100%;

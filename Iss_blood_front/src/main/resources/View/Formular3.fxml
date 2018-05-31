@@ -5,7 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="866.0" styleClass="formularPane" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Formular3Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="866.0" styleClass="formularPane" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.FormularDonare.Formular3Controller">
    <children>
       <AnchorPane layoutY="57.0" prefHeight="12.0" prefWidth="866.0" styleClass="design-line-formular-thin" />
       <AnchorPane fx:id="pane_conditii" layoutX="7.0" layoutY="69.0" prefHeight="410.0" prefWidth="853.0">

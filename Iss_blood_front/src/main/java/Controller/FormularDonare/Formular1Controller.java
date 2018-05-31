@@ -1,5 +1,7 @@
-package Controller;
+package Controller.FormularDonare;
 
+import Controller.ControlledScreen;
+import Controller.DonatorDashboardController;
 import Service.MainService;
 import Utils.Screen;
 import com.jfoenix.controls.JFXButton;
