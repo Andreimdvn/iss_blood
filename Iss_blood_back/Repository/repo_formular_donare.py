@@ -34,7 +34,8 @@ class RepositoryFormularDonari(IRepository):
         specific_col_names = ['id', 'id_donator', 'beneficiar_full_name', 'beneficiar_CNP', 'grupa',
                               'rh', 'zile_disponibil', 'status']
 
-        localitate_centru = self.get_localitate(id_locatie)
+        locatie = self.get_locatie(id_locatie)
+        localitate_centru = self.get_localitate(locatie.id_localitate)
         judet_centru_cod = self.get_judet(localitate_centru.id_judet).id
         try:
             rezultat = []
@@ -83,6 +84,12 @@ class RepositoryFormularDonari(IRepository):
         values = [id_donator]
         donator = self.db.select(table_name, columns=specific_col_names, values=values, first=True)
         return None if not donator else donator
+
+    def get_locatie(self,id_locatie):
+        table_name='Locatie'
+        specific_col_names = ['id']
+        values = [id_locatie]
+        return self.db.select(table_name, columns=specific_col_names,values=values, first=True)
 
     def get_localitate(self,id_localitate):
         table_name = 'Localitate'

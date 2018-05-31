@@ -1,7 +1,5 @@
-package Controller.FormularDonare;
+package Controller;
 
-import Controller.CentruCereriDonariController;
-import Controller.ScreenController;
 import Model.FormularDonare;
 import Model.StaffInfo;
 import Utils.CustomMessageBox;
@@ -27,7 +25,9 @@ public class CentruFormularController extends AbstractFormularDonareController {
         {
             CustomMessageBox msg = new CustomMessageBox("Info", "Formularul a fost trimis cu succes", 0);
             msg.show();
-            ((CentruCereriDonariController)getScreenController().getControlledScreen("CENTRU_CERERI_DONARI")).updateThis();
+            update();
+
+//            ((CentruCereriDonariController)getScreenController().getControlledScreen("CENTRU_CERERI_DONARI")).updateThis();
 //            loadPostFormular();
         }
         else
@@ -35,6 +35,12 @@ public class CentruFormularController extends AbstractFormularDonareController {
             CustomMessageBox msg = new CustomMessageBox("Eroare", rez.getValue(), 1);
             msg.show();
         }
+
+    }
+
+
+    @Override
+    void updateThis() {
 
     }
 

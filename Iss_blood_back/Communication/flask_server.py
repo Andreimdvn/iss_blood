@@ -5,6 +5,7 @@ import logging
 
 from Controller.back_controller import BackController
 from Model.account_type import AccountType
+from Model.analiza import Analiza
 from Model.register_info import RegisterInfo
 from Model.formular_donare import FormularDonare
 
@@ -46,9 +47,67 @@ class FlaskServer:
         self.app.add_url_rule("/staff_cere_formulare_donari", "staff_cere_formulare_donari",
                               self.staff_cere_formular_donari,
                               methods=["POST"])
-        self.app.add_url_rule("/staff_update_formular_donare", "staff_update_fomrular_donare",
+        self.app.add_url_rule("/staff_update_formular_donare", "staff_update_fomular_donare",
                               self.staff_update_formular_donare,
                               methods=["POST"])
+        self.app.add_url_rule("/staff_trimite_analiza", "staff_trimite_analiza",
+                              self.staff_trimite_analiza,
+                              methods=["POST"])
+        self.app.add_url_rule("/staff_get_stoc_curent", "staff_get_stoc_curent",
+                              self.staff_get_stoc_curent,
+                              methods=["POST"])
+        self.app.add_url_rule("/get_analize", "get_analize",
+                              self.get_analize,
+                              methods=["POST"])
+        self.app.add_url_rule("/desavarsire_cerere_medic", "desavarsire_cerere_medic",
+                              self.trimite_pungi,
+                              methods=["POST"])
+
+    def trimite_pungi(self):
+        self.request_data = request.get_json()
+        self.logger.debug("Got request trimite pungi JSON: {}".format(self.request_data))
+
+        id_locatie_curenta = self.request_data["id_locatie_curenta"]
+
+        # Update on production
+        id_locatie_noua = self.request_data["id_locatie_noua"]
+
+        grupa = self.request_data["grupa"]
+        rh = self.request_data["rh"]
+        numar_plasma = self.request_data["plasma"]
+        numar_globule = self.request_data["globule"]
+        numar_trombocite = self.request_data["trombocite"]
+        lista = [numar_plasma, numar_trombocite, numar_globule]
+        self.logger.debug(lista)
+        status, mesaj = self.controller.send_pungi(id_locatie_curenta,
+                                                   id_locatie_noua,
+                                                   grupa,
+                                                   rh,
+                                                   plasma=numar_plasma,
+                                                   globule_rosii=numar_globule,
+                                                   tromobocite=numar_trombocite)
+        if status == 0:
+            # pungile au fost trimise
+            id_cerere = self.request_data["id_cerere"]
+
+            # TO DO change status to complete for cerere sange
+
+        return_dict = {"status": status, "message": mesaj}
+
+        self.logger.debug("Returning response for trimite pungi: {}".format(return_dict))
+
+        return json.dumps(return_dict)
+
+    def get_analize(self):
+        self.request_data = request.get_json()
+        self.logger.debug("Req data: {}".format(self.request_data))
+
+        dictionar = {
+            "entities": self.controller.get_analize(self.request_data["cnp"])
+        }
+        self.logger.debug(dictionar)
+
+        return json.dumps(dictionar)
 
     def test_request(self):
         self.request_data = request.get_json()
@@ -82,7 +141,7 @@ class FlaskServer:
         register_info = RegisterInfo(self.request_data["username"], self.request_data["password"],
                                      self.request_data["email"], self.request_data["nume"],
                                      self.request_data["prenume"], self.request_data["cnp"],
-                                     self.request_data["localitate"], self.request_data["judet"],
+                                     self.request_data["judet"], self.request_data["localitate"],
                                      self.request_data["address"], self.request_data["phone"],
                                      AccountType[self.request_data["accountType"]], self.request_data["license"])
 
@@ -117,6 +176,16 @@ class FlaskServer:
         return_dict = {"status": str(status), "message": message}
         return json.dumps(return_dict)
 
+    def staff_get_stoc_curent(self):
+        self.request_data = request.get_json()
+        self.logger.debug("Got register request JSON: {}".format(self.request_data))
+        id_locatie = self.request_data["id_locatie"]
+
+        return_dict = self.controller.get_stoc_curent(id_locatie)
+        self.logger.debug("Returning response: {}".format(return_dict))
+
+        return json.dumps(return_dict)
+
     def staff_cere_formular_donari(self):
         self.request_data = request.get_json()
         self.logger.debug("Got register request JSON: {}".format(self.request_data))
@@ -148,6 +217,45 @@ class FlaskServer:
 
         return json.dumps(return_dict)
 
+    def staff_trimite_analiza(self):
+        self.request_data = request.get_json()
+        self.logger.debug("Got register request JSON: {}".format(self.request_data))
+
+        formular_donare = FormularDonare(self.request_data["nume"],
+                                         self.request_data["prenume"],
+                                         self.request_data["sex"],
+                                         self.request_data["telefon"],
+                                         self.request_data["domiciliu_localitate"],
+                                         self.request_data["domiciliu_judet"],
+                                         self.request_data["domiciliu_adresa"],
+                                         self.request_data["resedinta_localitate"],
+                                         self.request_data["resedinta_judet"],
+                                         self.request_data["resedinta_adresa"],
+                                         self.request_data["beneficiar_full_name"],
+                                         self.request_data["beneficiar_CNP"],
+                                         self.request_data["grupa"],
+                                         self.request_data["rh"],
+                                         self.request_data["zile_disponibil"],
+                                         self.request_data["status"],
+                                         self.request_data["id"])
+
+        id_locatie = self.request_data["id_locatie"]
+
+        analiza = Analiza(
+                        -1,
+                        self.request_data["alt"],
+                        self.request_data["sif"],
+                        self.request_data["htlv"],
+                        self.request_data["htcv"],
+                        self.request_data["hiv"],
+                        self.request_data["hb"])
+
+        self.logger.debug(analiza)
+        status, message = self.controller.staff_update_formular_donare(formular_donare, id_locatie, analiza)
+        return_dict = {"status": str(status), "message": message}
+
+        return json.dumps(return_dict)
+
     def staff_update_formular_donare(self):
         self.request_data = request.get_json()
         self.logger.debug("Got register request JSON: {}".format(self.request_data))
@@ -170,7 +278,9 @@ class FlaskServer:
                                          self.request_data["status"],
                                          self.request_data["id"])
 
-        status, message = self.controller.staff_update_formular_donare(formular_donare)
+        id_locatie = self.request_data["id_locatie"]
+
+        status, message = self.controller.staff_update_formular_donare(formular_donare, id_locatie)
         return_dict = {"status": str(status), "message": message}
 
         return json.dumps(return_dict)

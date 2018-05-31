@@ -109,7 +109,7 @@ public class CentruTransfuzieController extends ControlledScreen {
     }
 
     private void loadLogin() {
-        getScreenController().setScreen(Screen.LOGIN_SCREEN);
+        unloadAfterLogout();
     }
 
     @FXML
@@ -137,6 +137,11 @@ public class CentruTransfuzieController extends ControlledScreen {
                 primaryStage.setY(event.getScreenY() - yOffset);
             }
         });
+    }
+
+    @Override
+    void updateThis() {
+
     }
 
     @Override

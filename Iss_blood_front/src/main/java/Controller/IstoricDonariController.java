@@ -63,4 +63,9 @@ public class IstoricDonariController extends ControlledScreen {
     private void initialize(){
 
     }
+
+    @Override
+    void updateThis() {
+
+    }
 }

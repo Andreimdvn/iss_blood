@@ -1,6 +1,5 @@
-package Controller.FormularDonare;
+package Controller;
 
-import Controller.ScreenController;
 import Model.*;
 import Utils.CustomMessageBox;
 import Validators.ValidationException;
@@ -21,6 +20,12 @@ public class FormularDonareController extends AbstractFormularDonareController {
         ResedintaAdresaTextField.setText(info.getResedintaAdresa());
         phoneTextField.setText(info.getTelefon());
         sexToggleGroup.selectToggle(info.getSex() == Sex.FEMININ ? femininToggle : masculinToggle);
+    }
+
+
+    @Override
+    void updateThis() {
+
     }
 
     @Override

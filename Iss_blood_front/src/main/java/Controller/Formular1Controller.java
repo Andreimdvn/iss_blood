@@ -1,4 +1,4 @@
-package Controller.FormularDonare;
+package Controller;
 
 import Controller.ControlledScreen;
 import Controller.DonatorDashboardController;
@@ -87,5 +87,10 @@ public class Formular1Controller extends ControlledScreen {
             currentScreen--;
             displayCurrentScreen();
         }
+    }
+
+    @Override
+    void updateThis() {
+
     }
 }

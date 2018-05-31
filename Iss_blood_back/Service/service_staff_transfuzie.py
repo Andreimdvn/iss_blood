@@ -6,6 +6,10 @@ class ServiceStaffTransfuzie(IService):
     def __init__(self, repo_manager, db):
         super().__init__(repo_manager, db)
 
+    def get_id_donator(self, formular):
+        return self.repo_manager.repo_formular_donare.db.select(
+            'FormularDonare', ['id'], [formular.id], first=True).id_donator
+
     def insert_formular_staff(self, formular):
         '''
         Insereaza datele din formular in BD pentru o persoana care nu are cont
@@ -44,4 +48,4 @@ class ServiceStaffTransfuzie(IService):
         return lista
 
     def update_formular(self, formular_donare):
-            return self.repo_manager.repo_formular_donare.update(formular_donare)
+        return self.repo_manager.repo_formular_donare.update(formular_donare)

@@ -155,9 +155,9 @@ class SangeBrut(DB):
     id_donator = Column(Integer, ForeignKey('Donator.id_donator'))
     id_locatie_recoltare = Column(Integer, ForeignKey('Locatie.id'))
     data_recoltare = Column(Date, nullable=False)
-    status = Column(Enum('Recoltata', 'Analizata', 'Impartita', 'Aruncata'), nullable=False)
-    rh = Column(Enum('pozitiv', 'negativ'), nullable=False)
-    grupa = Column(Enum('O1', 'A2', 'B3', 'AB4'), nullable=False)
+    status = Column(Enum('Recoltata', 'Prelucrata', 'Impartita', 'Aruncata'), nullable=False)
+    rh = Column(Enum('pozitiv', 'negativ', 'unknown'), nullable=False)
+    grupa = Column(Enum('O1', 'A2', 'B3', 'AB4', 'unknown'), nullable=False)
     id_locatie_curenta = Column(Integer, ForeignKey('Locatie.id'))
 
     donator = relationship('Donator', back_populates='sange_brut')
@@ -172,7 +172,7 @@ class SangePrelucrat(DB):
     id_sange_brut = Column(Integer, ForeignKey('SangeBrut.id'))
     tip = Column(Enum('Plasma', 'Trombocite', 'Globule_rosii'))
     id_locatie = Column(Integer, ForeignKey('Locatie.id'))
-    status = Column(Enum('Depozitat', 'Folosit', 'Expirat'))
+    status = Column(Enum('Prelucrat','Depozitat', 'Folosit', 'Expirat'))
 
     sange_brut = relationship('SangeBrut', back_populates='sange_prelucrat')
     locatie = relationship('Locatie', back_populates='sange_prelucrat')
@@ -403,10 +403,11 @@ class ORM:
             raise ValueError('[!] Specify values for where clause!')
         if len(values) != len(columns):
             raise ValueError('[!] There are not enough values/columns!')
-        item = self.select(table, columns, values, first=True)
-        if not item:
+        items = self.select(table, columns, values)
+        if not items:
             raise ValueError('[!] Item with specified values doesn\'t exists!')
-        self.ses.delete(item)
+        for item in items:
+            self.ses.delete(item)
         self.ses.commit()
         self.ses.flush()
         self.ses.close()

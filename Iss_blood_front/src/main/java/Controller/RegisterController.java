@@ -256,4 +256,9 @@ public class RegisterController extends ControlledScreen {
         enableStyle();
         accountTypeToggleGroup = donatorToggleButton.getToggleGroup();
     }
+
+    @Override
+    void updateThis() {
+
+    }
 }
