@@ -11,8 +11,9 @@ public class DonatorInfo extends UserInfo {
     private String resedintaLocalitate;
     private String resedintaJudet;
     private String resedintaAdresa;
+    private Sex sex;
 
-    public DonatorInfo(String username, String nume, String prenume, String cnp, String telefon, String domiciliuLocalitate, String domiciliuJudet, String domiciliuAdresa, String resedintaLocalitate, String resedintaJudet, String resedintaAdresa) {
+    public DonatorInfo(String username, String nume, String prenume, String cnp, String telefon, String domiciliuLocalitate, String domiciliuJudet, String domiciliuAdresa, String resedintaLocalitate, String resedintaJudet, String resedintaAdresa, Sex sex) {
         super(username);
         this.nume = nume;
         this.prenume = prenume;
@@ -24,6 +25,7 @@ public class DonatorInfo extends UserInfo {
         this.resedintaLocalitate = resedintaLocalitate;
         this.resedintaJudet = resedintaJudet;
         this.resedintaAdresa = resedintaAdresa;
+        this.sex = sex;
     }
 
     public String getNume() {
@@ -65,4 +67,6 @@ public class DonatorInfo extends UserInfo {
     public String getResedintaAdresa() {
         return resedintaAdresa;
     }
+
+    public Sex getSex() {return sex;}
 }

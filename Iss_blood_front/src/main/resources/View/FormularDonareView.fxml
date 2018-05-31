@@ -26,12 +26,12 @@
                   </AnchorPane>
                   <JFXTextField fx:id="firstNameTextField" focusColor="#fea02f" layoutX="42.0" layoutY="58.0" prefHeight="25.0" prefWidth="121.0" promptText="First name" styleClass="textboxSmall" unFocusColor="WHITE" />
                   <Label alignment="TOP_CENTER" contentDisplay="TOP" layoutX="81.0" layoutY="101.0" styleClass="labelFormular" text="Sex" />
-                  <JFXRadioButton layoutX="137.0" layoutY="102.0" styleClass="jfx-radio-button" text="M">
+                  <JFXRadioButton fx:id="masculinToggle" layoutX="137.0" layoutY="102.0" styleClass="jfx-radio-button" text="M">
                      <toggleGroup>
                         <ToggleGroup fx:id="sexToggleGroup" />
                      </toggleGroup>
                   </JFXRadioButton>
-                  <JFXRadioButton layoutX="195.0" layoutY="102.0" text="F" toggleGroup="$sexToggleGroup" />
+                  <JFXRadioButton fx:id="femininToggle" layoutX="195.0" layoutY="102.0" text="F" toggleGroup="$sexToggleGroup" />
                   <JFXTextField fx:id="phoneTextField" focusColor="#fea02f" layoutX="79.0" layoutY="135.0" promptText="Telefon" styleClass="textboxFormular" unFocusColor="WHITE" />
                   <HBox layoutX="58.0" layoutY="211.0" spacing="23.0">
                      <children>

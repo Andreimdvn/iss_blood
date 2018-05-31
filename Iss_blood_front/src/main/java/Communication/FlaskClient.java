@@ -1,20 +1,21 @@
 package Communication;
 
-import Model.CerereSange;
-import Model.FormularDonare;
-import Model.RegisterInfo;
-import Model.UserInfo;
+import Controller.ControlledScreen;
+import Model.*;
+import Utils.Observer;
 import Utils.UserUtils;
 import javafx.util.Pair;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import javax.naming.directory.InvalidAttributesException;
 import java.io.*;
 import java.net.*;
 import java.nio.charset.StandardCharsets;
-import java.util.Properties;
+import java.rmi.RemoteException;
+import java.util.*;
 
 public class FlaskClient {
 
@@ -95,7 +96,6 @@ public class FlaskClient {
         }
 
         String jsonString = new JSONObject().put("username", user).put("password", password).toString();
-
         logger.debug("SENDING: " + jsonString);
         JSONObject jsonResponse = this.sendRequest(connection, jsonString);
         logger.debug("RESPONSE : " + jsonResponse);
@@ -113,7 +113,39 @@ public class FlaskClient {
             return new Pair<>(null, jsonResponse.getString("message"));
         }
     }
+    public List<Analiza> getAnalize(String cnp){
 
+        HttpURLConnection connection = getConnection("/get_analize");
+
+        if(connection == null)
+            logger.debug("Client connection request Error");
+
+        String jsonString = new JSONObject().put("cnp",cnp).toString();
+
+        logger.debug("SENDING: " + jsonString);
+        JSONObject jsonResponse = sendRequest(connection, jsonString);
+        logger.debug("RESPONSE : " + jsonResponse);
+
+        List<Analiza> list = new ArrayList<>();
+
+        JSONArray analize = jsonResponse.getJSONArray("entities");
+
+        for(int i = 0; i < analize.length() ;i++)
+        {
+            JSONObject analiza = analize.getJSONObject(i);
+
+            int id = analiza.getInt("id");
+            boolean alt = analiza.getBoolean("alt");
+            boolean sif = analiza.getBoolean("sif");
+            boolean htcv = analiza.getBoolean("htcv");
+            boolean htlv = analiza.getBoolean("htlv");
+            boolean hiv = analiza.getBoolean("hiv");
+            boolean hb = analiza.getBoolean("hb");
+            list.add(new Analiza(id,alt,sif,htlv,htcv,hiv,hb));
+        }
+
+        return list;
+    }
     public Pair<Boolean, String> register(RegisterInfo info)
     {
         HttpURLConnection connection = getConnection("/register");
@@ -143,9 +175,9 @@ public class FlaskClient {
         return new Pair<>(false, jsonResponse.getString("message"));
     }
 
-    public Pair<Boolean, String> trimiteFormularDonare(FormularDonare formular)
+    public Pair<Boolean, String> userTrimiteFormularDonare(FormularDonare formular, String username)
     {
-        HttpURLConnection connection = getConnection("/trimiteFormularDonare");
+        HttpURLConnection connection = getConnection("/user_trimite_formular_donare");
 
         if(connection == null)
             return new Pair<>(false, "Client connection request Error");
@@ -162,7 +194,117 @@ public class FlaskClient {
                 .put("beneficiar_CNP", formular.getBeneficiarCNP())
                 .put("grupa", formular.getGrupa()).put("rh", formular.getRh().toString())
                 .put("zile_disponibil", formular.getZileDisponibil())
-                .put("username", formular.getUsername()).toString();
+                .put("username", username).toString();
+
+        logger.debug("SENDING: " + jsonString);
+        JSONObject jsonResponse = sendRequest(connection, jsonString);
+        logger.debug("RESPONSE : " + jsonResponse);
+
+        return new Pair<>(true, "Success");
+    }
+
+    public Pair<Boolean,String> staffUpdateFormularDonare(FormularDonare formular, int id_locatie)
+    {
+        HttpURLConnection connection = getConnection("/staff_update_formular_donare");
+
+        if(connection == null)
+            return new Pair<>(false, "Client connection request Error");
+
+        String jsonString = new JSONObject().put("nume", formular.getNume()).put("prenume", formular.getPrenume())
+                .put("sex", formular.getSex().toString()).put("telefon", formular.getTelefon())
+                .put("domiciliu_localitate", formular.getDomiciliuLocalitate())
+                .put("domiciliu_judet", formular.getDomiciliuJudet())
+                .put("domiciliu_adresa", formular.getDomiciliuAdresa())
+                .put("resedinta_localitate", formular.getResedintaLocalitate())
+                .put("resedinta_judet", formular.getResedintaJudet())
+                .put("resedinta_adresa", formular.getResedintaAdresa())
+                .put("beneficiar_full_name", formular.getBeneficiarFullName())
+                .put("beneficiar_CNP", formular.getBeneficiarCNP())
+                .put("grupa", formular.getGrupa())
+                .put("rh", formular.getRh().toString())
+                .put("zile_disponibil", formular.getZileDisponibil())
+                .put("id",formular.getId())
+                .put("status",formular.getStatus())
+                .put("id_locatie",id_locatie).toString();
+
+        logger.debug("SENDING: " + jsonString);
+        JSONObject jsonResponse = sendRequest(connection, jsonString);
+        logger.debug("RESPONSE : " + jsonResponse);
+
+        return new Pair<>(true, "Success");
+    }
+
+    public List<FormularDonare> getFormulareDonariDupaLocatie(int id_locatie)
+    {
+        List<FormularDonare> list = new ArrayList<>();
+        HttpURLConnection connection = getConnection("/staff_cere_formulare_donari");
+
+        if(connection == null)
+            System.out.println("Pula");
+
+        String jsonString = new JSONObject().put("id_locatie", id_locatie).toString();
+
+        logger.debug("SENDING: " + jsonString);
+        JSONObject jsonResponse = sendRequest(connection, jsonString);
+        logger.debug("RESPONSE : " + jsonResponse);
+
+        if(jsonResponse != null)
+        {
+            JSONArray formularDonares = jsonResponse.getJSONArray("entities");
+            System.out.println(formularDonares.length());
+            for(int i = 0; i < formularDonares.length() ;i++)
+            {
+                JSONObject x = formularDonares.getJSONObject(i);
+                int id = x.getInt("id");
+                String nume = x.getString("nume");
+                String prenume = x.getString("prenume");
+                Sex sex = Sex.valueOf(x.getString("sex"));
+                String telefon = x.getString("telefon");
+                String domiciliuLocalitate = x.getString("domiciliuLocalitate");
+                String domiciliuJudet = x.getString("domiciliuJudet");
+                String domiciliuAdresa = x.getString("domiciliuAdresa");
+                String resedintaLocalitate = x.getString("resedintaLocalitate");
+                String resedintaJudet = x.getString("resedintaJudet");
+                String resedintaAdresa = x.getString("resedintaAdresa");
+                String beneficiarFullName = x.get("beneficiar_full_name").toString();
+                String beneficiarCNP = x.get("beneficiar_cnp").toString();
+                GrupaSange grupa = GrupaSange.valueOf(x.getString("grupa").toUpperCase());
+                RH rh = RH.valueOf(x.getString("rh").toUpperCase());
+                Status status = Status.valueOf(x.getString("status"));
+                FormularDonare a = new FormularDonare(id,nume,prenume,sex,telefon,
+                        domiciliuLocalitate,domiciliuJudet,domiciliuAdresa,
+                        resedintaLocalitate,resedintaJudet,resedintaAdresa,
+                        beneficiarFullName,beneficiarCNP,grupa,rh,status);
+
+                list.add(a);
+            }
+        }
+
+        return list;
+
+
+    }
+
+
+    public Pair<Boolean, String> staffTrimiteFormularDonare(FormularDonare formular)
+    {
+        HttpURLConnection connection = getConnection("/staff_trimite_formular_donare");
+
+        if(connection == null)
+            return new Pair<>(false, "Client connection request Error");
+
+        String jsonString = new JSONObject().put("nume", formular.getNume()).put("prenume", formular.getPrenume())
+                .put("sex", formular.getSex().toString()).put("telefon", formular.getTelefon())
+                .put("domiciliu_localitate", formular.getDomiciliuLocalitate())
+                .put("domiciliu_judet", formular.getDomiciliuJudet())
+                .put("domiciliu_adresa", formular.getDomiciliuAdresa())
+                .put("resedinta_localitate", formular.getResedintaLocalitate())
+                .put("resedinta_judet", formular.getResedintaJudet())
+                .put("resedinta_adresa", formular.getResedintaAdresa())
+                .put("beneficiar_full_name", formular.getBeneficiarFullName())
+                .put("beneficiar_CNP", formular.getBeneficiarCNP())
+                .put("grupa", formular.getGrupa()).put("rh", formular.getRh().toString())
+                .put("zile_disponibil", formular.getZileDisponibil()).toString();
 
         logger.debug("SENDING: " + jsonString);
         JSONObject jsonResponse = sendRequest(connection, jsonString);
@@ -170,7 +312,6 @@ public class FlaskClient {
 
 
         return new Pair<>(true, "Success");
-
     }
 
     /** Sends a json string to a given relative path
@@ -185,7 +326,145 @@ public class FlaskClient {
             return null;
         }
 
+
         return this.sendRequest(http, jsonString);
+    }
+
+    public Pair<Boolean, String> staffTrimiteAnaliza(FormularDonare formular, Analiza analiza, Integer idLocatie) {
+        HttpURLConnection connection = getConnection("/staff_trimite_analiza");
+
+        if(connection == null)
+            return new Pair<>(false, "Client connection request Error");
+
+        String jsonString = new JSONObject().put("nume", formular.getNume()).put("prenume", formular.getPrenume())
+                .put("sex", formular.getSex().toString()).put("telefon", formular.getTelefon())
+                .put("domiciliu_localitate", formular.getDomiciliuLocalitate())
+                .put("domiciliu_judet", formular.getDomiciliuJudet())
+                .put("domiciliu_adresa", formular.getDomiciliuAdresa())
+                .put("resedinta_localitate", formular.getResedintaLocalitate())
+                .put("resedinta_judet", formular.getResedintaJudet())
+                .put("resedinta_adresa", formular.getResedintaAdresa())
+                .put("beneficiar_full_name", formular.getBeneficiarFullName())
+                .put("beneficiar_CNP", formular.getBeneficiarCNP())
+                .put("grupa", formular.getGrupa())
+                .put("rh", formular.getRh().toString())
+                .put("zile_disponibil", formular.getZileDisponibil())
+                .put("id",formular.getId())
+                .put("status",formular.getStatus())
+                .put("id_locatie",idLocatie)
+                .put("alt",analiza.getALT())
+                .put("sif",analiza.getSIF())
+                .put("htlv",analiza.getANTIHTLV())
+                .put("htcv",analiza.getANTIHCV())
+                .put("hiv",analiza.getANTIHIV())
+                .put("hb",analiza.getHB())
+                .toString();
+
+        logger.debug("SENDING: " + jsonString);
+        JSONObject jsonResponse = sendRequest(connection, jsonString);
+        logger.debug("RESPONSE : " + jsonResponse);
+
+
+        return new Pair<>(true, "Success");
+    }
+
+    public Pair<Boolean,String> trimitePungi(int idCerere, int idLocatie, int idLocatieNoua,
+                                             GrupaSange grupaSange, RH rh,
+                                             int plasma,int trombocite, int globule)
+    {
+            HttpURLConnection connection = getConnection("/desavarsire_cerere_medic");
+
+        if(connection == null)
+            System.out.println("Problema la conexiune");
+
+        String jsonString = new JSONObject().put("id_cerere", idCerere)
+                .put("id_locatie_curenta",idLocatie)
+                .put("id_locatie_noua",idLocatieNoua)
+                .put("grupa",grupaSange.toString())
+                .put("rh",rh.toString())
+                .put("plasma",plasma)
+                .put("trombocite",trombocite)
+                .put("globule",globule)
+                .toString();
+
+        logger.debug("SENDING: " + jsonString);
+        JSONObject jsonResponse = sendRequest(connection, jsonString);
+        logger.debug("RESPONSE : " + jsonResponse);
+
+        boolean status =jsonResponse.getInt("status") == 0;
+        String mesaj = jsonResponse.getString("message");
+
+        logger.debug(status + " "+ mesaj);
+
+
+        return new Pair<>(status,mesaj);
+    }
+
+    public Map<String, List<Integer>> getStocCurent(int id_locatie)
+    {
+        HttpURLConnection connection = getConnection("/staff_get_stoc_curent");
+
+        if(connection == null)
+            System.out.println("Pula");
+
+        String jsonString = new JSONObject().put("id_locatie", id_locatie).toString();
+
+        logger.debug("SENDING: " + jsonString);
+        JSONObject jsonResponse = sendRequest(connection, jsonString);
+        logger.debug("RESPONSE : " + jsonResponse);
+
+        Map<String, List<Integer>> map = new HashMap<>();
+
+        if(jsonResponse != null)
+        {
+            String endMessage;
+            for(int i = 0;i< 2;i++) {
+                endMessage = "_pozitiv";
+                if (i == 1)
+                    endMessage = "_negativ";
+                int contor = 0;
+                    while (contor < 4) {
+                        String beginMessage="";
+                        switch (contor) {
+                            case 0:
+                                beginMessage="O1";
+                                break;
+                            case 1:
+                                beginMessage="A2";
+                                break;
+                            case 2:
+                                beginMessage="B3";
+                                break;
+                            case 3:
+                                beginMessage="AB4";
+                                break;
+                        }
+                        JSONObject lista = jsonResponse.getJSONObject(beginMessage+endMessage);
+                        List<Integer> stoc = new ArrayList<>();
+
+                        stoc.add(lista.getInt("Plasma"));
+                        stoc.add(lista.getInt("Trombocite"));
+                        stoc.add(lista.getInt("Globule_rosii"));
+
+                        map.put(beginMessage+endMessage,stoc);
+                        contor++;
+                        }
+                    }
+            }
+
+        return map;
+        }
+
+    private Observer observer;
+    private void update(){
+        try {
+            observer.update();
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+    }
+    public void addObserver(Observer controlledScreen) {
+        observer = controlledScreen;
     }
 
     public Pair<Boolean,String> trimiteCerereSange(CerereSange cerere, String cnpMedic) {
@@ -217,3 +496,4 @@ public class FlaskClient {
         return new Pair<>(jsonResponse.getInt("status")== 0, jsonResponse.getString("message"));
     }
 }
+

@@ -1,9 +1,6 @@
 package Utils;
 
-import Model.DonatorInfo;
-import Model.MedicInfo;
-import Model.StaffInfo;
-import Model.UserInfo;
+import Model.*;
 import org.json.JSONObject;
 
 import javax.naming.directory.InvalidAttributesException;
@@ -14,6 +11,8 @@ public class UserUtils {
         UserInfo info = null;
         if(type == 1) //donator
         {
+            Object returnedSex = loginResponse.get("sex");
+            Sex sex = returnedSex != JSONObject.NULL ? Sex.valueOf((String)returnedSex) : Sex.MASCULIN;
             info = new DonatorInfo(username,
                     loginResponse.getString("nume"),
                     loginResponse.getString("prenume"),
@@ -24,7 +23,8 @@ public class UserUtils {
                     loginResponse.getString("domiciliu_adresa"),
                     loginResponse.getString("resedinta_localitate"),
                     loginResponse.getString("resedinta_judet"),
-                    loginResponse.getString("resedinta_adresa")
+                    loginResponse.getString("resedinta_adresa"),
+                    sex
                     );
         }
         else if(type == 2)
@@ -33,6 +33,7 @@ public class UserUtils {
                     loginResponse.getString("nume"),
                     loginResponse.getString("prenume"),
                     loginResponse.getInt("id_locatie"),
+                    loginResponse.getString("nume_locatie"),
                     loginResponse.getString("cnp"));
         }
         else if(type == 3)
@@ -40,7 +41,10 @@ public class UserUtils {
             info = new StaffInfo(username,
                     loginResponse.getString("nume"),
                     loginResponse.getString("prenume"),
-                    loginResponse.getInt("id_locatie"));
+                    loginResponse.getInt("id_locatie"),
+                    loginResponse.getString("nume_locatie"),
+                    loginResponse.getString("nume_judet"),
+                    loginResponse.getInt("id_judet"));
         }
         else
         {

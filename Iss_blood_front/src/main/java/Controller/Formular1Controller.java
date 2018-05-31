@@ -1,5 +1,7 @@
 package Controller;
 
+import Controller.ControlledScreen;
+import Controller.DonatorDashboardController;
 import Service.MainService;
 import Utils.Screen;
 import com.jfoenix.controls.JFXButton;
@@ -85,5 +87,10 @@ public class Formular1Controller extends ControlledScreen {
             currentScreen--;
             displayCurrentScreen();
         }
+    }
+
+    @Override
+    void updateThis() {
+
     }
 }

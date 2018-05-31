@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.MedicInfo;
 import Utils.Screen;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.animation.KeyFrame;
@@ -22,6 +23,9 @@ public class MedicDashboardController extends ControlledScreen {
 
     @FXML
     private Label fullnameLabel;
+
+    @FXML
+    private Label numeSpitalLabel;
 
     @FXML
     private Button cerereSangeButton;
@@ -197,13 +201,29 @@ public class MedicDashboardController extends ControlledScreen {
 
     }
 
+    @Override
+    void updateThis() {
+
+    }
+
+    @Override
+    public void setScreenController(ScreenController ctr)
+    {
+        super.setScreenController(ctr);
+
+        MedicInfo info = (MedicInfo)ctr.userInfo;
+
+        fullnameLabel.setText(info.getNume() + " " + info.getPrenume());
+        numeSpitalLabel.setText("Stoc " + info.getNumeLocatie());
+    }
+
     @FXML
     private void logout(){
         loadLogin();
     }
 
     private void loadLogin() {
-        getScreenController().setScreen(Screen.LOGIN_SCREEN);
+        unloadAfterLogout();
     }
 
     @FXML

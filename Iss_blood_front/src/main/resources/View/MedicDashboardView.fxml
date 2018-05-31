@@ -40,7 +40,7 @@
                         <Label fx:id="fullnameLabel" layoutX="129.0" layoutY="41.0" prefHeight="55.0" prefWidth="353.0" styleClass="headerFormular" text="Doctor Moldovan Daniel-Gabriel" />
                      </children>
                   </AnchorPane>
-                  <VBox layoutX="684.0" layoutY="98.0">
+                  <VBox layoutX="684.0" layoutY="201.0">
                      <children>
                         <AnchorPane>
                            <children>
@@ -87,24 +87,12 @@
                               </Pane>
                            </children>
                         </AnchorPane>
-                        <AnchorPane>
-                           <children>
-                              <Pane prefHeight="104.0" prefWidth="215.0" styleClass="subFormularPane">
-                                 <children>
-                                    <Pane prefHeight="104.0" prefWidth="75.0" styleClass="bloodBox" />
-                                    <Pane layoutX="75.0" prefHeight="104.0" prefWidth="140.0" styleClass="box">
-                                       <children>
-                                          <Label layoutX="27.0" layoutY="14.0" styleClass="headerBlood" text="Pungi sange" />
-                                          <Label layoutX="5.0" layoutY="52.0" prefHeight="17.0" prefWidth="129.0" styleClass="labelBoxes" text="32" />
-                                       </children>
-                                    </Pane>
-                                 </children>
-                              </Pane>
-                           </children>
-                        </AnchorPane>
+                        <AnchorPane />
                      </children>
                   </VBox>
-                  <Label layoutX="690.0" layoutY="56.0" text="Stoc centrul de transfuzie Cluj-Napoca" />
+
+                  <Label layoutX="690.0" layoutY="56.0" text="Loading..." fx:id="numeSpitalLabel"/>
+
                </children>
             </AnchorPane>
          </center>

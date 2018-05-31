@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="655.0" prefWidth="1031.0" styleClass="toggle" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CentruPrelevareController">
+   <children>
+      <AnchorPane layoutX="337.0" layoutY="31.0" prefHeight="497.0" prefWidth="656.0" styleClass="box">
+         <children>
+            <AnchorPane prefHeight="42.0" prefWidth="655.0" styleClass="headerPaneFormular" stylesheets="@../main.css">
+               <children>
+                  <Label layoutX="7.0" layoutY="15.0" prefHeight="21.0" prefWidth="639.0" styleClass="labelFormularHeader" text="Formular" />
+               </children>
+            </AnchorPane>
+            <VBox layoutX="14.0" layoutY="98.0" prefHeight="321.0" prefWidth="487.0" spacing="12.0" styleClass="labelFormularHeader" stylesheets="@../main.css">
+               <children>
+                  <Label text="1. Are varsta cuprinsa intre 18 si 60 de ani?" />
+                  <Label text="2. Are greautatea peste 50 de kilograme?" />
+                  <Label text="3. Are pulsul regulat? (60-100 batai/minut)" />
+                  <Label text="4. A suferit in ultimele 6 luni interventii chirurgicale?" />
+                  <Label text="5. In caz ca este de sex feminin.Este gravida sau in perioada menstruala?" />
+                  <Label text="6. Este sub tratament pentru diferite afectiuni? (boli renale,de inima, etc)" />
+                  <Label text="7.Este pensionat medical?" />
+                  <Label text="8,Sufera/a suferit din urmatoarele boli?(hover for more information)">
+                     <tooltip>
+                        <Tooltip autoHide="true" consumeAutoHidingEvents="false" text="Pula lui Iustin este micuta" />
+                     </tooltip>
+                  </Label>
+                  <Label text="9.Sufera temporar din urmatoarele boli?(hover for more information)" />
+               </children>
+            </VBox>
+            <VBox fx:id="selectionPane" layoutX="514.0" layoutY="98.0" prefHeight="295.0" prefWidth="113.0" spacing="8.0">
+               <children>
+                  <HBox spacing="50.0">
+                     <children>
+                        <ToggleButton mnemonicParsing="false" styleClass="toggle-button-formular" text="Da">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="grup1" />
+                           </toggleGroup>
+                        </ToggleButton>
+                        <ToggleButton mnemonicParsing="false" selected="true" styleClass="toggle-button-formular" text="Nu" toggleGroup="$grup1" />
+                     </children>
+                  </HBox>
+                  <HBox spacing="50.0">
+                     <children>
+                        <ToggleButton mnemonicParsing="false" styleClass="toggle-button-formular" text="Da">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="grup2" />
+                           </toggleGroup>
+                        </ToggleButton>
+                        <ToggleButton mnemonicParsing="false" selected="true" styleClass="toggle-button-formular" text="Nu" toggleGroup="$grup2" />
+                     </children>
+                  </HBox>
+                  <HBox spacing="50.0">
+                     <children>
+                        <ToggleButton mnemonicParsing="false" styleClass="toggle-button-formular" text="Da">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="grup3" />
+                           </toggleGroup>
+                        </ToggleButton>
+                        <ToggleButton mnemonicParsing="false" selected="true" styleClass="toggle-button-formular" text="Nu" toggleGroup="$grup3" />
+                     </children>
+                  </HBox>
+                  <HBox spacing="50.0">
+                     <children>
+                        <ToggleButton mnemonicParsing="false" styleClass="toggle-button-formular" text="Da">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="grup4" />
+                           </toggleGroup>
+                        </ToggleButton>
+                        <ToggleButton mnemonicParsing="false" selected="true" styleClass="toggle-button-formular" text="Nu" toggleGroup="$grup4" />
+                     </children>
+                  </HBox>
+                  <HBox spacing="50.0">
+                     <children>
+                        <ToggleButton mnemonicParsing="false" styleClass="toggle-button-formular" text="Da">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="grup5" />
+                           </toggleGroup>
+                        </ToggleButton>
+                        <ToggleButton mnemonicParsing="false" selected="true" styleClass="toggle-button-formular" text="Nu" toggleGroup="$grup5" />
+                     </children>
+                  </HBox>
+                  <HBox spacing="50.0">
+                     <children>
+                        <ToggleButton mnemonicParsing="false" styleClass="toggle-button-formular" text="Da">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="grup6" />
+                           </toggleGroup>
+                        </ToggleButton>
+                        <ToggleButton mnemonicParsing="false" selected="true" styleClass="toggle-button-formular" text="Nu" toggleGroup="$grup6" />
+                     </children>
+                  </HBox>
+                  <HBox spacing="50.0">
+                     <children>
+                        <ToggleButton mnemonicParsing="false" styleClass="toggle-button-formular" text="Da">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="grup7" />
+                           </toggleGroup>
+                        </ToggleButton>
+                        <ToggleButton mnemonicParsing="false" selected="true" styleClass="toggle-button-formular" text="Nu" toggleGroup="$grup7" />
+                     </children>
+                  </HBox>
+                  <HBox spacing="50.0">
+                     <children>
+                        <ToggleButton mnemonicParsing="false" styleClass="toggle-button-formular" text="Da">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="grup8" />
+                           </toggleGroup>
+                        </ToggleButton>
+                        <ToggleButton mnemonicParsing="false" selected="true" styleClass="toggle-button-formular" text="Nu" toggleGroup="$grup8" />
+                     </children>
+                  </HBox>
+                  <HBox spacing="50.0">
+                     <children>
+                        <ToggleButton mnemonicParsing="false" styleClass="toggle-button-formular" text="Da">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="grup9" />
+                           </toggleGroup>
+                        </ToggleButton>
+                        <ToggleButton mnemonicParsing="false" selected="true" styleClass="toggle-button-formular" text="Nu" toggleGroup="$grup9" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="14.0" layoutY="31.0" prefHeight="594.0" prefWidth="300.0" styleClass="box">
+         <children>
+            <AnchorPane prefHeight="42.0" prefWidth="299.0" styleClass="headerPaneFormular" stylesheets="@../main.css">
+               <children>
+                  <Label layoutX="14.0" layoutY="15.0" prefHeight="21.0" prefWidth="273.0" styleClass="labelFormularHeader" text="Informatie donator" />
+               </children>
+            </AnchorPane>
+            <VBox layoutX="79.0" layoutY="85.0" spacing="20.0">
+               <children>
+                  <HBox spacing="15.0">
+                     <children>
+                        <Label text="Nume" />
+                        <Label fx:id="numeLabel" text="Nume donator" />
+                     </children>
+                  </HBox>
+                  <HBox spacing="15.0">
+                     <children>
+                        <Label text="Prenume" />
+                        <Label fx:id="prenumeLabel" text="Nume donator" />
+                     </children>
+                  </HBox>
+                  <HBox spacing="15.0">
+                     <children>
+                        <Label text="Sex" />
+                        <Label fx:id="sexLabel" text="Nume donator" />
+                     </children>
+                  </HBox>
+                  <HBox spacing="15.0">
+                     <children>
+                        <Label text="Telefon" />
+                        <Label fx:id="telefonLabel" text="Nume donator" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox layoutX="78.0" layoutY="257.0" spacing="20.0">
+               <children>
+                  <HBox spacing="15.0">
+                     <children>
+                        <Label text="Localitate" />
+                        <Label fx:id="domiciliuLocalitateLabel" text="Nume donator" />
+                     </children>
+                  </HBox>
+                  <HBox spacing="15.0">
+                     <children>
+                        <Label text="Judet" />
+                        <Label fx:id="domiciliuJudetLabel" text="Nume donator" />
+                     </children>
+                  </HBox>
+                  <HBox spacing="15.0">
+                     <children>
+                        <Label text="Adresa" />
+                        <Label fx:id="domiciliuAdresaLabel" text="Nume donator" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox layoutX="78.0" layoutY="384.0" spacing="20.0">
+               <children>
+                  <HBox spacing="15.0">
+                     <children>
+                        <Label text="Localitate" />
+                        <Label fx:id="resedintaLocalitateLabel" text="Nume donator" />
+                     </children>
+                  </HBox>
+                  <HBox spacing="15.0">
+                     <children>
+                        <Label text="Judet" />
+                        <Label fx:id="resedintaJudetLabel" text="Nume donator" />
+                     </children>
+                  </HBox>
+                  <HBox spacing="15.0">
+                     <children>
+                        <Label text="Adresa" />
+                        <Label fx:id="resedintaAdresaLabel" text="Nume donator" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <Label layoutX="87.0" layoutY="57.0" styleClass="labelFormularHeader" text="Informatii generale" />
+            <Label layoutX="118.0" layoutY="225.0" styleClass="labelFormularHeader" text="Domiciliu" />
+            <Label layoutX="119.0" layoutY="356.0" styleClass="labelFormularHeader" text="Resedinta" />
+            <Label layoutX="68.0" layoutY="489.0" styleClass="labelFormularHeader" text="Pentru cine vrei sa donezi" />
+            <JFXTextField fx:id="donatFullnameTextField" focusColor="#fea02f" layoutX="59.0" layoutY="521.0" promptText="Fullname" styleClass="textboxFormular" unFocusColor="WHITE" />
+            <JFXTextField fx:id="donatCnpTextField" focusColor="#fea02f" layoutX="59.0" layoutY="555.0" promptText="CNP" styleClass="textboxFormular" unFocusColor="WHITE" />
+         </children>
+      </AnchorPane>
+      <JFXButton layoutX="338.0" layoutY="600.0" onAction="#validareClicked" prefHeight="25.0" prefWidth="655.0" styleClass="buttonFormular" text="Valideaza formular" />
+   </children>
+</AnchorPane>

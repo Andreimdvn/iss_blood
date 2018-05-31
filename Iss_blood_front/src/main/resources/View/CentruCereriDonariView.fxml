@@ -27,10 +27,10 @@
       </AnchorPane>
       <AnchorPane layoutX="21.0" layoutY="495.0" prefHeight="132.0" prefWidth="979.0" styleClass="box">
          <children>
-            <JFXButton fx:id="prelevareButton" layoutX="364.0" layoutY="11.0" prefHeight="110.0" prefWidth="133.0" styleClass="buttonFormular" text="Prelevare" />
-            <JFXButton fx:id="pregatireButton" disable="true" layoutX="563.0" layoutY="11.0" prefHeight="110.0" prefWidth="133.0" styleClass="buttonFormular" text="Pregatirea" />
-            <JFXButton fx:id="calificareButton" disable="true" layoutX="751.0" layoutY="11.0" prefHeight="110.0" prefWidth="133.0" styleClass="buttonFormular" text="Calificare " />
-            <Label layoutX="37.0" layoutY="48.0" styleClass="headerPrimary" text="Status donator selectat" />
+            <JFXButton fx:id="prelevareButton" disable="true" layoutX="347.0" layoutY="30.0" onMouseClicked="#button1Clicked" prefHeight="73.0" prefWidth="180.0" styleClass="buttonFormular" text="Completeaza chestionar" />
+            <JFXButton fx:id="pregatireButton" disable="true" layoutX="540.0" layoutY="30.0" onMouseClicked="#button2Clicked" prefHeight="73.0" prefWidth="205.0" styleClass="buttonFormular" text="Sangele a fost prelucrat" />
+            <JFXButton fx:id="calificareButton" disable="true" layoutX="758.0" layoutY="30.0" onMouseClicked="#button3Clicked" prefHeight="73.0" prefWidth="190.0" styleClass="buttonFormular" text="Completeaza analiza donatie" />
+            <Label layoutX="39.0" layoutY="49.0" styleClass="headerPrimary" text="Status donator selectat" />
          </children>
       </AnchorPane>
       <AnchorPane layoutX="38.0" layoutY="35.0" prefHeight="401.0" prefWidth="208.0" styleClass="box">
@@ -40,13 +40,13 @@
                   <Label layoutX="84.0" layoutY="15.0" text="Filter" />
                </children>
             </Pane>
-            <JFXTextField layoutX="13.0" layoutY="97.0" promptText="Nume donator" styleClass="textboxPrimary" />
-            <JFXTextField layoutX="14.0" layoutY="188.0" promptText="Prenume donator" styleClass="textboxPrimary" />
-            <ComboBox layoutX="14.0" layoutY="281.0" prefWidth="150.0" promptText="Last status" />
-            <JFXButton layoutX="1.0" layoutY="374.0" onAction="#populateDummy" prefHeight="25.0" prefWidth="205.0" styleClass="buttonFormular" text="Cauta" />
+            <JFXTextField fx:id="searchNume" layoutX="13.0" layoutY="97.0" promptText="Nume donator" styleClass="textboxPrimary" />
+            <JFXTextField fx:id="searchPrenume" layoutX="14.0" layoutY="188.0" promptText="Prenume donator" styleClass="textboxPrimary" />
+            <ComboBox fx:id="statusCombo" layoutX="14.0" layoutY="281.0" prefWidth="150.0" promptText="Last status" />
+            <JFXButton layoutX="1.0" layoutY="374.0" onAction="#filter" prefHeight="25.0" prefWidth="205.0" styleClass="buttonFormular" text="Cauta" />
+            <JFXButton layoutX="1.0" layoutY="343.0" onAction="#reset" prefHeight="25.0" prefWidth="205.0" styleClass="buttonFormular" text="Reset" />
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="21.0" layoutY="387.0" prefHeight="12.0" prefWidth="893.0" />
       <Label layoutX="76.0" layoutY="457.0" text="Selecteaza un donator pentru a vedea statusul sau" />
       <OctIconView glyphName="INFO" layoutX="38.0" layoutY="477.0" size="30" wrappingWidth="24.88885498046875" />
    </children>

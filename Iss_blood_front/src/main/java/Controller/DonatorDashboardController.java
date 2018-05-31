@@ -485,6 +485,11 @@ public class DonatorDashboardController extends ControlledScreen {
     }
 
     @Override
+    void updateThis() {
+
+    }
+
+    @Override
     public void setScreenController(ScreenController ctr)
     {
         super.setScreenController(ctr);
@@ -544,7 +549,7 @@ public class DonatorDashboardController extends ControlledScreen {
     }
 
     private void loadLogin() {
-        getScreenController().setScreen(Screen.LOGIN_SCREEN);
+        unloadAfterLogout();
     }
 
 }
