@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -69,7 +70,11 @@
       <AnchorPane fx:id="topBar" layoutX="19.0" layoutY="17.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="41.0" prefWidth="759.0" style="-fx-border-color: black; -fx-border-width: 0.02em;" styleClass="secondaryPane" stylesheets="@../main.css">
          <children>
             <Label alignment="CENTER" contentDisplay="CENTER" layoutX="195.0" layoutY="3.0" prefHeight="35.0" prefWidth="369.0" styleClass="labelAnalizaHeader" text="Fișă analize sânge" textAlignment="CENTER" />
-            <FontAwesomeIconView fx:id="closeIcon1" glyphName="CLOSE" layoutX="728.0" layoutY="29.0" size="26" styleClass="iconSecondary" text="" />
+            <JFXButton fx:id="closeButton" layoutX="709.0" layoutY="3.0" onAction="#closeWindow" prefHeight="35.0" prefWidth="22.0" text=" ">
+               <graphic>
+                  <FontAwesomeIconView fx:id="icon" glyphName="CLOSE" size="26" styleClass="iconSecondary" text="" />
+               </graphic>
+            </JFXButton>
          </children>
       </AnchorPane>
    </children>

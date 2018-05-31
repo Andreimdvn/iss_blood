@@ -1,9 +1,17 @@
 package Controller;
 
+import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
+import javafx.stage.Screen;
+import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -42,7 +50,15 @@ public class IstoricDonariController extends ControlledScreen {
         Label data = new Label(dataDonare);
         Label nume = new Label(numeCentru);
         Label st = new Label(status);
-
+        st.onMouseClickedProperty().set(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                Stage stage = new Stage();
+                stage.setTitle("Results");
+                stage.setScene(new Scene((Parent) getScreenController().getScreen(Utils.Screen.DONATOR_SCREEN)));
+                stage.show();
+            }
+        });
 
         String numeLabelStyle = "labelIstoric";
         id.getStyleClass().add(numeLabelStyle);

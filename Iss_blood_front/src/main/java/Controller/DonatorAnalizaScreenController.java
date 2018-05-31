@@ -4,6 +4,7 @@ import Model.*;
 import Utils.Screen;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -11,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import org.apache.logging.log4j.core.util.ArrayUtils;
 
 import java.lang.reflect.Array;
@@ -19,6 +21,9 @@ import java.util.Arrays;
 import java.util.List;
 
 public class DonatorAnalizaScreenController extends ControlledScreen{
+
+    @FXML
+    JFXButton closeButton;
 
     @FXML
     JFXComboBox cb_rh;
@@ -74,8 +79,10 @@ public class DonatorAnalizaScreenController extends ControlledScreen{
         label_varsta.setText(age.toString());
         label_sex.setText(donatorSex.toString());
     }
-    public void back(){
-        getScreenController().setScreen(Screen.CENTRU_TRANSFUZIE_SCREEN);
+    public void closeWindow(){
+        Stage stage = (Stage) closeButton.getScene().getWindow();
+        // do what you have to do
+        stage.close();
     }
 
 }
