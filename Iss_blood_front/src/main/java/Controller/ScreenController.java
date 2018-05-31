@@ -10,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.layout.StackPane;
 
 import java.io.IOException;
+import java.util.Collection;
 import java.util.HashMap;
 
 /**
@@ -24,6 +25,9 @@ public class ScreenController extends StackPane {
     public ScreenController(MainService service) {
         super();
         this.mainService = service;
+    }
+    public Collection<ViewDetails> getAllScreens(){
+        return screenViews.values();
     }
 
     /**

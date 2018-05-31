@@ -1,7 +1,9 @@
 package Service;
 
 import Communication.FlaskClient;
+import Controller.ControlledScreen;
 import Model.*;
+import Utils.Observer;
 import javafx.util.Pair;
 
 import java.util.List;
@@ -52,5 +54,9 @@ public class MainService {
                                               GrupaSange grupaSange, RH rh, int plasma, int trombocite, int globule){
         return flaskClient.trimitePungi(idCerere,  idLocatie, idLocatieNoua, grupaSange, rh, plasma,trombocite, globule);
 
+    }
+
+    public void addObserver(Observer controlledScreen) {
+        flaskClient.addObserver(controlledScreen);
     }
 }

@@ -58,4 +58,9 @@ public class StarePacientiController extends ControlledScreen {
         numarCereriColumn.setCellValueFactory(new PropertyValueFactory<>("numarCereri"));
 
     }
+
+    @Override
+    void updateThis() {
+
+    }
 }

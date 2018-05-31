@@ -135,8 +135,7 @@ public class CentruAnalizaController extends ControlledScreen{
             cr.setCenter(
                     getScreenController().getScreen("CENTRU_CERERI_DONARI"));
 
-            CentruCereriDonariController cd =(CentruCereriDonariController) getScreenController().getControlledScreen("CENTRU_CERERI_DONARI");
-            cd.updateThis();
+            update();
 
         }
     }
@@ -196,4 +195,8 @@ public class CentruAnalizaController extends ControlledScreen{
     }
 
 
+    @Override
+    void updateThis() {
+
+    }
 }

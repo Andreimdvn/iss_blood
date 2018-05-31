@@ -1,6 +1,8 @@
 package Communication;
 
+import Controller.ControlledScreen;
 import Model.*;
+import Utils.Observer;
 import Utils.UserUtils;
 import javafx.util.Pair;
 import org.apache.logging.log4j.LogManager;
@@ -12,6 +14,7 @@ import javax.naming.directory.InvalidAttributesException;
 import java.io.*;
 import java.net.*;
 import java.nio.charset.StandardCharsets;
+import java.rmi.RemoteException;
 import java.util.*;
 
 public class FlaskClient {
@@ -197,7 +200,7 @@ public class FlaskClient {
         JSONObject jsonResponse = sendRequest(connection, jsonString);
         logger.debug("RESPONSE : " + jsonResponse);
 
-
+        ;
         return new Pair<>(true, "Success");
 
     }
@@ -229,7 +232,6 @@ public class FlaskClient {
         logger.debug("SENDING: " + jsonString);
         JSONObject jsonResponse = sendRequest(connection, jsonString);
         logger.debug("RESPONSE : " + jsonResponse);
-
 
         return new Pair<>(true, "Success");
     }
@@ -326,6 +328,7 @@ public class FlaskClient {
             return null;
         }
 
+
         return this.sendRequest(http, jsonString);
     }
 
@@ -395,6 +398,7 @@ public class FlaskClient {
 
         logger.debug(status + " "+ mesaj);
 
+
         return new Pair<>(status,mesaj);
     }
 
@@ -449,7 +453,20 @@ public class FlaskClient {
                         }
                     }
             }
+
         return map;
         }
+
+    private Observer observer;
+    private void update(){
+        try {
+            observer.update();
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+    }
+    public void addObserver(Observer controlledScreen) {
+        observer = controlledScreen;
+    }
 }
 

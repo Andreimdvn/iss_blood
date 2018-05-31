@@ -7,4 +7,8 @@ import Service.MainService;
  */
 public class ControllerNull extends ControlledScreen {
 
+    @Override
+    void updateThis() {
+
+    }
 }

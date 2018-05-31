@@ -195,4 +195,9 @@ public class CerereSangeController extends ControlledScreen {
     private GrupaSange getGrupaSange(){
         return grupaSangeComboBox.getValue();
     }
+
+    @Override
+    void updateThis() {
+
+    }
 }

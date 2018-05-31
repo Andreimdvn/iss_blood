@@ -131,8 +131,7 @@ public class CentruPrelevareController extends ControlledScreen{
     private void goBack(){
         ((CentruTransfuzieController)getScreenController().getControlledScreen("CENTRU_TRANSFUZIE")).setCenter(
                 getScreenController().getScreen("CENTRU_CERERI_DONARI"));
-        CentruCereriDonariController cd =(CentruCereriDonariController) getScreenController().getControlledScreen("CENTRU_CERERI_DONARI");
-        cd.updateThis();
+        update();
     }               
 
     @FXML
@@ -175,4 +174,8 @@ public class CentruPrelevareController extends ControlledScreen{
     @FXML
     private JFXTextField donatCnpTextField;
 
+    @Override
+    void updateThis() {
+
+    }
 }

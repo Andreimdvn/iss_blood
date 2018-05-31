@@ -138,5 +138,12 @@ public class CentruCereriSangeController extends ControlledScreen{
                 GrupaSange.valueOf(grupaText.getText()),RH.valueOf(rhText.getText()),
                 Integer.parseInt(plasmaText.getText()),Integer.parseInt(trombociteText.getText())
                 ,Integer.parseInt(globuleText.getText()));
+
+        update();
+    }
+
+    @Override
+    void updateThis() {
+
     }
 }
