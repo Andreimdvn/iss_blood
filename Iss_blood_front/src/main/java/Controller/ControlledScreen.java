@@ -30,6 +30,8 @@ public class ControlledScreen implements Observer {
 
     }
 
+    //abstract void updateThis();
+
     public MainService getService() {
         return service;
     }

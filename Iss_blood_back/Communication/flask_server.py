@@ -56,6 +56,58 @@ class FlaskServer:
         self.app.add_url_rule("/staff_get_stoc_curent", "staff_get_stoc_curent",
                               self.staff_get_stoc_curent,
                               methods=["POST"])
+        self.app.add_url_rule("/get_analize", "get_analize",
+                              self.get_analize,
+                              methods=["POST"])
+        self.app.add_url_rule("/desavarsire_cerere_medic", "desavarsire_cerere_medic",
+                              self.trimite_pungi,
+                              methods=["POST"])
+
+    def trimite_pungi(self):
+        self.request_data = request.get_json()
+        self.logger.debug("Got request trimite pungi JSON: {}".format(self.request_data))
+
+        id_locatie_curenta = self.request_data["id_locatie_curenta"]
+
+        # Update on production
+        id_locatie_noua = self.request_data["id_locatie_noua"]
+
+        grupa = self.request_data["grupa"]
+        rh = self.request_data["rh"]
+        numar_plasma = self.request_data["plasma"]
+        numar_globule = self.request_data["globule"]
+        numar_trombocite = self.request_data["trombocite"]
+        lista = [numar_plasma, numar_trombocite, numar_globule]
+        self.logger.debug(lista)
+        status, mesaj = self.controller.send_pungi(id_locatie_curenta,
+                                                   id_locatie_noua,
+                                                   grupa,
+                                                   rh,
+                                                   plasma=numar_plasma,
+                                                   globule_rosii=numar_globule,
+                                                   tromobocite=numar_trombocite)
+        if status == 0:
+            # pungile au fost trimise
+            id_cerere = self.request_data["id_cerere"]
+
+            # TO DO change status to complete for cerere sange
+
+        return_dict = {"status": status, "message": mesaj}
+
+        self.logger.debug("Returning response for trimite pungi: {}".format(return_dict))
+
+        return json.dumps(return_dict)
+
+    def get_analize(self):
+        self.request_data = request.get_json()
+        self.logger.debug("Req data: {}".format(self.request_data))
+
+        dictionar = {
+            "entities": self.controller.get_analize(self.request_data["cnp"])
+        }
+        self.logger.debug(dictionar)
+
+        return json.dumps(dictionar)
 
     def test_request(self):
         self.request_data = request.get_json()

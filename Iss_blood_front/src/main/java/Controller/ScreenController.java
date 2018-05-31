@@ -36,7 +36,7 @@ public class ScreenController extends StackPane {
     }
     /**
      *  Add an entry into hashmap of screenViews
-     *  They are not loaded into scene graph
+     *  They are not loaaded into scene graph
      * @param name represents the name of screen, they can be found in Utils module, Screen class
      * @param screenDetails
      */

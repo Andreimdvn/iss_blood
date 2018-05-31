@@ -72,6 +72,14 @@ class ServiceSange(IService):
     def delete_sange_prelucrat(self, id_sange_brut):
         self.repo_manager.repo_sange_prelucrat.delete(id_sange_brut)
 
+    def get_analize(self, cnp):
+        return self.repo_manager.repo_analiza.get_analize(cnp)
+
+    def send_pungi(self, id_locatie_curenta, id_locatie_noua, grupa, rh, plasma, tromobocite, globule_rosii):
+        self.repo_manager.repo_sange_prelucrat.\
+            send_pungi(id_locatie_curenta, id_locatie_noua, grupa, rh, plasma, tromobocite, globule_rosii)
+
+
     def get_stoc_curent(self, id_locatie):
         repo = self.repo_manager.repo_sange_prelucrat
         stoc_curent = {
@@ -86,6 +94,7 @@ class ServiceSange(IService):
         }
 
         self.logger.debug(stoc_curent)
+
         return stoc_curent
 
     def get_current_date(self):

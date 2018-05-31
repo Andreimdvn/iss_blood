@@ -110,7 +110,39 @@ public class FlaskClient {
             return new Pair<>(null, jsonResponse.getString("message"));
         }
     }
+    public List<Analiza> getAnalize(String cnp){
 
+        HttpURLConnection connection = getConnection("/get_analize");
+
+        if(connection == null)
+            logger.debug("Client connection request Error");
+
+        String jsonString = new JSONObject().put("cnp",cnp).toString();
+
+        logger.debug("SENDING: " + jsonString);
+        JSONObject jsonResponse = sendRequest(connection, jsonString);
+        logger.debug("RESPONSE : " + jsonResponse);
+
+        List<Analiza> list = new ArrayList<>();
+
+        JSONArray analize = jsonResponse.getJSONArray("entities");
+
+        for(int i = 0; i < analize.length() ;i++)
+        {
+            JSONObject analiza = analize.getJSONObject(i);
+
+            int id = analiza.getInt("id");
+            boolean alt = analiza.getBoolean("alt");
+            boolean sif = analiza.getBoolean("sif");
+            boolean htcv = analiza.getBoolean("htcv");
+            boolean htlv = analiza.getBoolean("htlv");
+            boolean hiv = analiza.getBoolean("hiv");
+            boolean hb = analiza.getBoolean("hb");
+            list.add(new Analiza(id,alt,sif,htlv,htcv,hiv,hb));
+        }
+
+        return list;
+    }
     public Pair<Boolean, String> register(RegisterInfo info)
     {
         HttpURLConnection connection = getConnection("/register");
@@ -334,6 +366,38 @@ public class FlaskClient {
 
         return new Pair<>(true, "Success");
     }
+
+    public Pair<Boolean,String> trimitePungi(int idCerere, int idLocatie, int idLocatieNoua,
+                                             GrupaSange grupaSange, RH rh,
+                                             int plasma,int trombocite, int globule)
+    {
+            HttpURLConnection connection = getConnection("/desavarsire_cerere_medic");
+
+        if(connection == null)
+            System.out.println("Problema la conexiune");
+
+        String jsonString = new JSONObject().put("id_cerere", idCerere)
+                .put("id_locatie_curenta",idLocatie)
+                .put("id_locatie_noua",idLocatieNoua)
+                .put("grupa",grupaSange.toString())
+                .put("rh",rh.toString())
+                .put("plasma",plasma)
+                .put("trombocite",trombocite)
+                .put("globule",globule)
+                .toString();
+
+        logger.debug("SENDING: " + jsonString);
+        JSONObject jsonResponse = sendRequest(connection, jsonString);
+        logger.debug("RESPONSE : " + jsonResponse);
+
+        boolean status =jsonResponse.getInt("status") == 0;
+        String mesaj = jsonResponse.getString("message");
+
+        logger.debug(status + " "+ mesaj);
+
+        return new Pair<>(status,mesaj);
+    }
+
     public Map<String, List<Integer>> getStocCurent(int id_locatie)
     {
         HttpURLConnection connection = getConnection("/staff_get_stoc_curent");

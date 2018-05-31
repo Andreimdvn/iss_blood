@@ -51,6 +51,26 @@ class BackController:
     def get_stoc_curent(self,id_locatie):
         return self.service_sange.get_stoc_curent(id_locatie)
 
+    def send_pungi(self, id_locatie_curenta, id_locatie_noua, grupa, rh, plasma, tromobocite, globule_rosii):
+
+        stoc_curent = self.get_stoc_curent(id_locatie_curenta)
+
+        stoc_specific = stoc_curent[str(grupa).upper()+'_'+str(rh).lower()]
+
+        numar_plasma = stoc_specific["Plasma"]
+        numar_trombocite = stoc_specific["Trombocite"]
+        numar_globule = stoc_specific["Globule_rosii"]
+
+        if numar_plasma - plasma >= 0 and numar_trombocite - tromobocite >= 0 and numar_globule - globule_rosii >= 0:
+            self.service_sange.send_pungi(
+                id_locatie_curenta, id_locatie_noua, grupa, rh, plasma, tromobocite, globule_rosii)
+            return 0, "Pungile au fost trimise"
+
+        return 2, "Mesaj dragut de eroare"
+
+    def get_analize(self, cnp):
+        return self.service_sange.get_analize(cnp)
+
     def manage_request(self, formular_donare, id_locatie, analiza=None):
         status = formular_donare.status
         id_donator = self.get_id_donator(formular_donare)
