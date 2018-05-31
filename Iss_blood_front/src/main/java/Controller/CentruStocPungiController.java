@@ -102,33 +102,14 @@ public class CentruStocPungiController extends ControlledScreen {
     @FXML
     private AnchorPane plasmaPane;
 
-
-    private int getTotal(AnchorPane pane){
-        int total = 0;
-        for (Node node : pane.getChildren()) {
-            if(node instanceof Label)
-            {
-                String text = ((Label) node).getText();
-                if(FunctiiUtile.isNumeric(text))
-                    total += Integer.parseInt(text);
-            }
-        }
-        return total;
-    }
-
-    private void calculateTotal(){
-            setIntLabel(totalGlobule,getTotal(globulePane));
-            setIntLabel(totalPlasma,getTotal(plasmaPane));
-            setIntLabel(totalTrombocite,getTotal(trombocitePane));
-    }
-
     static {
 
     }
 
-    private void setIntLabel(Label label, int numar)
+    private int setIntLabel(Label label, int numar)
     {
         label.setText(String.valueOf(numar));
+        return numar;
     }
 
     private StaffInfo getInfo(){
@@ -143,34 +124,38 @@ public class CentruStocPungiController extends ControlledScreen {
     private void updateLabels(){
         // Globule 2, tromobicite 1 , plasma 0
         Map<String,List<Integer>> map = getService().getStocCurent(getInfo().getIdLocatie());
-        setIntLabel(globuleO1PozitivLabel,map.get("O1_pozitiv").get(2));
-        setIntLabel(globuleA2PozitivLabel,map.get("A2_pozitiv").get(2));
-        setIntLabel(globuleB3PozitivLabel,map.get("B3_pozitiv").get(2));
-        setIntLabel(globuleAB4PozitivLabel,map.get("AB4_pozitiv").get(2));
-        setIntLabel(globuleO1NegativLabel,map.get("O1_negativ").get(2));
-        setIntLabel(globuleA2NegativLabel,map.get("A2_negativ").get(2));
-        setIntLabel(globuleB3NegativLabel,map.get("B3_negativ").get(2));
-        setIntLabel(globuleAB4NegativLabel,map.get("AB4_negativ").get(2));
+        int globule=0;
+        globule+= setIntLabel(globuleO1PozitivLabel,map.get("O1_pozitiv").get(2));
+        globule+= setIntLabel(globuleA2PozitivLabel,map.get("A2_pozitiv").get(2));
+        globule+= setIntLabel(globuleB3PozitivLabel,map.get("B3_pozitiv").get(2));
+        globule+= setIntLabel(globuleAB4PozitivLabel,map.get("AB4_pozitiv").get(2));
+        globule+= setIntLabel(globuleO1NegativLabel,map.get("O1_negativ").get(2));
+        globule+= setIntLabel(globuleA2NegativLabel,map.get("A2_negativ").get(2));
+        globule+= setIntLabel(globuleB3NegativLabel,map.get("B3_negativ").get(2));
+        globule+= setIntLabel(globuleAB4NegativLabel,map.get("AB4_negativ").get(2));
 
-        setIntLabel(plasmaO1PozitivLabel,map.get("O1_pozitiv").get(0));
-        setIntLabel(plasmaA2PozitivLabel,map.get("A2_pozitiv").get(0));
-        setIntLabel(plasmaB3PozitivLabel,map.get("B3_pozitiv").get(0));
-        setIntLabel(plasmaAB4PozitivLabel,map.get("AB4_pozitiv").get(0));
-        setIntLabel(plasmaO1NegativLabel,map.get("O1_negativ").get(0));
-        setIntLabel(plasmaA2NegativLabel,map.get("A2_negativ").get(0));
-        setIntLabel(plasmaB3NegativLabel,map.get("B3_negativ").get(0));
-        setIntLabel(plasmaAB4NegativLabel,map.get("AB4_negativ").get(0));
+        int plasma = 0;
+        plasma += setIntLabel(plasmaO1PozitivLabel,map.get("O1_pozitiv").get(0));
+        plasma +=setIntLabel(plasmaA2PozitivLabel,map.get("A2_pozitiv").get(0));
+        plasma +=setIntLabel(plasmaB3PozitivLabel,map.get("B3_pozitiv").get(0));
+        plasma +=setIntLabel(plasmaAB4PozitivLabel,map.get("AB4_pozitiv").get(0));
+        plasma +=setIntLabel(plasmaO1NegativLabel,map.get("O1_negativ").get(0));
+        plasma +=setIntLabel(plasmaA2NegativLabel,map.get("A2_negativ").get(0));
+        plasma +=setIntLabel(plasmaB3NegativLabel,map.get("B3_negativ").get(0));
+        plasma +=setIntLabel(plasmaAB4NegativLabel,map.get("AB4_negativ").get(0));
+        int trombocite =0;
+        trombocite+=setIntLabel(trombociteO1PozitivLabel,map.get("O1_pozitiv").get(1));
+        trombocite+=setIntLabel(trombociteA2PozitivLabel,map.get("A2_pozitiv").get(1));
+        trombocite+=setIntLabel(trombociteB3PozitivLabel,map.get("B3_pozitiv").get(1));
+        trombocite+=setIntLabel(trombociteAB4PozitivLabel,map.get("AB4_pozitiv").get(1));
+        trombocite+=setIntLabel(trombociteO1NegativLabel,map.get("O1_negativ").get(1));
+        trombocite+=setIntLabel(trombociteA2NegativLabel,map.get("A2_negativ").get(1));
+        trombocite+=setIntLabel(trombociteB3NegativLabel,map.get("B3_negativ").get(1));
+        trombocite+=setIntLabel(trombociteAB4NegativLabel,map.get("AB4_negativ").get(1));
 
-        setIntLabel(trombociteO1PozitivLabel,map.get("O1_pozitiv").get(1));
-        setIntLabel(trombociteA2PozitivLabel,map.get("A2_pozitiv").get(1));
-        setIntLabel(trombociteB3PozitivLabel,map.get("B3_pozitiv").get(1));
-        setIntLabel(trombociteAB4PozitivLabel,map.get("AB4_pozitiv").get(1));
-        setIntLabel(trombociteO1NegativLabel,map.get("O1_negativ").get(1));
-        setIntLabel(trombociteA2NegativLabel,map.get("A2_negativ").get(1));
-        setIntLabel(trombociteB3NegativLabel,map.get("B3_negativ").get(1));
-        setIntLabel(trombociteAB4NegativLabel,map.get("AB4_negativ").get(1));
-
-        calculateTotal();
+        setIntLabel(totalTrombocite,trombocite);
+        setIntLabel(totalPlasma,plasma);
+        setIntLabel(totalGlobule,globule);
     }
 
     @FXML
