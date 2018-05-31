@@ -1,6 +1,7 @@
 package Service;
 
 import Communication.FlaskClient;
+import Model.CerereSange;
 import Model.FormularDonare;
 import Model.RegisterInfo;
 import Model.UserInfo;
@@ -24,4 +25,8 @@ public class MainService {
     }
 
     public Pair<Boolean, String> trimiteFormularDonare (FormularDonare formular){return flaskClient.trimiteFormularDonare(formular);}
+
+    public Pair<Boolean, String> trimiteCerereSange(CerereSange cerere, String cnpMedic) {
+        return flaskClient.trimiteCerereSange(cerere, cnpMedic);
+    }
 }

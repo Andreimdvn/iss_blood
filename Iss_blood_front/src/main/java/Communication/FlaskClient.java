@@ -1,5 +1,6 @@
 package Communication;
 
+import Model.CerereSange;
 import Model.FormularDonare;
 import Model.RegisterInfo;
 import Model.UserInfo;
@@ -87,16 +88,16 @@ public class FlaskClient {
      */
     public Pair<UserInfo, String> login(String user, String password){
 
-        HttpURLConnection http = getConnection("/login");
+        HttpURLConnection connection = getConnection("/login");
 
-        if(http == null){
+        if(connection == null){
             return new Pair<>(null, "Client connection request Error");
         }
 
         String jsonString = new JSONObject().put("username", user).put("password", password).toString();
 
         logger.debug("SENDING: " + jsonString);
-        JSONObject jsonResponse = this.sendRequest(http, jsonString);
+        JSONObject jsonResponse = this.sendRequest(connection, jsonString);
         logger.debug("RESPONSE : " + jsonResponse);
         if(jsonResponse == null) {
             return new Pair<>(null, "Connection error.");
@@ -185,5 +186,34 @@ public class FlaskClient {
         }
 
         return this.sendRequest(http, jsonString);
+    }
+
+    public Pair<Boolean,String> trimiteCerereSange(CerereSange cerere, String cnpMedic) {
+        this.logger.debug("Sending request trimitereCerereSange");
+        HttpURLConnection connection = getConnection("/trimiteCerereSange");
+
+        if(connection == null)
+            return new Pair<>(false, "Client connection request Error");
+
+        String jsonString = new JSONObject()
+                .put("cnp_medic", cnpMedic)
+                .put("nume_pacient", cerere.getNumePacient())
+                .put("cnp_pacient", cerere.getCnpPacient())
+                .put("spital", cerere.getSpital())
+                .put("grupa_sange", cerere.getGrupaSange().toString())
+                .put("rh", cerere.getRh().toString())
+                .put("numar_pungi_trombocite", cerere.getNumarPungiTrombocite().toString())
+                .put("numar_pungi_globule_rosii", cerere.getNumarPungiGlobuleRosii().toString())
+                .put("numar_pungi_plasma", cerere.getNumarPungiPlasma())
+                .put("importanta", cerere.getImportanta().toString()).toString();
+
+        logger.debug("SENDING: " + jsonString);
+        JSONObject jsonResponse = sendRequest(connection, jsonString);
+        logger.debug("RESPONSE : " + jsonResponse);
+
+        if(jsonResponse == null) {
+            return new Pair<>(null, "Connection error.");
+        }
+        return new Pair<>(jsonResponse.getInt("status")== 0, jsonResponse.getString("message"));
     }
 }

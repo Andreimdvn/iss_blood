@@ -32,7 +32,8 @@ public class UserUtils {
             info = new MedicInfo(username,
                     loginResponse.getString("nume"),
                     loginResponse.getString("prenume"),
-                    loginResponse.getInt("id_locatie"));
+                    loginResponse.getInt("id_locatie"),
+                    loginResponse.getString("cnp"));
         }
         else if(type == 3)
         {

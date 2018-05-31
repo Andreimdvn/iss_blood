@@ -25,3 +25,6 @@ class BackController:
 
     def trimite_formular(self, formular):
         return self.service_donator.trimite_formular(formular)
+
+    def trimite_cerere_sange(self, cerere, cnp_medic):
+        return self.service_medic.trimite_cerere_sange(cerere, cnp_medic)

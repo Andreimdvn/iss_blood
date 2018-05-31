@@ -1,10 +1,12 @@
 import json
+import logging
+import datetime
 
 from flask import Flask, request
-import logging
 
 from Controller.back_controller import BackController
 from Model.account_type import AccountType
+from Model.cerere_sange import CerereSange
 from Model.register_info import RegisterInfo
 from Model.FormularDonare import FormularDonare
 
@@ -38,6 +40,8 @@ class FlaskServer:
         self.app.add_url_rule("/login", "login_request", self.login_request, methods=["POST"])
         self.app.add_url_rule("/register", "register_request", self.register_request, methods=["POST"])
         self.app.add_url_rule("/trimiteFormularDonare", "trimite_formular_donare", self.trimite_formular_donare,
+                              methods=["POST"])
+        self.app.add_url_rule("/trimiteCerereSange", "trimite_cerere_sange", self.trimite_cerere_sange,
                               methods=["POST"])
 
     def test_request(self):
@@ -84,7 +88,7 @@ class FlaskServer:
 
     def trimite_formular_donare(self):
         self.request_data = request.get_json()
-        self.logger.debug("Got register request JSON: {}".format(self.request_data))
+        self.logger.debug("Got trimiteFormularDonare request JSON: {}".format(self.request_data))
 
         formular_donare = FormularDonare(self.request_data["username"],
                                          self.request_data["nume"],
@@ -106,4 +110,23 @@ class FlaskServer:
         self.controller.trimite_formular(formular_donare)
 
         return_dict = {"status": "0", "message": "Success"}
+        return json.dumps(return_dict)
+
+    def trimite_cerere_sange(self):
+        self.request_data = request.get_json()
+        self.logger.debug("Got /trimiteCereeSange request JSON {}".format(self.request_data))
+
+        cerere = CerereSange( self.request_data["nume_pacient"],
+                              self.request_data["cnp_pacient"],
+                              self.request_data["grupa_sange"],
+                              self.request_data["rh"],
+                              self.request_data["numar_pungi_trombocite"],
+                              self.request_data["numar_pungi_globule_rosii"],
+                              self.request_data["numar_pungi_plasma"],
+                              datetime.datetime.today().strftime('%Y-%m-%d'),
+                              self.request_data["importanta"])
+
+        status, message = self.controller.trimite_cerere_sange(cerere, self.request_data["cnp_medic"])
+        return_dict = {"status": status, "message": message}
+
         return json.dumps(return_dict)
