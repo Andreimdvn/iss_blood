@@ -1,7 +1,5 @@
-package Controller.FormularDonare;
+package Controller;
 
-import Controller.ControlledScreen;
-import Controller.DonatorDashboardController;
 import Model.*;
 import Utils.Screen;
 import Validators.FormularValidator;

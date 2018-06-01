@@ -90,7 +90,7 @@ public class LoginController extends ControlledScreen {
         //remove this ^^^ on production
 
         if (canLogin.getKey() == null) { //failed
-            new CustomMessageBox("Login",canLogin.getValue()).show();
+            new CustomMessageBox("Login", canLogin.getValue()).show();
             return;
         }
 
@@ -98,25 +98,7 @@ public class LoginController extends ControlledScreen {
 
         screenController.userInfo = canLogin.getKey();
 
-        if (canLogin.getKey() instanceof DonatorInfo){
-            loadScreensDonator();
-
-            screenController.setScreen(Screen.DONATOR_SCREEN);
-        }
-        else if (canLogin.getKey() instanceof MedicInfo) {
-            loadScreensMedic();
-
-            getScreenController().setScreen(Screen.MEDIC_SCREEN);
-        }
-        else  {
-            loadScreensCentru();
-
-            getScreenController().setScreen(Screen.CENTRU_TRANSFUZIE_SCREEN);
-
-            //logger.debug("Credintiale gresite");
-            //controller.setScreen();
-        }
-
+        loadAfterLogin();
     }
 
     /***
@@ -141,42 +123,7 @@ public class LoginController extends ControlledScreen {
     }
 
 
-    private void loadScreensDonator()
-    {
-        ScreenController screenController = getScreenController();
-        screenController.loadScreen(Screen.DONATOR_SCREEN,Screen.DONATOR_RESOURCE);
-        screenController.loadScreen(Screen.FORMULAR_DONARE_SCREEN, Screen.FORMULAR_DONARE_RESOURCE);
-        screenController.loadScreen(Screen.ISTORIC_DONARI_SCREEN,Screen.ISTORIC_DONARI_RESOURCE);
-        screenController.loadScreen(Screen.FORMULAR_1_TEXT1_SCREEN,Screen.FORMULAR_1_TEXT1_RESOURCE);
-        screenController.loadScreen(Screen.FORMULAR_1_TEXT2_SCREEN,Screen.FORMULAR_1_TEXT2_RESOURCE);
-        screenController.loadScreen(Screen.FORMULAR_1_TEXT3_SCREEN,Screen.FORMULAR_1_TEXT3_RESOURCE);
-        screenController.loadScreen(Screen.FORMULAR_1_TEXT4_SCREEN,Screen.FORMULAR_1_TEXT4_RESOURCE);
-        screenController.loadScreen(Screen.FORMULAR_1_SCREEN,Screen.FORMULAR_1_RESOURCE);
-        screenController.loadScreen(Screen.FORMULAR_3_SCREEN,Screen.FORMULAR_3_RESOURCE);
-    }
-
-    private void loadScreensMedic()
-    {
-        ScreenController screenController = getScreenController();
-
-        screenController.loadScreen(Screen.MEDIC_SCREEN,Screen.MEDIC_RESOURCE);
-        screenController.loadScreen(Screen.ISTORIC_CERERI_SCREEN,Screen.ISTORIC_CERERI_RESOURCE);
-        screenController.loadScreen(Screen.STARE_PACIENTI_SCREEN,Screen.STARE_PACIENTI_RESOURCE);
-        screenController.loadScreen(Screen.CERERE_SANGE_SCREEN,Screen.CERERE_SANGE_RESOURCE);
-    }
-
-    private void loadScreensCentru()
-    {
-        ScreenController screenController = getScreenController();
-
-        screenController.loadScreen(Screen.CENTRU_TRANSFUZIE_SCREEN,Screen.CENTRU_TRANSFUZIE_RESOURCE);
-        screenController.loadScreen(Screen.CENTRU_CERERI_DONARI_SCREEN,Screen.CENTRU_CERERI_DONARI_RESOURCE);
-        ((CentruCereriDonariController)screenController.getControlledScreen("CENTRU_CERERI_DONARI")).updateThis();
-        screenController.loadScreen(Screen.CENTRU_ANALIZA_SCREEN,Screen.CENTRU_ANALIZA_RESOURCE);
-        screenController.loadScreen(Screen.CENTRU_CHESTIONAR_SCREEN,Screen.CENTRU_CHESTIONAR_RESOURCE);
-        screenController.loadScreen(Screen.CENTRU_CERERI_SANGE_SCREEN,Screen.CENTRU_CERERI_SANGE_RESOURCE);
-        screenController.loadScreen(Screen.CENTRU_STOC_PUNGI_SCREEN,Screen.CENTRU_STOC_PUNGI_RESOURCE);
-        screenController.loadScreen(Screen.FORMULAR_DONARE_SCREEN, Screen.CENTRU_FORMULAR_RESOURCE);
-
+    @Override
+    protected void updateThis() {
     }
 }

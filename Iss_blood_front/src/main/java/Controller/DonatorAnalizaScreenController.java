@@ -95,4 +95,8 @@ public class DonatorAnalizaScreenController extends ControlledScreen{
         stage.close();
     }
 
+    @Override
+    void updateThis() {
+
+    }
 }

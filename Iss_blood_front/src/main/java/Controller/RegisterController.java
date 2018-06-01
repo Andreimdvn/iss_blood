@@ -180,7 +180,7 @@ public class RegisterController extends ControlledScreen {
             }
 
             RegisterValidator validator = new RegisterValidator();
-            Pair<Boolean, String> validationResult = validator.Validate(info);
+            Pair<Boolean, String> validationResult = validator.validate(info);
             if(validationResult.getKey())
             {
                 getScreenController().setScreen(Screen.LOGIN_SCREEN);
@@ -255,5 +255,10 @@ public class RegisterController extends ControlledScreen {
     private void initialize(){
         enableStyle();
         accountTypeToggleGroup = donatorToggleButton.getToggleGroup();
+    }
+
+    @Override
+    void updateThis() {
+
     }
 }

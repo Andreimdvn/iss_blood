@@ -117,4 +117,9 @@ public class IstoricCereriController extends ControlledScreen {
        cerereSangeTableView.setItems(cereriSange);
        cerereSangeCompletateTableView.setItems(cereriSange);
     }
+
+    @Override
+    void updateThis() {
+
+    }
 }

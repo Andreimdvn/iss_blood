@@ -202,6 +202,11 @@ public class MedicDashboardController extends ControlledScreen {
     }
 
     @Override
+    void updateThis() {
+
+    }
+
+    @Override
     public void setScreenController(ScreenController ctr)
     {
         super.setScreenController(ctr);
@@ -218,7 +223,7 @@ public class MedicDashboardController extends ControlledScreen {
     }
 
     private void loadLogin() {
-        getScreenController().setScreen(Screen.LOGIN_SCREEN);
+        unloadAfterLogout();
     }
 
     @FXML
