@@ -39,7 +39,7 @@
             <Label layoutX="305.0" styleClass="headerFormular" text="Cereri in asteptare" />
             <JFXTextField layoutX="14.0" layoutY="285.0" prefHeight="25.0" prefWidth="276.0" promptText="Search pacient by name" styleClass="textboxFormular" unFocusColor="WHITE" />
             <JFXTextField layoutY="25.0" prefHeight="25.0" prefWidth="276.0" promptText="Search pacient by name" styleClass="textboxFormular" unFocusColor="WHITE" />
-            <JFXButton layoutX="692.0" layoutY="10.0" onAction="#populate" prefHeight="29.0" prefWidth="107.0" styleClass="buttonDashboard" text="Anulare cerere" />
+            <JFXButton layoutX="693.0" layoutY="11.0" onAction="#anulare" prefHeight="29.0" prefWidth="107.0" styleClass="buttonFormular" text="Anulare cerere" />
          </children>
       </AnchorPane>
    </children>

@@ -1,6 +1,5 @@
 package Communication;
 
-
 import Model.Pacient;
 import Model.RegisterInfo;
 import Model.*;
@@ -16,6 +15,7 @@ import java.io.*;
 import java.net.*;
 import java.nio.charset.StandardCharsets;
 import java.rmi.RemoteException;
+import java.sql.Date;
 import java.util.*;
 
 public class FlaskClient {
@@ -395,7 +395,7 @@ public class FlaskClient {
         return new Pair<>(true, "Success");
     }
 
-    public Pair<Boolean,String> trimitePungi(int idCerere, int idLocatie, int idLocatieNoua,
+    public Pair<Boolean,String> trimitePungi(int idCerere, int idLocatie,
                                              GrupaSange grupaSange, RH rh,
                                              int plasma,int trombocite, int globule)
     {
@@ -406,7 +406,6 @@ public class FlaskClient {
 
         String jsonString = new JSONObject().put("id_cerere", idCerere)
                 .put("id_locatie_curenta",idLocatie)
-                .put("id_locatie_noua",idLocatieNoua)
                 .put("grupa",grupaSange.toString())
                 .put("rh",rh.toString())
                 .put("plasma",plasma)
@@ -482,6 +481,8 @@ public class FlaskClient {
         return map;
         }
 
+
+
     private Observer observer;
     private void update(){
         try {
@@ -521,6 +522,68 @@ public class FlaskClient {
             return new Pair<>(null, "Connection error.");
         }
         return new Pair<>(jsonResponse.getInt("status")== 0, jsonResponse.getString("message"));
+    }
+
+    public List<CerereSange> getCereriSange(int idLocatie, String status, Boolean fromSpital)
+    {
+        List<CerereSange> list = new ArrayList<>();
+        HttpURLConnection connection = getConnection("/get_cereri_sange");
+
+        if(connection == null)
+            System.out.println("Pula");
+
+        String jsonString = new JSONObject().put("id_locatie", idLocatie)
+                .put("status",status)
+                .put("from_spital",fromSpital).toString();
+
+        logger.debug("SENDING: " + jsonString);
+        JSONObject jsonResponse = sendRequest(connection, jsonString);
+        logger.debug("RESPONSE : " + jsonResponse);
+
+        if(jsonResponse != null)
+        {
+            JSONArray formularDonares = jsonResponse.getJSONArray("entities");
+            System.out.println(formularDonares.length());
+            for(int i = 0; i < formularDonares.length() ;i++)
+            {
+                JSONObject x = formularDonares.getJSONObject(i);
+                int id = x.getInt("id");
+                int trombo = x.getInt("numar_pungi_trombocite");
+                int globule = x.getInt("numar_pungi_globule_rosii");
+                int plasma = x.getInt("numar_pungi_plasma");
+                String cnpPacient = x.getString("cnp_pacient");
+                GrupaSange grupa = GrupaSange.valueOf(x.getString("grupa").toUpperCase());
+                RH rh = RH.valueOf(x.getString("rh").toUpperCase());
+                String numePacient =  x.getString("nume_pacient");
+                Date date= Date.valueOf(x.getString("data"));
+                Importanta im = Importanta.valueOf(x.getString("importanta").toUpperCase());
+                String numeMedic = x.getString("nume_medic");
+                String numeSpital = x.getString("spital");
+                CerereSange a = new CerereSange(id, numePacient, cnpPacient, grupa, rh, trombo, globule, plasma, date, im, numeMedic, numeSpital);
+
+                list.add(a);
+            }
+        }
+
+        return list;
+
+
+    }
+
+    public Pair<Boolean, String> anulareCerere(Integer id) {
+        HttpURLConnection connection = getConnection("/anulare_cerere");
+
+        if(connection == null)
+            return new Pair<>(false, "Client connection request Error");
+
+        String jsonString = new JSONObject().put("id_cerere", id).toString();
+
+        logger.debug("SENDING: " + jsonString);
+        JSONObject jsonResponse = sendRequest(connection, jsonString);
+        logger.debug("RESPONSE : " + jsonResponse);
+
+
+        return new Pair<>(true, "Success");
     }
 }
 

@@ -34,10 +34,19 @@ class RepositorySangePrelucrat(IRepository):
 
         return 0, "Deleted successfully"
 
-    def send_pungi(self, id_locatie_curenta, id_locatie_noua, grupa, rh, plasma, tromobocite, globule_rosii):
+    def get_id_locatie_noua_from_cerere(self,cerere):
+        medic = self.db.select('Medic', ['id_user'], [cerere.id_medic], first=True)
+        return medic.id_locatie
+
+    def send_pungi(self, id_locatie_curenta, id_cerere, grupa, rh, plasma, tromobocite, globule_rosii):
+
+        cerere = self.db.select('CereriSange', ['id'], [id_cerere], first=True)
+
+        id_locatie_noua = self.get_id_locatie_noua_from_cerere(cerere)
 
         id_judet = self.get_id_judet(id_locatie_curenta)
         self.logger.debug(id_judet)
+
         sange_brut_locatie = self.db.select('SangeBrut',
                                             columns=['status', 'grupa', 'rh'],
                                             values=['Impartita', grupa, rh])
@@ -60,6 +69,7 @@ class RepositorySangePrelucrat(IRepository):
                         if punga.tip == 'Globule_rosii' and globule_rosii != 0:
                             globule_rosii -= 1
                             self.update_status_by_id_punga(punga.id, 'Folosit', id_locatie_noua)
+
 
     def get_stoc_curent_by_grupa_rh(self, id_locatie, grupa_ceruta, rh_cerut):
 

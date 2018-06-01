@@ -143,7 +143,6 @@ public abstract class ControlledScreen implements Observer {
      */
     @Override
     public void update() {
-
         getScreenController().getAllScreens().forEach(
                 x -> x.getControlledScreen().updateThis()
         );

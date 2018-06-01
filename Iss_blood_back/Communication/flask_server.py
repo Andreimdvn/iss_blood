@@ -75,6 +75,10 @@ class FlaskServer:
                               methods=["POST"])
         self.app.add_url_rule("/trimiteCerereSange", "trimite_cerere_sange", self.trimite_cerere_sange,
                               methods=["POST"])
+        self.app.add_url_rule("/get_cereri_sange", "get_cereri_sange", self.get_cereri_sange,
+                              methods=["POST"])
+        self.app.add_url_rule("/anulare_cerere", "anulare_cerere", self.anulare_cerere,
+                              methods=["POST"])
 
     def trimite_pungi(self):
         self.request_data = request.get_json()
@@ -83,7 +87,7 @@ class FlaskServer:
         id_locatie_curenta = self.request_data["id_locatie_curenta"]
 
         # Update on production
-        id_locatie_noua = self.request_data["id_locatie_noua"]
+        id_cerere = self.request_data["id_cerere"]
 
         grupa = self.request_data["grupa"]
         rh = self.request_data["rh"]
@@ -93,7 +97,7 @@ class FlaskServer:
         lista = [numar_plasma, numar_trombocite, numar_globule]
         self.logger.debug(lista)
         status, mesaj = self.controller.send_pungi(id_locatie_curenta,
-                                                   id_locatie_noua,
+                                                   id_cerere,
                                                    grupa,
                                                    rh,
                                                    plasma=numar_plasma,
@@ -357,3 +361,32 @@ class FlaskServer:
         return_dict = {"status": status, "message": message}
 
         return json.dumps(return_dict)
+
+    def get_cereri_sange(self):
+        self.request_data = request.get_json()
+        self.logger.debug("Got /get cereri sange request JSON {}".format(self.request_data))
+
+        id_locatie = self.request_data["id_locatie"]
+        status = self.request_data["status"]
+        from_spital = self.request_data["from_spital"]
+
+        list_dict = {"entities": self.controller.get_cereri_sange(id_locatie, status, from_spital)}
+
+        self.logger.debug(list_dict)
+
+        return json.dumps(list_dict)
+
+    def anulare_cerere(self):
+        self.request_data = request.get_json()
+        self.logger.debug("Got /anulare request JSON {}".format(self.request_data))
+
+        id_cerere = self.request_data["id_cerere"]
+
+        status, mesaj = self.controller.anulare_cerere(id_cerere)
+
+        list_dict = {"status": status,
+                     "messsage": mesaj}
+
+        self.logger.debug(list_dict)
+
+        return json.dumps(list_dict)

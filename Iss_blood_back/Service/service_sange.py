@@ -75,9 +75,9 @@ class ServiceSange(IService):
     def get_analize(self, cnp):
         return self.repo_manager.repo_analiza.get_analize(cnp)
 
-    def send_pungi(self, id_locatie_curenta, id_locatie_noua, grupa, rh, plasma, tromobocite, globule_rosii):
+    def send_pungi(self, id_locatie_curenta, id_cerere, grupa, rh, plasma, tromobocite, globule_rosii):
         self.repo_manager.repo_sange_prelucrat.\
-            send_pungi(id_locatie_curenta, id_locatie_noua, grupa, rh, plasma, tromobocite, globule_rosii)
+            send_pungi(id_locatie_curenta, id_cerere, grupa, rh, plasma, tromobocite, globule_rosii)
 
 
     def get_stoc_curent(self, id_locatie):

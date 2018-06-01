@@ -32,7 +32,6 @@ public class LoginController extends ControlledScreen {
 
 
     private double xOffset;
-
     private double yOffset;
 
     private void enableStyle(){

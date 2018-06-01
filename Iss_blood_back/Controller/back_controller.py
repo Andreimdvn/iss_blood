@@ -55,7 +55,7 @@ class BackController:
     def get_stoc_curent(self,id_locatie):
         return self.service_sange.get_stoc_curent(id_locatie)
 
-    def send_pungi(self, id_locatie_curenta, id_locatie_noua, grupa, rh, plasma, tromobocite, globule_rosii):
+    def send_pungi(self, id_locatie_curenta, id_cerere, grupa, rh, plasma, tromobocite, globule_rosii):
 
         stoc_curent = self.get_stoc_curent(id_locatie_curenta)
 
@@ -67,7 +67,9 @@ class BackController:
 
         if numar_plasma - plasma >= 0 and numar_trombocite - tromobocite >= 0 and numar_globule - globule_rosii >= 0:
             self.service_sange.send_pungi(
-                id_locatie_curenta, id_locatie_noua, grupa, rh, plasma, tromobocite, globule_rosii)
+                id_locatie_curenta, id_cerere, grupa, rh, plasma, tromobocite, globule_rosii)
+
+            self.service_medic.update_cerere(id_cerere, 'Rezolvata')
             return 0, "Pungile au fost trimise"
 
         return 2, "Mesaj dragut de eroare"
@@ -99,3 +101,9 @@ class BackController:
 
     def trimite_cerere_sange(self, cerere, cnp_medic):
         return self.service_medic.trimite_cerere_sange(cerere, cnp_medic)
+
+    def get_cereri_sange(self, id_locatie, status, from_spital):
+        return self.service_medic.get_cereri_sange(id_locatie, status, from_spital)
+
+    def anulare_cerere(self, id_cerere):
+        return self.service_medic.update_cerere(id_cerere, 'Anulata')

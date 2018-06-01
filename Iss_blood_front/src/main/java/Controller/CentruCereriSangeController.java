@@ -97,53 +97,29 @@ public class CentruCereriSangeController extends ControlledScreen{
         }
     }
 
-    @FXML
-    private void populateDummy() {
-        CerereSange cr = new CerereSange("NumePacient", "dsds", GrupaSange.A2, RH.NEGATIV,
-                1,2,3, Date.valueOf("2017-06-13"),
-                Importanta.MEDIE, "Moldovan Andrei", "Tudor's Hospital");
-        this.cereriSange.add(cr);
-    }
-
-    @FXML
-    private JFXTextField plasmaText;
-
-    @FXML
-    private JFXTextField globuleText;
-
-    @FXML
-    private JFXTextField trombociteText;
-
-    @FXML
-    private JFXTextField idCerereText;
-
-    @FXML
-    private JFXTextField idLocatieNouaText;
-
-    @FXML
-    private JFXTextField grupaText;
-
-    @FXML
-    private JFXTextField rhText;
-
     private StaffInfo getInfo(){
         return (StaffInfo) getScreenController().userInfo;
     }
 
     @FXML
     private void trimitePungi() {
-        int id_locatie = getInfo().getIdLocatie();
-        getService().trimitePungi(Integer.parseInt(idCerereText.getText()),id_locatie,
-                Integer.parseInt(idLocatieNouaText.getText()),
-                GrupaSange.valueOf(grupaText.getText()),RH.valueOf(rhText.getText()),
-                Integer.parseInt(plasmaText.getText()),Integer.parseInt(trombociteText.getText())
-                ,Integer.parseInt(globuleText.getText()));
 
+        CerereSange cerereSange = cerereSangeTableView.getSelectionModel().getSelectedItem();
+        if(cerereSange != null){
+
+            int id_locatie = getInfo().getIdLocatie();
+            getService().trimitePungi(cerereSange.getId(),
+                                      id_locatie,
+                                      cerereSange.getGrupaSange(),
+                                      cerereSange.getRh(),cerereSange.getNumarPungiPlasma(),
+                                      cerereSange.getNumarPungiTrombocite(),cerereSange.getNumarPungiGlobuleRosii());
+        }
         update();
     }
 
     @Override
     void updateThis() {
+        cereriSange.setAll(getService().getCereriSange(getInfo().getIdLocatie(),"IN_ASTEPTARE",false));
 
     }
 }
