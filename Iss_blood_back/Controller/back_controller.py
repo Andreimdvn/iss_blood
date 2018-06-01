@@ -109,3 +109,6 @@ class BackController:
 
     def anulare_cerere(self, id_cerere):
         return self.service_medic.update_cerere(id_cerere, 'Anulata')
+
+    def is_a_valid_donation(self, cnp_donator):
+        return self.service_donator.is_a_valid_donation(cnp_donator)

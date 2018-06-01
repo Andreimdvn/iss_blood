@@ -77,4 +77,8 @@ public class MainService {
     public void anulare(Integer id) {
         flaskClient.anulareCerere(id);
     }
+
+    public Pair<Boolean, String> isAValidDonation(String cnpDonator) {
+        return flaskClient.isAValidDonation(cnpDonator);
+    }
 }

@@ -1,6 +1,9 @@
 from Model.status_cerere_sange import StatusCerereSange
+import datetime
+
 from Service.i_service import IService
 from Utils import user_utils, locatii_utils
+from datetime import datetime as dt
 
 
 class ServiceDonator(IService):
@@ -27,6 +30,31 @@ class ServiceDonator(IService):
 
         # 2. Fa update pe datele userului daca e cazul
         return self.__update_user(formular, user)
+
+    def is_a_valid_donation(self, cnp_donator):
+        """
+
+        :param cnp_donator:
+        :return:
+        """
+        donator = self.db.select('Donator', ['cnp'], [cnp_donator])
+        sex_donator = donator[0].sex
+        id_donator = donator[0].id_donator
+        all_dates = self.db.select('SangeBrut', ['id_donator'], [id_donator])
+        last_date_of_donation = all_dates[-1]
+
+        current_date = dt.strptime(self.get_current_date(), "%Y-%m-%d")
+        date_of_last_donation = dt.strptime(str(last_date_of_donation.data_recoltare), "%Y-%m-%d")
+
+        if sex_donator == 'MASCULIN' and ((current_date - date_of_last_donation).days < 120):
+            return 1, "S-a realizat deja o donare in ultimele 4 luni"
+        if sex_donator == 'FEMININ' and ((current_date - date_of_last_donation).days < 90):
+            return 1, "S-a realizat deja o donare in ultimele 3 luni"
+        return 0, "Donare valida"
+
+    def get_current_date(self):
+        now = datetime.datetime.now()
+        return str(now.year) + '-' + str(now.month) + '-' + str(now.day)
 
     def __update_user(self, formular, user):
         '''
