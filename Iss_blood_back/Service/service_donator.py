@@ -1,3 +1,4 @@
+from Model.status_cerere_sange import StatusCerereSange
 import datetime
 
 from Service.i_service import IService
@@ -27,7 +28,7 @@ class ServiceDonator(IService):
         # 1. Insereaza in formular ce e de inserat
         user_utils.insert_formular(self.db, formular, donator.id_donator)
 
-        #2. Fa update pe datele userului daca e cazul
+        # 2. Fa update pe datele userului daca e cazul
         return self.__update_user(formular, user)
 
     def is_a_valid_donation(self, cnp_donator):
@@ -110,3 +111,55 @@ class ServiceDonator(IService):
                            values=valori_noi)
 
         return 0, "Formular inregistrat cu succes"
+
+    def get_istoric_donari(self, username):
+        # centru donare: din donator -> sange brut -> locatie
+        # numar_donare: id formular
+        # status: formular.status
+        #analiza: din sange brut -> analize, where ID = sangeBrut.ID
+
+        #am nevoie de: user -> 1 donator -> * sange brut -> analize, locatie  -> merge dupa id sange
+        #                                -> * formular                        ^
+
+        rez = []
+
+        user = self.db.select("User", ['username'], [username], True)
+
+        donator = self.db.select("Donator", ['id_user'], [user.id], True)
+
+        lst_sange_brut = self.db.select("SangeBrut", ['id_donator'], [donator.id_donator])
+
+        lst_analize = {} #dictionar. key = id sange; value = analiza
+        for sange in lst_sange_brut:
+            analiza = self.db.select("Analize", ['id_sange_brut'], [sange.id], True)
+            lst_analize[sange.id] = analiza
+
+        lst_locatii = {} #dictionar. key = id sange; value = string
+        for sange in lst_sange_brut:
+            locatie = self.db.select("Locatie", ['id'], [sange.id_locatie_recoltare], True)
+            lst_locatii[sange.id] = locatie.nume
+
+        lst_formulare = self.db.select("FormularDonare", ['id_donator'], [donator.id_donator])
+
+        for key in lst_analize.keys():
+            analiza = lst_analize[key]
+            if analiza is None:
+                continue
+            formular = next(x for x in lst_formulare if x.id == analiza.id_formular)
+            lst_formulare.remove(formular)
+            locatie = lst_locatii[key]
+            sange = next(x for x in lst_sange_brut if x.id == key)
+
+            dict = {"id_analiza": analiza.id, "numar_donare": formular.id, "centru_donare": locatie,
+                    "status": formular.status, "ALT": analiza.alt, "SIF": analiza.sif, "ANTIHTLV": analiza.antihtlv,
+                    "ANTIHCV": analiza.antihtcv, "ANTIHIV": analiza.antihiv, "HB": analiza.hb,
+                    "grupa": str(sange.grupa), "rh": str(sange.rh), "data": str(sange.data_recoltare),
+                    "staff_full_name": sange.nume_staff_responsabil}
+            rez.append(dict)
+
+        for formular in lst_formulare: #daca au mai ramas formulare, la dam asa(nu au fost procesate inca)
+            dict = {"id_analiza": -1, "numar_donare": formular.id, "centru_donare": "TBD",
+                    "status": formular.status}
+            rez.append(dict)
+
+        return rez

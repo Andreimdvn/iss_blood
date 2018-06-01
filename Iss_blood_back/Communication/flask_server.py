@@ -84,6 +84,8 @@ class FlaskServer:
                               methods=["POST"])
         self.flask_app.add_url_rule("/anulare_cerere", "anulare_cerere", self.anulare_cerere,
                               methods=["POST"])
+        self.flask_app.add_url_rule("/getIstoricDonare", "get_istoric_donare", self.get_istoric_donare,
+                              methods=["POST"])
         self.flask_app.add_url_rule("/valid_donation", "valid_donation_request",
                               self.valid_donation_request,
                               methods=["POST"])
@@ -114,8 +116,6 @@ class FlaskServer:
         if status == 0:
             # pungile au fost trimise
             id_cerere = self.request_data["id_cerere"]
-
-            # TO DO change status to complete for cerere sange
 
         return_dict = {"status": status, "message": mesaj}
 
@@ -306,10 +306,12 @@ class FlaskServer:
                         self.request_data["htlv"],
                         self.request_data["htcv"],
                         self.request_data["hiv"],
-                        self.request_data["hb"])
+                        self.request_data["hb"]
+
+        )
 
         self.logger.debug(analiza)
-        status, message = self.controller.staff_update_formular_donare(formular_donare, id_locatie, analiza)
+        status, message = self.controller.staff_update_formular_donare(formular_donare, id_locatie, analiza=analiza)
         return_dict = {"status": str(status), "message": message}
 
         self.update_wrapper()
@@ -340,7 +342,9 @@ class FlaskServer:
 
         id_locatie = self.request_data["id_locatie"]
 
-        status, message = self.controller.staff_update_formular_donare(formular_donare, id_locatie)
+        staff_full_name = self.request_data["staff_full_name"]
+
+        status, message = self.controller.staff_update_formular_donare(formular_donare, id_locatie, staff_full_name=staff_full_name)
         return_dict = {"status": str(status), "message": message}
 
         self.update_wrapper()
@@ -393,6 +397,18 @@ class FlaskServer:
         return_dict = {"status": status, "message": message}
 
         self.update_wrapper()
+
+        return json.dumps(return_dict)
+
+    def get_istoric_donare(self):
+        self.request_data = request.get_json()
+        self.logger.debug("Got /get_istoric_donare request JSON {}".format(self.request_data))
+
+        username = self.request_data["username"]
+
+        return_dict = {
+            "entities": self.controller.get_istoric_donari(username)
+        }
 
         return json.dumps(return_dict)
 

@@ -274,7 +274,7 @@ public class FlaskClient {
         return new Pair<>(true, "Success");
     }
 
-    public Pair<Boolean,String> staffUpdateFormularDonare(FormularDonare formular, int id_locatie)
+    public Pair<Boolean,String> staffUpdateFormularDonare(FormularDonare formular, int id_locatie, String staffFullName)
     {
         HttpURLConnection connection = getConnection("/staff_update_formular_donare");
 
@@ -296,7 +296,8 @@ public class FlaskClient {
                 .put("zile_disponibil", formular.getZileDisponibil())
                 .put("id",formular.getId())
                 .put("status",formular.getStatus())
-                .put("id_locatie",id_locatie).toString();
+                .put("id_locatie",id_locatie)
+                .put("staff_full_name", staffFullName).toString();
 
         logger.debug("SENDING: " + jsonString);
         JSONObject jsonResponse = sendRequest(connection, jsonString);
@@ -614,6 +615,68 @@ public class FlaskClient {
         return list;
 
 
+    }
+
+
+    public Collection<DonareInfo> getIstoricDonare(String username) {
+        this.logger.debug("Sending request trimitereCerereSange");
+        HttpURLConnection connection = getConnection("/getIstoricDonare");
+
+        if (connection == null)
+            return null;
+
+        String jsonString = new JSONObject()
+                .put("username", username)
+                .toString();
+
+        Collection<DonareInfo> rez = new ArrayList<>();
+
+        logger.debug("SENDING: " + jsonString);
+        JSONObject jsonResponse = sendRequest(connection, jsonString);
+        logger.debug("RESPONSE : " + jsonResponse);
+
+
+        JSONArray formularDonares = jsonResponse.getJSONArray("entities");
+        for (int i = 0; i < formularDonares.length(); i++) {
+            JSONObject jsonObject = formularDonares.getJSONObject(i);
+            Analiza analiza = null;
+            String data = "";
+            String staffResponsabil = "";
+            GrupaSange grupaSange = GrupaSange.UNKNOWN;
+            RH rh = RH.UNKNOWN;
+            if (jsonObject.getInt("id_analiza") >= 0) //altfel nu e gata inca
+            {
+                analiza = new Analiza(
+                        jsonObject.getInt("id_analiza"),
+                        jsonObject.getBoolean("ALT"),
+                        jsonObject.getBoolean("SIF"),
+                        jsonObject.getBoolean("ANTIHTLV"),
+                        jsonObject.getBoolean("ANTIHCV"),
+                        jsonObject.getBoolean("ANTIHIV"),
+                        jsonObject.getBoolean("HB")
+                );
+                data = jsonObject.getString("data");
+                grupaSange = GrupaSange.valueOf(jsonObject.getString("grupa"));
+                rh = RH.valueOf(jsonObject.getString("rh").toUpperCase());
+                staffResponsabil = jsonObject.getString("staff_full_name");
+            }
+
+
+            DonareInfo info = new DonareInfo(
+                    jsonObject.getInt("numar_donare"),
+                    jsonObject.getString("centru_donare"),
+                    Status.valueOf(jsonObject.getString("status")),
+                    analiza,
+                    "",
+                    data,
+                    grupaSange,
+                    rh
+            );
+
+            rez.add(info);
+        }
+
+        return rez;
     }
 
     public Pair<Boolean, String> anulareCerere(Integer id) {
