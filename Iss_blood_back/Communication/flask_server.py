@@ -84,6 +84,9 @@ class FlaskServer:
                               methods=["POST"])
         self.flask_app.add_url_rule("/anulare_cerere", "anulare_cerere", self.anulare_cerere,
                               methods=["POST"])
+        self.flask_app.add_url_rule("/valid_donation", "valid_donation_request",
+                              self.valid_donation_request,
+                              methods=["POST"])
 
     def trimite_pungi(self):
         self.request_data = request.get_json()
@@ -137,6 +140,17 @@ class FlaskServer:
         self.request_data = request.get_json()
         self.logger.debug("Req data: {}".format(self.request_data))
         return json.dumps(self.request_data)
+
+    def valid_donation_request(self):
+        self.request_data = request.get_json()
+        self.logger.debug("Valid donation request JSON: {}".format(self.request_data))
+        cnp_donator = self.request_data["cnpDonator"]
+
+        status, message = self.controller.is_a_valid_donation(cnp_donator)
+
+        return_dict = {"status" : str(status), "message" : message}
+
+        return json.dumps(return_dict)
 
     def add_pacient_request(self):
         self.request_data = request.get_json()
