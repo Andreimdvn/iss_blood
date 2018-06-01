@@ -45,8 +45,8 @@ class BackController:
     def create_sange_prelucrat(self,id_donator):
         self.service_sange.create_sange_prelucrat(id_donator)
 
-    def create_analiza(self, id_donator,grupa, rh, alt, sif, antihtlv, antihtcv, antihiv, hb):
-        self.service_sange.create_analiza(id_donator, grupa, rh, alt, sif, antihtlv, antihtcv, antihiv, hb)
+    def create_analiza(self, id_donator,grupa, rh, alt, sif, antihtlv, antihtcv, antihiv, hb, id_formular):
+        self.service_sange.create_analiza(id_donator, grupa, rh, alt, sif, antihtlv, antihtcv, antihiv, hb, id_formular)
 
     def get_stoc_curent(self,id_locatie):
         return self.service_sange.get_stoc_curent(id_locatie)
@@ -88,7 +88,7 @@ class BackController:
             hb = analiza.hb
             grupa = formular_donare.grupa
             rh = formular_donare.rh
-            self.create_analiza(id_donator, grupa, rh, alt, sif, antihtlv, antihtcv, antihiv, hb)
+            self.create_analiza(id_donator, grupa, rh, alt, sif, antihtlv, antihtcv, antihiv, hb, formular_donare.id)
 
     def get_id_donator(self, formular_donare):
         return self.service_transfuzie.get_id_donator(formular_donare)

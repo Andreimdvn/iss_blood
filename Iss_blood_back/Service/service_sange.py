@@ -44,12 +44,12 @@ class ServiceSange(IService):
         sange_brut.status = 'Prelucrata'
         self.repo_manager.repo_sange_brut.update(sange_brut)
 
-    def create_analiza(self, id_donator,grupa,rh, alt, sif, antihtlv, antihtcv, antihiv, hb):
+    def create_analiza(self, id_donator,grupa,rh, alt, sif, antihtlv, antihtcv, antihiv, hb, id_formular):
         status = 'Prelucrata'
         sange_brut = self.repo_manager.repo_sange_brut.get_first_element(id_donator, status)
         sange_brut.grupa = grupa
         sange_brut.rh = rh
-        analiza = Analiza(sange_brut.id, alt, sif, antihtlv, antihtcv, antihiv, hb)
+        analiza = Analiza(sange_brut.id, alt, sif, antihtlv, antihtcv, antihiv, hb, id_formular)
 
         self.repo_manager.repo_analiza.insert(analiza)
 

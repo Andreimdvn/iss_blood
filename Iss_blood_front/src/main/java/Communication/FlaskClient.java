@@ -529,8 +529,8 @@ public class FlaskClient {
                         jsonObject.getBoolean("ANTIHCV"),
                         jsonObject.getBoolean("ANTIHIV"),
                         jsonObject.getBoolean("HB"),
-                        GrupaSange.A2,
-                        RH.POZITIV
+                        GrupaSange.valueOf(jsonObject.getString("grupa")),
+                        RH.valueOf(jsonObject.getString("rh"))
                 );
             }
 

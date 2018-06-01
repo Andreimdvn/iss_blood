@@ -144,6 +144,7 @@ class Analize(DB):
     antihtcv = Column(Boolean, nullable=False)
     antihiv = Column(Boolean, nullable=False)
     hb = Column(Boolean, nullable=False)
+    id_formular = Column(Integer, ForeignKey("FormularDonare.id"))
 
     sange_brut = relationship('SangeBrut', back_populates='analize')
 
