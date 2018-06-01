@@ -566,6 +566,8 @@ public class FlaskClient {
         }
 
         return list;
+
+
     }
 
     public Pair<Boolean, String> anulareCerere(Integer id) {

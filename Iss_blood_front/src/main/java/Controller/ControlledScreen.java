@@ -76,7 +76,7 @@ public abstract class ControlledScreen implements Observer {
         unloadLoginRegister();
         update();
     }
-    
+
     private void unloadLoginRegister() {
         screenController.unloadScreen(Screen.LOGIN_SCREEN);
         screenController.unloadScreen(Screen.REGISTER_SCREEN);
