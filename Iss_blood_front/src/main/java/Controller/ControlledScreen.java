@@ -13,6 +13,7 @@ import javafx.scene.Parent;
 public abstract class ControlledScreen implements Observer {
     private MainService service;
     private ScreenController screenController;
+
     /**
      * Method called after each logout for each controlled screen in the application
      */

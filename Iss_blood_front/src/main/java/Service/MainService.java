@@ -1,11 +1,11 @@
 package Service;
 
 import Communication.FlaskClient;
-import Controller.ControlledScreen;
+import Model.Pacient;
+import Model.RegisterInfo;
 import Model.*;
 import Utils.Observer;
 import javafx.util.Pair;
-
 import java.util.List;
 import java.util.Map;
 
@@ -25,6 +25,8 @@ public class MainService {
     {
         return flaskClient.register(info);
     }
+
+    public Pair<Boolean, String> addPacient(Pacient pacient) { return  flaskClient.addPacient(pacient); }
 
     public Pair<Boolean, String> userTrimiteFormularDonare(FormularDonare formular, String username){return flaskClient.userTrimiteFormularDonare(formular, username);}
 
