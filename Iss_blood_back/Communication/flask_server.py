@@ -254,7 +254,9 @@ class FlaskServer:
                         self.request_data["htlv"],
                         self.request_data["htcv"],
                         self.request_data["hiv"],
-                        self.request_data["hb"])
+                        self.request_data["hb"]
+
+        )
 
         self.logger.debug(analiza)
         status, message = self.controller.staff_update_formular_donare(formular_donare, id_locatie, analiza)

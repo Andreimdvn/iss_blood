@@ -141,7 +141,7 @@ public class FlaskClient {
             boolean htlv = analiza.getBoolean("htlv");
             boolean hiv = analiza.getBoolean("hiv");
             boolean hb = analiza.getBoolean("hb");
-            list.add(new Analiza(id,alt,sif,htlv,htcv,hiv,hb, GrupaSange.A2, RH.NEGATIV)); //TO DO: RH si GRUPA
+            list.add(new Analiza(id,alt,sif,htlv,htcv,hiv,hb));
         }
 
         return list;
@@ -519,6 +519,9 @@ public class FlaskClient {
         {
             JSONObject jsonObject = formularDonares.getJSONObject(i);
             Analiza analiza = null;
+            String data = "";
+            GrupaSange grupaSange = GrupaSange.UNKNOWN;
+            RH rh = RH.UNKNOWN;
             if(jsonObject.getInt("id_analiza") >= 0) //altfel nu e gata inca
             {
                 analiza = new Analiza(
@@ -528,10 +531,12 @@ public class FlaskClient {
                         jsonObject.getBoolean("ANTIHTLV"),
                         jsonObject.getBoolean("ANTIHCV"),
                         jsonObject.getBoolean("ANTIHIV"),
-                        jsonObject.getBoolean("HB"),
-                        GrupaSange.valueOf(jsonObject.getString("grupa")),
-                        RH.valueOf(jsonObject.getString("rh"))
+                        jsonObject.getBoolean("HB")
                 );
+                data = jsonObject.getString("data");
+                grupaSange = GrupaSange.valueOf(jsonObject.getString("grupa"));
+                rh = RH.valueOf(jsonObject.getString("rh").toUpperCase());
+
             }
 
 
@@ -541,7 +546,9 @@ public class FlaskClient {
                     Status.valueOf(jsonObject.getString("status")),
                     analiza,
                     "",
-                    ""
+                    data,
+                    grupaSange,
+                    rh
             );
 
             rez.add(info);

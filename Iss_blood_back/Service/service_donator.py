@@ -97,10 +97,6 @@ class ServiceDonator(IService):
         # jsonObject.getString("centru_donare"),
         # Status.valueOf(jsonObject.getString("status")),
 
-        rez = [{"id_analiza": 1, "ALT":True, "SIF": True, "ANTIHTLV": True, "ANTIHCV": False, "ANTIHIV": False, "HB": True,
-                "numar_donare": 0, "centru_donare": "Nicu", "status": "IN_ASTEPTARE", "grupa": "AB4", "rh": "NEGATIV"}]
-
-
         # centru doanre: din donator -> sange brut -> locatie
         # numar_donare: id formular
         # status: formular.status
@@ -108,6 +104,8 @@ class ServiceDonator(IService):
 
         #am nevoie de: user -> 1 donator -> * sange brut -> analize, locatie  -> merge dupa id sange
         #                                -> * formular                        ^
+
+        rez = []
 
         user = self.db.select("User", ['username'], [username], True)
 
@@ -139,7 +137,7 @@ class ServiceDonator(IService):
             dict = {"id_analiza": analiza.id, "numar_donare": formular.id, "centru_donare": locatie,
                     "status": formular.status, "ALT": analiza.alt, "SIF": analiza.sif, "ANTIHTLV": analiza.antihtlv,
                     "ANTIHCV": analiza.antihtcv, "ANTIHIV": analiza.antihiv, "HB": analiza.hb,
-                    "grupa": str(sange.grupa), "rh": str(sange.rh)}
+                    "grupa": str(sange.grupa), "rh": str(sange.rh), "data": str(sange.data_recoltare)}
             rez.append(dict)
 
         for formular in lst_formulare: #daca au mai ramas formulare, la dam asa(nu au fost procesate inca)
