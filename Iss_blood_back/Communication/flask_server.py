@@ -78,7 +78,7 @@ class FlaskServer:
         self.flask_app.add_url_rule("/desavarsire_cerere_medic", "desavarsire_cerere_medic",
                               self.trimite_pungi,
                               methods=["POST"])
-        self.app.add_url_rule("/trimite_cerere_sange", "trimite_cerere_sange", self.trimite_cerere_sange,
+        self.flask_app.add_url_rule("/trimite_cerere_sange", "trimite_cerere_sange", self.trimite_cerere_sange,
                               methods=["POST"])
         self.flask_app.add_url_rule("/get_cereri_sange", "get_cereri_sange", self.get_cereri_sange,
                               methods=["POST"])
@@ -86,11 +86,10 @@ class FlaskServer:
                               methods=["POST"])
         self.flask_app.add_url_rule("/getIstoricDonare", "get_istoric_donare", self.get_istoric_donare,
                               methods=["POST"])
-        self.flask_app.add_url_rule("/valid_donation", "valid_donation_request",
-                              self.valid_donation_request,
+        self.flask_app.add_url_rule("/valid_donation", "valid_donation_request", self.valid_donation_request,
                               methods=["POST"])
-        self.app.add_url_rule("/get_centru_home_screen_data", "get_centru_home_screen_data",
-                              self.get_centru_home_screen_data, methods=["POST"])
+        self.flask_app.add_url_rule("/get_centru_home_screen_data", "get_centru_home_screen_data",
+                                    self.get_centru_home_screen_data, methods=["POST"])
 
     def trimite_pungi(self):
         self.request_data = request.get_json()
