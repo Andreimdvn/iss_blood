@@ -9,6 +9,8 @@ import Utils.Screen;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 
+import java.util.ArrayList;
+
 
 public abstract class ControlledScreen implements Observer {
     private MainService service;
@@ -74,7 +76,6 @@ public abstract class ControlledScreen implements Observer {
         else if(screenController.userInfo instanceof DonatorInfo)
             loadScreensDonator();
         unloadLoginRegister();
-        update();
     }
 
     private void unloadLoginRegister() {
@@ -144,9 +145,12 @@ public abstract class ControlledScreen implements Observer {
     @Override
     public void update() {
         getScreenController().getAllScreens().forEach(
-                x -> x.getControlledScreen().updateThis()
+                x -> {
+                    x.getControlledScreen().updateThis();
+                }
         );
     }
+
     abstract void updateThis();
 
     public MainService getService() {
@@ -156,6 +160,7 @@ public abstract class ControlledScreen implements Observer {
     public void setService(MainService service) {
         this.service = service;
         this.service.addObserver(this);
+
     }
 
     public ScreenController getScreenController() {
