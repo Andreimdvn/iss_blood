@@ -73,7 +73,10 @@ public class MainService {
         return flaskClient.trimiteCerereSange(cerere, cnpMedic);
     }
 
-    public Collection<DonareInfo> getIstoricDonare(String username) {return flaskClient.getIstoricDonare(username);}
+    public List<DonareInfo> getIstoricDonare(String username)
+    {
+        return flaskClient.getIstoricDonare(username);
+    }
     public void anulare(Integer id) {
         flaskClient.anulareCerere(id);
     }

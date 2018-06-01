@@ -12,6 +12,7 @@ import javafx.scene.layout.VBox;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.function.Predicate;
@@ -42,18 +43,19 @@ public class IstoricDonariController extends ControlledScreen {
     private Predicate<DonareInfo> filterCentru = info -> true;
     private Predicate<DonareInfo> filterStatus = info -> true;
 
-    private Collection<DonareInfo> istoric;
+    private List<DonareInfo> istoric = new ArrayList<>();
     private ObservableList<DonareInfo> model = FXCollections.observableArrayList();
 
 
     @FXML
     private void initialize(){
-        viewIstoric.setItems(model);
 
         numarDonareColumn.setCellValueFactory(new PropertyValueFactory<>("numarDonare"));
         centruDonareColumn.setCellValueFactory(new PropertyValueFactory<>("centruDonare"));
         statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
 
+
+        viewIstoric.setItems(model);
         ObservableList lst = FXCollections.observableArrayList();
         lst.add(Status.DISTRIBUIRE);
         lst.add(Status.IN_ASTEPTARE);
@@ -111,7 +113,8 @@ public class IstoricDonariController extends ControlledScreen {
     @Override
     void updateThis() {
         //Trimite un request catre sever si asteapta pana primeste raspunsul
-        istoric =  getService().getIstoricDonare(getScreenController().userInfo.getUsername());
+        istoric = getService().
+                getIstoricDonare(getScreenController().userInfo.getUsername());
         refreshView();
     }
 

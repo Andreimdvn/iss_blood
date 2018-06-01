@@ -663,9 +663,11 @@ public class FlaskClient {
     }
 
 
-    public Collection<DonareInfo> getIstoricDonare(String username) {
-        this.logger.debug("Sending request trimitereCerereSange");
-        HttpURLConnection connection = getConnection("/getIstoricDonare");
+    public List<DonareInfo> getIstoricDonare(String username) {
+        this.logger.debug("Sending request get istoric");
+        HttpURLConnection connection = getConnection("/get_istoric_donare");
+
+        List<DonareInfo> rez = new ArrayList<>();
 
         if (connection == null)
             return null;
@@ -674,7 +676,6 @@ public class FlaskClient {
                 .put("username", username)
                 .toString();
 
-        Collection<DonareInfo> rez = new ArrayList<>();
 
         logger.debug("SENDING: " + jsonString);
         JSONObject jsonResponse = sendRequest(connection, jsonString);
