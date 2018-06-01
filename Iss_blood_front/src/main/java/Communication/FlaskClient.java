@@ -103,7 +103,7 @@ public class FlaskClient {
     }
 
     public Pair<Boolean, String> isAValidDonation(String cnpDonator) {
-        HttpURLConnection connection = getConnection("/validDonation");
+        HttpURLConnection connection = getConnection("/valid_donation");
 
         if(connection == null){
             return new Pair<>(null, "Client connection request Error");

@@ -84,7 +84,7 @@ class FlaskServer:
                               methods=["POST"])
         self.flask_app.add_url_rule("/anulare_cerere", "anulare_cerere", self.anulare_cerere,
                               methods=["POST"])
-        self.app.add_url_rule("/validDonation", "valid_donation_request",
+        self.flask_app.add_url_rule("/valid_donation", "valid_donation_request",
                               self.valid_donation_request,
                               methods=["POST"])
 
