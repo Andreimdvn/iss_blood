@@ -43,11 +43,14 @@ def insert_dumy_data(orm):
     # medic
     orm.insert('User', columns=('username', 'email', 'password'), values=('medic1', 'medic1@gmail.com', 'medic1'))
     orm.insert('User', columns=('username', 'email', 'password'), values=('medic2', 'medic2@gmail.com', 'medic2'))
+    orm.insert('User', columns=('username', 'email', 'password'), values=('medic3', 'medic3@gmail.com', 'medic3'))
 
     orm.insert('Medic', columns=('id_user', 'id_locatie', 'prenume', 'nume', 'cnp', 'telefon', 'specializare'),
                values=(1, 1, 'PrenumeMedic1', 'NumeMedic1', '1234567891234', '1231231231', 'Oncologie'))
     orm.insert('Medic', columns=('id_user', 'id_locatie', 'prenume', 'nume', 'cnp', 'telefon', 'specializare'),
                values=(2, 2, 'PrenumeMedic2', 'NumeMedic2', '1234567891235', '1231231232', 'Boli infectioase'))
+    orm.insert('Medic', columns=('id_user', 'id_locatie', 'prenume', 'nume', 'cnp', 'telefon', 'specializare'),
+               values=(3, 2, 'PrenumeMedic3', 'NumeMedic3', '1554567891235', '1231231232', 'Olaru'))
 
     # donator
     orm.insert('User', columns=('username', 'email', 'password'), values=('donator1', 'donator1@gmail.com', 'donator1'))
@@ -55,11 +58,11 @@ def insert_dumy_data(orm):
 
     orm.insert('Donator', columns=('id_user', 'nume', 'prenume', 'cnp', 'id_domiciliu', 'adresa_domiciliu',
                                    'data_nasterii', 'telefon', 'id_localitate_resedinta', 'adresa_resedinta'),
-               values=(3, 'NumeDonator1', 'PrenumeDonator1', '1234567891236', 1, 'Domiciliu1', datetime(1997, 1, 21),
+               values=(4, 'NumeDonator1', 'PrenumeDonator1', '1234567891236', 1, 'Domiciliu1', datetime(1997, 1, 21),
                        '1231233211', 1, 'Resedinta1'))
     orm.insert('Donator', columns=('id_user', 'nume', 'prenume', 'cnp', 'id_domiciliu', 'adresa_domiciliu',
                                    'data_nasterii', 'telefon', 'id_localitate_resedinta', 'adresa_resedinta'),
-               values=(4, 'NumeDonator2', 'PrenumeDonator2', '1234569871236', 3, 'Domiciliu2', datetime(1991, 5, 2),
+               values=(5, 'NumeDonator2', 'PrenumeDonator2', '1234569871236', 3, 'Domiciliu2', datetime(1991, 5, 2),
                        '1221233211', 1, 'Resedinta2'))
 
     # staff transfurzii
@@ -70,11 +73,11 @@ def insert_dumy_data(orm):
     orm.insert('User', columns=('username', 'email', 'password'), values=('transfuzie3', 'transfuzie3@gmail.com',
                                                                           'transfuzie3'))
     orm.insert('StaffTransfuzii', columns=('id_user', 'id_locatie', 'telefon', 'prenume', 'nume', 'cnp'),
-               values=(5, 4, '0987654321', 'PrenumeTransfuzie1', 'NumeTransfuzie1', '1122334455667'))
+               values=(6, 4, '0987654321', 'PrenumeTransfuzie1', 'NumeTransfuzie1', '1122334455667'))
     orm.insert('StaffTransfuzii', columns=('id_user', 'id_locatie', 'telefon', 'prenume', 'nume', 'cnp'),
-               values=(6, 5, '0987651234', 'PrenumeTransfuzie2', 'NumeTransfuzie2', '1122734455667'))
+               values=(7, 5, '0987651234', 'PrenumeTransfuzie2', 'NumeTransfuzie2', '1122734455667'))
     orm.insert('StaffTransfuzii', columns=('id_user', 'id_locatie', 'telefon', 'prenume', 'nume', 'cnp'),
-               values=(7, 6, '0987651234', 'PrenumeTransfuzie2', 'NumeTransfuzie3', '1112734455667'))
+               values=(8, 6, '0987651234', 'PrenumeTransfuzie2', 'NumeTransfuzie3', '1112734455667'))
 
     # licente
     orm.insert('Licente', columns=('tip_licenta', 'cod_licenta', 'folosita'), values=('StaffTransfuzie', 'transf1', 0))

@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.DonatorInfo;
+import Utils.CustomMessageBox;
 import Utils.Screen;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.animation.*;
@@ -16,6 +17,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import javafx.util.Pair;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -125,24 +127,40 @@ public class DonatorDashboardController extends ControlledScreen {
 
     @FXML
     private void animationDashboardButtons(){
-        mouseLeftFormularContainer();
-        mouseLeftIstoricContainer();
+        Pair<Boolean, String> validDonation = isAValidDonation();
+        if(validDonation.getKey()) {
+            mouseLeftFormularContainer();
+            mouseLeftIstoricContainer();
 
-        if(this.isAnySelected() && this.isAnyLoaded())
-        {
-         stopTimer();
-         loadBottomPane();
+            if(this.isAnySelected() && this.isAnyLoaded())
+            {
+             stopTimer();
+             loadBottomPane();
+            }
+            else if(this.isAnySelected() && !okStyle) {
+                moveCenterToTop();
+            }
+            else if(!this.isAnySelected() && okStyle) {
+                unloadFormular();
+                moveTopToCenter();
+                istoricLoaded = false;
+                formularLoaded = false;
+                startTimer();
+            }
+        } else {
+            new CustomMessageBox("Donare", validDonation.getValue()).show();
         }
-        else if(this.isAnySelected() && !okStyle) {
-            moveCenterToTop();
-        }
-        else if(!this.isAnySelected() && okStyle) {
-            unloadFormular();
-            moveTopToCenter();
-            istoricLoaded = false;
-            formularLoaded = false;
-            startTimer();
-        }
+    }
+
+    /**
+     *  Check if a donator can donate, checking if he donated in last 3 months for men and 4 months for women
+     * @return true if the donator can donate
+     *         false else
+     */
+    private Pair<Boolean, String> isAValidDonation() {
+        String cnpDonator = ((DonatorInfo) getScreenController().userInfo).getCnp();
+        Pair<Boolean, String> response = getService().isAValidDonation(cnpDonator);
+        return response;
     }
 
     private void showTopBar()
@@ -263,6 +281,7 @@ public class DonatorDashboardController extends ControlledScreen {
         logger.debug("Buton istoric a fost apasat");
         borderPane.setBottom(getIstoric());
         fadeIn(getIstoric());
+
 
     }
     /**

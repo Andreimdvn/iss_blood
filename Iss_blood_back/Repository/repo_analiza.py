@@ -9,10 +9,10 @@ class RepositoryAnaliza(IRepository):
 
         table_name = 'Analize'
 
-        specific_vals = [analiza.id_sange_brut, analiza.alt, analiza.sif, analiza.antihtlv, analiza.antihtcv,
+        specific_vals = [analiza.id_sange_brut, analiza.id_formular, analiza.alt, analiza.sif, analiza.antihtlv, analiza.antihtcv,
                          analiza.antihiv, analiza.hb]
 
-        specific_col_names = ['id_sange_brut', 'alt', 'sif', 'antihtlv', 'antihtcv', 'antihiv', 'hb']
+        specific_col_names = ['id_sange_brut', 'id_formular', 'alt', 'sif', 'antihtlv', 'antihtcv', 'antihiv', 'hb']
 
         try:
             self.db.insert(table_name, specific_col_names, specific_vals)

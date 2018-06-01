@@ -67,7 +67,7 @@ public class CentruCereriDonariController extends ControlledScreen{
 
     }
 
-    public void updateThis(){
+    public void updateThis() {
 
         list = getService().getFormulareDonariDupaLocatie(getInfo().getIdLocatie());
         donareObservableList.setAll(list);
@@ -131,8 +131,9 @@ public class CentruCereriDonariController extends ControlledScreen{
     @FXML
     private void button2Clicked(){
         getSelected().setStatus(Status.PREGATIRE);
-        getService().staffUpdateFormularDonare(getSelected(),getInfo().getIdLocatie());
-        update();
+        StaffInfo info = (StaffInfo)getScreenController().userInfo;
+        String name = info.getNume() + " " + info.getPrenume();
+        getService().staffUpdateFormularDonare(getSelected(),getInfo().getIdLocatie(), name);
     }
     @FXML
     private void button3Clicked(){
