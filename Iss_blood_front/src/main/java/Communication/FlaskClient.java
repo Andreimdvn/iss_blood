@@ -5,6 +5,9 @@ import Model.RegisterInfo;
 import Model.*;
 import Utils.Observer;
 import Utils.UserUtils;
+import io.socket.client.IO;
+import io.socket.client.Socket;
+import io.socket.emitter.Emitter;
 import javafx.util.Pair;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -22,11 +25,30 @@ public class FlaskClient {
 
     private String urlRoot;
 
-
     private Logger logger = LogManager.getLogger(FlaskClient.class.getName());
 
     public FlaskClient(Properties properties) {
         this.urlRoot = "http://"+properties.getProperty("serverIp")+":"+properties.getProperty("serverPort");
+        initializeConnection();
+    }
+
+    private void initializeConnection() {
+        try {
+            Socket socket = IO.socket(this.urlRoot);
+
+            socket.on("update", new Emitter.Listener() {
+                @Override
+                public void call(Object... args) {
+                    System.out.println("Am primit update!");
+                    update();
+                }
+            });
+
+            socket.connect();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+            this.logger.error(e.getMessage());
+        }
     }
 
     /**
@@ -506,7 +528,8 @@ public class FlaskClient {
 
 
     private Observer observer;
-    private void update(){
+
+    private void update() {
         try {
             observer.update();
         } catch (RemoteException e) {
@@ -515,6 +538,7 @@ public class FlaskClient {
     }
     public void addObserver(Observer controlledScreen) {
         observer = controlledScreen;
+        update();
     }
 
     public Pair<Boolean,String> trimiteCerereSange(CerereSange cerere, String cnpMedic) {
