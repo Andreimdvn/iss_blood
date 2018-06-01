@@ -1,8 +1,18 @@
 {
+<<<<<<< HEAD
   "flask_http_port": 16000,
   "mysql_server": "localhost",
   "mysql_username": "root",
-  "mysql_password": "root",
+  "mysql_password": "parola",
   "mysql_database": "iss_blood",
   "mysql_port": 3306
 }
+=======
+   "flask_http_port": 16000,
+   "mysql_server": "127.0.0.1",
+   "mysql_username": "root",
+   "mysql_password": "root",
+   "mysql_database": "sql9226036",
+   "mysql_port": 3306
+}
+>>>>>>> 527d2c6d19298cca63b038dccf16bddb68c99fea
