@@ -105,7 +105,6 @@ public class CentruCereriSangeController extends ControlledScreen{
 
     @FXML
     private void trimitePungi() {
-
         CerereSange cerereSange = cerereSangeTableView.getSelectionModel().getSelectedItem();
         if(cerereSange != null){
 
@@ -126,6 +125,6 @@ public class CentruCereriSangeController extends ControlledScreen{
 
     @FXML
     private void messageHim(){
-        Chat a = new Chat();
+        loadChat();
     }
 }

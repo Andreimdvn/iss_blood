@@ -6,8 +6,14 @@ import Model.StaffInfo;
 import Service.MainService;
 import Utils.Observer;
 import Utils.Screen;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.StageStyle;
+
+import java.io.IOException;
+import java.util.ArrayList;
 
 
 public abstract class ControlledScreen implements Observer {
@@ -62,7 +68,10 @@ public abstract class ControlledScreen implements Observer {
         screenController.loadScreen(Screen.FORMULAR_DONARE_SCREEN, Screen.CENTRU_FORMULAR_RESOURCE);
         screenController.setScreen(Screen.CENTRU_TRANSFUZIE_SCREEN);
     }
+    protected void loadChat(){
+        screenController.loadScreen(Screen.CHAT_SCREEN,Screen.CHAT_RESOURCE);
 
+    }
     /**
      * Method called after login for each controlled screen in the application
      */
@@ -143,9 +152,12 @@ public abstract class ControlledScreen implements Observer {
     @Override
     public void update() {
         getScreenController().getAllScreens().forEach(
-                x -> x.getControlledScreen().updateThis()
+                x -> {
+                    x.getControlledScreen().updateThis();
+                }
         );
     }
+
     abstract void updateThis();
 
     public MainService getService() {
@@ -155,6 +167,7 @@ public abstract class ControlledScreen implements Observer {
     public void setService(MainService service) {
         this.service = service;
         this.service.addObserver(this);
+
     }
 
     public ScreenController getScreenController() {

@@ -102,7 +102,12 @@ public class CentruTransfuzieController extends ControlledScreen {
 
         // borderPane.getCenter().setLayoutY(6500);
     }
+    @FXML
 
+    private void chatClicked(){
+        loadChat();
+        borderPane.setCenter(super.getScreenController().getScreen(Screen.CHAT_SCREEN));
+    }
     @FXML
     private void logout(){
         loadLogin();

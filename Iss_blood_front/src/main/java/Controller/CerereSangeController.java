@@ -76,7 +76,6 @@ public class CerereSangeController extends ControlledScreen {
 
             logger.info("Date introduse corect in cerere de sange. " + cerereLogDetails);
 
-
             cerere.setNumeMedic(((MedicInfo)getScreenController().userInfo).getFullName());
             String cnpMedic = ((MedicInfo)getScreenController().userInfo).getCnp();
             Pair<Boolean, String> requestVerdict = getService().trimiteCerereSange(cerere, cnpMedic);

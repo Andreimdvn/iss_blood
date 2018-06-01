@@ -5,6 +5,9 @@ import Model.RegisterInfo;
 import Model.*;
 import Utils.Observer;
 import Utils.UserUtils;
+import io.socket.client.IO;
+import io.socket.client.Socket;
+import io.socket.emitter.Emitter;
 import javafx.util.Pair;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -22,11 +25,30 @@ public class FlaskClient {
 
     private String urlRoot;
 
-
     private Logger logger = LogManager.getLogger(FlaskClient.class.getName());
 
     public FlaskClient(Properties properties) {
         this.urlRoot = "http://"+properties.getProperty("serverIp")+":"+properties.getProperty("serverPort");
+        initializeConnection();
+    }
+
+    private void initializeConnection() {
+        try {
+            Socket socket = IO.socket(this.urlRoot);
+
+            socket.on("update", new Emitter.Listener() {
+                @Override
+                public void call(Object... args) {
+                    System.out.println("Am primit update!");
+                    update();
+                }
+            });
+
+            socket.connect();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+            this.logger.error(e.getMessage());
+        }
     }
 
     /**
@@ -80,6 +102,28 @@ public class FlaskClient {
         }
     }
 
+    public Pair<Boolean, String> isAValidDonation(String cnpDonator) {
+        HttpURLConnection connection = getConnection("/valid_donation");
+
+        if(connection == null){
+            return new Pair<>(null, "Client connection request Error");
+        }
+
+        String jsonString = new JSONObject().put("cnpDonator", cnpDonator).toString();
+        logger.debug("SENDING VALIDATION DONATION   " + jsonString);
+
+        JSONObject jsonResponse = sendRequest(connection, jsonString);
+
+        logger.debug("RESPONSE VALIDATION DONATION" + jsonResponse);
+
+        if(jsonResponse == null)
+            return new Pair<>(false, "Connection error.");
+        if(jsonResponse.getString("status").equals("0"))
+            return new Pair<>(true, "Is a valid donation");
+
+        return new Pair<>(false, jsonResponse.getString("message"));
+    }
+
     /**
      * Sends a login request to the server
      * @param user : Username for login
@@ -114,6 +158,53 @@ public class FlaskClient {
             return new Pair<>(null, jsonResponse.getString("message"));
         }
     }
+
+    public Pair<Object, String> addActiveUser(String cnp){
+        HttpURLConnection connection = getConnection("/chat_add_active_user");
+
+        if(connection == null){
+            return new Pair<>(null, "Client connection request Error");
+        }
+
+        String jsonString = new JSONObject().put("cnp", cnp).toString();
+        logger.debug("SENDING: " + jsonString);
+        JSONObject jsonResponse = this.sendRequest(connection, jsonString);
+        logger.debug("RESPONSE : " + jsonResponse);
+
+        return new Pair<>(jsonResponse.getInt("status"), jsonResponse.getString("message"));
+
+    }
+
+    public Pair<Integer, List<List<String>>> getActiveUser(){
+
+        HttpURLConnection connection = getConnection("/chat_get_active_users");
+
+        if(connection == null){
+        }
+        else {
+            String jsonString = new JSONObject().put("ds",2).toString();
+
+            logger.debug("SENDING: " + jsonString);
+            JSONObject jsonResponse = this.sendRequest(connection, jsonString);
+            logger.debug("RESPONSE : " + jsonResponse);
+
+            if(jsonResponse != null)
+            {
+                JSONArray formularDonares = jsonResponse.getJSONArray("message");
+                System.out.println(formularDonares.length());
+                for(int i = 0; i < formularDonares.length() ;i++)
+                {
+                    JSONObject x = formularDonares.getJSONObject(i);
+
+                }
+            }
+
+        }
+        return new Pair<>(null,null);
+    }
+
+
+
     public List<Analiza> getAnalize(String cnp){
         HttpURLConnection connection = getConnection("/get_analize");
 
@@ -484,7 +575,8 @@ public class FlaskClient {
 
 
     private Observer observer;
-    private void update(){
+
+    private void update() {
         try {
             observer.update();
         } catch (RemoteException e) {

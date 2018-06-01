@@ -81,6 +81,8 @@ public class ChatController extends ControlledScreen{
         boolean y = x.nextBoolean();
         handleMessage("Pizda lui Alin ",y);
 
+        getService().getActiveUser();
+
     }
     private void handleMessage(String string, Boolean meSentIt){
         Label l = new Label(string);
@@ -100,7 +102,6 @@ public class ChatController extends ControlledScreen{
     }
     @Override
     void updateThis() {
-
     }
 
 

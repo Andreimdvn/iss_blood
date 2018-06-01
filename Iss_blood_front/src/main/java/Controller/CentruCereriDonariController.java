@@ -66,7 +66,7 @@ public class CentruCereriDonariController extends ControlledScreen{
 
     }
 
-    public void updateThis(){
+    public void updateThis() {
 
         list = getService().getFormulareDonariDupaLocatie(getInfo().getIdLocatie());
         donareObservableList.setAll(list);

@@ -26,6 +26,11 @@ dependencies {
     compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.8.2'
     // https://mvnrepository.com/artifact/de.jensd/fontawesomefx-octicons
     compile group: 'de.jensd', name: 'fontawesomefx-octicons', version: '4.3.0-9.1.2'
+
+    compile ('io.socket:socket.io-client:1.0.0') {
+        // excluding org.json which is provided by Android
+        exclude group: 'org.json', module: 'json'
+    }
 }
 
 jar {

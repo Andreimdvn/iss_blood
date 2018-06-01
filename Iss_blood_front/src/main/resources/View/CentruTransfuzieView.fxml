@@ -125,12 +125,17 @@
                   <ToggleButton fx:id="t3" mnemonicParsing="false" onMouseClicked="#cereriDonariClicked" prefHeight="29.0" prefWidth="178.0" styleClass="buttonSecondaryTiny" text="Vizualizare cereri donari" toggleGroup="$leftGroup" />
                   <ToggleButton fx:id="t4" mnemonicParsing="false" onAction="#cereriSangeClicked" prefHeight="29.0" prefWidth="178.0" styleClass="buttonSecondaryTiny" text="Vizualizare cereri sange" toggleGroup="$leftGroup" />
                   <ToggleButton fx:id="t5" mnemonicParsing="false" onAction="#stocCurentClicked" prefHeight="29.0" prefWidth="178.0" styleClass="buttonSecondaryTiny" text="Stoc curent" toggleGroup="$leftGroup" />
+                  <ToggleButton fx:id="t51" mnemonicParsing="false" onAction="#chatClicked" prefHeight="29.0" prefWidth="178.0" styleClass="buttonSecondaryTiny" text="Chat">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="leftGroup1" />
+                     </toggleGroup>
+                  </ToggleButton>
                </children>
             </VBox>
             <Pane layoutX="12.0" layoutY="6.0" prefHeight="150.0" prefWidth="208.0">
                <children>
-                  <Label layoutX="5.0" layoutY="96.3125" prefHeight="20.0" prefWidth="198.0" style="-fx-alignment: center;" styleClass="labelSecondary" text="Loading..." textAlignment="CENTER" fx:id="numeStaffLabel" />
-                  <Label fx:id="numeCentruLabel" layoutY="67.3125" styleClass="labelSecondary" text="Loading..."/>
+                  <Label fx:id="numeStaffLabel" layoutX="5.0" layoutY="96.3125" prefHeight="20.0" prefWidth="198.0" style="-fx-alignment: center;" styleClass="labelSecondary" text="Loading..." textAlignment="CENTER" />
+                  <Label fx:id="numeCentruLabel" layoutY="67.3125" styleClass="labelSecondary" text="Loading..." />
                   <OctIconView fill="WHITE" glyphName="SHIELD" layoutX="82.0" layoutY="59.0" size="50" wrappingWidth="44.66668701171875" />
                </children>
             </Pane>
