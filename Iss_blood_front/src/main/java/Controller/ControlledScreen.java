@@ -15,6 +15,8 @@ import javafx.stage.StageStyle;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import java.util.ArrayList;
+
 
 public abstract class ControlledScreen implements Observer {
     private MainService service;
