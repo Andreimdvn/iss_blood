@@ -80,6 +80,28 @@ public class FlaskClient {
         }
     }
 
+    public Pair<Boolean, String> isAValidDonation(String cnpDonator) {
+        HttpURLConnection connection = getConnection("/validDonation");
+
+        if(connection == null){
+            return new Pair<>(null, "Client connection request Error");
+        }
+
+        String jsonString = new JSONObject().put("cnpDonator", cnpDonator).toString();
+        logger.debug("SENDING VALIDATION DONATION   " + jsonString);
+
+        JSONObject jsonResponse = sendRequest(connection, jsonString);
+
+        logger.debug("RESPONSE VALIDATION DONATION" + jsonResponse);
+
+        if(jsonResponse == null)
+            return new Pair<>(false, "Connection error.");
+        if(jsonResponse.getString("status").equals("0"))
+            return new Pair<>(true, "Is a valid donation");
+
+        return new Pair<>(false, jsonResponse.getString("message"));
+    }
+
     /**
      * Sends a login request to the server
      * @param user : Username for login
