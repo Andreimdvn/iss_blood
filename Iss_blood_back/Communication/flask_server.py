@@ -66,6 +66,8 @@ class FlaskServer:
                               methods=["POST"])
         self.app.add_url_rule("/trimiteCerereSange", "trimite_cerere_sange", self.trimite_cerere_sange,
                               methods=["POST"])
+        self.app.add_url_rule("/getIstoricDonare", "get_istoric_donare", self.get_istoric_donare,
+                              methods=["POST"])
 
     def trimite_pungi(self):
         self.request_data = request.get_json()
@@ -330,5 +332,17 @@ class FlaskServer:
 
         status, message = self.controller.trimite_cerere_sange(cerere, self.request_data["cnp_medic"])
         return_dict = {"status": status, "message": message}
+
+        return json.dumps(return_dict)
+
+    def get_istoric_donare(self):
+        self.request_data = request.get_json()
+        self.logger.debug("Got /get_istoric_donare request JSON {}".format(self.request_data))
+
+        username = self.request_data["username"]
+
+        return_dict = {
+            "entities": self.controller.get_istoric_donari(username)
+        }
 
         return json.dumps(return_dict)

@@ -33,12 +33,11 @@
             </AnchorPane>
          </children>
       </VBox>
-      <JFXButton layoutX="33.0" layoutY="420.0" prefHeight="25.0" prefWidth="184.0" styleClass="buttonFormular" text="Cauta" />
-      <TableView layoutX="252.0" layoutY="31.0" prefHeight="465.0" prefWidth="511.0">
+      <TableView fx:id="viewIstoric" layoutX="252.0" layoutY="31.0" prefHeight="465.0" prefWidth="511.0">
         <columns>
-          <TableColumn prefWidth="118.5" text="Numar donare" />
-          <TableColumn prefWidth="323.0" text="Centru donare" />
-            <TableColumn prefWidth="68.5" text="Status" />
+          <TableColumn fx:id="numarDonareColumn" prefWidth="118.5" text="Numar donare" />
+          <TableColumn fx:id="centruDonareColumn" prefWidth="323.0" text="Centru donare" />
+            <TableColumn fx:id="statusColumn" prefWidth="68.5" text="Status" />
         </columns>
       </TableView>
    </children>

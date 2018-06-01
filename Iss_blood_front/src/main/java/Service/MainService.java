@@ -6,6 +6,7 @@ import Model.*;
 import Utils.Observer;
 import javafx.util.Pair;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -63,4 +64,6 @@ public class MainService {
     public Pair<Boolean, String> trimiteCerereSange(CerereSange cerere, String cnpMedic) {
         return flaskClient.trimiteCerereSange(cerere, cnpMedic);
     }
+
+    public Collection<DonareInfo> getIstoricDonare(String username) {return flaskClient.getIstoricDonare(username);}
 }

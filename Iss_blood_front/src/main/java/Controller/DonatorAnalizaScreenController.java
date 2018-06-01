@@ -88,7 +88,7 @@ public class DonatorAnalizaScreenController extends ControlledScreen{
             }
         });
     }
-    public void setFields(String surname,String forename,Sex donatorSex,Integer age,Integer idBloodBag){
+    public void setFields(String dataRecoltarii,){
     }
     public void closeWindow(){
         Stage stage = (Stage) closeButton.getScene().getWindow();
