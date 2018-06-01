@@ -14,6 +14,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.Collection;
+import java.util.function.Predicate;
 
 public class IstoricDonariController extends ControlledScreen {
 
@@ -40,6 +41,11 @@ public class IstoricDonariController extends ControlledScreen {
     private TableColumn centruDonareColumn;
     @FXML
     private TableColumn statusColumn;
+
+    private Predicate<DonareInfo> filterData;
+    private Predicate<DonareInfo> filterCentru;
+    private Predicate<DonareInfo> filterStatus;
+
 
 
     private Collection<DonareInfo> istoric;
