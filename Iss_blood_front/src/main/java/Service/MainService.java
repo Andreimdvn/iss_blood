@@ -50,9 +50,9 @@ public class MainService {
         return flaskClient.getAnalize(cnp);
     }
 
-    public Pair<Boolean, String> trimitePungi(int idCerere, int idLocatie, int idLocatieNoua,
+    public Pair<Boolean, String> trimitePungi(int idCerere, int idLocatie,
                                               GrupaSange grupaSange, RH rh, int plasma, int trombocite, int globule){
-        return flaskClient.trimitePungi(idCerere,  idLocatie, idLocatieNoua, grupaSange, rh, plasma,trombocite, globule);
+        return flaskClient.trimitePungi(idCerere,  idLocatie, grupaSange, rh, plasma,trombocite, globule);
 
     }
 
@@ -60,7 +60,16 @@ public class MainService {
         flaskClient.addObserver(controlledScreen);
     }
 
+    public List<CerereSange> getCereriSange(int id_locatie,String status,boolean fromSpital)
+    {
+     return flaskClient.getCereriSange(id_locatie,status,fromSpital);
+    }
+
     public Pair<Boolean, String> trimiteCerereSange(CerereSange cerere, String cnpMedic) {
         return flaskClient.trimiteCerereSange(cerere, cnpMedic);
+    }
+
+    public void anulare(Integer id) {
+        flaskClient.anulareCerere(id);
     }
 }

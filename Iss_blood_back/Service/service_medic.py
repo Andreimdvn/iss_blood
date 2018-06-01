@@ -38,3 +38,9 @@ class ServiceMedic(IService):
                       "A fost adaugat si un pacient nou."
         else:
             return 0, "Cerere adaugata cu succes."
+
+    def get_cereri_sange(self, id_locatie, status, from_spital):
+        return self.repo_manager.repo_cereri.get_all_by_id_status(id_locatie, status, from_spital)
+
+    def update_cerere(self, id_cerere, status):
+        return self.repo_manager.repo_cereri.update_cerere(id_cerere, status)

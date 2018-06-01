@@ -6,18 +6,52 @@ import org.apache.logging.log4j.Logger;
 import java.sql.Date;
 
 public class CerereSange{
+    private Integer id;
     private String numePacient;
+
+    public CerereSange(Integer id, String numePacient, String cnpPacient, GrupaSange grupaSange, RH rh, Integer numarPungiTrombocite, Integer numarPungiGlobuleRosii, Integer numarPungiPlasma, Date date, Importanta importanta, String numeMedic, String spital) {
+        this.id = id;
+        this.numePacient = numePacient;
+        this.cnpPacient = cnpPacient;
+        this.grupaSange = grupaSange;
+        this.rh = rh;
+        this.numarPungiTrombocite = numarPungiTrombocite;
+        this.numarPungiGlobuleRosii = numarPungiGlobuleRosii;
+        this.numarPungiPlasma = numarPungiPlasma;
+        this.date = date;
+        this.importanta = importanta;
+        this.numeMedic = numeMedic;
+        this.spital = spital;
+    }
+
     private String cnpPacient;
     private GrupaSange grupaSange;
     private RH rh;
     private Integer numarPungiTrombocite;
     private Integer numarPungiGlobuleRosii;
     private Integer numarPungiPlasma;
+
+    public CerereSange(Integer id, String numePacient, String cnpPacient, GrupaSange grupaSange, RH rh, Integer numarPungiTrombocite, Integer numarPungiGlobuleRosii, Integer numarPungiPlasma, Date date, Importanta importanta, String numeMedic, String spital, String status) {
+        this.id = id;
+        this.numePacient = numePacient;
+        this.cnpPacient = cnpPacient;
+        this.grupaSange = grupaSange;
+        this.rh = rh;
+        this.numarPungiTrombocite = numarPungiTrombocite;
+        this.numarPungiGlobuleRosii = numarPungiGlobuleRosii;
+        this.numarPungiPlasma = numarPungiPlasma;
+        this.date = date;
+        this.importanta = importanta;
+        this.numeMedic = numeMedic;
+        this.spital = spital;
+        this.status = status;
+    }
+
     private Date date;
     private Importanta importanta;
     private String numeMedic;
     private String spital;
-    private Boolean status;
+    private String status;
 
     private Logger logger = LogManager.getLogger(CerereSange.class.getName());
 
@@ -33,7 +67,7 @@ public class CerereSange{
         this.importanta = importanta;
         this.numeMedic = numeMedic;
         this.spital = spital;
-        this.status = false;
+        this.status = "pl";
     }
 
     public String getNumeMedic() {
@@ -134,7 +168,7 @@ public class CerereSange{
         this.numarPungiGlobuleRosii = numarPungiGlobuleRosii;
         this.numarPungiPlasma = numarPungiPlasma;
         this.importanta = importanta;
-        this.status = false;
+        this.status="pl";
 
         this.logger.debug(toString());
     }
@@ -165,5 +199,9 @@ public class CerereSange{
         this.numarPungiPlasma = numarPungiPlasma;
         this.date = date;
         this.importanta = importanta;
+    }
+
+    public Integer getId() {
+        return id;
     }
 }

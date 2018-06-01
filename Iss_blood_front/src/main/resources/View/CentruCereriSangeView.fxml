@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXCheckBox?>
-<?import com.jfoenix.controls.JFXTextField?>
 <?import de.jensd.fx.glyphs.octicons.OctIconView?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
@@ -52,19 +50,11 @@
                   </HBox>
                </children>
             </VBox>
-            <JFXCheckBox layoutX="734.0" layoutY="107.0" text="Esti sigur?" />
             <Label layoutX="325.0" layoutY="23.0" prefHeight="17.0" prefWidth="77.0" text="Nume doctor" />
             <Label layoutX="325.0" layoutY="57.0" prefHeight="17.0" prefWidth="77.0" text="Nume spital" />
             <Label fx:id="spitalLabel" layoutX="402.0" layoutY="58.0" prefHeight="17.0" prefWidth="200.0" />
             <Label fx:id="doctorLabel" layoutX="402.0" layoutY="23.0" prefHeight="17.0" prefWidth="235.0" />
             <JFXButton layoutX="325.0" layoutY="93.0" prefHeight="25.0" prefWidth="154.0" styleClass="buttonMessageBox" text="Message him" />
-            <JFXTextField fx:id="plasmaText" layoutX="568.0" layoutY="19.0" prefHeight="25.0" prefWidth="69.0" promptText="plasma" />
-            <JFXTextField fx:id="trombociteText" layoutX="648.0" layoutY="19.0" prefHeight="25.0" prefWidth="69.0" promptText="trombocite" />
-            <JFXTextField fx:id="globuleText" layoutX="734.0" layoutY="19.0" prefHeight="25.0" prefWidth="69.0" promptText="globule" />
-            <JFXTextField fx:id="idLocatieNouaText" layoutX="648.0" layoutY="62.0" prefHeight="25.0" prefWidth="96.0" promptText="idLocatieNoua" />
-            <JFXTextField fx:id="idCerereText" layoutX="568.0" layoutY="63.0" prefHeight="25.0" prefWidth="69.0" promptText="idCerere" />
-            <JFXTextField fx:id="grupaText" layoutX="568.0" layoutY="103.0" prefHeight="25.0" prefWidth="69.0" promptText="globule" text="Grupa" />
-            <JFXTextField fx:id="rhText" layoutX="648.0" layoutY="99.0" prefHeight="25.0" prefWidth="69.0" promptText="globule" text="Rh" />
          </children>
       </AnchorPane>
    </children>
