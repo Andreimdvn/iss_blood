@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.UserInfo;
 import Utils.CustomMessageBox;
 import Utils.Screen;
 import com.jfoenix.controls.JFXPasswordField;
@@ -14,9 +15,6 @@ import javafx.stage.Stage;
 import javafx.util.Pair;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import java.util.Objects;
-
 
 public class LoginController extends ControlledScreen {
 
@@ -75,33 +73,32 @@ public class LoginController extends ControlledScreen {
         logger.debug("Login button has been clicked");
 
 
+
         //Pair<Integer, String> canLogin;
-        Pair<Integer, String> canLogin = getService().login(username, password);
+        //Pair<Integer, String> canLogin = getService().login(username, password);
+
+//        Pair<Integer, String> canLogin;
+        Pair<UserInfo, String> canLogin = getService().login(username, password);
+
         // Login for debug
-        if(username.equals("donator"))
-            canLogin = new Pair<>(1,"");
-        else if(username.equals("medic"))
-            canLogin = new Pair<>(2,"");
-        else
-            canLogin = new Pair<>(3,"");
+//        if(username.equals("donator"))
+//            canLogin = new Pair<>(1,"");
+//        else if(username.equals("medic"))
+//            canLogin = new Pair<>(2,"");
+//        else
+//            canLogin = new Pair<>(3,"");
         //remove this ^^^ on production
 
-        if (canLogin.getKey() == 0) {
-            new CustomMessageBox("Login",canLogin.getValue()).show();
-        } else if (canLogin.getKey() == 1){
-
-            getScreenController().setScreen(Screen.DONATOR_SCREEN);
-        }
-        else if (canLogin.getKey() == 2) {
-            getScreenController().setScreen(Screen.MEDIC_SCREEN);
-        }
-        else  {
-            getScreenController().setScreen(Screen.CENTRU_TRANSFUZIE_SCREEN);
-
-            //logger.debug("Credintiale gresite");
-            //controller.setScreen();
+        if (canLogin.getKey() == null) { //failed
+            new CustomMessageBox("Login", canLogin.getValue()).show();
+            return;
         }
 
+        ScreenController screenController = getScreenController();
+
+        screenController.userInfo = canLogin.getKey();
+
+        loadAfterLogin();
     }
 
     /***
@@ -123,5 +120,11 @@ public class LoginController extends ControlledScreen {
         logger.debug("X has been clicked");
         Stage current = getStage();
         current.close();
+    }
+
+
+    @Override
+    protected void updateThis() {
+
     }
 }

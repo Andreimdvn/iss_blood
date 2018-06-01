@@ -3,15 +3,14 @@ package Validators;
 import Model.RegisterInfo;
 import javafx.util.Pair;
 
-public class RegisterValidator {
+public class RegisterValidator extends Validator<RegisterInfo> {
 
     /**
      * @param info - the RegisterInfo to be validated
      * @return True if the info is valid, false otherwise
      */
-    public Pair<Boolean, String> Validate(RegisterInfo info)
+    public Pair<Boolean, String> validate(RegisterInfo info)
     {
-//        return new Pair<>(true, "ok");
 
         String erori = "";
 
@@ -35,19 +34,5 @@ public class RegisterValidator {
             return new Pair<>(true, "Ok");
         return new Pair<>(false, erori);
     }
-
-    /**
-     * Verifica daca stringul e format doar din cifre
-     * @param str - stringul de verificat
-     * @return True daaca stringul contine doar cifre, False altfel
-     */
-    private Boolean checkForDigits(String str)
-    {
-        for(char c : str.toCharArray())
-            if(c < '0' || c > '9')
-                return false;
-        return true;
-    }
-
 }
 

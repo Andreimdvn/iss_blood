@@ -65,7 +65,5 @@ public class CustomMessageBox {
             e.printStackTrace();
         }
 
-
     }
-
 }

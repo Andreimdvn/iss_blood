@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.DonatorInfo;
 import Utils.Screen;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.animation.*;
@@ -31,6 +32,12 @@ public class DonatorDashboardController extends ControlledScreen {
     private boolean isAnyLoaded(){
         return formularLoaded || istoricLoaded;
     }
+
+    @FXML
+    private Label labelUsername;
+
+    @FXML
+    private Label labelFullName;
 
     @FXML
     private BorderPane borderPane;
@@ -477,6 +484,22 @@ public class DonatorDashboardController extends ControlledScreen {
         mouseLeftIstoricContainer();
     }
 
+    @Override
+    void updateThis() {
+
+    }
+
+    @Override
+    public void setScreenController(ScreenController ctr)
+    {
+        super.setScreenController(ctr);
+
+        DonatorInfo info = (DonatorInfo)ctr.userInfo;
+
+        labelUsername.setText(info.getUsername());
+        labelFullName.setText(info.getNume() + " " + info.getPrenume());
+    }
+
     @FXML
     private Label ultimaDataDonare;
 
@@ -526,7 +549,7 @@ public class DonatorDashboardController extends ControlledScreen {
     }
 
     private void loadLogin() {
-        getScreenController().setScreen(Screen.LOGIN_SCREEN);
+        unloadAfterLogout();
     }
 
 }

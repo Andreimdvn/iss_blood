@@ -22,7 +22,7 @@ public class PreloaderApp  extends Preloader {
         imageView.setSmooth(true);
         imageView.setPreserveRatio(true);
         BorderPane borderPane = new BorderPane();
-        //borderPane.setCenter(imageView);
+        borderPane.setCenter(imageView);
         //borderPane.setBackground(new Background(new BackgroundFill(Color.rgb(23,32,39), CornerRadii.EMPTY, Insets.EMPTY)));
         borderPane.setBackground(Background.EMPTY);
         preloaderScene = new Scene(borderPane ,800,600);

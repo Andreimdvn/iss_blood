@@ -1,87 +1,71 @@
 package Controller;
 
-import Model.GrupaSange;
-import Model.Pacient;
-import Model.RH;
-import Service.MainService;
-import Utils.Screen;
-import Validators.AddPacientValidator;
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXCheckBox;
-import com.jfoenix.controls.JFXTextField;
-import javafx.fxml.FXML;
-import javafx.scene.control.ComboBox;
 import javafx.util.Pair;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-public class FormularDonareController extends ControlledScreen {
-
-    @FXML
-    private JFXTextField fullnameTextField;
-
-    @FXML
-    private JFXTextField donatFullnameTextField;
-
-    @FXML
-    private JFXTextField donatCnpTextField;
-
-    @FXML
-    private JFXTextField DomiciliuLocalitateTextField;
-
-    @FXML
-    private JFXTextField DomiciliuJudetTextField;
-
-    @FXML
-    private JFXTextField DomiciliuAdresaTextField;
-
-    @FXML
-    private JFXTextField ResedintaLocalitateTextField;
-
-    @FXML
-    private JFXTextField ResedintaJudetTextField;
-
-    @FXML
-    private JFXTextField ResedintaAdresaTextField;
-
-    @FXML
-    private JFXTextField phoneTextField;
-
-    @FXML
-    private JFXCheckBox luniCheckbox;
-
-    @FXML
-    private JFXCheckBox martiCheckbox;
-
-    @FXML
-    private JFXCheckBox miercuriCheckbox;
-
-    @FXML
-    private JFXCheckBox joiCheckbox;
-
-    @FXML
-    private JFXCheckBox vineriCheckbox;
-
-    @FXML
-    private ComboBox<GrupaSange> grupaSangeComboBox;
-
-    @FXML
-    private ComboBox<RH> rhComboBox;
+import Model.*;
+import Utils.CustomMessageBox;
+import Validators.ValidationException;
 
 
-    private Logger logger = LogManager.getLogger(FormularDonareController.class.getName());
+public class FormularDonareController extends AbstractFormularDonareController {
 
-    /**
-     * Sends a request to the main screen controller to load the post-registration view
-     */
-    public void loadPostFormular(){
-        DonatorDashboardController donatorDashboardController = (DonatorDashboardController)getScreenController().getControlledScreen(Screen.DONATOR_SCREEN);
-        donatorDashboardController.loadPostFormular();
+    private void autoFillTextFields()
+    {
+        DonatorInfo info = (DonatorInfo) getScreenController().userInfo;
+        firstNameTextField.setText(info.getPrenume());
+        lastNameTextField.setText(info.getNume());
+        DomiciliuJudetTextField.setText(info.getDomiciliuJudet());
+        DomiciliuLocalitateTextField.setText(info.getDomiciliuLocalitate());
+        DomiciliuAdresaTextField.setText(info.getDomiciliuAdresa());
+        ResedintaJudetTextField.setText(info.getResedintaJudet());
+        ResedintaLocalitateTextField.setText(info.getResedintaLocalitate());
+        ResedintaAdresaTextField.setText(info.getResedintaAdresa());
+        phoneTextField.setText(info.getTelefon());
+        sexToggleGroup.selectToggle(info.getSex() == Sex.FEMININ ? femininToggle : masculinToggle);
     }
-    @FXML
-    private void initialize(){
-        grupaSangeComboBox.getItems().addAll(GrupaSange.O1,GrupaSange.A2,GrupaSange.B3,GrupaSange.AB4);
-        rhComboBox.getItems().addAll(RH.POZITIV,RH.NEGATIV);
+
+    @Override
+    void updateThis() {
+
+    }
+
+    @Override
+    public void setScreenController(ScreenController screenController) {
+        super.setScreenController(screenController);
+
+        autoFillTextFields();
+    }
+
+    @Override
+    public void trimiteFormular()
+    {
+        //ia field-urile
+        //le trimite la service
+        //daca e ok, trece la ecranul urmator
+
+        FormularDonare formularDonare = null;
+        try {
+            formularDonare = GetInfoFormular();
+        } catch (ValidationException e) {
+            CustomMessageBox msg = new CustomMessageBox("Eroare", "Formularul nu a fost completat corect. " +
+                    "\n" + e.getMessage(), 1);
+            msg.show();
+            return;
+        }
+
+        String username = getScreenController().userInfo.getUsername();
+
+        Pair<Boolean, String> rez = getService().userTrimiteFormularDonare(formularDonare, username);
+        if(rez.getKey())
+        {
+            CustomMessageBox msg = new CustomMessageBox("Info", "Formularul a fost trimis cu succes", 0);
+            msg.show();
+            loadPostFormular();
+        }
+        else
+        {
+            CustomMessageBox msg = new CustomMessageBox("Eroare", rez.getValue(), 1);
+            msg.show();
+        }
     }
 
 }

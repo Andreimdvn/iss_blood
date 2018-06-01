@@ -6,6 +6,8 @@
 <?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
@@ -114,23 +116,25 @@
          <children>
             <VBox layoutX="31.0" layoutY="217.0" spacing="5.0">
                <children>
-                  <JFXButton onMouseClicked="#homeClicked" prefHeight="31.0" prefWidth="176.0" styleClass="buttonSecondaryTiny" text="Home" />
-                  <JFXButton onMouseClicked="#cerereDonareClicked" prefHeight="31.0" prefWidth="176.0" styleClass="buttonSecondaryTiny" text="Adaugare cerere donare" />
-                  <JFXButton onMouseClicked="#cereriDonariClicked" prefHeight="31.0" prefWidth="180.0" styleClass="buttonSecondaryTiny" text="Vizualizare cereri donari" />
-                  <JFXButton onAction="#cereriSangeClicked" prefHeight="31.0" prefWidth="180.0" styleClass="buttonSecondaryTiny" text="Vizualizare cereri sange" />
-                  <JFXButton prefHeight="31.0" prefWidth="180.0" styleClass="buttonSecondaryTiny" text="Istoric cereri" />
-                  <JFXButton onAction="#stocCurentClicked" prefHeight="31.0" prefWidth="180.0" styleClass="buttonSecondaryTiny" text="Stoc curent" />
-                  <JFXButton prefHeight="31.0" prefWidth="180.0" styleClass="buttonSecondaryTiny" text="Notificari" />
+                  <ToggleButton fx:id="t1" mnemonicParsing="false" onAction="#homeClicked" prefHeight="29.0" prefWidth="178.0" selected="true" styleClass="buttonSecondaryTiny" text="Home">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="leftGroup" />
+                     </toggleGroup>
+                  </ToggleButton>
+                  <ToggleButton fx:id="t2" mnemonicParsing="false" onAction="#cerereDonareClicked" prefHeight="29.0" prefWidth="178.0" styleClass="buttonSecondaryTiny" text="Adaugare cerere donare" toggleGroup="$leftGroup" />
+                  <ToggleButton fx:id="t3" mnemonicParsing="false" onMouseClicked="#cereriDonariClicked" prefHeight="29.0" prefWidth="178.0" styleClass="buttonSecondaryTiny" text="Vizualizare cereri donari" toggleGroup="$leftGroup" />
+                  <ToggleButton fx:id="t4" mnemonicParsing="false" onAction="#cereriSangeClicked" prefHeight="29.0" prefWidth="178.0" styleClass="buttonSecondaryTiny" text="Vizualizare cereri sange" toggleGroup="$leftGroup" />
+                  <ToggleButton fx:id="t5" mnemonicParsing="false" onAction="#stocCurentClicked" prefHeight="29.0" prefWidth="178.0" styleClass="buttonSecondaryTiny" text="Stoc curent" toggleGroup="$leftGroup" />
                </children>
             </VBox>
             <Pane layoutX="12.0" layoutY="6.0" prefHeight="150.0" prefWidth="208.0">
                <children>
-                  <Label layoutX="5.0" layoutY="96.3125" prefHeight="20.0" prefWidth="198.0" style="-fx-alignment: center;" styleClass="labelSecondary" text="Moldovan Daniel" textAlignment="CENTER" />
-                  <Label layoutY="67.3125" styleClass="labelSecondary" text="Centrul de transfuzie Cluj-Napoca" />
+                  <Label layoutX="5.0" layoutY="96.3125" prefHeight="20.0" prefWidth="198.0" style="-fx-alignment: center;" styleClass="labelSecondary" text="Loading..." textAlignment="CENTER" fx:id="numeStaffLabel" />
+                  <Label fx:id="numeCentruLabel" layoutY="67.3125" styleClass="labelSecondary" text="Loading..."/>
                   <OctIconView fill="WHITE" glyphName="SHIELD" layoutX="82.0" layoutY="59.0" size="50" wrappingWidth="44.66668701171875" />
                </children>
             </Pane>
-            <JFXButton layoutX="33.0" layoutY="596.0" prefHeight="31.0" prefWidth="176.0" styleClass="buttonSecondaryTiny" text="Logout" />
+            <JFXButton layoutX="33.0" layoutY="596.0" onAction="#logout" prefHeight="31.0" prefWidth="176.0" styleClass="buttonSecondaryTiny" text="Logout" />
          </children>
       </AnchorPane>
    </left>

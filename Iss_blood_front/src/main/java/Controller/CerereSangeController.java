@@ -1,16 +1,15 @@
 package Controller;
 
-import Model.CerereSange;
-import Model.GrupaSange;
-import Model.Importanta;
-import Model.RH;
+import Model.*;
 import Utils.CustomMessageBox;
 import Utils.FunctiiUtile;
+import Validators.CerereSangeValidator;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.util.Pair;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -21,7 +20,6 @@ public class CerereSangeController extends ControlledScreen {
     private JFXTextField globuleRosiTextField;
     @FXML
     private JFXTextField plasmaTextField;
-
 
     @FXML
     private JFXTextField numePacientTextField;
@@ -36,73 +34,6 @@ public class CerereSangeController extends ControlledScreen {
     private JFXComboBox<RH> rhComboBox;
 
     @FXML
-    private void initialize(){
-        grupaSangeComboBox.getItems().addAll(GrupaSange.O1,GrupaSange.A2,GrupaSange.B3,GrupaSange.AB4);
-        rhComboBox.getItems().addAll(RH.POZITIV,RH.NEGATIV);
-
-    }
-    private boolean verificareCerere(){
-        RH rh = getRH();
-        Importanta importanta = getImportanta();
-        GrupaSange grupaSange = getGrupaSange();
-
-        String nume = numePacientTextField.getText();
-        String cnp = cnpPacientTextField.getText();
-        Integer trombocite = Integer.valueOf(trombocitetTextField.getText());
-        Integer plasma = Integer.valueOf(plasmaTextField.getText());
-        Integer globule = Integer.valueOf(globuleRosiTextField.getText());
-
-        String mesajEroare="";
-        if(nume.isEmpty())
-            mesajEroare+= "Nume necompletat\n";
-        if(cnp.length() != 13)
-            mesajEroare+= "Cnp necompletat\n";
-        if(trombocite.equals(0) && plasma.equals(0) && globule.equals(0))
-            mesajEroare+= "Nu ai cerut nicio punga\n";
-        if(grupaSange == null)
-            mesajEroare += "Nu ai selectat o grupa de sange\n";
-        if(importanta == null)
-            mesajEroare += "Nu ai selectat importanta\n";
-        if(rh == null)
-            mesajEroare += "Nu ai selectat rh\n";
-
-        if(mesajEroare.isEmpty())
-            return true;
-
-        CustomMessageBox box = new CustomMessageBox("Error",mesajEroare);
-        box.show();
-        return false;
-    }
-
-    private Logger logger = LogManager.getLogger(CerereSangeController.class.getName());
-
-
-    @FXML
-    private void trimiteCerere() {
-        logger.debug("Se trimite cerere");
-
-        if (verificareCerere()) {
-
-            CerereSange a = getCerereSange();
-
-            String x = "Are importanta : " + getImportanta() + " si are nevoie de :"
-                    + a.getNumarPungiTrombocite() + "," + a.getNumarPungiGlobuleRosii() + ","
-                    + a.getNumarPungiPlasma();
-
-            logger.info("Date introduse corecte in cerere de sange. " + x);
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Cerere trimisa");
-            alert.setHeaderText(a.getNumePacient() + " "
-                    + a.getCnpPacient() + " cu grupa " + a.getGrupaSange() + "si rh " + a.getRh());
-            CustomMessageBox e = new CustomMessageBox("Cerere trimisa",x,0);
-            e.show();
-        }
-        else
-            logger.info("Date introduse gresit in cerere de sange");
-
-    }
-
-    @FXML
     private JFXRadioButton scazutaRadioButton;
 
     @FXML
@@ -112,9 +43,68 @@ public class CerereSangeController extends ControlledScreen {
     private JFXRadioButton ridicataRadioButton;
 
 
+    @FXML
+    private void initialize(){
+        grupaSangeComboBox.getItems().addAll(GrupaSange.O1,GrupaSange.A2,GrupaSange.B3,GrupaSange.AB4);
+        rhComboBox.getItems().addAll(RH.POZITIV,RH.NEGATIV);
+
+    }
+
+    private Logger logger = LogManager.getLogger(CerereSangeController.class.getName());
+
+
+    @FXML
+    private void trimiteCerere() {
+        logger.debug("S-a apasat butonul pentru a trimite cererea.");
+
+        CerereSange cerere;
+        try {
+            cerere = getCerereSange();
+        }catch (Exception ex)
+        {
+            new CustomMessageBox("Error", "Completati toate campurile!").show();
+            return;
+        }
+        CerereSangeValidator validator = new CerereSangeValidator();
+        Pair<Boolean,String> validatorVerdict = validator.validate(cerere);
+
+        if (validatorVerdict.getKey()) {
+            String cerereLogDetails = "Importanta : " + cerere.getImportanta() + ". Contine: "
+                    + cerere.getNumarPungiTrombocite() + " pungi trombocite,\n"
+                    + cerere.getNumarPungiGlobuleRosii() + " pungi globule rosi, "
+                    + cerere.getNumarPungiPlasma() + " pungi plasma";
+
+            logger.info("Date introduse corect in cerere de sange. " + cerereLogDetails);
+
+            cerere.setNumeMedic(((MedicInfo)getScreenController().userInfo).getFullName());
+            String cnpMedic = ((MedicInfo)getScreenController().userInfo).getCnp();
+            Pair<Boolean, String> requestVerdict = getService().trimiteCerereSange(cerere, cnpMedic);
+            if (requestVerdict.getKey() == null) {
+                this.logger.warn("request key is null!");
+                new CustomMessageBox("", requestVerdict.getValue()).show();
+                return;
+            }
+
+            if (requestVerdict.getKey()){
+                CustomMessageBox msg = new CustomMessageBox("Cerere trimisa", requestVerdict.getValue() +
+                        "\n" + cerereLogDetails,0);
+                msg.show();
+                clearCerereSange();
+            }
+            else
+            {
+                new CustomMessageBox("Error", requestVerdict.getValue()).show();
+            }
+        }
+        else{
+            logger.info("Date introduse gresit in cererea de sange. Error: " + validatorVerdict.getValue());
+            CustomMessageBox msg = new CustomMessageBox("Error", validatorVerdict.getValue());
+            msg.show();
+        }
+    }
+
     private void changeResult(JFXTextField punga,int value)
     {
-
         if(FunctiiUtile.isNumeric(punga.getText()))
         {
             String valoareNoua = String.valueOf((Integer.parseInt(punga.getText())+ value));
@@ -143,6 +133,18 @@ public class CerereSangeController extends ControlledScreen {
         return new CerereSange(nume,cnp,grupaSange,rh,trombocite,globule,plasma,importanta);
     }
 
+    private void clearCerereSange(){
+        rhComboBox.setValue(null);
+        grupaSangeComboBox.setValue(null);
+        scazutaRadioButton.setSelected(false);
+        medieRadioButton.setSelected(true);
+        ridicataRadioButton.setSelected(false);
+        numePacientTextField.clear();
+        cnpPacientTextField.clear();
+        trombocitetTextField.setText("0");
+        plasmaTextField.setText("0");
+        globuleRosiTextField.setText("0");
+    }
 
     @FXML
     private void trombociteDown(){
@@ -194,5 +196,10 @@ public class CerereSangeController extends ControlledScreen {
 
     private GrupaSange getGrupaSange(){
         return grupaSangeComboBox.getValue();
+    }
+
+    @Override
+    void updateThis() {
+
     }
 }

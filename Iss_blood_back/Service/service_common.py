@@ -4,6 +4,8 @@ from Model.account_type import AccountType
 from Service.i_service import IService
 from Utils.orm import User
 from Validators.register_validator import register_validator
+from Utils.user_utils import get_info_donator, get_info_medic, get_info_staff
+from Utils import locatii_utils
 
 
 class ServiceCommon(IService):
@@ -13,23 +15,25 @@ class ServiceCommon(IService):
     def login(self, username, password):
         """
         Checks the databse for the username and password entry
-        :return: int 0(success) 1(error) + type of user: 1. donator , 2. medic 3. staff , 4. administrator
+        :return: int 0(success) 1(error) +
+                type of user: 1. donator , 2. medic 3. staff , 4. administrator +
+                Model.donator_info pentru donator
         """
-        lst = self.db.select("User", ["username", "password"], [username, password])
-        if len(lst) == 0:
-            return 1, None
+        # uita-te mai intai in tabela de useri si dupa cauta dupa foreign key in tabelele specifice
+        user = self.db.select("User", ["username", "password"], [username, password], True)
+        if user is None:
+            return 1, None, None
         else:
-            user = lst[0]
             id = user.id
-            donatori = self.db.select("Donator", ["id_user"], [id])
-            if len(donatori) == 1:
-                return 0, 1
-            medici = self.db.select("Medic", ["id_user"], [id])
-            if len(medici) == 1:
-                return 0, 2
-            staff = self.db.select("StaffTransfuzii", ["id_user"], [id])
-            if len(staff) == 1:
-                return 0, 3
+            donator = self.db.select("Donator", ["id_user"], [id], True)
+            if donator is not None:
+                return 0, 1, get_info_donator(self.db, user.id, donator)
+            medic = self.db.select("Medic", ["id_user"], [id], True)
+            if medic is not None:
+                return 0, 2, get_info_medic(self.db, user.id, medic)
+            staff = self.db.select("StaffTransfuzii", ["id_user"], [id], True)
+            if staff is not None:
+                return 0, 3, get_info_staff(self.db, user.id, staff)
             # administrator select
 
         return 1, None
@@ -56,8 +60,8 @@ class ServiceCommon(IService):
 
             # licenta e buna, la sfarsit seteaz-o la folosita
             use_license_callback = lambda: self.db.update('Licente', ['tip_licenta', 'cod_licenta'],
-                                                           [register_info.account_type.name, register_info.license],
-                                                           ['folosita'], [True])
+                                                          [register_info.account_type.name, register_info.license],
+                                                          ['folosita'], [True])
 
         # 2. Verifica daca exista deja userul. Username si email trebuie sa fie unice
         duplicate_user = self.db.select('User', ['username'], [register_info.username], True)
@@ -74,10 +78,10 @@ class ServiceCommon(IService):
         new_user_object.email = register_info.email
 
         # 4. Vezi daca exista judetul in BD sau trebuie adaugat
-        id_judet = self.get_id_judet(register_info.judet)
+        id_judet = locatii_utils.get_id_judet(self.db, register_info.judet)
 
         # 5. La fel pentru localitate
-        id_localitate = self.get_id_localitate(register_info.localitate, id_judet)
+        id_localitate = locatii_utils.get_id_localitate(self.db, register_info.localitate, id_judet)
 
         # 6. Numele tabelului si coloanele in functie de tipul de cont
         table_name = None
@@ -121,7 +125,7 @@ class ServiceCommon(IService):
         :return: Tuple<bool, string> daca licenta poate fi folosita si un mesaj
         '''
         license_row = self.db.select('Licente', ['tip_licenta', 'cod_licenta'],
-                                    [license_type, license_code], True)
+                                     [license_type, license_code], True)
         if license_row is None:
             return False, "Licenta nu este valida"
         if license_row.folosita:
@@ -129,27 +133,4 @@ class ServiceCommon(IService):
 
         return True, "Ok"
 
-    def get_id_judet(self, nume):
-        '''
-        Cauta ID-ul unui judet. Daca nu exista, il adauga in BD si returneaza ID-ul creat
-        :param nume: string, numele judetului
-        :return: int, ID-ul
-        '''
-        judet = self.db.select('Judet', ['nume'], [nume], True)
-        if judet is None:  # trebuie adaugat
-            self.db.insert('Judet', ['nume'], [nume])
-            judet = self.db.select('Judet', ['nume'], [nume], True)
-        return judet.id
-
-    def get_id_localitate(self, nume, id_judet):
-        '''
-        Cauta ID-ul unei localitati. Daca nu exista, o adauga in BD si returneaza ID-ul creat
-        :param nume: string, numele localitatii
-        :return: int, ID-ul
-        '''
-        localitate = self.db.select('Localitate', ['nume', 'id_judet'], [nume, id_judet], True)
-        if localitate is None:  # trebuie adaugata
-            self.db.insert('Localitate', ['nume', 'id_judet'], [nume, id_judet])
-            localitate = self.db.select('Localitate', ['nume', 'id_judet'], [nume, id_judet], True)
-        return localitate.id
 

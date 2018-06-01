@@ -48,16 +48,18 @@ class Localitate(DB):
 class Donator(DB):
     __tablename__ = 'Donator'
 
-    id_user = Column(Integer, ForeignKey('User.id'), primary_key=True, unique=True)
+    id_donator = Column(Integer, autoincrement=True, primary_key=True)
+    id_user = Column(Integer, ForeignKey('User.id'), unique=True, nullable=True)
     prenume = Column(String(50), nullable=False)
     nume = Column(String(50), nullable=False)
-    cnp = Column(String(13), nullable=False, unique=True)
+    cnp = Column(String(13), nullable=True, unique=True)
     id_domiciliu = Column(Integer, ForeignKey('Localitate.id'))
     adresa_domiciliu = Column(String(100), nullable=False)
-    data_nasterii = Column(Date, nullable=False)
+    data_nasterii = Column(Date, nullable=True)
     telefon = Column(String(20), nullable=False)
     id_localitate_resedinta = Column(Integer, ForeignKey('Localitate.id'))
     adresa_resedinta = Column(String(100), nullable=False)
+    sex = Column(Enum('MASCULIN', 'FEMININ'))
 
     user = relationship('User', back_populates='donatori')
     sange_brut = relationship('SangeBrut', back_populates='donator')
@@ -106,6 +108,8 @@ class Medic(DB):
     user = relationship('User', back_populates='medici')
     locatie = relationship('Locatie', back_populates='medici')
     pacient = relationship('Pacient', back_populates='medic')
+    cereri_sange = relationship('CereriSange', back_populates='medic')
+
 
 class Pacient(DB):
     __tablename__ = 'Pacient'
@@ -118,13 +122,15 @@ class Pacient(DB):
     id_medic = Column(Integer, ForeignKey('Medic.id_user'))
 
     medic = relationship('Medic', back_populates='pacient')
+    cereri_sange = relationship('CereriSange', back_populates='pacient')
+
 
 class Licente(DB):
     __tablename__ = 'Licente'
 
     id = Column(Integer, autoincrement=True, primary_key=True)
     tip_licenta = Column(Enum('StaffTransfuzie', 'Medic'), nullable=False)
-    cod_licenta = Column(String(100), nullable=False)
+    cod_licenta = Column(String(100), nullable=False, unique=True)
     folosita = Column(Boolean, nullable=False)
 
 class Analize(DB):
@@ -146,12 +152,12 @@ class SangeBrut(DB):
     __tablename__ = 'SangeBrut'
 
     id = Column(Integer, autoincrement=True, primary_key=True)
-    id_donator = Column(Integer, ForeignKey('Donator.id_user'))
+    id_donator = Column(Integer, ForeignKey('Donator.id_donator'))
     id_locatie_recoltare = Column(Integer, ForeignKey('Locatie.id'))
     data_recoltare = Column(Date, nullable=False)
-    status = Column(Enum('Recoltata', 'Analizata', 'Impartita', 'Aruncata'), nullable=False)
-    rh = Column(Enum('pozitiv', 'negativ'), nullable=False)
-    grupa = Column(Enum('O1', 'A2', 'B3', 'AB4'), nullable=False)
+    status = Column(Enum('Recoltata', 'Prelucrata', 'Impartita', 'Aruncata'), nullable=False)
+    rh = Column(Enum('pozitiv', 'negativ', 'unknown'), nullable=False)
+    grupa = Column(Enum('O1', 'A2', 'B3', 'AB4', 'unknown'), nullable=False)
     id_locatie_curenta = Column(Integer, ForeignKey('Locatie.id'))
 
     donator = relationship('Donator', back_populates='sange_brut')
@@ -166,10 +172,44 @@ class SangePrelucrat(DB):
     id_sange_brut = Column(Integer, ForeignKey('SangeBrut.id'))
     tip = Column(Enum('Plasma', 'Trombocite', 'Globule_rosii'))
     id_locatie = Column(Integer, ForeignKey('Locatie.id'))
-    status = Column(Enum('Depozitat', 'Folosit', 'Expirat'))
+    status = Column(Enum('Prelucrat','Depozitat', 'Folosit', 'Expirat'))
 
     sange_brut = relationship('SangeBrut', back_populates='sange_prelucrat')
     locatie = relationship('Locatie', back_populates='sange_prelucrat')
+
+class FormularDonare(DB):
+    __tablename__ = 'FormularDonare'
+
+    id = Column(Integer, autoincrement=True, primary_key=True)
+    id_donator = Column(Integer, ForeignKey('Donator.id_donator'))
+    beneficiar_full_name = Column(String(50))
+    beneficiar_CNP = Column(String(13))
+    grupa = Column(Enum("O1", "A2", "B3", "AB4", "UNKNOWN"))
+    rh = Column(Enum("pozitiv", "negativ", "UNKNOWN"))
+    zile_disponibil = Column(Integer)
+    status = Column(Enum('IN_ASTEPTARE','PRELEVARE','PREGATIRE','CALIFICARE','DISTRIBUIRE','NONCONFORM'), default='IN_ASTEPTARE')
+
+
+class CereriSange(DB):
+    __tablename__ = 'CereriSange'
+
+    id = Column(Integer, autoincrement=True, primary_key=True)
+
+    id_medic = Column(Integer, ForeignKey('Medic.id_user'), nullable=False)
+    id_pacient = Column(Integer, ForeignKey('Pacient.id'), nullable=False)
+
+    grupa_sange = Column(Enum('O1', 'A2', 'B3', 'AB4'), nullable=False)
+    rh = Column(Enum('Pozitiv', 'Negativ'), nullable=False)
+
+    numar_pungi_trombocite = Column(Integer, nullable=False)
+    numar_pungi_globule_rosii = Column(Integer, nullable=False)
+    numar_pungi_plasma = Column(Integer, nullable=False)
+    date = Column(Date, nullable=False)
+    importanta = Column(Enum('Scazuta', 'Medie', 'Ridicata'))
+    status = Column(Enum('in_asteptare', 'rezolvata', 'anulata'))
+
+    medic = relationship('Medic', back_populates='cereri_sange')
+    pacient = relationship('Pacient', back_populates='cereri_sange')
 
 
 class ORM:
@@ -364,10 +404,11 @@ class ORM:
             raise ValueError('[!] Specify values for where clause!')
         if len(values) != len(columns):
             raise ValueError('[!] There are not enough values/columns!')
-        item = self.select(table, columns, values, first=True)
-        if not item:
+        items = self.select(table, columns, values)
+        if not items:
             raise ValueError('[!] Item with specified values doesn\'t exists!')
-        self.ses.delete(item)
+        for item in items:
+            self.ses.delete(item)
         self.ses.commit()
         self.ses.flush()
         self.ses.close()

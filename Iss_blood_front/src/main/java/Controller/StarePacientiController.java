@@ -99,10 +99,16 @@ public class StarePacientiController extends ControlledScreen {
             logger.debug("Eroare la adaugare pacient \n" + validationResult.getValue());
             new CustomMessageBox("Eroare adaugare pacient", validationResult.getValue(),1).show();
         } else {
+            String idMedic = ((MedicInfo)getScreenController().userInfo).getCnp();
             pacientForValidation.setIdMedic(idMedic);
             Pair<Boolean, String> response = getService().addPacient(pacientForValidation);
             new CustomMessageBox("Adaugare pacient", response.getValue(), response.getKey() ? 0 : 1).show();
             logger.debug("Adaugare pacient cu mesajul " + response.getValue());
         }
+    }
+
+    @Override
+    void updateThis() {
+
     }
 }

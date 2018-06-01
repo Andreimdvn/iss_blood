@@ -2,7 +2,15 @@ package Model;
 
 public class Pacient {
 
-    private int idMedic;
+    public String getIdMedic() {
+        return idMedic;
+    }
+
+    public void setIdMedic(String idMedic) {
+        this.idMedic = idMedic;
+    }
+
+    private String idMedic;
 
     private String nume;
 
@@ -17,14 +25,6 @@ public class Pacient {
         this.cnp = cnp;
         this.grupaSange = grupaSange;
         this.rh = rh;
-    }
-
-    public int getIdMedic() {
-        return idMedic;
-    }
-
-    public void setIdMedic(int idMedic) {
-        this.idMedic = idMedic;
     }
 
     public String getNume() {

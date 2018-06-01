@@ -1,6 +1,7 @@
 package Controller;
 
 import Main.MainApplication;
+import Model.UserInfo;
 import Service.MainService;
 import Utils.ViewDetails;
 import javafx.fxml.FXMLLoader;
@@ -9,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.layout.StackPane;
 
 import java.io.IOException;
+import java.util.Collection;
 import java.util.HashMap;
 
 /**
@@ -18,10 +20,14 @@ public class ScreenController extends StackPane {
 
     private HashMap<String, ViewDetails> screenViews = new HashMap<>();
     MainService mainService;
+        public UserInfo userInfo;
 
     public ScreenController(MainService service) {
         super();
         this.mainService = service;
+    }
+    public Collection<ViewDetails> getAllScreens(){
+        return screenViews.values();
     }
 
     /**
@@ -34,7 +40,7 @@ public class ScreenController extends StackPane {
     }
     /**
      *  Add an entry into hashmap of screenViews
-     *  They are not loaded into scene graph
+     *  They are not loaaded into scene graph
      * @param name represents the name of screen, they can be found in Utils module, Screen class
      * @param screenDetails
      */
@@ -86,6 +92,7 @@ public class ScreenController extends StackPane {
             if(!getChildren().isEmpty()) {
                 getChildren().remove(0);
                 getChildren().add(0, screenViews.get(name).getNode());
+
                 MainApplication.resizeScreen();
             } else
                 getChildren().add(screenViews.get(name).getNode());
