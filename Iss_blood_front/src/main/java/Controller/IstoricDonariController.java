@@ -66,6 +66,6 @@ public class IstoricDonariController extends ControlledScreen {
 
     @Override
     void updateThis() {
-
+    
     }
 }
