@@ -26,6 +26,10 @@ class BackController:
     def register(self, register_info):
         return self.service_common.register(register_info)
 
+
+    def add_pacient(self, id_medic, nume_pacient, cnp_pacient, grupa_sange_pacient, rh_pacient):
+        return self.service_medic.add_pacient(id_medic, nume_pacient, cnp_pacient, grupa_sange_pacient, rh_pacient)
+
     def user_trimite_formular(self, formular, username):
         return self.service_donator.insert_formular_user(formular, username)
 
@@ -51,7 +55,7 @@ class BackController:
     def get_stoc_curent(self,id_locatie):
         return self.service_sange.get_stoc_curent(id_locatie)
 
-    def send_pungi(self, id_locatie_curenta, id_locatie_noua, grupa, rh, plasma, tromobocite, globule_rosii):
+    def send_pungi(self, id_locatie_curenta, id_cerere, grupa, rh, plasma, tromobocite, globule_rosii):
 
         stoc_curent = self.get_stoc_curent(id_locatie_curenta)
 
@@ -63,7 +67,9 @@ class BackController:
 
         if numar_plasma - plasma >= 0 and numar_trombocite - tromobocite >= 0 and numar_globule - globule_rosii >= 0:
             self.service_sange.send_pungi(
-                id_locatie_curenta, id_locatie_noua, grupa, rh, plasma, tromobocite, globule_rosii)
+                id_locatie_curenta, id_cerere, grupa, rh, plasma, tromobocite, globule_rosii)
+
+            self.service_medic.update_cerere(id_cerere, 'Rezolvata')
             return 0, "Pungile au fost trimise"
 
         return 2, "Mesaj dragut de eroare"
@@ -98,3 +104,8 @@ class BackController:
 
     def get_istoric_donari(self, username):
         return self.service_donator.get_istoric_donari(username)
+    def get_cereri_sange(self, id_locatie, status, from_spital):
+        return self.service_medic.get_cereri_sange(id_locatie, status, from_spital)
+
+    def anulare_cerere(self, id_cerere):
+        return self.service_medic.update_cerere(id_cerere, 'Anulata')

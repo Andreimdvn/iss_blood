@@ -133,7 +133,6 @@ public class CentruPrelevareController extends ControlledScreen{
     private void goBack(){
         ((CentruTransfuzieController)getScreenController().getControlledScreen("CENTRU_TRANSFUZIE")).setCenter(
                 getScreenController().getScreen("CENTRU_CERERI_DONARI"));
-        update();
     }               
 
     @FXML
