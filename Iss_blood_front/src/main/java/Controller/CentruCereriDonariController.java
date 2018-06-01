@@ -133,7 +133,6 @@ public class CentruCereriDonariController extends ControlledScreen{
         StaffInfo info = (StaffInfo)getScreenController().userInfo;
         String name = info.getNume() + " " + info.getPrenume();
         getService().staffUpdateFormularDonare(getSelected(),getInfo().getIdLocatie(), name);
-        update();
     }
     @FXML
     private void button3Clicked(){
