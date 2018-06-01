@@ -38,6 +38,17 @@ class RepositorySangePrelucrat(IRepository):
         medic = self.db.select('Medic', ['id_user'], [cerere.id_medic], first=True)
         return medic.id_locatie
 
+    def functie(self, cerere):
+        pacient = self.db.select('Pacient', ['id'], [cerere.id_pacient], First=True)
+
+        columns = ['beneficiar_CNP', 'beneficiar_full_name', 'status']
+        values = [pacient.cnp, pacient.nume, 'Distribuire']
+        formulare_donari = self.db.select('FormularDonare',columns,values)
+
+        # for formular in formulare_donari:
+
+
+
     def send_pungi(self, id_locatie_curenta, id_cerere, grupa, rh, plasma, tromobocite, globule_rosii):
 
         cerere = self.db.select('CereriSange', ['id'], [id_cerere], first=True)

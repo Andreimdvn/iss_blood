@@ -119,6 +119,8 @@ public class IstoricCereriController extends ControlledScreen {
 
     @Override
     void updateThis() {
+
+        System.out.println("PULA MARE");
         MedicInfo info = (MedicInfo) getScreenController().userInfo;
         cereriSange.setAll(getService().getCereriSange(info.getIdLocatie(),"IN_ASTEPTARE",true));
         cereriSangeCompletate.setAll(getService().getCereriSange(info.getIdLocatie(),"REZOLVATA",true));
