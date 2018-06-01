@@ -8,8 +8,10 @@ public class Analiza {
     private Boolean ANTIHCV;
     private Boolean ANTIHIV;
     private Boolean HB;
+    private GrupaSange grupaSange;
+    private RH rh;
 
-    public Analiza(Integer idAnaliza, Boolean ALT, Boolean SIF, Boolean ANTIHTLV, Boolean ANTIHCV, Boolean ANTIHIV, Boolean HB) {
+    public Analiza(Integer idAnaliza, Boolean ALT, Boolean SIF, Boolean ANTIHTLV, Boolean ANTIHCV, Boolean ANTIHIV, Boolean HB, GrupaSange grupaSange, RH rh) {
         this.idAnaliza = idAnaliza;
         this.ALT = ALT;
         this.SIF = SIF;
@@ -17,6 +19,8 @@ public class Analiza {
         this.ANTIHCV = ANTIHCV;
         this.ANTIHIV = ANTIHIV;
         this.HB = HB;
+        this.grupaSange = grupaSange;
+        this.rh = rh;
     }
 
     public Integer getIdAnaliza() {
@@ -73,5 +77,13 @@ public class Analiza {
 
     public void setHB(Boolean HB) {
         this.HB = HB;
+    }
+
+    public RH getRh() {
+        return rh;
+    }
+
+    public GrupaSange getGrupaSange() {
+        return grupaSange;
     }
 }

@@ -97,7 +97,7 @@ class ServiceDonator(IService):
         # jsonObject.getString("centru_donare"),
         # Status.valueOf(jsonObject.getString("status")),
 
-        rez = [{"id_analiza": 0, "ALT":True, "SIF": True, "ANTIHTLV": True, "ANTIHCV": False, "ANTIHIV": False, "HB": True,
+        rez = [{"id_analiza": -1, "ALT":True, "SIF": True, "ANTIHTLV": True, "ANTIHCV": False, "ANTIHIV": False, "HB": True,
                 "numar_donare": 0, "centru_donare": "Nicu", "status": "IN_ASTEPTARE"}]
 
 
@@ -143,5 +143,6 @@ class ServiceDonator(IService):
         for formular in lst_formulare: #daca au mai ramas formulare, la dam asa(nu au fost procesate inca)
             dict = {"id_analiza": -1, "numar_donare": formular.id, "centru_donare": "",
                     "status": formular.status}
+            rez.append(dict)
 
         return rez

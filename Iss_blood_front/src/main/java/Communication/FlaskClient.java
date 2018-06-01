@@ -141,7 +141,7 @@ public class FlaskClient {
             boolean htlv = analiza.getBoolean("htlv");
             boolean hiv = analiza.getBoolean("hiv");
             boolean hb = analiza.getBoolean("hb");
-            list.add(new Analiza(id,alt,sif,htlv,htcv,hiv,hb));
+            list.add(new Analiza(id,alt,sif,htlv,htcv,hiv,hb, GrupaSange.A2, RH.NEGATIV)); //TO DO: RH si GRUPA
         }
 
         return list;
@@ -518,15 +518,22 @@ public class FlaskClient {
         for(int i = 0; i < formularDonares.length() ;i++)
         {
             JSONObject jsonObject = formularDonares.getJSONObject(i);
-            Analiza analiza = new Analiza(
-                    jsonObject.getInt("id_analiza"),
-                    jsonObject.getBoolean("ALT"),
-                    jsonObject.getBoolean("SIF"),
-                    jsonObject.getBoolean("ANTIHTLV"),
-                    jsonObject.getBoolean("ANTIHCV"),
-                    jsonObject.getBoolean("ANTIHIV"),
-                    jsonObject.getBoolean("HB")
-            );
+            Analiza analiza = null;
+            if(jsonObject.getInt("id_analiza") >= 0) //altfel nu e gata inca
+            {
+                analiza = new Analiza(
+                        jsonObject.getInt("id_analiza"),
+                        jsonObject.getBoolean("ALT"),
+                        jsonObject.getBoolean("SIF"),
+                        jsonObject.getBoolean("ANTIHTLV"),
+                        jsonObject.getBoolean("ANTIHCV"),
+                        jsonObject.getBoolean("ANTIHIV"),
+                        jsonObject.getBoolean("HB"),
+                        GrupaSange.A2,
+                        RH.POZITIV
+                );
+            }
+
 
             DonareInfo info = new DonareInfo(
                     jsonObject.getInt("numar_donare"),
@@ -534,9 +541,7 @@ public class FlaskClient {
                     Status.valueOf(jsonObject.getString("status")),
                     analiza,
                     "",
-                    "",
-                    GrupaSange.A2,
-                    RH.POZITIV
+                    ""
             );
 
             rez.add(info);
