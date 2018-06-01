@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+
+<AnchorPane fx:id="mainPane" prefHeight="518.0" prefWidth="907.0" styleClass="secondaryPane" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ChatController">
+   <children>
+      <ScrollPane layoutX="25.0" layoutY="22.0" prefHeight="469.0" prefWidth="149.0">
+         <content>
+            <VBox prefHeight="441.0" prefWidth="123.0" />
+         </content>
+      </ScrollPane>
+      <ScrollPane layoutX="198.0" layoutY="98.0" prefHeight="366.0" prefWidth="682.0" vbarPolicy="ALWAYS">
+         <content>
+            <VBox fx:id="mainChat" accessibleRole="BUTTON" prefHeight="285.0" prefWidth="652.0" styleClass="vboxChat">
+               <padding>
+                  <Insets left="20.0" />
+               </padding>
+            </VBox>
+         </content>
+         <padding>
+            <Insets left="2.0" right="10.0" />
+         </padding>
+      </ScrollPane>
+      <Button layoutX="198.0" layoutY="466.0" mnemonicParsing="false" onAction="#sent" prefHeight="25.0" prefWidth="670.0" styleClass="buttonFormular" text="Trimite" />
+      <AnchorPane layoutX="198.0" layoutY="22.0" prefHeight="63.0" prefWidth="670.0" styleClass="headerPaneFormular">
+         <children>
+            <Label layoutX="239.0" layoutY="15.0" text="Chat privat cu " />
+            <Label layoutX="342.0" layoutY="15.0" text="numeDestinatar" />
+         </children>
+      </AnchorPane>
+      <FontAwesomeIconView fx:id="closeIcon" glyphName="CLOSE" layoutX="885.0" layoutY="24.0" onMouseClicked="#close" size="30" styleClass="iconSecondary" />
+   </children>
+</AnchorPane>

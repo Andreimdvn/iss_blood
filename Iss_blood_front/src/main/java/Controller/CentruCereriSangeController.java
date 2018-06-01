@@ -2,6 +2,8 @@ package Controller;
 
 import Model.*;
 import Service.MainService;
+import Utils.Chat;
+import Utils.FunctiiUtile;
 import com.jfoenix.controls.JFXTextField;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -114,12 +116,16 @@ public class CentruCereriSangeController extends ControlledScreen{
                                       cerereSange.getRh(),cerereSange.getNumarPungiPlasma(),
                                       cerereSange.getNumarPungiTrombocite(),cerereSange.getNumarPungiGlobuleRosii());
         }
-        update();
     }
 
     @Override
     void updateThis() {
         cereriSange.setAll(getService().getCereriSange(getInfo().getIdLocatie(),"IN_ASTEPTARE",false));
 
+    }
+
+    @FXML
+    private void messageHim(){
+        Chat a = new Chat();
     }
 }

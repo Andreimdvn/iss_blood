@@ -74,7 +74,6 @@ public abstract class ControlledScreen implements Observer {
         else if(screenController.userInfo instanceof DonatorInfo)
             loadScreensDonator();
         unloadLoginRegister();
-        update();
     }
     
     private void unloadLoginRegister() {
