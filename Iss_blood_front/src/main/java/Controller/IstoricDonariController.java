@@ -120,7 +120,9 @@ public class IstoricDonariController extends ControlledScreen {
     @FXML
     public void OnDateChanged()
     {
-        filterDate = donareInfo -> donareInfo.getData().equals(datePicker.getValue().toString());
+        if(datePicker.getValue() == null)
+            return;
+        filterDate = donareInfo -> donareInfo.getData().equals("") || donareInfo.getData().equals(datePicker.getValue().toString());
         refreshView();
     }
 
@@ -138,10 +140,25 @@ public class IstoricDonariController extends ControlledScreen {
     @FXML
     public void OnStatusChanged()
     {
+        if(statusComboBox.getValue() == null)
+            return;
         filterStatus = donareInfo -> donareInfo.getStatus().equals(statusComboBox.getValue());
         refreshView();
     }
 
+    @FXML
+    public void clearFilters()
+    {
+        datePicker.setValue(null);
+        centruDonareTextField.setText("");
+        statusComboBox.setValue(null);
+
+        filterDate = info -> true;
+        filterCentru = info -> true;
+        filterStatus = info -> true;
+
+        refreshView();
+    }
 
 
     @Override
