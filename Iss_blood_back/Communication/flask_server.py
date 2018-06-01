@@ -64,8 +64,10 @@ class FlaskServer:
         self.app.add_url_rule("/desavarsire_cerere_medic", "desavarsire_cerere_medic",
                               self.trimite_pungi,
                               methods=["POST"])
-        self.app.add_url_rule("/trimiteCerereSange", "trimite_cerere_sange", self.trimite_cerere_sange,
+        self.app.add_url_rule("/trimite_cerere_sange", "trimite_cerere_sange", self.trimite_cerere_sange,
                               methods=["POST"])
+        self.app.add_url_rule("/get_centru_home_screen_data", "get_centru_home_screen_data",
+                              self.get_centru_home_screen_data, methods=["POST"])
 
     def trimite_pungi(self):
         self.request_data = request.get_json()
@@ -214,7 +216,7 @@ class FlaskServer:
                          "grupa": x[13],
                          "rh": x[14],
                          "status": x[15]}
-
+            self.logger.debug("Entity in all cereri list for location {}: {}".format(id_locatie, x))
             lista_dictionare.append(dict_list)
 
         return_dict = {"entities": lista_dictionare}
@@ -314,6 +316,7 @@ class FlaskServer:
         return_dict = {"status": str(status), "message": message}
 
         return json.dumps(return_dict)
+
     def trimite_cerere_sange(self):
         self.request_data = request.get_json()
         self.logger.debug("Got /trimiteCereeSange request JSON {}".format(self.request_data))
@@ -330,5 +333,15 @@ class FlaskServer:
 
         status, message = self.controller.trimite_cerere_sange(cerere, self.request_data["cnp_medic"])
         return_dict = {"status": status, "message": message}
+
+        return json.dumps(return_dict)
+
+    def get_centru_home_screen_data(self):
+        self.request_data = request.get_json()
+        id_locatie = int(self.request_data["id_locatie"])
+
+        self.logger.debug("Got request get_centru_home_screen_data for id_locatie: {}".format(id_locatie))
+        return_dict = self.controller.get_centru_home_screen_data(id_locatie)
+        self.logger.debug("Returning data for request get_centru_home_screen_data {}".format(return_dict))
 
         return json.dumps(return_dict)

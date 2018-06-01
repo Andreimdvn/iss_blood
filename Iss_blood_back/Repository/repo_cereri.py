@@ -53,7 +53,7 @@ class RepositoryCereri(IRepository):
         :return: all elements from table
         """
         specific_col_names = ['id_medic', 'id_pacient', 'grupa_sange', 'rh', 'numar_pungi_trombocite',
-                              'numar_pungi_globule_rosii', 'numar_pungi_plasma', 'date', 'importanta']
+                              'numar_pungi_globule_rosii', 'numar_pungi_plasma', 'date', 'importanta', 'status']
         try:
             return self.db.select('CereriSange', columns=specific_col_names, values=[])
         except:

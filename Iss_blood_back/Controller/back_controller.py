@@ -95,3 +95,6 @@ class BackController:
 
     def trimite_cerere_sange(self, cerere, cnp_medic):
         return self.service_medic.trimite_cerere_sange(cerere, cnp_medic)
+
+    def get_centru_home_screen_data(self, id_locatie):
+        return self.service_sange.get_centru_home_screen_data(id_locatie)

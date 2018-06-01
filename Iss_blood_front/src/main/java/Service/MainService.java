@@ -63,4 +63,8 @@ public class MainService {
     public Pair<Boolean, String> trimiteCerereSange(CerereSange cerere, String cnpMedic) {
         return flaskClient.trimiteCerereSange(cerere, cnpMedic);
     }
+
+    public Map<String,Integer> getCentruHomeScreenData(Integer idLocatie) {
+        return flaskClient.getCentruHomeScreenData(idLocatie);
+    }
 }
