@@ -2,7 +2,7 @@ import sys
 
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, String, ForeignKey, Date, Float, Enum, create_engine, Boolean
-from sqlalchemy.orm import relationship, sessionmaker
+from sqlalchemy.orm import relationship, sessionmaker, scoped_session
 
 
 MYSQL_CON_STRING = 'mysql://%s:%s@%s:%s/%s'
@@ -219,7 +219,7 @@ class ORM:
                                          config['mysql_port'], config['mysql_database'])
 
         self.engine = create_engine(con_string)
-        self.session = sessionmaker(bind=self.engine)
+        self.session = scoped_session(sessionmaker(bind=self.engine))
         self.ses = None
 
     def create_database(self):
@@ -279,7 +279,6 @@ class ORM:
             self.ses.add(tb(**col_val))
         self.ses.commit()
         self.ses.flush()
-        self.ses = None
 
     def select(self, table, columns=None, values=None, first=False):
         """
@@ -301,10 +300,7 @@ class ORM:
             if type(values) not in (list, tuple):
                 raise ValueError('[!] Type [%s is not allowed for values!' % type(values))
         tb = self.table_object(table)
-        existing_session = True
-        if not self.ses:
-            self.ses = self.session()
-            existing_session = False
+        self.ses = self.session()
         if not columns:
             res = self.ses.query(tb)
         elif not values:
@@ -317,9 +313,6 @@ class ORM:
             col_val = {e[0].key: e[1] for e in zip(cols, values)}
             res = self.ses.query(tb).filter_by(**col_val)
         result = res.first() if first else res.all()
-        if not existing_session:
-            self.ses.close()
-            self.ses = None
         return result
 
     def update(self, table, columns_where=None, values_where=None, columns=None, values=None):
@@ -376,8 +369,6 @@ class ORM:
                 setattr(item, col, values[i])
         self.ses.commit()
         self.ses.flush()
-        self.ses.close()
-        self.ses = None
 
     def delete(self, table, columns=None, values=None):
         """
@@ -387,7 +378,6 @@ class ORM:
         :param values:
         :return:
         """
-        self.ses = self.session()
         if columns:
             if type(columns) not in (list, tuple):
                 raise ValueError('[!] Type [%s] is not allowed for columns!' % type(columns))
@@ -404,6 +394,7 @@ class ORM:
             raise ValueError('[!] Specify values for where clause!')
         if len(values) != len(columns):
             raise ValueError('[!] There are not enough values/columns!')
+        self.ses = self.session()
         items = self.select(table, columns, values)
         if not items:
             raise ValueError('[!] Item with specified values doesn\'t exists!')
@@ -411,5 +402,3 @@ class ORM:
             self.ses.delete(item)
         self.ses.commit()
         self.ses.flush()
-        self.ses.close()
-        self.ses = None

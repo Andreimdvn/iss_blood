@@ -103,7 +103,6 @@ public class CentruCereriSangeController extends ControlledScreen{
 
     @FXML
     private void trimitePungi() {
-
         CerereSange cerereSange = cerereSangeTableView.getSelectionModel().getSelectedItem();
         if(cerereSange != null){
 
@@ -114,7 +113,6 @@ public class CentruCereriSangeController extends ControlledScreen{
                                       cerereSange.getRh(),cerereSange.getNumarPungiPlasma(),
                                       cerereSange.getNumarPungiTrombocite(),cerereSange.getNumarPungiGlobuleRosii());
         }
-        update();
     }
 
     @Override
