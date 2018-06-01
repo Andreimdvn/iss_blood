@@ -44,7 +44,8 @@ public class UserUtils {
                     loginResponse.getInt("id_locatie"),
                     loginResponse.getString("nume_locatie"),
                     loginResponse.getString("nume_judet"),
-                    loginResponse.getInt("id_judet"));
+                    loginResponse.getInt("id_judet"),
+                    loginResponse.getString("cnp"));
         }
         else
         {

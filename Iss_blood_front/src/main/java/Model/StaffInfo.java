@@ -7,10 +7,9 @@ public class StaffInfo extends UserInfo {
     private String numeLocatie;
     private String numeJudet;
     private Integer idJudet;
-    //TO DO: CNP
+    private String cnp;
 
-    public StaffInfo(String username, String nume, String prenume, Integer idLocatie, String numeLocatie,
-                     String numeJudet, Integer idJudet) {
+    public StaffInfo(String username, String nume, String prenume, Integer idLocatie, String numeLocatie, String numeJudet, Integer idJudet, String cnp) {
         super(username);
         this.nume = nume;
         this.prenume = prenume;
@@ -18,6 +17,7 @@ public class StaffInfo extends UserInfo {
         this.numeLocatie = numeLocatie;
         this.numeJudet = numeJudet;
         this.idJudet = idJudet;
+        this.cnp = cnp;
     }
 
     public String getNumeJudet() {
@@ -42,5 +42,9 @@ public class StaffInfo extends UserInfo {
 
     public String getNumeLocatie() {
         return numeLocatie;
+    }
+
+    public String getCnp() {
+        return cnp;
     }
 }
