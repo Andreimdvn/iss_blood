@@ -29,6 +29,7 @@ import java.io.IOException;
 
 import java.sql.Statement;
 import java.util.Collection;
+import java.util.function.Predicate;
 
 public class IstoricDonariController extends ControlledScreen {
 
@@ -53,6 +54,13 @@ public class IstoricDonariController extends ControlledScreen {
     private TableColumn centruDonareColumn;
     @FXML
     private TableColumn statusColumn;
+
+    private Predicate<DonareInfo> filterData;
+    private Predicate<DonareInfo> filterCentru;
+    private Predicate<DonareInfo> filterStatus;
+
+
+
     private Collection<DonareInfo> istoric;
     private ObservableList<DonareInfo> model = FXCollections.observableArrayList();
 
@@ -122,12 +130,12 @@ public class IstoricDonariController extends ControlledScreen {
                 DonareInfo infoDonare = (DonareInfo)newSelection;
                 if(infoDonare.getStatus()!=Status.NONCONFORM || infoDonare.getStatus()!= Status.NONCONFORM)
                 {
-                    CustomMessageBox msg = new CustomMessageBox("Info", "Analizele nu sunt finalizate încă. Vă rugăm reveniți mai tărziu." +
+                    CustomMessageBox msg = new CustomMessageBox("Info", "Analizele nu sunt finalizate �nc�. V� rug�m reveni?i mai t�rziu." +
                             "\n", 1);
                     msg.show();
                     return;
                 }else if(infoDonare.getAnaliza() == null){
-                    CustomMessageBox msg = new CustomMessageBox("Error", "A aparut o eroare la procesarea analizelor. Vă rugăm contactați un cadru de la centrul de transfuzii." +
+                    CustomMessageBox msg = new CustomMessageBox("Error", "A aparut o eroare la procesarea analizelor. V� rug�m contacta?i un cadru de la centrul de transfuzii." +
                             "\n", 1);
                     msg.show();
                     return;

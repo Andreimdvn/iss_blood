@@ -88,7 +88,21 @@ public class DonatorAnalizaScreenController extends ControlledScreen{
             }
         });
     }
-    public void setFields(String dataRecoltarii,){
+    private String translate(Boolean value){
+        return value == true ? "Pozitiv" : "Negativ";
+    }
+    public void load(DonareInfo info){
+        l_cod.setText(String.valueOf(info.getNumarDonare()));
+        l_data.setText(info.getData());
+        l_responsabil.setText(info.getNumeStaff());
+        l_gr.setText(info.getGrupaSange().toString());
+        l_rh.setText(info.getRh().toString());
+        l_alt.setText(translate(info.getAnaliza().getALT()));
+        l_hbs.setText(translate(info.getAnaliza().getHB()));
+        l_hcv.setText(translate(info.getAnaliza().getANTIHCV()));
+        l_hiv.setText(translate(info.getAnaliza().getANTIHIV()));
+        l_htlv.setText(translate(info.getAnaliza().getANTIHTLV()));
+        l_sif.setText(translate(info.getAnaliza().getSIF()));
     }
     public void closeWindow(){
         Stage stage = (Stage) closeButton.getScene().getWindow();

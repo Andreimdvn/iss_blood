@@ -100,4 +100,48 @@ class ServiceDonator(IService):
         rez = [{"id_analiza": 0, "ALT":True, "SIF": True, "ANTIHTLV": True, "ANTIHCV": False, "ANTIHIV": False, "HB": True,
                 "numar_donare": 0, "centru_donare": "Nicu", "status": "IN_ASTEPTARE"}]
 
+
+        # centru doanre: din donator -> sange brut -> locatie
+        # numar_donare: id formular
+        # status: formular.status
+        #analiza: din sange brut -> analize, where ID = sangeBrut.ID
+
+        #am nevoie de: user -> 1 donator -> * sange brut -> analize, locatie  -> merge dupa id donator
+        #                                -> * formular                        ^
+
+        user = self.db.select("User", ['username'], [username], True)
+
+        donator = self.db.select("Donator", ['id_user'], [user.id], True)
+
+        lst_sange_brut = self.db.select("SangeBrut", ['id_donator'], [donator.id_donator])
+
+        lst_analize = {} #dictionar. key = id donator; value = analiza
+        for sange in lst_sange_brut:
+            analiza = self.db.select("Analize", ['id_sange_brut'], [sange.id], True)
+            lst_analize[sange.id_donator] = analiza
+
+        lst_locatii = {} #dictionar. key = id donator; value = string
+        for sange in lst_sange_brut:
+            nume_centru = self.db.select("Locatie", ['id'], [sange.id_locatie_recoltare], True)
+            lst_locatii[sange.id_donator] = nume_centru
+
+        lst_formulare = self.db.select("FormularDonare", ['id_donator'], [donator.id_donator])
+
+        for key in lst_analize.keys():
+            formular = next(x for x in lst_formulare if x.id_donator == key)
+            lst_formulare.remove(formular)
+            analiza = lst_analize[key]
+            locatie = lst_locatii[key]
+            #sange = next(x for x in lst_sange_brut if x.id_donator == key)
+
+
+            dict = {"id_analiza": analiza.id, "numar_donare": formular.id, "centru_donare": locatie,
+                    "status": formular.status, "ALT": analiza.alt, "SIF": analiza.sif, "ANTIHTLV": analiza.antihtlv,
+                    "ANTIHCV": analiza.antihtcv, "ANTIHIV": analiza.antihiv, "HB": analiza.hb}
+            rez.append(dict)
+
+        for formular in lst_formulare: #daca au mai ramas formulare, la dam asa(nu au fost procesate inca)
+            dict = {"id_analiza": -1, "numar_donare": formular.id, "centru_donare": "",
+                    "status": formular.status}
+
         return rez

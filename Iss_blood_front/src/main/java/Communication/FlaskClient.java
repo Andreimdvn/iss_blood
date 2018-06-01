@@ -532,7 +532,11 @@ public class FlaskClient {
                     jsonObject.getInt("numar_donare"),
                     jsonObject.getString("centru_donare"),
                     Status.valueOf(jsonObject.getString("status")),
-                    analiza
+                    analiza,
+                    "",
+                    "",
+                    GrupaSange.A2,
+                    RH.POZITIV
             );
 
             rez.add(info);
