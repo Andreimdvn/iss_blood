@@ -1,13 +1,23 @@
 package Controller;
 
+import Model.DonareInfo;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.Collection;
+
 public class IstoricDonariController extends ControlledScreen {
+
+    //TO DO: CE PLM e cu Vboxul si hardocarea asta
 
     @FXML
     private VBox tabelDonari;
@@ -20,6 +30,20 @@ public class IstoricDonariController extends ControlledScreen {
     private int getSize(){
         return tabelDonari.getChildren().size() - 2;
     }
+
+    @FXML
+    private TableView viewIstoric;
+
+    @FXML
+    private TableColumn numarDonareColumn;
+    @FXML
+    private TableColumn centruDonareColumn;
+    @FXML
+    private TableColumn statusColumn;
+
+
+    private Collection<DonareInfo> istoric;
+    private ObservableList<DonareInfo> model = FXCollections.observableArrayList();
 
 
     int contor = 0;
@@ -61,11 +85,26 @@ public class IstoricDonariController extends ControlledScreen {
 
     @FXML
     private void initialize(){
+        viewIstoric.setItems(model);
+
+        numarDonareColumn.setCellValueFactory(new PropertyValueFactory<>("numarDonare"));
+        centruDonareColumn.setCellValueFactory(new PropertyValueFactory<>("centruDonare"));
+        statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
 
     }
 
     @Override
     void updateThis() {
+        //Trimite un request catre sever si asteapta pana primeste raspunsul
+        istoric =  getService().getIstoricDonare(getScreenController().userInfo.getUsername());
+        refreshView();
+    }
 
+    /**
+     * Reaplica filtrarile pe istoric si updateaza TableView
+     */
+    private void refreshView()
+    {
+        model.setAll(istoric); //TO DO: filtrari
     }
 }

@@ -495,5 +495,50 @@ public class FlaskClient {
         }
         return new Pair<>(jsonResponse.getInt("status")== 0, jsonResponse.getString("message"));
     }
+
+    public Collection<DonareInfo> getIstoricDonare(String username)
+    {
+        this.logger.debug("Sending request trimitereCerereSange");
+        HttpURLConnection connection = getConnection("/getIstoricDonare");
+
+        if(connection == null)
+            return null;
+
+        String jsonString = new JSONObject()
+                .put("username", username)
+                .toString();
+
+        logger.debug("SENDING: " + jsonString);
+        JSONObject jsonResponse = sendRequest(connection, jsonString);
+        logger.debug("RESPONSE : " + jsonResponse);
+
+        Collection<DonareInfo> rez = new ArrayList<>();
+
+        JSONArray formularDonares = jsonResponse.getJSONArray("entities");
+        for(int i = 0; i < formularDonares.length() ;i++)
+        {
+            JSONObject jsonObject = formularDonares.getJSONObject(i);
+            Analiza analiza = new Analiza(
+                    jsonObject.getInt("id_analiza"),
+                    jsonObject.getBoolean("ALT"),
+                    jsonObject.getBoolean("SIF"),
+                    jsonObject.getBoolean("ANTIHTLV"),
+                    jsonObject.getBoolean("ANTIHCV"),
+                    jsonObject.getBoolean("ANTIHIV"),
+                    jsonObject.getBoolean("HB")
+            );
+
+            DonareInfo info = new DonareInfo(
+                    jsonObject.getInt("numar_donare"),
+                    jsonObject.getString("centru_donare"),
+                    Status.valueOf(jsonObject.getString("status")),
+                    analiza
+            );
+
+            rez.add(info);
+        }
+
+        return rez;
+    }
 }
 

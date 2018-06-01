@@ -95,3 +95,6 @@ class BackController:
 
     def trimite_cerere_sange(self, cerere, cnp_medic):
         return self.service_medic.trimite_cerere_sange(cerere, cnp_medic)
+
+    def get_istoric_donari(self, username):
+        return self.service_donator.get_istoric_donari(username)

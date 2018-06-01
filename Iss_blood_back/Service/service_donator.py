@@ -1,3 +1,4 @@
+from Model.status_cerere_sange import StatusCerereSange
 from Service.i_service import IService
 from Utils import user_utils, locatii_utils
 
@@ -24,10 +25,8 @@ class ServiceDonator(IService):
         # 1. Insereaza in formular ce e de inserat
         user_utils.insert_formular(self.db, formular, donator.id_donator)
 
-        #2. Fa update pe datele userului daca e cazul
+        # 2. Fa update pe datele userului daca e cazul
         return self.__update_user(formular, user)
-
-
 
     def __update_user(self, formular, user):
         '''
@@ -84,3 +83,21 @@ class ServiceDonator(IService):
                            values=valori_noi)
 
         return 0, "Formular inregistrat cu succes"
+
+    def get_istoric_donari(self, username):
+
+        #     jsonObject.getInt("id_analiza"),
+        #     jsonObject.getBoolean("ALT"),
+        #     jsonObject.getBoolean("SIF"),
+        #     jsonObject.getBoolean("ANTIHTLV"),
+        #     jsonObject.getBoolean("ANTIHCV"),
+        #     jsonObject.getBoolean("ANTIHIV"),
+        #     jsonObject.getBoolean("HB")
+        # jsonObject.getInt("numar_donare"),
+        # jsonObject.getString("centru_donare"),
+        # Status.valueOf(jsonObject.getString("status")),
+
+        rez = [{"id_analiza": 0, "ALT":True, "SIF": True, "ANTIHTLV": True, "ANTIHCV": False, "ANTIHIV": False, "HB": True,
+                "numar_donare": 0, "centru_donare": "Nicu", "status": "IN_ASTEPTARE"}]
+
+        return rez

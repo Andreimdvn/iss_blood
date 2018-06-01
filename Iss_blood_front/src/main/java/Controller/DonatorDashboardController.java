@@ -264,6 +264,7 @@ public class DonatorDashboardController extends ControlledScreen {
         borderPane.setBottom(getIstoric());
         fadeIn(getIstoric());
 
+
     }
     /**
      * Loads the pre-registration view in the donation registration
