@@ -7,6 +7,7 @@ public class StaffInfo extends UserInfo {
     private String numeLocatie;
     private String numeJudet;
     private Integer idJudet;
+    //TO DO: CNP
 
     public StaffInfo(String username, String nume, String prenume, Integer idLocatie, String numeLocatie,
                      String numeJudet, Integer idJudet) {

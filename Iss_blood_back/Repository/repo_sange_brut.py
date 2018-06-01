@@ -16,10 +16,11 @@ class RepositorySangeBrut(IRepository):
                          sange_brut.status,
                          sange_brut.grupa,
                          sange_brut.rh,
-                         sange_brut.id_locatie_curenta]
+                         sange_brut.id_locatie_curenta,
+                         sange_brut.staff_full_name]
 
         specific_col_names = ['id_donator', 'id_locatie_recoltare', 'data_recoltare',
-                              'status', 'grupa', 'rh', 'id_locatie_curenta']
+                              'status', 'grupa', 'rh', 'id_locatie_curenta', 'nume_staff_responsabil']
 
         try:
             self.db.insert(table_name, specific_col_names, specific_vals)

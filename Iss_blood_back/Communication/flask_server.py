@@ -259,7 +259,7 @@ class FlaskServer:
         )
 
         self.logger.debug(analiza)
-        status, message = self.controller.staff_update_formular_donare(formular_donare, id_locatie, analiza)
+        status, message = self.controller.staff_update_formular_donare(formular_donare, id_locatie, analiza=analiza)
         return_dict = {"status": str(status), "message": message}
 
         return json.dumps(return_dict)
@@ -288,7 +288,9 @@ class FlaskServer:
 
         id_locatie = self.request_data["id_locatie"]
 
-        status, message = self.controller.staff_update_formular_donare(formular_donare, id_locatie)
+        staff_full_name = self.request_data["staff_full_name"]
+
+        status, message = self.controller.staff_update_formular_donare(formular_donare, id_locatie, staff_full_name=staff_full_name)
         return_dict = {"status": str(status), "message": message}
 
         return json.dumps(return_dict)

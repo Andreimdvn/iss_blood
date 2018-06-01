@@ -160,6 +160,7 @@ class SangeBrut(DB):
     rh = Column(Enum('pozitiv', 'negativ', 'unknown'), nullable=False)
     grupa = Column(Enum('O1', 'A2', 'B3', 'AB4', 'unknown'), nullable=False)
     id_locatie_curenta = Column(Integer, ForeignKey('Locatie.id'))
+    nume_staff_responsabil = Column(String(60), nullable=False)
 
     donator = relationship('Donator', back_populates='sange_brut')
     sange_prelucrat = relationship('SangePrelucrat', back_populates='sange_brut')

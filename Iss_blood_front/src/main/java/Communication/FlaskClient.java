@@ -203,7 +203,7 @@ public class FlaskClient {
         return new Pair<>(true, "Success");
     }
 
-    public Pair<Boolean,String> staffUpdateFormularDonare(FormularDonare formular, int id_locatie)
+    public Pair<Boolean,String> staffUpdateFormularDonare(FormularDonare formular, int id_locatie, String staffFullName)
     {
         HttpURLConnection connection = getConnection("/staff_update_formular_donare");
 
@@ -225,7 +225,8 @@ public class FlaskClient {
                 .put("zile_disponibil", formular.getZileDisponibil())
                 .put("id",formular.getId())
                 .put("status",formular.getStatus())
-                .put("id_locatie",id_locatie).toString();
+                .put("id_locatie",id_locatie)
+                .put("staff_full_name", staffFullName).toString();
 
         logger.debug("SENDING: " + jsonString);
         JSONObject jsonResponse = sendRequest(connection, jsonString);
@@ -520,6 +521,7 @@ public class FlaskClient {
             JSONObject jsonObject = formularDonares.getJSONObject(i);
             Analiza analiza = null;
             String data = "";
+            String staffResponsabil = "";
             GrupaSange grupaSange = GrupaSange.UNKNOWN;
             RH rh = RH.UNKNOWN;
             if(jsonObject.getInt("id_analiza") >= 0) //altfel nu e gata inca
@@ -536,7 +538,7 @@ public class FlaskClient {
                 data = jsonObject.getString("data");
                 grupaSange = GrupaSange.valueOf(jsonObject.getString("grupa"));
                 rh = RH.valueOf(jsonObject.getString("rh").toUpperCase());
-
+                staffResponsabil = jsonObject.getString("staff_full_name");
             }
 
 

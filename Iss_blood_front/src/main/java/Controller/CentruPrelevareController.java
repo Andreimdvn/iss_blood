@@ -98,12 +98,14 @@ public class CentruPrelevareController extends ControlledScreen{
         String mesaj =  null;
         boolean goBack = true;
         int type = 0;
+        StaffInfo info = (StaffInfo)getScreenController().userInfo;
+        String staffFullName = info.getNume() + " " + info.getPrenume();
         if(ok.equals(INVALID)) {
             titlu = "Nu poate dona";
             mesaj = "Persoana nu poate dona";
             type = 0;
             cerereDonare.setStatus(Status.NONCONFORM);
-            getService().staffUpdateFormularDonare(cerereDonare,getInfo().getIdLocatie());
+            getService().staffUpdateFormularDonare(cerereDonare,getInfo().getIdLocatie(), staffFullName);
 
         }
         else if(ok.equals(ERROR)) {
@@ -119,13 +121,13 @@ public class CentruPrelevareController extends ControlledScreen{
             cerereDonare.setStatus(Status.PRELEVARE);
             cerereDonare.setBeneficiarFullName(donatFullnameTextField.getText());
             cerereDonare.setBeneficiarCNP(donatCnpTextField.getText());
-            getService().staffUpdateFormularDonare(cerereDonare,getInfo().getIdLocatie());
+            getService().staffUpdateFormularDonare(cerereDonare,getInfo().getIdLocatie(), staffFullName);
 
             type = 0;
         }
         new CustomMessageBox(titlu,mesaj,type).show();
         if(goBack)
-            goBack();
+             goBack();
     }
 
     private void goBack(){

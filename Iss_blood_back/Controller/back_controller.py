@@ -35,12 +35,12 @@ class BackController:
     def staff_cerere_formulare_donari(self,id_locatie):
         return self.service_transfuzie.get_cereri(id_locatie)
 
-    def staff_update_formular_donare(self, formular_donare, id_locatie, analiza=None):
-        self.manage_request(formular_donare, id_locatie, analiza)
+    def staff_update_formular_donare(self, formular_donare, id_locatie, analiza=None, staff_full_name=None):
+        self.manage_request(formular_donare, id_locatie, analiza=analiza, staff_full_name=staff_full_name)
         return self.service_transfuzie.update_formular(formular_donare)
 
-    def create_sange_brut(self, id_donator, id_locatie):
-        self.service_sange.create_sange_brut(id_donator, id_locatie)
+    def create_sange_brut(self, id_donator, id_locatie, staff_full_name):
+        self.service_sange.create_sange_brut(id_donator, id_locatie, staff_full_name)
 
     def create_sange_prelucrat(self,id_donator):
         self.service_sange.create_sange_prelucrat(id_donator)
@@ -71,12 +71,12 @@ class BackController:
     def get_analize(self, cnp):
         return self.service_sange.get_analize(cnp)
 
-    def manage_request(self, formular_donare, id_locatie, analiza=None):
+    def manage_request(self, formular_donare, id_locatie, analiza=None, staff_full_name=None):
         status = formular_donare.status
         id_donator = self.get_id_donator(formular_donare)
 
         if status.upper() == 'PRELEVARE':
-            self.create_sange_brut(id_donator, id_locatie)
+            self.create_sange_brut(id_donator, id_locatie, staff_full_name)
         elif status.upper() == 'PREGATIRE':
             self.create_sange_prelucrat(id_donator)
         elif analiza is not None:

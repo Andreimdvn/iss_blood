@@ -10,7 +10,7 @@ class ServiceSange(IService):
     def __init__(self, repo_manager, db):
         super().__init__(repo_manager, db)
 
-    def create_sange_brut(self, id_donator, id_locatie):
+    def create_sange_brut(self, id_donator, id_locatie, staff_full_name):
         """
         Sangele a fost recoltat =>
             status: recoltata
@@ -23,7 +23,7 @@ class ServiceSange(IService):
         status = 'Recoltata'
         rh = 'unknown'
         grupa = 'unknown'
-        sange_brut = SangeBrut(id_donator, id_locatie, current_date, status, grupa, rh, id_locatie)
+        sange_brut = SangeBrut(id_donator, id_locatie, current_date, status, grupa, rh, id_locatie, staff_full_name)
         status = self.repo_manager.repo_sange_brut.insert(sange_brut)
 
         # to do / check status

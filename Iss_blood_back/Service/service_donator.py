@@ -85,19 +85,7 @@ class ServiceDonator(IService):
         return 0, "Formular inregistrat cu succes"
 
     def get_istoric_donari(self, username):
-
-        #     jsonObject.getInt("id_analiza"),
-        #     jsonObject.getBoolean("ALT"),
-        #     jsonObject.getBoolean("SIF"),
-        #     jsonObject.getBoolean("ANTIHTLV"),
-        #     jsonObject.getBoolean("ANTIHCV"),
-        #     jsonObject.getBoolean("ANTIHIV"),
-        #     jsonObject.getBoolean("HB")
-        # jsonObject.getInt("numar_donare"),
-        # jsonObject.getString("centru_donare"),
-        # Status.valueOf(jsonObject.getString("status")),
-
-        # centru doanre: din donator -> sange brut -> locatie
+        # centru donare: din donator -> sange brut -> locatie
         # numar_donare: id formular
         # status: formular.status
         #analiza: din sange brut -> analize, where ID = sangeBrut.ID
@@ -137,7 +125,8 @@ class ServiceDonator(IService):
             dict = {"id_analiza": analiza.id, "numar_donare": formular.id, "centru_donare": locatie,
                     "status": formular.status, "ALT": analiza.alt, "SIF": analiza.sif, "ANTIHTLV": analiza.antihtlv,
                     "ANTIHCV": analiza.antihtcv, "ANTIHIV": analiza.antihiv, "HB": analiza.hb,
-                    "grupa": str(sange.grupa), "rh": str(sange.rh), "data": str(sange.data_recoltare)}
+                    "grupa": str(sange.grupa), "rh": str(sange.rh), "data": str(sange.data_recoltare),
+                    "staff_full_name": sange.nume_staff_responsabil}
             rez.append(dict)
 
         for formular in lst_formulare: #daca au mai ramas formulare, la dam asa(nu au fost procesate inca)

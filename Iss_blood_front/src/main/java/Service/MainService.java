@@ -35,8 +35,8 @@ public class MainService {
         return flaskClient.getFormulareDonariDupaLocatie(i);
 
     }
-    public Pair<Boolean, String> staffUpdateFormularDonare(FormularDonare formularDonare,int id_locatie){
-        return flaskClient.staffUpdateFormularDonare(formularDonare,id_locatie);
+    public Pair<Boolean, String> staffUpdateFormularDonare(FormularDonare formularDonare,int id_locatie, String staffFullName){
+        return flaskClient.staffUpdateFormularDonare(formularDonare,id_locatie, staffFullName);
     }
 
     public void staffTrimiteAnaliza(Integer idLocatie, FormularDonare cerereDonare, Analiza analiza) {
