@@ -4,14 +4,20 @@ import Model.*;
 import Utils.Screen;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXPasswordField;
+import com.jfoenix.controls.JFXTextField;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import org.apache.logging.log4j.core.util.ArrayUtils;
 
@@ -23,65 +29,69 @@ import java.util.List;
 public class DonatorAnalizaScreenController extends ControlledScreen{
 
     @FXML
+    private AnchorPane mainPane;
+
+    private double xOffset;
+
+    private double yOffset;
+
+    @FXML
     JFXButton closeButton;
 
     @FXML
-    JFXComboBox cb_rh;
+    Label l_rh;
     @FXML
-    JFXComboBox cb_gr;
+    Label l_gr;
     @FXML
-    JFXComboBox cb_alt;
+    Label l_alt;
     @FXML
-    JFXComboBox cb_sif;
+    Label l_sif;
     @FXML
-    JFXComboBox cb_htlv;
+    Label l_htlv;
     @FXML
-    JFXComboBox cb_hcv;
+    Label l_hcv;
     @FXML
-    JFXComboBox cb_hiv;
+    Label l_hiv;
     @FXML
-    JFXComboBox cb_hbs;
+    Label l_hbs;
     @FXML
-    Label label_responsabil;
+    Label l_responsabil;
     @FXML
-    Label label_nume;
+    Label l_data;
     @FXML
-    Label label_prenume;
-    @FXML
-    Label label_varsta;
-    @FXML
-    Label label_sex;
-    @FXML
-    Label label_cod;
+    Label l_cod;
 
     @FXML
     private void initialize(){
-        List<GrupaSange> grupeSange = new ArrayList<>(Arrays.asList(GrupaSange.values()));
-        List<RH> rhs = new ArrayList<>(Arrays.asList(RH.values()));
-        grupeSange.remove(GrupaSange.UNKNOWN);
-        rhs.remove(RH.UNKNOWN);
-        cb_gr.setItems( FXCollections.observableArrayList( grupeSange));
-        cb_rh.setItems( FXCollections.observableArrayList( rhs));
-        cb_alt.setItems( FXCollections.observableArrayList( PozNegEnum.values()));
-        cb_sif.setItems( FXCollections.observableArrayList( PozNegEnum.values()));
-        cb_htlv.setItems( FXCollections.observableArrayList( PozNegEnum.values()));
-        cb_hcv.setItems( FXCollections.observableArrayList( PozNegEnum.values()));
-        cb_hiv.setItems( FXCollections.observableArrayList( PozNegEnum.values()));
-        cb_hbs.setItems( FXCollections.observableArrayList( PozNegEnum.values()));
-    }
+        //List<GrupaSange> grupeSange = new ArrayList<>(Arrays.asList(GrupaSange.values()));
+        //List<RH> rhs = new ArrayList<>(Arrays.asList(RH.values()));
+        //grupeSange.remove(GrupaSange.UNKNOWN);
+        ///rhs.remove(RH.UNKNOWN);
+        enableStyle();
 
+    }
+    private void enableStyle(){
+        String focusColor = "#fea02f";
+        mainPane.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                xOffset = event.getSceneX();
+                yOffset = event.getSceneY();
+            }
+        });
+        mainPane.setOnMouseDragged(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                Stage stage = (Stage) mainPane.getScene().getWindow();
+                stage.setX(event.getScreenX() - xOffset);
+                stage.setY(event.getScreenY() - yOffset);
+            }
+        });
+    }
     public void setFields(String surname,String forename,Sex donatorSex,Integer age,Integer idBloodBag){
-        label_nume.setText(surname);
-        label_prenume.setText(forename);
-        label_cod.setText(idBloodBag.toString());
-        //todo add getScreenController.getCurrentAccountName() here
-        label_responsabil.setText("missing implementation");
-        label_varsta.setText(age.toString());
-        label_sex.setText(donatorSex.toString());
     }
     public void closeWindow(){
         Stage stage = (Stage) closeButton.getScene().getWindow();
-        // do what you have to do
         stage.close();
     }
 

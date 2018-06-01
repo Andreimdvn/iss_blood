@@ -1,8 +1,10 @@
 package Controller;
 
+import Utils.Screen;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -10,10 +12,12 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.io.IOException;
 
 public class IstoricDonariController extends ControlledScreen {
 
@@ -53,10 +57,18 @@ public class IstoricDonariController extends ControlledScreen {
         st.onMouseClickedProperty().set(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                Stage stage = new Stage();
-                stage.setTitle("Results");
-                stage.setScene(new Scene((Parent) getScreenController().getScreen(Utils.Screen.DONATOR_SCREEN)));
-                stage.show();
+                FXMLLoader loader = new FXMLLoader(getClass().getResource(Screen.DONATOR_ANALIZA_RESOURCE));
+                try {
+                    Parent loadedScreen = loader.load();
+                    Stage stage = new Stage();
+                    stage.initStyle(StageStyle.UNDECORATED);
+
+                    stage.setScene(new Scene(loadedScreen));
+                    stage.show();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
             }
         });
 
