@@ -92,3 +92,6 @@ class BackController:
 
     def get_id_donator(self, formular_donare):
         return self.service_transfuzie.get_id_donator(formular_donare)
+
+    def trimite_cerere_sange(self, cerere, cnp_medic):
+        return self.service_medic.trimite_cerere_sange(cerere, cnp_medic)

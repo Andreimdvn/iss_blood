@@ -5,13 +5,15 @@ public class MedicInfo extends UserInfo {
     private String prenume;
     private Integer idLocatie;
     private String numeLocatie;
+    private String cnp;
 
-    public MedicInfo(String username, String nume, String prenume, Integer idLocatie, String numeLocatie) {
+    public MedicInfo(String username, String nume, String prenume, Integer idLocatie, String numeLocatie, String cnp) {
         super(username);
         this.nume = nume;
         this.prenume = prenume;
         this.idLocatie = idLocatie;
         this.numeLocatie = numeLocatie;
+        this.cnp = cnp;
     }
 
     public String getNume() {
@@ -28,5 +30,13 @@ public class MedicInfo extends UserInfo {
 
     public String getNumeLocatie() {
         return numeLocatie;
+    }
+
+    public String getFullName(){
+        return nume + " " +  prenume;
+    }
+
+    public String getCnp() {
+        return cnp;
     }
 }

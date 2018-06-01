@@ -59,4 +59,8 @@ public class MainService {
     public void addObserver(Observer controlledScreen) {
         flaskClient.addObserver(controlledScreen);
     }
+
+    public Pair<Boolean, String> trimiteCerereSange(CerereSange cerere, String cnpMedic) {
+        return flaskClient.trimiteCerereSange(cerere, cnpMedic);
+    }
 }

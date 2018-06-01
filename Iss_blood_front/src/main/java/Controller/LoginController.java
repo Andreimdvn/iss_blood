@@ -90,7 +90,7 @@ public class LoginController extends ControlledScreen {
         //remove this ^^^ on production
 
         if (canLogin.getKey() == null) { //failed
-            new CustomMessageBox("Login",canLogin.getValue()).show();
+            new CustomMessageBox("Login", canLogin.getValue()).show();
             return;
         }
 

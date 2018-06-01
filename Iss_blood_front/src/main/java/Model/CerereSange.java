@@ -15,6 +15,11 @@ public class CerereSange{
     private Integer numarPungiPlasma;
     private Date date;
     private Importanta importanta;
+    private String numeMedic;
+    private String spital;
+    private Boolean status;
+
+    private Logger logger = LogManager.getLogger(CerereSange.class.getName());
 
     public CerereSange(String numePacient, String cnpPacient, GrupaSange grupaSange, RH rh, Integer numarPungiTrombocite, Integer numarPungiGlobuleRosii, Integer numarPungiPlasma, Date date, Importanta importanta, String numeMedic, String spital) {
         this.cnpPacient = cnpPacient;
@@ -28,6 +33,7 @@ public class CerereSange{
         this.importanta = importanta;
         this.numeMedic = numeMedic;
         this.spital = spital;
+        this.status = false;
     }
 
     public String getNumeMedic() {
@@ -46,11 +52,6 @@ public class CerereSange{
     public void setSpital(String spital) {
         this.spital = spital;
     }
-
-    private String numeMedic;
-    private String spital;
-
-    private Logger logger = LogManager.getLogger(CerereSange.class.getName());
 
     public String getNumePacient() {
         return numePacient;
@@ -133,9 +134,9 @@ public class CerereSange{
         this.numarPungiGlobuleRosii = numarPungiGlobuleRosii;
         this.numarPungiPlasma = numarPungiPlasma;
         this.importanta = importanta;
+        this.status = false;
 
         this.logger.debug(toString());
-
     }
 
     @Override

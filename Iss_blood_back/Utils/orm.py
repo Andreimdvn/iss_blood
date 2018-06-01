@@ -206,6 +206,7 @@ class CereriSange(DB):
     numar_pungi_plasma = Column(Integer, nullable=False)
     date = Column(Date, nullable=False)
     importanta = Column(Enum('Scazuta', 'Medie', 'Ridicata'))
+    status = Column(Enum('in_asteptare', 'rezolvata', 'anulata'))
 
     medic = relationship('Medic', back_populates='cereri_sange')
     pacient = relationship('Pacient', back_populates='cereri_sange')
