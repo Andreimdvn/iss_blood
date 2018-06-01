@@ -96,8 +96,6 @@ class FlaskServer:
             # pungile au fost trimise
             id_cerere = self.request_data["id_cerere"]
 
-            # TO DO change status to complete for cerere sange
-
         return_dict = {"status": status, "message": mesaj}
 
         self.logger.debug("Returning response for trimite pungi: {}".format(return_dict))

@@ -1,12 +1,11 @@
 package Controller;
 
 import Model.DonareInfo;
+import Model.Status;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -14,7 +13,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class IstoricDonariController extends ControlledScreen {
 
@@ -42,9 +43,17 @@ public class IstoricDonariController extends ControlledScreen {
     @FXML
     private TableColumn statusColumn;
 
-    private Predicate<DonareInfo> filterData;
-    private Predicate<DonareInfo> filterCentru;
-    private Predicate<DonareInfo> filterStatus;
+    @FXML
+    private DatePicker datePicker;
+    @FXML
+    private TextField centruDonareTextField;
+    @FXML
+    private ComboBox statusComboBox;
+
+
+    private Predicate<DonareInfo> filterDate = info -> true;
+    private Predicate<DonareInfo> filterCentru = info -> true;
+    private Predicate<DonareInfo> filterStatus = info -> true;
 
 
 
@@ -97,7 +106,43 @@ public class IstoricDonariController extends ControlledScreen {
         centruDonareColumn.setCellValueFactory(new PropertyValueFactory<>("centruDonare"));
         statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
 
+        ObservableList lst = FXCollections.observableArrayList();
+        lst.add(Status.DISTRIBUIRE);
+        lst.add(Status.IN_ASTEPTARE);
+        lst.add(Status.NONCONFORM);
+        lst.add(Status.CALIFICARE);
+        lst.add(Status.PREGATIRE);
+        lst.add(Status.PRELEVARE);
+        statusComboBox.setItems(lst);
+
     }
+
+    @FXML
+    public void OnDateChanged()
+    {
+        filterDate = donareInfo -> donareInfo.getData().equals(datePicker.getValue().toString());
+        refreshView();
+    }
+
+    @FXML
+    public void OnCentruChanged()
+    {
+        String centru = centruDonareTextField.getText();
+        if (centru.equals(""))
+            filterCentru = donareInfo -> true;
+        else
+            filterCentru = donareInfo -> donareInfo.getCentruDonare().equals(centru);
+        refreshView();
+    }
+
+    @FXML
+    public void OnStatusChanged()
+    {
+        filterStatus = donareInfo -> donareInfo.getStatus().equals(statusComboBox.getValue());
+        refreshView();
+    }
+
+
 
     @Override
     void updateThis() {
@@ -111,6 +156,9 @@ public class IstoricDonariController extends ControlledScreen {
      */
     private void refreshView()
     {
-        model.setAll(istoric); //TO DO: filtrari
+        List<DonareInfo> rez = istoric.stream()
+                .filter(filterCentru.and(filterDate).and(filterStatus))
+                .collect(Collectors.toList());
+        model.setAll(rez);
     }
 }
