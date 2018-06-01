@@ -75,9 +75,8 @@ def get_info_medic(db, user_id, medic=None):
     return {"nume": medic.nume,
             "prenume": medic.prenume,
             "id_locatie": medic.id_locatie,
-            "nume_locatie": locatie.nume},
-            "cnp" : medic.cnp}
-
+            "nume_locatie": locatie.nume,
+            "cnp": medic.cnp}
 
 def get_info_staff(db, user_id, staff=None):
     '''
