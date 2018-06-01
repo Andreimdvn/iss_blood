@@ -1,9 +1,10 @@
 package Controller;
 
+import javafx.util.Pair;
 import Model.*;
 import Utils.CustomMessageBox;
 import Validators.ValidationException;
-import javafx.util.Pair;
+
 
 public class FormularDonareController extends AbstractFormularDonareController {
 
@@ -21,7 +22,6 @@ public class FormularDonareController extends AbstractFormularDonareController {
         phoneTextField.setText(info.getTelefon());
         sexToggleGroup.selectToggle(info.getSex() == Sex.FEMININ ? femininToggle : masculinToggle);
     }
-
 
     @Override
     void updateThis() {

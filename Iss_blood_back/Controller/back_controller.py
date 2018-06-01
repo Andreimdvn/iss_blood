@@ -26,6 +26,10 @@ class BackController:
     def register(self, register_info):
         return self.service_common.register(register_info)
 
+
+    def add_pacient(self, id_medic, nume_pacient, cnp_pacient, grupa_sange_pacient, rh_pacient):
+        return self.service_medic.add_pacient(id_medic, nume_pacient, cnp_pacient, grupa_sange_pacient, rh_pacient)
+
     def user_trimite_formular(self, formular, username):
         return self.service_donator.insert_formular_user(formular, username)
 

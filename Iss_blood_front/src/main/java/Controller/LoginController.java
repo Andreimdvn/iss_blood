@@ -1,7 +1,5 @@
 package Controller;
 
-import Model.DonatorInfo;
-import Model.MedicInfo;
 import Model.UserInfo;
 import Utils.CustomMessageBox;
 import Utils.Screen;
@@ -17,9 +15,6 @@ import javafx.stage.Stage;
 import javafx.util.Pair;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import java.util.Objects;
-
 
 public class LoginController extends ControlledScreen {
 
@@ -78,8 +73,13 @@ public class LoginController extends ControlledScreen {
         logger.debug("Login button has been clicked");
 
 
+
+        //Pair<Integer, String> canLogin;
+        //Pair<Integer, String> canLogin = getService().login(username, password);
+
 //        Pair<Integer, String> canLogin;
         Pair<UserInfo, String> canLogin = getService().login(username, password);
+
         // Login for debug
 //        if(username.equals("donator"))
 //            canLogin = new Pair<>(1,"");

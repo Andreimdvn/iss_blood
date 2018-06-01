@@ -1,6 +1,8 @@
 package Communication;
 
-import Controller.ControlledScreen;
+
+import Model.Pacient;
+import Model.RegisterInfo;
 import Model.*;
 import Utils.Observer;
 import Utils.UserUtils;
@@ -9,7 +11,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import javax.naming.directory.InvalidAttributesException;
 import java.io.*;
 import java.net.*;
@@ -114,7 +115,6 @@ public class FlaskClient {
         }
     }
     public List<Analiza> getAnalize(String cnp){
-
         HttpURLConnection connection = getConnection("/get_analize");
 
         if(connection == null)
@@ -146,6 +146,33 @@ public class FlaskClient {
 
         return list;
     }
+
+    public Pair<Boolean, String> addPacient(Pacient pacient) {
+        HttpURLConnection connection = getConnection("/add_pacient");
+
+        if(connection == null)
+            return new Pair<>(false, "Add pacient connection request error");
+
+        String jsonString = new JSONObject().put("idMedic", pacient.getIdMedic())
+                .put("numePacient",pacient.getNume())
+                .put("cnpPacient", pacient.getCnp())
+                .put("grupaSangePacient", pacient.getGrupaSange().toString())
+                .put("rhPacient", pacient.getRh().toString()).toString();
+        logger.debug("SENDING ADD PACIENT REQUEST " + jsonString);
+
+        JSONObject jsonResponse = sendRequest(connection, jsonString);
+
+        logger.debug("RESPONSE ADD PACIENT" + jsonResponse);
+
+        if(jsonResponse == null)
+            return new Pair<>(false, "Connection error.");
+        if(jsonResponse.getString("status").equals("0"))
+            return new Pair<>(true, "Added new pacient successfully");
+
+        return new Pair<>(false, jsonResponse.getString("message"));
+
+    }
+
     public Pair<Boolean, String> register(RegisterInfo info)
     {
         HttpURLConnection connection = getConnection("/register");
