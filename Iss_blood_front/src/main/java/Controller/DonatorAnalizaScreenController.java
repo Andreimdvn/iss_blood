@@ -95,8 +95,8 @@ public class DonatorAnalizaScreenController extends ControlledScreen{
         l_cod.setText(String.valueOf(info.getNumarDonare()));
         l_data.setText(info.getData());
         l_responsabil.setText(info.getNumeStaff());
-        l_gr.setText(info.getGrupaSange().toString());
-        l_rh.setText(info.getRh().toString());
+        l_gr.setText(info.getAnaliza().getGrupaSange().toString());
+        l_rh.setText(info.getAnaliza().getRh().toString());
         l_alt.setText(translate(info.getAnaliza().getALT()));
         l_hbs.setText(translate(info.getAnaliza().getHB()));
         l_hcv.setText(translate(info.getAnaliza().getANTIHCV()));

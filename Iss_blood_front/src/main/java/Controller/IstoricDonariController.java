@@ -1,11 +1,10 @@
 package Controller;
 
-import Model.Status;
+import Model.*;
 import Utils.CustomMessageBox;
 import Utils.Screen;
 import javafx.application.Application;
 import javafx.event.EventHandler;
-import Model.DonareInfo;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -22,6 +21,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -128,14 +128,17 @@ public class IstoricDonariController extends ControlledScreen {
             if (newSelection != null) {
 
                 DonareInfo infoDonare = (DonareInfo)newSelection;
+                //testing
+                //infoDonare = new DonareInfo(103,"centru",Status.NONCONFORM,new Analiza(100,false,false,false,false,false,false, GrupaSange.A2, RH.NEGATIV),"Vlad","10/10/2019");
+
                 if(infoDonare.getStatus()!=Status.NONCONFORM || infoDonare.getStatus()!= Status.NONCONFORM)
                 {
-                    CustomMessageBox msg = new CustomMessageBox("Info", "Analizele nu sunt finalizate �nc�. V� rug�m reveni?i mai t�rziu." +
+                    CustomMessageBox msg = new CustomMessageBox("Info", "Analizele nu sunt finalizate inca. Va rugam reveniti mai tarziu." +
                             "\n", 1);
                     msg.show();
                     return;
                 }else if(infoDonare.getAnaliza() == null){
-                    CustomMessageBox msg = new CustomMessageBox("Error", "A aparut o eroare la procesarea analizelor. V� rug�m contacta?i un cadru de la centrul de transfuzii." +
+                    CustomMessageBox msg = new CustomMessageBox("Error", "A aparut o eroare la procesarea analizelor. Va rugam contactati un cadru de la centrul de transfuzii." +
                             "\n", 1);
                     msg.show();
                     return;
@@ -143,13 +146,13 @@ public class IstoricDonariController extends ControlledScreen {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource(Screen.DONATOR_ANALIZA_RESOURCE));
                 try {
                     Parent loadedScreen = loader.load();
+                    ((DonatorAnalizaScreenController)loader.getController()).load(infoDonare);
                     Stage stage = new Stage();
                     stage.initStyle(StageStyle.UNDECORATED);
-
                     stage.setScene(new Scene(loadedScreen));
                     stage.show();
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    logger.log(Level.ERROR,e.getStackTrace().toString());
                 }
             }
         });
