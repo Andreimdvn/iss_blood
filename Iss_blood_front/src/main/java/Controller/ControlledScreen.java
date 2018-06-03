@@ -53,6 +53,7 @@ public abstract class ControlledScreen implements Observer {
         screenController.loadScreen(Screen.ISTORIC_CERERI_SCREEN,Screen.ISTORIC_CERERI_RESOURCE);
         screenController.loadScreen(Screen.STARE_PACIENTI_SCREEN,Screen.STARE_PACIENTI_RESOURCE);
         screenController.loadScreen(Screen.CERERE_SANGE_SCREEN,Screen.CERERE_SANGE_RESOURCE);
+
         screenController.setScreen(Screen.MEDIC_SCREEN);
 
     }
@@ -85,6 +86,7 @@ public abstract class ControlledScreen implements Observer {
         else if(screenController.userInfo instanceof DonatorInfo)
             loadScreensDonator();
         unloadLoginRegister();
+        //update();
     }
     
     private void unloadLoginRegister() {
@@ -153,11 +155,7 @@ public abstract class ControlledScreen implements Observer {
      */
     @Override
     public void update() {
-        getScreenController().getAllScreens().forEach(
-                x -> {
-                    x.getControlledScreen().updateThis();
-                }
-        );
+        getScreenController().update();
     }
 
     abstract void updateThis();

@@ -411,6 +411,7 @@ class FlaskServer:
         return_dict = {
             "entities": self.controller.get_istoric_donari(username)
         }
+        self.logger.debug(return_dict)
 
         return json.dumps(return_dict)
 

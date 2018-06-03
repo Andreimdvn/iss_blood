@@ -79,6 +79,12 @@ public class ScreenController extends StackPane {
         }
     }
 
+    private ControlledScreen currentWindow;
+
+
+    void update(){
+        currentWindow.updateThis();
+    }
     /**
      *  Set the given screen( given name of the screen) on top of scene graph( load the screen) and unload
      *  the current screen from scene graph (not from hashmap of screenViews, so the details from the current screen
@@ -92,8 +98,9 @@ public class ScreenController extends StackPane {
             if(!getChildren().isEmpty()) {
                 getChildren().remove(0);
                 getChildren().add(0, screenViews.get(name).getNode());
-
                 MainApplication.resizeScreen();
+                currentWindow = getControlledScreen(name);
+                update();
             } else
                 getChildren().add(screenViews.get(name).getNode());
             return true;

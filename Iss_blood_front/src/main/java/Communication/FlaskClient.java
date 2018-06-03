@@ -586,7 +586,7 @@ public class FlaskClient {
     }
     public void addObserver(Observer controlledScreen) {
         observer = controlledScreen;
-        update();
+        //update();
     }
 
     public Pair<Boolean,String> trimiteCerereSange(CerereSange cerere, String cnpMedic) {
