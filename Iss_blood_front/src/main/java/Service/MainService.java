@@ -6,6 +6,8 @@ import Model.RegisterInfo;
 import Model.*;
 import Utils.Observer;
 import javafx.util.Pair;
+
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -36,8 +38,8 @@ public class MainService {
         return flaskClient.getFormulareDonariDupaLocatie(i);
 
     }
-    public Pair<Boolean, String> staffUpdateFormularDonare(FormularDonare formularDonare,int id_locatie){
-        return flaskClient.staffUpdateFormularDonare(formularDonare,id_locatie);
+    public Pair<Boolean, String> staffUpdateFormularDonare(FormularDonare formularDonare,int id_locatie, String staffFullName){
+        return flaskClient.staffUpdateFormularDonare(formularDonare,id_locatie, staffFullName);
     }
 
     public void staffTrimiteAnaliza(Integer idLocatie, FormularDonare cerereDonare, Analiza analiza) {
@@ -71,11 +73,16 @@ public class MainService {
         return flaskClient.trimiteCerereSange(cerere, cnpMedic);
     }
 
+    public Collection<DonareInfo> getIstoricDonare(String username) {return flaskClient.getIstoricDonare(username);}
     public void anulare(Integer id) {
         flaskClient.anulareCerere(id);
     }
 
     public Pair<Boolean, String> isAValidDonation(String cnpDonator) {
         return flaskClient.isAValidDonation(cnpDonator);
+    }
+
+    public Map<String,Integer> getCentruHomeScreenData(Integer idLocatie) {
+        return flaskClient.getCentruHomeScreenData(idLocatie);
     }
 }

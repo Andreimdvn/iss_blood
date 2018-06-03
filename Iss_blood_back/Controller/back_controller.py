@@ -39,18 +39,18 @@ class BackController:
     def staff_cerere_formulare_donari(self,id_locatie):
         return self.service_transfuzie.get_cereri(id_locatie)
 
-    def staff_update_formular_donare(self, formular_donare, id_locatie, analiza=None):
-        self.manage_request(formular_donare, id_locatie, analiza)
+    def staff_update_formular_donare(self, formular_donare, id_locatie, analiza=None, staff_full_name=None):
+        self.manage_request(formular_donare, id_locatie, analiza=analiza, staff_full_name=staff_full_name)
         return self.service_transfuzie.update_formular(formular_donare)
 
-    def create_sange_brut(self, id_donator, id_locatie):
-        self.service_sange.create_sange_brut(id_donator, id_locatie)
+    def create_sange_brut(self, id_donator, id_locatie, staff_full_name):
+        self.service_sange.create_sange_brut(id_donator, id_locatie, staff_full_name)
 
     def create_sange_prelucrat(self,id_donator):
         self.service_sange.create_sange_prelucrat(id_donator)
 
-    def create_analiza(self, id_donator,grupa, rh, alt, sif, antihtlv, antihtcv, antihiv, hb):
-        self.service_sange.create_analiza(id_donator, grupa, rh, alt, sif, antihtlv, antihtcv, antihiv, hb)
+    def create_analiza(self, id_donator,grupa, rh, alt, sif, antihtlv, antihtcv, antihiv, hb, id_formular):
+        self.service_sange.create_analiza(id_donator, grupa, rh, alt, sif, antihtlv, antihtcv, antihiv, hb, id_formular)
 
     def get_stoc_curent(self,id_locatie):
         return self.service_sange.get_stoc_curent(id_locatie)
@@ -77,12 +77,12 @@ class BackController:
     def get_analize(self, cnp):
         return self.service_sange.get_analize(cnp)
 
-    def manage_request(self, formular_donare, id_locatie, analiza=None):
+    def manage_request(self, formular_donare, id_locatie, analiza=None, staff_full_name=None):
         status = formular_donare.status
         id_donator = self.get_id_donator(formular_donare)
 
         if status.upper() == 'PRELEVARE':
-            self.create_sange_brut(id_donator, id_locatie)
+            self.create_sange_brut(id_donator, id_locatie, staff_full_name)
         elif status.upper() == 'PREGATIRE':
             self.create_sange_prelucrat(id_donator)
         elif analiza is not None:
@@ -94,7 +94,7 @@ class BackController:
             hb = analiza.hb
             grupa = formular_donare.grupa
             rh = formular_donare.rh
-            self.create_analiza(id_donator, grupa, rh, alt, sif, antihtlv, antihtcv, antihiv, hb)
+            self.create_analiza(id_donator, grupa, rh, alt, sif, antihtlv, antihtcv, antihiv, hb, formular_donare.id)
 
     def get_id_donator(self, formular_donare):
         return self.service_transfuzie.get_id_donator(formular_donare)
@@ -102,6 +102,8 @@ class BackController:
     def trimite_cerere_sange(self, cerere, cnp_medic):
         return self.service_medic.trimite_cerere_sange(cerere, cnp_medic)
 
+    def get_istoric_donari(self, username):
+        return self.service_donator.get_istoric_donari(username)
     def get_cereri_sange(self, id_locatie, status, from_spital):
         return self.service_medic.get_cereri_sange(id_locatie, status, from_spital)
 
@@ -110,3 +112,6 @@ class BackController:
 
     def is_a_valid_donation(self, cnp_donator):
         return self.service_donator.is_a_valid_donation(cnp_donator)
+
+    def get_centru_home_screen_data(self, id_locatie):
+        return self.service_sange.get_centru_home_screen_data(id_locatie)

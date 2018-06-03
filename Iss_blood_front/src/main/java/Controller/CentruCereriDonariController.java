@@ -36,7 +36,7 @@ public class CentruCereriDonariController extends ControlledScreen{
     private List<FormularDonare> list = new ArrayList<>();
 
     @FXML
-    private void initialize(){
+    private void initialize() {
         numeColumn.setCellValueFactory(new PropertyValueFactory<>("nume"));
         prenumeColumn.setCellValueFactory(new PropertyValueFactory<>("prenume"));
         grupaSangeColumn.setCellValueFactory(new PropertyValueFactory<>("grupa"));
@@ -44,8 +44,9 @@ public class CentruCereriDonariController extends ControlledScreen{
         statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
         donareTableView.setItems(donareObservableList);
         statusCombo.getItems().addAll(
-                "ANY STATUS",Status.IN_ASTEPTARE.toString(),Status.PRELEVARE.toString()
-                ,Status.PREGATIRE.toString());
+                "ANY STATUS", Status.IN_ASTEPTARE.toString(), Status.PRELEVARE.toString()
+                , Status.PREGATIRE.toString(), Status.CALIFICARE.toString(), Status.DISTRIBUIRE.toString(),
+                Status.NONCONFORM.toString());
     }
     private FormularDonare getSelectedItem(){
         return donareTableView.getSelectionModel().getSelectedItem();
@@ -86,7 +87,7 @@ public class CentruCereriDonariController extends ControlledScreen{
     private JFXTextField searchPrenume;
 
     @FXML
-    private ComboBox<String> statusCombo;
+    public ComboBox<String> statusCombo;
 
     @FXML
     private void reset(){
@@ -97,7 +98,7 @@ public class CentruCereriDonariController extends ControlledScreen{
     }
 
     @FXML
-    private void filter(){
+    public void filter(){
 
         List<FormularDonare> donare = list.stream().filter(
                 p -> p.getNume().toLowerCase().contains(searchNume.getText().toLowerCase()))
@@ -130,7 +131,9 @@ public class CentruCereriDonariController extends ControlledScreen{
     @FXML
     private void button2Clicked(){
         getSelected().setStatus(Status.PREGATIRE);
-        getService().staffUpdateFormularDonare(getSelected(),getInfo().getIdLocatie());
+        StaffInfo info = (StaffInfo)getScreenController().userInfo;
+        String name = info.getNume() + " " + info.getPrenume();
+        getService().staffUpdateFormularDonare(getSelected(),getInfo().getIdLocatie(), name);
     }
     @FXML
     private void button3Clicked(){

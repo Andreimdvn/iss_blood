@@ -3,6 +3,7 @@ import datetime
 from Model.analiza import Analiza
 from Model.sange_brut import SangeBrut
 from Model.sange_prelucrat import SangePrelucrat
+from Model.status_cerere_sange import StatusCerereSange
 from Service.i_service import IService
 
 
@@ -10,7 +11,7 @@ class ServiceSange(IService):
     def __init__(self, repo_manager, db):
         super().__init__(repo_manager, db)
 
-    def create_sange_brut(self, id_donator, id_locatie):
+    def create_sange_brut(self, id_donator, id_locatie, staff_full_name):
         """
         Sangele a fost recoltat =>
             status: recoltata
@@ -23,7 +24,7 @@ class ServiceSange(IService):
         status = 'Recoltata'
         rh = 'unknown'
         grupa = 'unknown'
-        sange_brut = SangeBrut(id_donator, id_locatie, current_date, status, grupa, rh, id_locatie)
+        sange_brut = SangeBrut(id_donator, id_locatie, current_date, status, grupa, rh, id_locatie, staff_full_name)
         status = self.repo_manager.repo_sange_brut.insert(sange_brut)
 
         # to do / check status
@@ -44,12 +45,12 @@ class ServiceSange(IService):
         sange_brut.status = 'Prelucrata'
         self.repo_manager.repo_sange_brut.update(sange_brut)
 
-    def create_analiza(self, id_donator,grupa,rh, alt, sif, antihtlv, antihtcv, antihiv, hb):
+    def create_analiza(self, id_donator,grupa,rh, alt, sif, antihtlv, antihtcv, antihiv, hb, id_formular):
         status = 'Prelucrata'
         sange_brut = self.repo_manager.repo_sange_brut.get_first_element(id_donator, status)
         sange_brut.grupa = grupa
         sange_brut.rh = rh
-        analiza = Analiza(sange_brut.id, alt, sif, antihtlv, antihtcv, antihiv, hb)
+        analiza = Analiza(sange_brut.id, alt, sif, antihtlv, antihtcv, antihiv, hb, id_formular)
 
         self.repo_manager.repo_analiza.insert(analiza)
 
@@ -100,3 +101,23 @@ class ServiceSange(IService):
     def get_current_date(self):
         now = datetime.datetime.now()
         return str(now.year)+'-'+str(now.month)+'-'+str(now.day)
+
+    def get_centru_home_screen_data(self, id_locatie):
+        globule_rosii, trombocite, plasma = self.repo_manager.repo_sange_prelucrat.get_stoc_curent(id_locatie)
+
+        numar_donari_astazi = self.repo_manager.repo_sange_brut.get_count_for_location_and_date(
+            id_locatie, datetime.datetime.today().strftime('%Y-%m-%d'))
+        cereri_donari_in_asteptare = len([cerere for cerere in self.repo_manager.repo_formular_donare.get_all(id_locatie)
+                                          if cerere[15] == "IN_ASTEPTARE"])
+        cereri_sange_in_asteptare = len([cerere for cerere in self.repo_manager.repo_cereri.get_all()
+                                         if cerere.status == StatusCerereSange.in_asteptare.name])
+        home_data_dict = {
+            "pungi_globule_rosii": globule_rosii,
+            "pungi_plasma": plasma,
+            "pungi_trombocite": trombocite,
+            "total_donari": numar_donari_astazi,
+            "cereri_sange_in_asteptare": cereri_sange_in_asteptare,
+            "cereri_donari_in_asteptare": cereri_donari_in_asteptare
+        }
+
+        return home_data_dict
