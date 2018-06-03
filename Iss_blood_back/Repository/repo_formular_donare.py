@@ -29,7 +29,7 @@ class RepositoryFormularDonari(IRepository):
 
         return 0, "Updated successfuly"
 
-    def get_all(self,id_locatie):
+    def get_all(self, id_locatie):
         table_name = 'FormularDonare'
         specific_col_names = ['id', 'id_donator', 'beneficiar_full_name', 'beneficiar_CNP', 'grupa',
                               'rh', 'zile_disponibil', 'status']
@@ -74,8 +74,10 @@ class RepositoryFormularDonari(IRepository):
                          resedintaLocalitate, resedintaJudet, resedintaAdresa,
                          beneficiar_full_name, beneficiar_cnp, grupa, rh, status]
                     )
+            self.logger.debug("RETURN for get_all formular donare for location {}: {}".format(id_locatie, rezultat))
             return rezultat
-        except...:
+        except Exception as ex:
+            self.logger.error("DataBase error: {}".format(ex))
             return "Database error"
 
     def get_donator(self, id_donator):

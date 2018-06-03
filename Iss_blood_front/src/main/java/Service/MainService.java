@@ -1,7 +1,8 @@
 package Service;
 
 import Communication.FlaskClient;
-import Controller.ControlledScreen;
+import Model.Pacient;
+import Model.RegisterInfo;
 import Model.*;
 import Utils.Observer;
 import javafx.util.Pair;
@@ -27,6 +28,8 @@ public class MainService {
         return flaskClient.register(info);
     }
 
+    public Pair<Boolean, String> addPacient(Pacient pacient) { return  flaskClient.addPacient(pacient); }
+
     public Pair<Boolean, String> userTrimiteFormularDonare(FormularDonare formular, String username){return flaskClient.userTrimiteFormularDonare(formular, username);}
 
     public Pair<Boolean, String> staffTrimiteFormularDonare (FormularDonare formularDonare) { return flaskClient.staffTrimiteFormularDonare(formularDonare);}
@@ -35,8 +38,8 @@ public class MainService {
         return flaskClient.getFormulareDonariDupaLocatie(i);
 
     }
-    public Pair<Boolean, String> staffUpdateFormularDonare(FormularDonare formularDonare,int id_locatie){
-        return flaskClient.staffUpdateFormularDonare(formularDonare,id_locatie);
+    public Pair<Boolean, String> staffUpdateFormularDonare(FormularDonare formularDonare,int id_locatie, String staffFullName){
+        return flaskClient.staffUpdateFormularDonare(formularDonare,id_locatie, staffFullName);
     }
 
     public void staffTrimiteAnaliza(Integer idLocatie, FormularDonare cerereDonare, Analiza analiza) {
@@ -51,9 +54,9 @@ public class MainService {
         return flaskClient.getAnalize(cnp);
     }
 
-    public Pair<Boolean, String> trimitePungi(int idCerere, int idLocatie, int idLocatieNoua,
+    public Pair<Boolean, String> trimitePungi(int idCerere, int idLocatie,
                                               GrupaSange grupaSange, RH rh, int plasma, int trombocite, int globule){
-        return flaskClient.trimitePungi(idCerere,  idLocatie, idLocatieNoua, grupaSange, rh, plasma,trombocite, globule);
+        return flaskClient.trimitePungi(idCerere,  idLocatie, grupaSange, rh, plasma,trombocite, globule);
 
     }
 
@@ -61,9 +64,25 @@ public class MainService {
         flaskClient.addObserver(controlledScreen);
     }
 
+    public List<CerereSange> getCereriSange(int id_locatie,String status,boolean fromSpital)
+    {
+     return flaskClient.getCereriSange(id_locatie,status,fromSpital);
+    }
+
     public Pair<Boolean, String> trimiteCerereSange(CerereSange cerere, String cnpMedic) {
         return flaskClient.trimiteCerereSange(cerere, cnpMedic);
     }
 
     public Collection<DonareInfo> getIstoricDonare(String username) {return flaskClient.getIstoricDonare(username);}
+    public void anulare(Integer id) {
+        flaskClient.anulareCerere(id);
+    }
+
+    public Pair<Boolean, String> isAValidDonation(String cnpDonator) {
+        return flaskClient.isAValidDonation(cnpDonator);
+    }
+
+    public Map<String,Integer> getCentruHomeScreenData(Integer idLocatie) {
+        return flaskClient.getCentruHomeScreenData(idLocatie);
+    }
 }

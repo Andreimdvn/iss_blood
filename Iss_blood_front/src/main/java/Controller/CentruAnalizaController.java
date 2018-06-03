@@ -110,7 +110,7 @@ public class CentruAnalizaController extends ControlledScreen{
         ANTIHIV = hivPozitivToggleButton.isSelected();
         HB = hbPozitivToggleButton.isSelected();
 
-        return new Analiza(-1,ALT,SIF,ANTIHTLV,ANTIHCV,ANTIHIV,HB, GrupaSange.A2, RH.NEGATIV); //TO DO: RH si grupa
+        return new Analiza(-1,ALT,SIF,ANTIHTLV,ANTIHCV,ANTIHIV,HB);
     }
     @FXML
     private void validateAnaliza(){
@@ -134,8 +134,6 @@ public class CentruAnalizaController extends ControlledScreen{
             CentruTransfuzieController cr =(CentruTransfuzieController)getScreenController().getControlledScreen("CENTRU_TRANSFUZIE");
             cr.setCenter(
                     getScreenController().getScreen("CENTRU_CERERI_DONARI"));
-
-            update();
 
         }
     }

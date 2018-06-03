@@ -5,6 +5,7 @@ import Utils.CustomMessageBox;
 import Utils.Screen;
 import javafx.application.Application;
 import javafx.event.EventHandler;
+import Model.Status;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -14,6 +15,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
@@ -29,21 +31,12 @@ import java.io.IOException;
 
 import java.sql.Statement;
 import java.util.Collection;
+import java.util.List;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class IstoricDonariController extends ControlledScreen {
-
-    //TO DO: CE PLM e cu Vboxul si hardocarea asta
-
-
-    private final int MAX_SIZE = 7;
     Logger logger = LogManager.getLogger(IstoricDonariController.class.getName());
-    private boolean isFull(){
-        return getSize() == MAX_SIZE;
-    }
-    private int getSize(){
-        return viewIstoric.getItems().size() - 2;
-    }
 
     @FXML
     private TableView viewIstoric;
@@ -55,68 +48,66 @@ public class IstoricDonariController extends ControlledScreen {
     @FXML
     private TableColumn statusColumn;
 
-    private Predicate<DonareInfo> filterData;
-    private Predicate<DonareInfo> filterCentru;
-    private Predicate<DonareInfo> filterStatus;
+    @FXML
+    private DatePicker datePicker;
+    @FXML
+    private TextField centruDonareTextField;
+    @FXML
+    private ComboBox statusComboBox;
 
 
+    private Predicate<DonareInfo> filterDate = info -> true;
+    private Predicate<DonareInfo> filterCentru = info -> true;
+    private Predicate<DonareInfo> filterStatus = info -> true;
 
     private Collection<DonareInfo> istoric;
     private ObservableList<DonareInfo> model = FXCollections.observableArrayList();
 
 
-    int contor = 0;
     @FXML
-    private void dummyTest()
-    {
-        if(!isFull()) {
-            contor ++;
-            createHBoxIstoric(contor, "01/01/1990",
-                    "Nicu camin 16", "Ready to view");
-        }
+    private void initialize(){
+        viewIstoric.setItems(model);
+        numarDonareColumn.setCellValueFactory(new PropertyValueFactory<>("numarDonare"));
+        centruDonareColumn.setCellValueFactory(new PropertyValueFactory<>("centruDonare"));
+        statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
+        ObservableList lst = FXCollections.observableArrayList();
+        lst.add(Status.DISTRIBUIRE);
+        lst.add(Status.IN_ASTEPTARE);
+        lst.add(Status.NONCONFORM);
+        lst.add(Status.CALIFICARE);
+        lst.add(Status.PREGATIRE);
+        lst.add(Status.PRELEVARE);
+        statusComboBox.setItems(lst);
+        initializePopUpForTableView();
     }
 
-    private void createHBoxIstoric(int numarDonare,String dataDonare,String numeCentru,String status){
+    @FXML
+    public void OnDateChanged()
+    {
+        if(datePicker.getValue() == null)
+            return;
+        filterDate = donareInfo -> donareInfo.getData().equals("") || donareInfo.getData().equals(datePicker.getValue().toString());
+        refreshView();
+    }
 
-        logger.debug("Buton dummy a fost apasat");
-        HBox hBox = new HBox();
-        String numeStyle = "hboxIstoric";
-        hBox.getStyleClass().add(numeStyle);
-        Label id = new Label(String.valueOf(numarDonare));
-        Label data = new Label(dataDonare);
-        Label nume = new Label(numeCentru);
-        Label st = new Label(status);
-        st.onMouseClickedProperty().set(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource(Screen.DONATOR_ANALIZA_RESOURCE));
-                try {
-                    Parent loadedScreen = loader.load();
-                    Stage stage = new Stage();
-                    stage.initStyle(StageStyle.UNDECORATED);
+    @FXML
+    public void OnCentruChanged()
+    {
+        String centru = centruDonareTextField.getText();
+        if (centru.equals(""))
+            filterCentru = donareInfo -> true;
+        else
+            filterCentru = donareInfo -> donareInfo.getCentruDonare().equals(centru);
+        refreshView();
+    }
 
-                    stage.setScene(new Scene(loadedScreen));
-                    stage.show();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-            }
-        });
-
-        String numeLabelStyle = "labelIstoric";
-        id.getStyleClass().add(numeLabelStyle);
-        data.getStyleClass().add(numeLabelStyle);
-        nume.getStyleClass().add(numeLabelStyle);
-        st.getStyleClass().add(numeLabelStyle);
-
-        id.setPrefWidth(114);
-        data.setPrefWidth(114);
-        nume.setPrefWidth(225);
-        st.setPrefWidth(84);
-
-        hBox.getChildren().addAll(id,data,nume,st);
-        //tabelDonari.getChildren().add(getSize() + 1,hBox);
+    @FXML
+    public void OnStatusChanged()
+    {
+        if(statusComboBox.getValue() == null)
+            return;
+        filterStatus = donareInfo -> donareInfo.getStatus().equals(statusComboBox.getValue());
+        refreshView();
     }
 
 
@@ -158,14 +149,18 @@ public class IstoricDonariController extends ControlledScreen {
         });
     }
     @FXML
-    private void initialize(){
+    public void clearFilters()
+    {
+        datePicker.setValue(null);
+        centruDonareTextField.setText("");
+        statusComboBox.setValue(null);
+        filterDate = info -> true;
+        filterCentru = info -> true;
+        filterStatus = info -> true;
 
-        viewIstoric.setItems(model);
-        numarDonareColumn.setCellValueFactory(new PropertyValueFactory<>("numarDonare"));
-        centruDonareColumn.setCellValueFactory(new PropertyValueFactory<>("centruDonare"));
-        statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
-        initializePopUpForTableView();
+        refreshView();
     }
+
 
     @Override
     void updateThis() {
@@ -179,6 +174,9 @@ public class IstoricDonariController extends ControlledScreen {
      */
     private void refreshView()
     {
-        model.setAll(istoric); //TO DO: filtrari
+        List<DonareInfo> rez = istoric.stream()
+                .filter(filterCentru.and(filterDate).and(filterStatus))
+                .collect(Collectors.toList());
+        model.setAll(rez);
     }
 }

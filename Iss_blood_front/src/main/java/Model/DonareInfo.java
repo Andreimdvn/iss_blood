@@ -7,15 +7,18 @@ public class DonareInfo {
     private Analiza analiza;
     private String numeStaff;
     private String data;
+    private GrupaSange grupaSange;
+    private RH rh;
 
-
-    public DonareInfo(Integer numarDonare, String centruDonare, Status status, Analiza analiza, String numeStaff, String data) {
+    public DonareInfo(Integer numarDonare, String centruDonare, Status status, Analiza analiza, String numeStaff, String data, GrupaSange grupaSange, RH rh) {
         this.numarDonare = numarDonare;
         this.centruDonare = centruDonare;
         this.status = status;
         this.analiza = analiza;
         this.numeStaff = numeStaff;
         this.data = data;
+        this.grupaSange = grupaSange;
+        this.rh = rh;
     }
 
     public Integer getNumarDonare() {
@@ -40,5 +43,13 @@ public class DonareInfo {
 
     public String getData() {
         return data;
+    }
+
+    public GrupaSange getGrupaSange() {
+        return grupaSange;
+    }
+
+    public RH getRh() {
+        return rh;
     }
 }

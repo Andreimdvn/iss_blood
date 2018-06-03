@@ -1,9 +1,6 @@
 package Controller;
 
-import Model.CerereSange;
-import Model.GrupaSange;
-import Model.Importanta;
-import Model.RH;
+import Model.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -17,6 +14,7 @@ import java.sql.Date;
 
 public class IstoricCereriController extends ControlledScreen {
     ObservableList<CerereSange> cereriSange = FXCollections.observableArrayList();
+    ObservableList<CerereSange> cereriSangeCompletate = FXCollections.observableArrayList();
 
     private Logger logger = LogManager.getLogger(IstoricCereriController.class.getName());
 
@@ -108,18 +106,23 @@ public class IstoricCereriController extends ControlledScreen {
 
 
     public void populate(){
+    }
 
-        logger.debug("Buton anulare cerere a fost apasat");
-       CerereSange s = new CerereSange("Andrei","11",GrupaSange.O1,RH.POZITIV,1,3,5,Date.valueOf("2000-11-01") , Importanta.MEDIE);
-        CerereSange b = new CerereSange("Andrei","21",GrupaSange.B3,RH.NEGATIV,2,4,1,Date.valueOf("2000-01-01") , Importanta.RIDICATA);
-
-       cereriSange.addAll(s,b);
-       cerereSangeTableView.setItems(cereriSange);
-       cerereSangeCompletateTableView.setItems(cereriSange);
+    @FXML
+    private void anulare(){
+        CerereSange cr = cerereSangeTableView.getSelectionModel().getSelectedItem();
+        if(cr != null)
+        {
+            getService().anulare(cr.getId());
+        }
     }
 
     @Override
     void updateThis() {
-
+        MedicInfo info = (MedicInfo) getScreenController().userInfo;
+        cereriSange.setAll(getService().getCereriSange(info.getIdLocatie(),"IN_ASTEPTARE",true));
+        cereriSangeCompletate.setAll(getService().getCereriSange(info.getIdLocatie(),"REZOLVATA",true));
+        cerereSangeTableView.setItems(cereriSange);
+        cerereSangeCompletateTableView.setItems(cereriSangeCompletate);
     }
 }

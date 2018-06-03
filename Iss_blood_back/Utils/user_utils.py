@@ -105,7 +105,8 @@ def get_info_staff(db, user_id, staff=None):
             "id_locatie": staff.id_locatie,
             "nume_locatie": locatie.nume,
             "id_judet": id_judet,
-            "nume_judet": judet.nume}
+            "nume_judet": judet.nume,
+            "cnp": staff.cnp}
 
 
 def insert_formular(db, formular, donator_id):
