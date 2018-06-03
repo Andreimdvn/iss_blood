@@ -1,5 +1,3 @@
-from geopy.geocoders import Nominatim
-
 def get_id_judet(db, nume):
     '''
     Cauta ID-ul unui judet. Daca nu exista, il adauga in BD si returneaza ID-ul creat
@@ -26,16 +24,3 @@ def get_id_localitate(db, nume, id_judet):
         db.insert('Localitate', ['nume', 'id_judet', 'x_cord', 'y_cord'], [nume, id_judet, 0, 0])
         localitate = db.select('Localitate', ['nume', 'id_judet'], [nume, id_judet], True)
     return localitate.id
-
-def get_coordinates_for_address(self, address):
-    """
-    :param address: address, should be formatted like: "street,city,country"
-    :return: latitude,longitude for the address
-    """
-    geolocator = Nominatim()
-    location = geolocator.geocode(address)
-    if location != None:
-        return location.latitude, location.longitude
-    else:
-        return 46.5447533, 23.8822737
-        # default Centru transfuzie cluj napoca

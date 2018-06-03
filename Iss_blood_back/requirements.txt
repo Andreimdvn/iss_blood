@@ -3,4 +3,3 @@ flask
 flask_sqlalchemy
 mysqlclient
 flask-socketio
-geopy
