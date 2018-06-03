@@ -88,4 +88,7 @@ public class MainService {
     public void getActiveUser(){
         flaskClient.getActiveUser();
     }
+    public Map<String,Integer> getCentruHomeScreenData(Integer idLocatie) {
+        return flaskClient.getCentruHomeScreenData(idLocatie);
+    }
 }

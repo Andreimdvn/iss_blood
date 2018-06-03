@@ -28,7 +28,7 @@
                               <Pane layoutX="75.0" prefHeight="104.0" prefWidth="140.0" styleClass="box">
                                  <children>
                                     <Label layoutX="3.0" layoutY="14.0" styleClass="headerGlobuleRosii" text="Pungi globule rosii" />
-                                    <Label layoutX="5.0" layoutY="52.0" prefHeight="17.0" prefWidth="129.0" styleClass="labelBoxes" text="12" />
+                                    <Label fx:id="homeLabelPungiGlobuleRosii" layoutX="5.0" layoutY="52.0" prefHeight="17.0" prefWidth="129.0" styleClass="labelBoxes" text="12" />
                                  </children>
                               </Pane>
                            </children>
@@ -43,7 +43,7 @@
                               <Pane layoutX="75.0" prefHeight="104.0" prefWidth="140.0" styleClass="box">
                                  <children>
                                     <Label layoutX="22.0" layoutY="14.0" styleClass="headerPlasma" text="Pungi plasma" />
-                                    <Label layoutX="5.0" layoutY="52.0" prefHeight="17.0" prefWidth="129.0" styleClass="labelBoxes" text="7" />
+                                    <Label fx:id="homeLabelPungiPlasma" layoutX="5.0" layoutY="52.0" prefHeight="17.0" prefWidth="129.0" styleClass="labelBoxes" text="7" />
                                  </children>
                               </Pane>
                            </children>
@@ -58,7 +58,7 @@
                               <Pane layoutX="75.0" prefHeight="104.0" prefWidth="140.0" styleClass="box">
                                  <children>
                                     <Label layoutX="8.0" layoutY="14.0" styleClass="headerTrombocite" text="Pungi trombocite" />
-                                    <Label layoutX="5.0" layoutY="52.0" prefHeight="17.0" prefWidth="129.0" styleClass="labelBoxes" text="61" />
+                                    <Label fx:id="homeLabelPungiTrombocite" layoutX="5.0" layoutY="52.0" prefHeight="17.0" prefWidth="129.0" styleClass="labelBoxes" text="61" />
                                  </children>
                               </Pane>
                            </children>
@@ -71,25 +71,25 @@
             <PieChart fx:id="stocPieChart" labelLineLength="0.0" labelsVisible="false" layoutX="46.0" layoutY="161.0" legendSide="RIGHT" prefHeight="312.0" prefWidth="369.0" styleClass="backgroundMessageBox" title="Stoc curent" />
             <AnchorPane layoutX="82.0" layoutY="502.0" prefHeight="148.0" prefWidth="252.0" styleClass="box">
                <children>
-                  <Label layoutX="14.0" layoutY="76.0" styleClass="labelPrimary" text="Donari de sange facute azi" />
-                  <Label layoutX="193.0" layoutY="68.0" styleClass="labelBoxes" text="13" />
-                  <JFXButton layoutX="1.0" layoutY="121.0" prefHeight="27.0" prefWidth="252.0" styleClass="buttonFormular" text="View them" />
+                  <Label layoutX="10.0" layoutY="76.0" styleClass="labelPrimary" text="Numar total de donari astazi:" />
+                  <Label fx:id="homeLabelDonariTotal" layoutX="193.0" layoutY="68.0" styleClass="labelBoxes" text="13" />
+                  <JFXButton layoutX="1.0" layoutY="121.0" onAction="#buttonViewDonari" prefHeight="27.0" prefWidth="252.0" styleClass="buttonFormular" text="View them" />
                   <OctIconView glyphName="BOOK" layoutX="99.0" layoutY="59.0" size="50" wrappingWidth="54.4444580078125" />
                </children>
             </AnchorPane>
             <AnchorPane layoutX="383.0" layoutY="502.0" prefHeight="148.0" prefWidth="252.0" styleClass="box">
                <children>
                   <Label layoutX="14.0" layoutY="76.0" styleClass="labelPrimary" text="Numar cereri sange in asteptare" />
-                  <Label layoutX="224.0" layoutY="68.0" styleClass="labelBoxes" text="2" />
-                  <JFXButton layoutX="1.0" layoutY="121.0" prefHeight="27.0" prefWidth="252.0" styleClass="buttonFormular" text="View them" />
+                  <Label fx:id="homeLabelCereriSange" layoutX="224.0" layoutY="68.0" styleClass="labelBoxes" text="2" />
+                  <JFXButton layoutX="1.0" layoutY="121.0" onAction="#buttonViewCereriSange" prefHeight="27.0" prefWidth="252.0" styleClass="buttonFormular" text="View them" />
                   <OctIconView glyphName="CLIPPY" layoutX="106.0" layoutY="52.0" size="50" wrappingWidth="41.11114501953125" />
                </children>
             </AnchorPane>
             <AnchorPane layoutX="677.0" layoutY="502.0" prefHeight="148.0" prefWidth="252.0" styleClass="box">
                <children>
                   <Label layoutX="4.0" layoutY="76.0" styleClass="labelPrimary" text="Numar cereri donare in asteptare" />
-                  <Label layoutX="225.0" layoutY="68.0" styleClass="labelBoxes" text="91" />
-                  <JFXButton layoutX="1.0" layoutY="121.0" prefHeight="27.0" prefWidth="252.0" styleClass="buttonFormular" text="View them" />
+                  <Label fx:id="homeLabelDonariAsteptare" layoutX="225.0" layoutY="68.0" styleClass="labelBoxes" text="91" />
+                  <JFXButton layoutX="1.0" layoutY="121.0" onAction="#buttonViewDonariAsteptare" prefHeight="27.0" prefWidth="252.0" styleClass="buttonFormular" text="View them" />
                   <OctIconView glyphName="REPO" layoutX="106.0" layoutY="59.0" size="50" wrappingWidth="41.11114501953125" />
                </children>
             </AnchorPane>

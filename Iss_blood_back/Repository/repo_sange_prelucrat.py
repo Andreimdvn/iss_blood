@@ -65,8 +65,7 @@ class RepositorySangePrelucrat(IRepository):
             if id_judet == self.get_id_judet(sange_brut.id_locatie_recoltare):
                 lista_pungi = self.db.select('SangePrelucrat',
                                              columns=['id_sange_brut', 'status'],
-                                             values=[sange_brut.id, 'Depozitat']
-                                            )
+                                             values=[sange_brut.id, 'Depozitat'])
                 for punga in lista_pungi[::-1]:
                     id_judet_punga = self.get_id_judet(punga.id_locatie)
                     self.logger.debug(id_judet_punga)
@@ -97,8 +96,7 @@ class RepositorySangePrelucrat(IRepository):
             if id_judet == self.get_id_judet(sange_brut.id_locatie_recoltare):
                 lista_pungi = self.db.select('SangePrelucrat',
                                              columns=['id_sange_brut', 'status'],
-                                             values=[sange_brut.id, 'Depozitat']
-                                            )
+                                             values=[sange_brut.id, 'Depozitat'])
                 for punga in lista_pungi:
                     # remove if on production
                     id_judet_punga = self.get_id_judet(punga.id_locatie)
@@ -117,6 +115,18 @@ class RepositorySangePrelucrat(IRepository):
         self.logger.debug("Return stoc curent pentru locatie {} grupa {} rh {}: {}".format(id_locatie, grupa_ceruta,
                                                                                            rh_cerut, dictionar))
         return dictionar
+
+    def get_stoc_curent(self, id_locatie):
+        sange_prelucrat = self.db.select('SangePrelucrat',
+                                        columns=["id_locatie", "status"],
+                                        values=[id_locatie, "Depozitat"])
+        globule_rosii= len([sange for sange in sange_prelucrat if sange.tip == 'Globule_rosii'])
+        trombocite = len([sange for sange in sange_prelucrat if sange.tip == 'Trombocite'])
+        plasma = len([sange for sange in sange_prelucrat if sange.tip == 'Plasma'])
+
+        self.logger.debug("Returning stock for location {} globule_rosii: {}, trombocite: {}, plasma: {}.".format(
+            id_locatie, globule_rosii, trombocite, plasma))
+        return globule_rosii, trombocite, plasma
 
     def update_status_by_id_sange_brut(self, id_sange_brut, status):
 

@@ -102,9 +102,6 @@ public class CentruStocPungiController extends ControlledScreen {
     @FXML
     private AnchorPane plasmaPane;
 
-    static {
-
-    }
 
     private int setIntLabel(Label label, int numar)
     {

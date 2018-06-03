@@ -1,11 +1,12 @@
 package Controller;
 
+import Communication.FlaskClient;
 import Model.StaffInfo;
-import Service.MainService;
 import Utils.Screen;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -16,8 +17,33 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+
+import static Utils.Screen.CENTRU_TRANSFUZIE_SCREEN;
 
 public class CentruTransfuzieController extends ControlledScreen {
+
+    private Logger logger = LogManager.getLogger(FlaskClient.class.getName());
+
+    @FXML
+    public Label homeLabelPungiGlobuleRosii;
+    @FXML
+    public Label homeLabelPungiPlasma;
+    @FXML
+    public Label homeLabelPungiTrombocite;
+
+    @FXML
+    public Label homeLabelDonariTotal;
+    @FXML
+    public Label homeLabelCereriSange;
+    @FXML
+    public Label homeLabelDonariAsteptare;
 
     @FXML
     private Label numeStaffLabel;
@@ -37,20 +63,12 @@ public class CentruTransfuzieController extends ControlledScreen {
 
     @FXML
     private ToggleButton t1;
-
-
     @FXML
     private ToggleButton t2;
-
-
     @FXML
     private ToggleButton t3;
-
-
     @FXML
     private ToggleButton t4;
-
-
     @FXML
     private ToggleButton t5;
 
@@ -73,6 +91,7 @@ public class CentruTransfuzieController extends ControlledScreen {
     private void homeClicked(){
         borderPane.setCenter(homePane);
         checkSelected(t1);
+        getScreenController().getControlledScreen(CENTRU_TRANSFUZIE_SCREEN).updateThis();
     }
 
     @FXML
@@ -119,14 +138,6 @@ public class CentruTransfuzieController extends ControlledScreen {
 
     @FXML
     private void initialize(){
-        ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
-                new PieChart.Data("Pungi trombocite",61),
-                new PieChart.Data("Pungi globule rosii",12),
-                new PieChart.Data("Pungi plasma",7)
-                );
-
-        stocPieChart.setData(pieChartData);
-
         topBar.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -144,9 +155,46 @@ public class CentruTransfuzieController extends ControlledScreen {
         });
     }
 
+    private StaffInfo getInfo(){
+        return (StaffInfo) getScreenController().userInfo;
+    }
+
     @Override
     void updateThis() {
+        this.logger.debug("Updating Home screen for staff!");
+        try{
+            Map<String,Integer> map = getService().getCentruHomeScreenData(getInfo().getIdLocatie());
+            homeLabelPungiGlobuleRosii.setText(String.valueOf(map.get("pungi_globule_rosii")));
+            homeLabelPungiPlasma.setText(String.valueOf(map.get("pungi_plasma")));
+            homeLabelPungiTrombocite.setText(String.valueOf(map.get("pungi_trombocite")));
+            homeLabelDonariTotal.setText(String.valueOf(map.get("total_donari")));
+            homeLabelCereriSange.setText(String.valueOf(map.get("cereri_sange_in_asteptare")));
+            homeLabelDonariAsteptare.setText(String.valueOf(map.get("cereri_donari_in_asteptare")));
 
+            Integer trombocite = map.get("pungi_trombocite");
+            Integer glob_rosii = map.get("pungi_globule_rosii");
+            Integer plasma = map.get("pungi_plasma");
+            Integer total = trombocite + glob_rosii + plasma;
+
+            PieChart.Data pie_trombocite = new PieChart.Data("Pungi trombocite",total/trombocite);
+
+            PieChart.Data pie_glob_rosii = new PieChart.Data("Pungi globule rosii",total/glob_rosii);
+
+            PieChart.Data pie_plasma = new PieChart.Data("Pungi plasma",total/plasma);
+
+            ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
+                    pie_trombocite, pie_glob_rosii, pie_plasma
+            );
+
+            stocPieChart.setData(pieChartData);
+            pie_trombocite.getNode().setStyle("-fx-background-color: #E64850;");
+            pie_glob_rosii.getNode().setStyle("-fx-background-color : #7BB2D9;");
+            pie_plasma.getNode().setStyle("-fx-background-color: #F8C537;");
+
+        }catch (Exception ex)
+        {
+            this.logger.error("FAILED to update Home screen for staff!" + ex.getMessage());
+        }
     }
 
     @Override
@@ -177,4 +225,21 @@ public class CentruTransfuzieController extends ControlledScreen {
     }
 
 
+    public void buttonViewDonari(ActionEvent actionEvent) {
+        t1.setSelected(false);
+        cereriDonariClicked();
+    }
+
+    public void buttonViewCereriSange(ActionEvent actionEvent) {
+        t1.setSelected(false);
+        cereriSangeClicked();
+    }
+
+    public void buttonViewDonariAsteptare(ActionEvent actionEvent) {
+        t1.setSelected(false);
+        cereriDonariClicked();
+        CentruCereriDonariController ctr = (CentruCereriDonariController)getScreenController().getControlledScreen(Screen.CENTRU_CERERI_DONARI_SCREEN);
+        ctr.statusCombo.getSelectionModel().select("IN_ASTEPTARE");
+        ctr.filter();
+    }
 }

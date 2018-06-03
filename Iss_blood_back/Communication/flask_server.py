@@ -78,7 +78,8 @@ class FlaskServer:
         self.flask_app.add_url_rule("/desavarsire_cerere_medic", "desavarsire_cerere_medic",
                               self.trimite_pungi,
                               methods=["POST"])
-        self.flask_app.add_url_rule("/trimiteCerereSange", "trimite_cerere_sange", self.trimite_cerere_sange,
+
+        self.flask_app.add_url_rule("/trimite_cerere_sange", "trimite_cerere_sange", self.trimite_cerere_sange,
                               methods=["POST"])
         self.flask_app.add_url_rule("/get_cereri_sange", "get_cereri_sange", self.get_cereri_sange,
                               methods=["POST"])
@@ -87,10 +88,12 @@ class FlaskServer:
 
         self.flask_app.add_url_rule("/get_istoric_donare", "get_istoric_donare", self.get_istoric_donare,
                               methods=["POST"])
-
-        self.flask_app.add_url_rule("/valid_donation", "valid_donation_request",
-                              self.valid_donation_request,
+        self.flask_app.add_url_rule("/getIstoricDonare", "get_istoric_donare", self.get_istoric_donare,
                               methods=["POST"])
+        self.flask_app.add_url_rule("/valid_donation", "valid_donation_request", self.valid_donation_request,
+                              methods=["POST"])
+        self.flask_app.add_url_rule("/get_centru_home_screen_data", "get_centru_home_screen_data",
+                                    self.get_centru_home_screen_data, methods=["POST"])
 
     def trimite_pungi(self):
         self.request_data = request.get_json()
@@ -270,7 +273,7 @@ class FlaskServer:
                          "grupa": x[13],
                          "rh": x[14],
                          "status": x[15]}
-
+            self.logger.debug("Entity in all cereri list for location {}: {}".format(id_locatie, x))
             lista_dictionare.append(dict_list)
 
         return_dict = {"entities": lista_dictionare}
@@ -445,3 +448,13 @@ class FlaskServer:
         self.update_wrapper()
 
         return json.dumps(list_dict)
+
+    def get_centru_home_screen_data(self):
+        self.request_data = request.get_json()
+        id_locatie = int(self.request_data["id_locatie"])
+
+        self.logger.debug("Got request get_centru_home_screen_data for id_locatie: {}".format(id_locatie))
+        return_dict = self.controller.get_centru_home_screen_data(id_locatie)
+        self.logger.debug("Returning data for request get_centru_home_screen_data {}".format(return_dict))
+
+        return json.dumps(return_dict)

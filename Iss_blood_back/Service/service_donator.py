@@ -1,6 +1,4 @@
-
 from Model.status_cerere_sange import StatusCerereSange
-
 import datetime
 
 from Service.i_service import IService
