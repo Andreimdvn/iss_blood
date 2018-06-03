@@ -81,4 +81,7 @@ public class MainService {
     public Pair<Boolean, String> isAValidDonation(String cnpDonator) {
         return flaskClient.isAValidDonation(cnpDonator);
     }
+    public Map<String,Integer> getCentruHomeScreenData(Integer idLocatie) {
+        return flaskClient.getCentruHomeScreenData(idLocatie);
+    }
 }

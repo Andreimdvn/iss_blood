@@ -75,10 +75,6 @@ public class CerereSangeController extends ControlledScreen {
                     + cerere.getNumarPungiPlasma() + " pungi plasma";
 
             logger.info("Date introduse corect in cerere de sange. " + cerereLogDetails);
-<<<<<<< HEAD
-
-=======
->>>>>>> 527d2c6d19298cca63b038dccf16bddb68c99fea
 
             cerere.setNumeMedic(((MedicInfo)getScreenController().userInfo).getFullName());
             String cnpMedic = ((MedicInfo)getScreenController().userInfo).getCnp();

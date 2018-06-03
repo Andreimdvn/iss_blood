@@ -112,3 +112,6 @@ class BackController:
 
     def is_a_valid_donation(self, cnp_donator):
         return self.service_donator.is_a_valid_donation(cnp_donator)
+
+    def get_centru_home_screen_data(self, id_locatie):
+        return self.service_sange.get_centru_home_screen_data(id_locatie)

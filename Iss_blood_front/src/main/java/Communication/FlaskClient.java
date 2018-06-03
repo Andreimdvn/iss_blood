@@ -97,7 +97,6 @@ public class FlaskClient {
             return new JSONObject(responseStrBuilder.toString());
 
         } catch (Exception e) {
-            e.printStackTrace();
             return null;
         }
     }
@@ -312,7 +311,7 @@ public class FlaskClient {
         HttpURLConnection connection = getConnection("/staff_cere_formulare_donari");
 
         if(connection == null)
-            System.out.println("Pula");
+            System.out.println("Probleme la conectare");
 
         String jsonString = new JSONObject().put("id_locatie", id_locatie).toString();
 
@@ -471,12 +470,11 @@ public class FlaskClient {
         return new Pair<>(status,mesaj);
     }
 
-    public Map<String, List<Integer>> getStocCurent(int id_locatie)
-    {
+    public Map<String, List<Integer>> getStocCurent(int id_locatie) {
         HttpURLConnection connection = getConnection("/staff_get_stoc_curent");
 
         if(connection == null)
-            System.out.println("Pula");
+            System.out.println("Problema la conexiune");
 
         String jsonString = new JSONObject().put("id_locatie", id_locatie).toString();
 
@@ -544,7 +542,7 @@ public class FlaskClient {
 
     public Pair<Boolean,String> trimiteCerereSange(CerereSange cerere, String cnpMedic) {
         this.logger.debug("Sending request trimitereCerereSange");
-        HttpURLConnection connection = getConnection("/trimiteCerereSange");
+        HttpURLConnection connection = getConnection("/trimite_cerere_sange");
 
         if(connection == null)
             return new Pair<>(false, "Client connection request Error");
@@ -677,6 +675,7 @@ public class FlaskClient {
         return rez;
     }
 
+
     public Pair<Boolean, String> anulareCerere(Integer id) {
         HttpURLConnection connection = getConnection("/anulare_cerere");
 
@@ -691,6 +690,40 @@ public class FlaskClient {
 
 
         return new Pair<>(true, "Success");
+    }
+
+    public Map<String,Integer> getCentruHomeScreenData(Integer idLocatie) {
+        HttpURLConnection connection = getConnection("/get_centru_home_screen_data");
+
+        if(connection == null) {
+            logger.error("Problema la conexiune!");
+            return null;
+        }
+
+        String jsonString = new JSONObject().put("id_locatie", idLocatie).toString();
+
+        logger.debug("SENDING request for get_centru_home_screen_data: " + jsonString);
+        JSONObject jsonResponse = sendRequest(connection, jsonString);
+        logger.debug("RESPONSE for get_centru_home_screen_data for id : " + idLocatie.toString() + ": " + jsonResponse);
+
+        if (jsonResponse == null)
+        {
+            this.logger.error("Json response is nulll!");
+            return null;
+        }
+        Map<String, Integer> map = new HashMap<>();
+        List<String> keys = new ArrayList<String>(Arrays.asList("pungi_globule_rosii", "pungi_plasma",
+                "pungi_trombocite", "total_donari", "cereri_sange_in_asteptare", "cereri_donari_in_asteptare"));
+
+        for(String key : keys){
+            try {
+                map.put(key, jsonResponse.getInt(key));
+            }catch (Exception ex)
+            {
+                this.logger.error("Error for key: " + key + ": " + ex.getMessage());
+            }
+        }
+        return map;
     }
 }
 
