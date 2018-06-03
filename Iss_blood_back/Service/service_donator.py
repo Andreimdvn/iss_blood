@@ -33,16 +33,18 @@ class ServiceDonator(IService):
 
     def is_a_valid_donation(self, cnp_donator):
         """
-
+        Verifica daca donatorul cu cnp-ul cnp_donator poate sa doneze
         :param cnp_donator:
-        :return:
+        :return: 1,mesaj   daca nu poate sa doneze
+                 0,mesaj   daca poate sa doneze
         """
         donator = self.db.select('Donator', ['cnp'], [cnp_donator])
         sex_donator = donator[0].sex
         id_donator = donator[0].id_donator
         all_dates = self.db.select('SangeBrut', ['id_donator'], [id_donator])
+        if len(all_dates) == 0:
+            return 0, "Donare valida"
         last_date_of_donation = all_dates[-1]
-
         current_date = dt.strptime(self.get_current_date(), "%Y-%m-%d")
         date_of_last_donation = dt.strptime(str(last_date_of_donation.data_recoltare), "%Y-%m-%d")
 
@@ -50,6 +52,8 @@ class ServiceDonator(IService):
             return 1, "S-a realizat deja o donare in ultimele 4 luni"
         if sex_donator == 'FEMININ' and ((current_date - date_of_last_donation).days < 90):
             return 1, "S-a realizat deja o donare in ultimele 3 luni"
+        if sex_donator == None:
+            return 1, "Eroare la sexul donatorului."
         return 0, "Donare valida"
 
     def get_current_date(self):
