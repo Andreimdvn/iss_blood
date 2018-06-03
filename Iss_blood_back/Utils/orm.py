@@ -220,7 +220,7 @@ class ORM:
         con_string = MYSQL_CON_STRING % (config['mysql_username'], config['mysql_password'], config['mysql_server'],
                                          config['mysql_port'], config['mysql_database'])
 
-        self.engine = create_engine(con_string,pool_size=10, max_overflow=20)
+        self.engine = create_engine(con_string)
         self.session = scoped_session(sessionmaker(bind=self.engine))
         self.ses = None
 
