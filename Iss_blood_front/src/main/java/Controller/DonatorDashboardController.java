@@ -139,8 +139,11 @@ public class DonatorDashboardController extends ControlledScreen {
              if(formularToggleButton.isSelected()) {
                  if (validDonation.getKey())
                      loadBottomPane();
-                 else
-                    new CustomMessageBox("Donare", validDonation.getValue()).show();
+                 else {
+                     istoricToggleButton.setSelected(true);
+                     new CustomMessageBox("Donare", validDonation.getValue()).show();
+
+                 }
              }
              else
                  loadBottomPane();

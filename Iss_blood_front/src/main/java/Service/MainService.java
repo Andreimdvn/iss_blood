@@ -81,8 +81,7 @@ public class MainService {
     }
 
     public Pair<Boolean, String> isAValidDonation(String cnpDonator) {
-        //return flaskClient.isAValidDonation(cnpDonator);
-        return new Pair<>(false,"sda");
+        return flaskClient.isAValidDonation(cnpDonator);
     }
     public List<Pair<String, String>> getActiveUser(String cnp){
         return flaskClient.getActiveUser( cnp);
