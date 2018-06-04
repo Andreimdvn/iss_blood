@@ -720,7 +720,7 @@ public class FlaskClient {
                     jsonObject.getString("centru_donare"),
                     Status.valueOf(jsonObject.getString("status")),
                     analiza,
-                    "",
+                    staffResponsabil,
                     data,
                     grupaSange,
                     rh

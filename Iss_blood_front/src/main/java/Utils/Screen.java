@@ -61,9 +61,11 @@ public class Screen {
     public static String CENTRU_CERERI_SANGE_SCREEN = "CENTRU_CERERI_SANGE";
     public static String CENTRU_CERERI_SANGE_RESOURCE = "/View/CentruCereriSangeView.fxml";
 
-        public static String CENTRU_STOC_PUNGI_SCREEN = "CENTRU_STOC_PUNGI";
+    public static String CENTRU_STOC_PUNGI_SCREEN = "CENTRU_STOC_PUNGI";
     public static String CENTRU_STOC_PUNGI_RESOURCE = "/View/CentruStocPungiView.fxml";
 
+    public static String DONATOR_ANALIZA_SCREEN = "DONATOR_ANALIZA";
+    public static String DONATOR_ANALIZA_RESOURCE = "/View/DonatorAnalizaScreen.fxml";
 
     public static String CENTRU_CHESTIONAR_SCREEN ="CENTRU_CHESTIONAR";
     public static String CENTRU_CHESTIONAR_RESOURCE ="/View/CentruPrelevareView.fxml";

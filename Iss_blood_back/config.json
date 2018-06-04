@@ -1,8 +1,0 @@
-{
-  "flask_http_port": 16000,
-  "mysql_server": "localhost",
-  "mysql_username": "root",
-  "mysql_password": "parola",
-  "mysql_database": "iss_blood",
-  "mysql_port": 3306
-}

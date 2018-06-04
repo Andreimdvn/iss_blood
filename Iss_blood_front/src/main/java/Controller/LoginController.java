@@ -124,6 +124,5 @@ public class LoginController extends ControlledScreen {
 
     @Override
     protected void updateThis() {
-
     }
 }
