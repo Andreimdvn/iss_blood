@@ -90,6 +90,7 @@ public class CerereSangeController extends ControlledScreen {
                         "\n" + cerereLogDetails,0);
                 msg.show();
                 clearCerereSange();
+
             }
             else
             {

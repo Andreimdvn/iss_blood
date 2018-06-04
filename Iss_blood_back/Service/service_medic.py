@@ -82,3 +82,6 @@ class ServiceMedic(IService):
 
     def update_cerere(self, id_cerere, status):
         return self.repo_manager.repo_cereri.update_cerere(id_cerere, status)
+
+    def get_stare_actuala(self, id_locatie):
+        return self.repo_manager.repo_cereri.get_stare_actuala(id_locatie)

@@ -15,6 +15,8 @@ import javafx.util.Pair;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.List;
+
 public class StarePacientiController extends ControlledScreen {
 
     ObservableList<StarePacient> observableList = FXCollections.observableArrayList();
@@ -22,12 +24,6 @@ public class StarePacientiController extends ControlledScreen {
     private Logger logger = LogManager.getLogger(StarePacient.class.getName());
 
     public void populate(){
-
-        StarePacient s = new StarePacient("Alin","1234567890123",GrupaSange.O1,RH.POZITIV,1,3);
-        StarePacient b = new StarePacient("Tudor","1234567890123",GrupaSange.B3,RH.NEGATIV,2,4);
-
-        observableList.addAll(s,b);
-        starePacientTableView.setItems(observableList);
     }
 
     @FXML
@@ -76,6 +72,8 @@ public class StarePacientiController extends ControlledScreen {
         grupaSangeComboBox.getSelectionModel().selectFirst();
         rhComboBox.getItems().addAll(RH.POZITIV,RH.NEGATIV);
         rhComboBox.getSelectionModel().selectFirst();
+
+        starePacientTableView.setItems(observableList);
     }
 
 
@@ -109,6 +107,8 @@ public class StarePacientiController extends ControlledScreen {
 
     @Override
     void updateThis() {
-
+        MedicInfo info = (MedicInfo) getScreenController().userInfo;
+        List<StarePacient> x = getService().getStareActuala(info.getIdLocatie());
+        observableList.setAll(x);
     }
 }
