@@ -36,10 +36,10 @@ public class DonatorDashboardController extends ControlledScreen {
     }
 
     @FXML
-    private Label labelUsername;
+    Label labelUsername;
 
     @FXML
-    private Label labelFullName;
+    Label labelFullName;
 
     @FXML
     private BorderPane borderPane;
