@@ -2,12 +2,12 @@ import datetime
 
 
 def data_nasterii_din_cnp(cnp):
-    '''
+    """
     Extrage data nasterii din CNP
     Arunca ValueError daca rezulta o data invalida
     :param cnp:
     :return: datetime.datetime
-    '''
+    """
     # -yymmdd---
     year = int(cnp[1:3]) + 2000
     if year > datetime.datetime.now().year:
@@ -19,14 +19,14 @@ def data_nasterii_din_cnp(cnp):
 
 
 def get_info_donator(db, user_id, donator=None):
-    '''
+    """
     Returneaza toate informatiile despre donator, inclusiv cele din alte tabele(localitate, judet...)
     :param db: Utils.orm.ORM - Baza de date care va fi interogata
     :param donator: Utils.orm.Donator - Donatorul al carui informatie va fi cautata
     :param user_id: int
     :return: Un dictionar cu: username, nume, prenume, cnp, telefon, domiciliu_localitate, domiciliu_judet,
                 domiciliu_adresa, resedinta_localitate, resedinta_judet, resedinta_adresa
-    '''
+    """
 
     if donator is None:
         donator = db.select("Donator", ["id_user"], [user_id], True)
@@ -57,13 +57,13 @@ def get_info_donator(db, user_id, donator=None):
 
 
 def get_info_medic(db, user_id, medic=None):
-    '''
+    """
     Nume, prenume, ID locatie
     :param db:
     :param user_id: int
     :param medic: ORM.Medic
     :return:
-    '''
+    """
     if medic is None:
         medic = db.select("Medic", ["id_user"], [user_id])
 
@@ -78,14 +78,15 @@ def get_info_medic(db, user_id, medic=None):
             "nume_locatie": locatie.nume,
             "cnp": medic.cnp}
 
+
 def get_info_staff(db, user_id, staff=None):
-    '''
+    """
     Nume, prenume, ID locatie
     :param db:
     :param user:
     :param staff:
     :return:
-    '''
+    """
     if staff is None:
         staff = db.select("StaffTransfuzii", ["id_user"], [user_id])
 
@@ -110,13 +111,13 @@ def get_info_staff(db, user_id, staff=None):
 
 
 def insert_formular(db, formular, donator_id):
-    '''
+    """
     Insereaza in tabelul FormularDonare campurile completate din formular
     :param db - ORM
     :param formular: Model.FormularDonare
     :param donator_id: int; folosit pentru foreign key catre tabela de donatori
     :return: -
-    '''
+    """
     nume_coloane = ["id_donator", "zile_disponibil"]
     valori_coloane = [donator_id, formular.zile_disponibil]
     if formular.beneficiar_full_name != "":

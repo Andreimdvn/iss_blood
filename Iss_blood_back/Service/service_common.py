@@ -39,11 +39,11 @@ class ServiceCommon(IService):
         return 1, None
 
     def register(self, register_info):
-        '''
+        """
         Adds a new user to the database
         :param register_info: RegisterInfo;
         :return: Tuple<int, string> = (status code, status message); status code = 0 on success or >= 1 otherwise
-        '''
+        """
 
         validator = register_validator()
         valid, msg = validator.validate(register_info)
