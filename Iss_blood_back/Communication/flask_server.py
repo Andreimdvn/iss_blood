@@ -29,6 +29,9 @@ class FlaskServer:
     def update_wrapper(self):
         self.app.emit("update")
 
+    def update_chat(self):
+        self.app.emit("chat_update")
+
     def run(self):
         self.app.run(self.flask_app, self.host, self.port)
 
@@ -42,28 +45,21 @@ class FlaskServer:
         self.shutdown_server()
 
     def init_requests(self):
-        self.flask_app.add_url_rule("/test", "test_request",
-                              self.test_request,
-                              methods=["GET", "POST"])
-        self.flask_app.add_url_rule("/login", "login_request",
-                              self.login_request,
-                              methods=["POST"])
-        self.flask_app.add_url_rule("/register", "register_request",
-                              self.register_request,
-                              methods=["POST"])
-        self.flask_app.add_url_rule("/add_pacient", "add_pacient_request",
-                              self.add_pacient_request,
-                              methods=["POST"])
+        self.flask_app.add_url_rule("/test", "test_request", self.test_request, methods=["GET", "POST"])
+        self.flask_app.add_url_rule("/login", "login_request", self.login_request, methods=["POST"])
+        self.flask_app.add_url_rule("/register", "register_request", self.register_request, methods=["POST"])
+        self.flask_app.add_url_rule("/add_pacient", "add_pacient_request", self.add_pacient_request, methods=["POST"])
         self.flask_app.add_url_rule("/user_trimite_formular_donare", "user_trimite_formular_donare",
-                              self.user_trimite_formular_donare,
-                              methods=["POST"])
+                                    self.user_trimite_formular_donare,
+                                    methods=["POST"])
         self.flask_app.add_url_rule("/staff_trimite_formular_donare", "staff_trimite_formular_donare",
-                              self.staff_trimite_formular_donare,
-                              methods=["POST"])
+                                    self.staff_trimite_formular_donare,
+                                    methods=["POST"])
         self.flask_app.add_url_rule("/staff_cere_formulare_donari", "staff_cere_formulare_donari",
-                              self.staff_cere_formular_donari,
-                              methods=["POST"])
+                                    self.staff_cere_formular_donari,
+                                    methods=["POST"])
         self.flask_app.add_url_rule("/staff_update_formular_donare", "staff_update_fomular_donare",
+
                               self.staff_update_formular_donare,
                               methods=["POST"])
         self.flask_app.add_url_rule("/staff_trimite_analiza", "staff_trimite_analiza",
@@ -81,23 +77,33 @@ class FlaskServer:
 
         self.flask_app.add_url_rule("/trimite_cerere_sange", "trimite_cerere_sange", self.trimite_cerere_sange,
                               methods=["POST"])
+
         self.flask_app.add_url_rule("/get_cereri_sange", "get_cereri_sange", self.get_cereri_sange,
-                              methods=["POST"])
+                                    methods=["POST"])
         self.flask_app.add_url_rule("/anulare_cerere", "anulare_cerere", self.anulare_cerere,
                               methods=["POST"])
-
         self.flask_app.add_url_rule("/get_istoric_donare", "get_istoric_donare", self.get_istoric_donare,
                               methods=["POST"])
-        self.flask_app.add_url_rule("/getIstoricDonare", "get_istoric_donare", self.get_istoric_donare,
-                              methods=["POST"])
+
         self.flask_app.add_url_rule("/valid_donation", "valid_donation_request", self.valid_donation_request,
                               methods=["POST"])
+
         self.flask_app.add_url_rule("/get_centru_home_screen_data", "get_centru_home_screen_data",
                                     self.get_centru_home_screen_data, methods=["POST"])
 
         self.flask_app.add_url_rule("/medic_get_stare_actuala", "get_status_actuala", self.get_stare_actuala,
                                     methods=["POST"])
 
+        self.flask_app.add_url_rule("/chat_get_active_users", "get_active_users", self.get_active_users,
+                                    methods=["POST"])
+        self.flask_app.add_url_rule("/chat_add_active_user", "add_active_users", self.add_active_user,
+                                    methods=["POST"])
+
+        self.flask_app.add_url_rule("/add_new_message", "add_new_message", self.add_new_message,
+                                    methods=["POST"])
+
+        self.flask_app.add_url_rule("/get_messages_for_user", "get_messages_for_user", self.get_messages_for_user,
+                                    methods=["POST"])
     def get_stare_actuala(self):
 
         self.request_data = request.get_json()
@@ -108,6 +114,7 @@ class FlaskServer:
         return_dict = {"entities" : self.controller.get_stare_actuala(id_locatie)}
 
         return json.dumps(return_dict)
+
 
     def trimite_pungi(self):
         self.request_data = request.get_json()
@@ -463,6 +470,7 @@ class FlaskServer:
 
         return json.dumps(list_dict)
 
+
     def get_centru_home_screen_data(self):
         self.request_data = request.get_json()
         id_locatie = int(self.request_data["id_locatie"])
@@ -472,3 +480,69 @@ class FlaskServer:
         self.logger.debug("Returning data for request get_centru_home_screen_data {}".format(return_dict))
 
         return json.dumps(return_dict)
+
+    def get_active_users(self):
+
+        self.request_data = request.get_json()
+        self.logger.debug("Got request for active users in chat!")
+
+        status, mesaj = self.controller.get_active_users()
+
+        self.logger.debug("Sending response with active users: %s" % mesaj)
+
+        return json.dumps({"status": status, "message": mesaj})
+
+    def add_active_user(self):
+        self.request_data = request.get_json()
+
+        user = self.request_data["user"]
+        self.logger.debug("New user connected to chat [%s]!" % user)
+
+        status, mesaj = self.controller.add_active_user(user)
+
+        # self.update_wrapper()
+
+        return json.dumps({"status": status, "message": mesaj})
+
+    def remove_user(self):
+        self.request_data = request.get_json()
+
+        user = self.request_data["user"]
+        self.logger.debug("User [%s] disconnected from chat!" % user)
+
+        status, mesaj = self.controller.remove_user(user)
+
+        self.update_wrapper()
+
+        return json.dumps({"status": status, "message": mesaj})
+
+    def add_new_message(self):
+        self.request_data = request.get_json()
+
+        sender = self.request_data["sender"]
+        receiver = self.request_data["receiver"]
+        message = self.request_data["message"]
+        now = datetime.datetime.now()
+        date = str(now.year) + '-' + str(now.month) + '-' + str(now.day)
+
+        self.logger.debug("New message received from [%s] to [%s] with message [%s] on [%s]!" % (sender, receiver,
+                                                                                                 message, date))
+
+        status, mesaj = self.controller.add_new_message(sender, receiver, message, date)
+
+        self.update_wrapper()
+
+        return json.dumps({"status": status, "message": mesaj})
+
+    def get_messages_for_user(self):
+        self.request_data = request.get_json()
+
+        user1 = self.request_data["user1"]
+        user2 = self.request_data["user2"]
+
+        self.logger.debug("Sending all messages for users [%s %s]!" % (user1, user2))
+
+        status, mesaj = self.controller.get_messages_for_user(user1, user2)
+
+        return json.dumps({"status": status, "message": mesaj})
+

@@ -7,7 +7,6 @@ import Model.*;
 import Utils.Observer;
 import javafx.util.Pair;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -85,13 +84,30 @@ public class MainService {
         //return flaskClient.isAValidDonation(cnpDonator);
         return new Pair<>(false,"sda");
     }
-    public void getActiveUser(){
-        flaskClient.getActiveUser();
+    public List<Pair<String, String>> getActiveUser(String cnp){
+        return flaskClient.getActiveUser( cnp);
     }
+
     public Map<String,Integer> getCentruHomeScreenData(Integer idLocatie) {
         return flaskClient.getCentruHomeScreenData(idLocatie);
     }
     public List<StarePacient> getStareActuala(int idLocatie){
         return flaskClient.getStareActuala(idLocatie);
+    }
+
+    public Pair<Integer, String> addUser(String cnp){
+        return flaskClient.addActiveUser(cnp);
+    }
+
+    public void removeUser(String cnp) {
+        flaskClient.removeActiveUser(cnp);
+    }
+
+    public List<Pair<String,Boolean>> getMessages(String username, String sender) {
+        return flaskClient.getMessages(username,sender);
+    }
+
+    public void addMessage(String username, String sender, String effect) {
+        flaskClient.addMessage(username,sender,effect);
     }
 }

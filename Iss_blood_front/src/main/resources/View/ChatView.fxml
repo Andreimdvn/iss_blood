@@ -4,6 +4,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
@@ -12,7 +13,7 @@
    <children>
       <ScrollPane layoutX="25.0" layoutY="22.0" prefHeight="611.0" prefWidth="149.0">
          <content>
-            <VBox prefHeight="594.0" prefWidth="136.0" />
+            <ListView fx:id="activeUsers" onMouseClicked="#listSelected" prefHeight="607.0" prefWidth="128.0" />
          </content>
       </ScrollPane>
       <ScrollPane layoutX="198.0" layoutY="98.0" prefHeight="485.0" prefWidth="807.0" vbarPolicy="ALWAYS">
@@ -31,7 +32,7 @@
       <AnchorPane layoutX="198.0" layoutY="22.0" prefHeight="63.0" prefWidth="807.0" styleClass="headerPaneFormular">
          <children>
             <Label layoutX="276.0" layoutY="15.0" text="Chat privat cu " />
-            <Label layoutX="379.0" layoutY="15.0" text="numeDestinatar" />
+            <Label fx:id="numeDestinatar" layoutX="379.0" layoutY="15.0" text="numeDestinatar" />
          </children>
       </AnchorPane>
       <JFXTextField fx:id="messageTextField" layoutX="198.0" layoutY="609.0" prefHeight="25.0" prefWidth="543.0" promptText="Write here your message..." />

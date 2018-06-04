@@ -1,10 +1,12 @@
 from Repository.repository_manager import RepoManager
+
 from Service.service_common import ServiceCommon
 from Service.service_donator import ServiceDonator
 from Service.service_medic import ServiceMedic
 from Service.service_sange import ServiceSange
-
 from Service.service_staff_transfuzie import ServiceStaffTransfuzie
+from Service.service_chat import ServiceChat
+
 from Utils.orm import ORM
 
 
@@ -18,6 +20,7 @@ class BackController:
         self.service_medic = ServiceMedic(self.repo_manager, orm)
         self.service_transfuzie = ServiceStaffTransfuzie(self.repo_manager, orm)
         self.service_sange = ServiceSange(self.repo_manager, orm)
+        self.service_chat = ServiceChat(self.repo_manager, orm)
         self.service_administrator = None
 
     def login(self, user, password):
@@ -25,7 +28,6 @@ class BackController:
 
     def register(self, register_info):
         return self.service_common.register(register_info)
-
 
     def add_pacient(self, id_medic, nume_pacient, cnp_pacient, grupa_sange_pacient, rh_pacient):
         return self.service_medic.add_pacient(id_medic, nume_pacient, cnp_pacient, grupa_sange_pacient, rh_pacient)
@@ -114,9 +116,25 @@ class BackController:
     def is_a_valid_donation(self, cnp_donator):
         return self.service_donator.is_a_valid_donation(cnp_donator)
 
+
     def get_centru_home_screen_data(self, id_locatie):
         return self.service_sange.get_centru_home_screen_data(id_locatie)
 
     def get_stare_actuala(self, id_locatie):
         return self.service_medic.get_stare_actuala(id_locatie)
+
+    def get_active_users(self):
+        return self.service_chat.get_active_users()
+
+    def add_active_user(self, user):
+        return self.service_chat.add_active_user(user)
+
+    def remove_user(self, user):
+        return self.service_chat.remove_user(user)
+
+    def add_new_message(self, sender, receiver, message, date):
+        return self.service_chat.add_new_message(sender, receiver, message, date)
+
+    def get_messages_for_user(self, user1, user2):
+        return self.service_chat.get_messages_for_user(user1,user2)
 

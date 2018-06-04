@@ -44,6 +44,8 @@ public class FlaskClient {
                 }
             });
 
+            //socket.on("update_chat")
+
             socket.connect();
         } catch (URISyntaxException e) {
             e.printStackTrace();
@@ -158,14 +160,14 @@ public class FlaskClient {
         }
     }
 
-    public Pair<Object, String> addActiveUser(String cnp){
+    public Pair<Integer, String> addActiveUser(String cnp){
         HttpURLConnection connection = getConnection("/chat_add_active_user");
 
         if(connection == null){
             return new Pair<>(null, "Client connection request Error");
         }
 
-        String jsonString = new JSONObject().put("cnp", cnp).toString();
+        String jsonString = new JSONObject().put("user", cnp).toString();
         logger.debug("SENDING: " + jsonString);
         JSONObject jsonResponse = this.sendRequest(connection, jsonString);
         logger.debug("RESPONSE : " + jsonResponse);
@@ -174,18 +176,19 @@ public class FlaskClient {
 
     }
 
-    public Pair<Integer, List<List<String>>> getActiveUser(){
+    public List<Pair<String,String>> getActiveUser(String usernameM){
 
         HttpURLConnection connection = getConnection("/chat_get_active_users");
+        List<Pair<String,String>> lista = new ArrayList<>();
 
-        if(connection == null){
-        }
-        else {
-            String jsonString = new JSONObject().put("ds",2).toString();
+        if(connection == null)
+            return lista;
 
-            logger.debug("SENDING: " + jsonString);
-            JSONObject jsonResponse = this.sendRequest(connection, jsonString);
-            logger.debug("RESPONSE : " + jsonResponse);
+        String jsonString = new JSONObject().put("ds",2).toString();
+
+        logger.debug("SENDING: " + jsonString);
+        JSONObject jsonResponse = this.sendRequest(connection, jsonString);
+        logger.debug("RESPONSE : " + jsonResponse);
 
             if(jsonResponse != null)
             {
@@ -193,13 +196,19 @@ public class FlaskClient {
                 System.out.println(formularDonares.length());
                 for(int i = 0; i < formularDonares.length() ;i++)
                 {
-                    JSONObject x = formularDonares.getJSONObject(i);
 
+                    JSONObject x = formularDonares.getJSONObject(i);
+                    String username = x.getString("username");
+                    String cnp = x.getString("cnp");
+
+                    if(!Objects.equals(username, usernameM)) {
+                        System.out.println(username+ cnp);
+                        lista.add(new Pair(username, cnp));
+                    }
                 }
             }
 
-        }
-        return new Pair<>(null,null);
+        return lista;
     }
 
 
@@ -810,6 +819,73 @@ public class FlaskClient {
             }
         }
         return map;
+    }
+
+    public Pair<Boolean, String> removeActiveUser(String cnp) {
+        HttpURLConnection connection = getConnection("/remove_user");
+
+        if(connection == null)
+            return new Pair<>(false, "Client connection request Error");
+
+        String jsonString = new JSONObject().put("user", cnp).toString();
+
+        logger.debug("SENDING: " + jsonString);
+        JSONObject jsonResponse = sendRequest(connection, jsonString);
+        logger.debug("RESPONSE : " + jsonResponse);
+
+
+        return new Pair<>(true, "Success");
+    }
+
+    public Boolean addMessage(String sender, String receiver, String message){
+        HttpURLConnection connection = getConnection("/add_new_message");
+
+        if(connection == null)
+            return false;
+
+        String jsonString = new JSONObject().put("sender",sender)
+                .put("receiver",receiver)
+                .put("message",message).toString();
+
+        logger.debug("SENDING: " + jsonString);
+        JSONObject jsonResponse = this.sendRequest(connection, jsonString);
+        logger.debug("RESPONSE : " + jsonResponse);
+
+        return true;
+    }
+
+    public List<Pair<String,Boolean>> getMessages(String username, String sender) {
+
+        HttpURLConnection connection = getConnection("/get_messages_for_user");
+        List<Pair<String,Boolean>> lista = new ArrayList<>();
+
+        if(connection == null)
+            return lista;
+
+        String jsonString = new JSONObject().put("user1",username)
+                .put("user2",sender).toString();
+
+        logger.debug("SENDING: " + jsonString);
+        JSONObject jsonResponse = this.sendRequest(connection, jsonString);
+        logger.debug("RESPONSE : " + jsonResponse);
+
+        if(jsonResponse != null)
+        {
+            JSONArray formularDonares = jsonResponse.getJSONArray("message");
+            System.out.println(formularDonares.length());
+            for(int i = 0; i < formularDonares.length() ;i++)
+            {
+
+                JSONObject x = formularDonares.getJSONObject(i);
+                String message = x.getString("message");
+                Boolean me = x.getBoolean("me");
+
+                System.out.println(message);
+                lista.add(new Pair(message,me));
+            }
+        }
+
+        return lista;
     }
 }
 

@@ -47,8 +47,12 @@ public abstract class ControlledScreen implements Observer {
 
     private void loadScreensMedic()
     {
-        ScreenController screenController = getScreenController();
 
+        loadChat();
+        MedicInfo staff = (MedicInfo) getScreenController().userInfo;
+        getService().addUser(staff.getCnp());
+
+        ScreenController screenController = getScreenController();
         screenController.loadScreen(Screen.MEDIC_SCREEN,Screen.MEDIC_RESOURCE);
         screenController.loadScreen(Screen.ISTORIC_CERERI_SCREEN,Screen.ISTORIC_CERERI_RESOURCE);
         screenController.loadScreen(Screen.STARE_PACIENTI_SCREEN,Screen.STARE_PACIENTI_RESOURCE);
@@ -60,6 +64,11 @@ public abstract class ControlledScreen implements Observer {
 
     private void loadScreensCentru()
     {
+        loadChat();
+
+        StaffInfo staff = (StaffInfo) getScreenController().userInfo;
+        getService().addUser(staff.getCnp());
+
         ScreenController screenController = getScreenController();
 
         screenController.loadScreen(Screen.CENTRU_TRANSFUZIE_SCREEN,Screen.CENTRU_TRANSFUZIE_RESOURCE);
@@ -69,9 +78,10 @@ public abstract class ControlledScreen implements Observer {
         screenController.loadScreen(Screen.CENTRU_CERERI_SANGE_SCREEN,Screen.CENTRU_CERERI_SANGE_RESOURCE);
         screenController.loadScreen(Screen.CENTRU_STOC_PUNGI_SCREEN,Screen.CENTRU_STOC_PUNGI_RESOURCE);
         screenController.loadScreen(Screen.FORMULAR_DONARE_SCREEN, Screen.CENTRU_FORMULAR_RESOURCE);
+
         screenController.setScreen(Screen.CENTRU_TRANSFUZIE_SCREEN);
     }
-    protected void loadChat(){
+    void loadChat(){
         screenController.loadScreen(Screen.CHAT_SCREEN,Screen.CHAT_RESOURCE);
 
     }
@@ -86,7 +96,7 @@ public abstract class ControlledScreen implements Observer {
         else if(screenController.userInfo instanceof DonatorInfo)
             loadScreensDonator();
         unloadLoginRegister();
-        //update();
+        update();
     }
     
     private void unloadLoginRegister() {
@@ -123,6 +133,8 @@ public abstract class ControlledScreen implements Observer {
         screenController.unloadScreen(Screen.FORMULAR_1_TEXT4_SCREEN);
         screenController.unloadScreen(Screen.FORMULAR_1_SCREEN);
         screenController.unloadScreen(Screen.FORMULAR_3_SCREEN);
+
+
     }
 
     private void unloadScreensMedic()
@@ -133,6 +145,9 @@ public abstract class ControlledScreen implements Observer {
         screenController.unloadScreen(Screen.ISTORIC_CERERI_SCREEN);
         screenController.unloadScreen(Screen.STARE_PACIENTI_SCREEN);
         screenController.unloadScreen(Screen.CERERE_SANGE_SCREEN);
+
+        MedicInfo staff = (MedicInfo) getScreenController().userInfo;
+        getService().removeUser(staff.getCnp());
     }
 
     private void unloadScreensCentru()
@@ -146,7 +161,8 @@ public abstract class ControlledScreen implements Observer {
         screenController.unloadScreen(Screen.CENTRU_CERERI_SANGE_SCREEN);
         screenController.unloadScreen(Screen.CENTRU_STOC_PUNGI_SCREEN);
         screenController.unloadScreen(Screen.FORMULAR_DONARE_SCREEN);
-
+        StaffInfo staff = (StaffInfo) getScreenController().userInfo;
+        getService().removeUser(staff.getCnp());
     }
 
     /**

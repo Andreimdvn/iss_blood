@@ -92,30 +92,37 @@ public class CentruTransfuzieController extends ControlledScreen {
         borderPane.setCenter(homePane);
         checkSelected(t1);
         getScreenController().getControlledScreen(CENTRU_TRANSFUZIE_SCREEN).updateThis();
+
     }
 
     @FXML
     private void cereriDonariClicked(){
         borderPane.setCenter(super.getScreenController().getScreen("CENTRU_CERERI_DONARI"));
         checkSelected(t3);
+
     }
 
     @FXML
     private void stocCurentClicked(){
         borderPane.setCenter(super.getScreenController().getScreen("CENTRU_STOC_PUNGI"));
         checkSelected(t5);
+
     }
 
     @FXML
     private void cereriSangeClicked(){
         borderPane.setCenter(super.getScreenController().getScreen("CENTRU_CERERI_SANGE"));
         checkSelected(t4);
+
+
     }
 
     @FXML
     private void cerereDonareClicked(){
         borderPane.setCenter(super.getScreenController().getScreen("FORMULAR_DONARE"));
         checkSelected(t2);
+
+
         //borderPane.getCenter().setTranslateX(85);
         //borderPane.getCenter().setTranslateY(30);
 
@@ -124,8 +131,8 @@ public class CentruTransfuzieController extends ControlledScreen {
     @FXML
 
     private void chatClicked(){
-        loadChat();
-        borderPane.setCenter(super.getScreenController().getScreen(Screen.CHAT_SCREEN));
+
+    borderPane.setCenter(super.getScreenController().getScreen(Screen.CHAT_SCREEN));
     }
     @FXML
     private void logout(){
