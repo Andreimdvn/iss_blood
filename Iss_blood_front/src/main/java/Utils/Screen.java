@@ -73,5 +73,7 @@ public class Screen {
     public static String CENTRU_ANALIZA_SCREEN = "CENTRU_ANALIZA";
     public static String CENTRU_ANALIZA_RESOURCE="/View/CentruAnalizaView.fxml";
 
+    public static String CHAT_RESOURCE = "/View/ChatView.fxml";
+    public static String CHAT_SCREEN = "/View/CHAT";
 
 }

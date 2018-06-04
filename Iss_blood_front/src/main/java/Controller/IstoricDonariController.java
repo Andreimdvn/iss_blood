@@ -3,6 +3,7 @@ package Controller;
 import Model.*;
 import Utils.CustomMessageBox;
 import Utils.Screen;
+import com.jfoenix.controls.JFXButton;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import Model.Status;
@@ -30,6 +31,7 @@ import org.apache.logging.log4j.Logger;
 import java.io.IOException;
 
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.function.Predicate;
@@ -60,16 +62,17 @@ public class IstoricDonariController extends ControlledScreen {
     private Predicate<DonareInfo> filterCentru = info -> true;
     private Predicate<DonareInfo> filterStatus = info -> true;
 
-    private Collection<DonareInfo> istoric;
+    private List<DonareInfo> istoric = new ArrayList<>();
     private ObservableList<DonareInfo> model = FXCollections.observableArrayList();
 
 
     @FXML
     private void initialize(){
-        viewIstoric.setItems(model);
         numarDonareColumn.setCellValueFactory(new PropertyValueFactory<>("numarDonare"));
         centruDonareColumn.setCellValueFactory(new PropertyValueFactory<>("centruDonare"));
         statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
+
+        viewIstoric.setItems(model);
         ObservableList lst = FXCollections.observableArrayList();
         lst.add(Status.DISTRIBUIRE);
         lst.add(Status.IN_ASTEPTARE);
@@ -78,7 +81,7 @@ public class IstoricDonariController extends ControlledScreen {
         lst.add(Status.PREGATIRE);
         lst.add(Status.PRELEVARE);
         statusComboBox.setItems(lst);
-        initializePopUpForTableView();
+
     }
 
     @FXML
@@ -110,44 +113,41 @@ public class IstoricDonariController extends ControlledScreen {
         refreshView();
     }
 
-
     /**
-     * Adauga un action listener la tabelul cu istoric donari pentru deschiderea ferestrelor cu rezultate
+     * Deschide o fereastra noua cu rezultatele donarii de sange selectate din viewIstoric
      */
-    private void initializePopUpForTableView(){
-        viewIstoric.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
-            if (newSelection != null) {
-
-                DonareInfo infoDonare = (DonareInfo)newSelection;
-                //testing
-                //infoDonare = new DonareInfo(103,"centru",Status.NONCONFORM,new Analiza(100,false,false,false,false,false,false, GrupaSange.A2, RH.NEGATIV),"Vlad","10/10/2019");
-
-                if(infoDonare.getStatus()!=Status.NONCONFORM || infoDonare.getStatus()!= Status.NONCONFORM)
-                {
-                    CustomMessageBox msg = new CustomMessageBox("Info", "Analizele nu sunt finalizate inca. Va rugam reveniti mai tarziu." +
-                            "\n", 1);
-                    msg.show();
-                    return;
-                }else if(infoDonare.getAnaliza() == null){
-                    CustomMessageBox msg = new CustomMessageBox("Error", "A aparut o eroare la procesarea analizelor. Va rugam contactati un cadru de la centrul de transfuzii." +
-                            "\n", 1);
-                    msg.show();
-                    return;
-                }
-                FXMLLoader loader = new FXMLLoader(getClass().getResource(Screen.DONATOR_ANALIZA_RESOURCE));
-                try {
-                    Parent loadedScreen = loader.load();
-                    ((DonatorAnalizaScreenController)loader.getController()).load(infoDonare);
-                    Stage stage = new Stage();
-                    stage.initStyle(StageStyle.UNDECORATED);
-                    stage.setScene(new Scene(loadedScreen));
-                    stage.show();
-                } catch (IOException e) {
-                    logger.log(Level.ERROR,e.getStackTrace().toString());
-                }
-            }
-        });
+    public void displayResults(){
+        if(viewIstoric.getSelectionModel().getSelectedItem() == null){
+            CustomMessageBox box = new CustomMessageBox("Eroare","Va rugam selectati o donare din tabel mai intai.");
+            box.show();
+            return;
+        }
+        DonareInfo infoDonare = (DonareInfo)viewIstoric.getSelectionModel().getSelectedItem();
+        if(!infoDonare.getStatus().equals(Status.NONCONFORM) && !infoDonare.getStatus().equals(Status.DISTRIBUIRE))
+        {
+            CustomMessageBox msg = new CustomMessageBox("Info", "Analizele nu sunt finalizate inca. Va rugam reveniti mai tarziu." +
+                    "\n", 1);
+            msg.show();
+            return;
+        }else if(infoDonare.getAnaliza() == null){
+            CustomMessageBox msg = new CustomMessageBox("Eroare", "A aparut o eroare la procesarea analizelor. Va rugam contactati un cadru de la centrul de transfuzii." +
+                    "\n", 1);
+            msg.show();
+            return;
+        }
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(Screen.DONATOR_ANALIZA_RESOURCE));
+        try {
+            Parent loadedScreen = loader.load();
+            ((DonatorAnalizaScreenController)loader.getController()).load(infoDonare);
+            Stage stage = new Stage();
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.setScene(new Scene(loadedScreen));
+            stage.show();
+        } catch (IOException e) {
+            logger.log(Level.ERROR,e.getStackTrace().toString());
+        }
     }
+
     @FXML
     public void clearFilters()
     {
@@ -165,7 +165,8 @@ public class IstoricDonariController extends ControlledScreen {
     @Override
     void updateThis() {
         //Trimite un request catre sever si asteapta pana primeste raspunsul
-        istoric =  getService().getIstoricDonare(getScreenController().userInfo.getUsername());
+        istoric = getService().
+                getIstoricDonare(getScreenController().userInfo.getUsername());
         refreshView();
     }
 

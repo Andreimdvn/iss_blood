@@ -44,6 +44,8 @@ public class FlaskClient {
                 }
             });
 
+            //socket.on("update_chat")
+
             socket.connect();
         } catch (URISyntaxException e) {
             e.printStackTrace();
@@ -157,6 +159,60 @@ public class FlaskClient {
             return new Pair<>(null, jsonResponse.getString("message"));
         }
     }
+
+    public Pair<Integer, String> addActiveUser(String cnp){
+        HttpURLConnection connection = getConnection("/chat_add_active_user");
+
+        if(connection == null){
+            return new Pair<>(null, "Client connection request Error");
+        }
+
+        String jsonString = new JSONObject().put("user", cnp).toString();
+        logger.debug("SENDING: " + jsonString);
+        JSONObject jsonResponse = this.sendRequest(connection, jsonString);
+        logger.debug("RESPONSE : " + jsonResponse);
+
+        return new Pair<>(jsonResponse.getInt("status"), jsonResponse.getString("message"));
+
+    }
+
+    public List<Pair<String,String>> getActiveUser(String usernameM){
+
+        HttpURLConnection connection = getConnection("/chat_get_active_users");
+        List<Pair<String,String>> lista = new ArrayList<>();
+
+        if(connection == null)
+            return lista;
+
+        String jsonString = new JSONObject().put("ds",2).toString();
+
+        logger.debug("SENDING: " + jsonString);
+        JSONObject jsonResponse = this.sendRequest(connection, jsonString);
+        logger.debug("RESPONSE : " + jsonResponse);
+
+            if(jsonResponse != null)
+            {
+                JSONArray formularDonares = jsonResponse.getJSONArray("message");
+                System.out.println(formularDonares.length());
+                for(int i = 0; i < formularDonares.length() ;i++)
+                {
+
+                    JSONObject x = formularDonares.getJSONObject(i);
+                    String username = x.getString("username");
+                    String cnp = x.getString("cnp");
+
+                    if(!Objects.equals(username, usernameM)) {
+                        System.out.println(username+ cnp);
+                        lista.add(new Pair(username, cnp));
+                    }
+                }
+            }
+
+        return lista;
+    }
+
+
+
     public List<Analiza> getAnalize(String cnp){
         HttpURLConnection connection = getConnection("/get_analize");
 
@@ -537,7 +593,7 @@ public class FlaskClient {
     }
     public void addObserver(Observer controlledScreen) {
         observer = controlledScreen;
-        update();
+        //update();
     }
 
     public Pair<Boolean,String> trimiteCerereSange(CerereSange cerere, String cnpMedic) {
@@ -611,14 +667,14 @@ public class FlaskClient {
         }
 
         return list;
-
-
     }
 
 
-    public Collection<DonareInfo> getIstoricDonare(String username) {
-        this.logger.debug("Sending request trimitereCerereSange");
-        HttpURLConnection connection = getConnection("/getIstoricDonare");
+    public List<DonareInfo> getIstoricDonare(String username) {
+        this.logger.debug("Sending request get istoric");
+        HttpURLConnection connection = getConnection("/get_istoric_donare");
+
+        List<DonareInfo> rez = new ArrayList<>();
 
         if (connection == null)
             return null;
@@ -627,7 +683,6 @@ public class FlaskClient {
                 .put("username", username)
                 .toString();
 
-        Collection<DonareInfo> rez = new ArrayList<>();
 
         logger.debug("SENDING: " + jsonString);
         JSONObject jsonResponse = sendRequest(connection, jsonString);
@@ -675,7 +730,9 @@ public class FlaskClient {
         }
 
         return rez;
+
     }
+
 
     public Pair<Boolean, String> anulareCerere(Integer id) {
         HttpURLConnection connection = getConnection("/anulare_cerere");
@@ -693,6 +750,43 @@ public class FlaskClient {
         return new Pair<>(true, "Success");
     }
 
+    public List<StarePacient> getStareActuala(int idLocatie)
+    {
+        List<StarePacient> list = new ArrayList<>();
+        HttpURLConnection connection = getConnection("/medic_get_stare_actuala");
+
+        if(connection == null)
+            System.out.println("Connection failed");
+
+        String jsonString = new JSONObject().put("id_locatie", idLocatie)
+                .toString();
+
+        logger.debug("SENDING: " + jsonString);
+        JSONObject jsonResponse = sendRequest(connection, jsonString);
+        logger.debug("RESPONSE : " + jsonResponse);
+
+        if(jsonResponse != null)
+        {
+            JSONArray formularDonares = jsonResponse.getJSONArray("entities");
+
+            for(int i = 0; i < formularDonares.length() ;i++)
+            {
+                JSONObject x = formularDonares.getJSONObject(i);
+                String numePacient = x.getString("nume_pacient");
+                String cnpPacient = x.getString("cnp_pacient");
+                GrupaSange grupaSange = GrupaSange.valueOf(x.getString("grupa").toUpperCase());
+                RH rh = RH.valueOf(x.getString("rh").toUpperCase());
+                int numarCereri = x.getInt("numar_cereri");
+                int donatoriPreferentiali = x.getInt("donatori_preferentiali");
+
+                StarePacient a = new StarePacient(numePacient,cnpPacient,grupaSange,rh,numarCereri,donatoriPreferentiali);
+
+                list.add(a);
+            }
+        }
+
+        return list;
+    }
     public Map<String,Integer> getCentruHomeScreenData(Integer idLocatie) {
         HttpURLConnection connection = getConnection("/get_centru_home_screen_data");
 
@@ -725,6 +819,73 @@ public class FlaskClient {
             }
         }
         return map;
+    }
+
+    public Pair<Boolean, String> removeActiveUser(String cnp) {
+        HttpURLConnection connection = getConnection("/remove_user");
+
+        if(connection == null)
+            return new Pair<>(false, "Client connection request Error");
+
+        String jsonString = new JSONObject().put("user", cnp).toString();
+
+        logger.debug("SENDING: " + jsonString);
+        JSONObject jsonResponse = sendRequest(connection, jsonString);
+        logger.debug("RESPONSE : " + jsonResponse);
+
+
+        return new Pair<>(true, "Success");
+    }
+
+    public Boolean addMessage(String sender, String receiver, String message){
+        HttpURLConnection connection = getConnection("/add_new_message");
+
+        if(connection == null)
+            return false;
+
+        String jsonString = new JSONObject().put("sender",sender)
+                .put("receiver",receiver)
+                .put("message",message).toString();
+
+        logger.debug("SENDING: " + jsonString);
+        JSONObject jsonResponse = this.sendRequest(connection, jsonString);
+        logger.debug("RESPONSE : " + jsonResponse);
+
+        return true;
+    }
+
+    public List<Pair<String,Boolean>> getMessages(String username, String sender) {
+
+        HttpURLConnection connection = getConnection("/get_messages_for_user");
+        List<Pair<String,Boolean>> lista = new ArrayList<>();
+
+        if(connection == null)
+            return lista;
+
+        String jsonString = new JSONObject().put("user1",username)
+                .put("user2",sender).toString();
+
+        logger.debug("SENDING: " + jsonString);
+        JSONObject jsonResponse = this.sendRequest(connection, jsonString);
+        logger.debug("RESPONSE : " + jsonResponse);
+
+        if(jsonResponse != null)
+        {
+            JSONArray formularDonares = jsonResponse.getJSONArray("message");
+            System.out.println(formularDonares.length());
+            for(int i = 0; i < formularDonares.length() ;i++)
+            {
+
+                JSONObject x = formularDonares.getJSONObject(i);
+                String message = x.getString("message");
+                Boolean me = x.getBoolean("me");
+
+                System.out.println(message);
+                lista.add(new Pair(message,me));
+            }
+        }
+
+        return lista;
     }
 }
 

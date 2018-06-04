@@ -120,7 +120,7 @@ class Pacient(DB):
     rh = Column(Enum('pozitiv', 'negativ'), nullable=False)
     grupa = Column(Enum('O1', 'A2', 'B3', 'AB4'), nullable=False)
     id_medic = Column(Integer, ForeignKey('Medic.id_user'))
-
+    donatori_preferentiali = Column(Integer, default=0)
     medic = relationship('Medic', back_populates='pacient')
     cereri_sange = relationship('CereriSange', back_populates='pacient')
 
@@ -214,13 +214,24 @@ class CereriSange(DB):
     pacient = relationship('Pacient', back_populates='cereri_sange')
 
 
+class Mesaje(DB):
+    __tablename__ = 'Mesaje'
+
+    id = Column(Integer, autoincrement=True, primary_key=True)
+
+    id_sender = Column(String(50), ForeignKey('User.username'), nullable=False)
+    id_receiver = Column(String(50), ForeignKey('User.username'), nullable=False)
+    mesaj = Column(String(500), nullable=False)
+    data = Column(Date, nullable=False)
+
+
 class ORM:
 
     def __init__(self, config):
         con_string = MYSQL_CON_STRING % (config['mysql_username'], config['mysql_password'], config['mysql_server'],
                                          config['mysql_port'], config['mysql_database'])
 
-        self.engine = create_engine(con_string)
+        self.engine = create_engine(con_string, pool_size=500)
         self.session = scoped_session(sessionmaker(bind=self.engine))
         self.ses = None
 
@@ -360,7 +371,6 @@ class ORM:
             raise ValueError('[!] There are not enough values/columns!')
 
         tb = self.table_object(table)
-        self.ses = self.session()
         items = self.select(table, columns=columns_where, values=values_where)
 
         cols = [getattr(tb, c) for c in columns]
@@ -396,7 +406,6 @@ class ORM:
             raise ValueError('[!] Specify values for where clause!')
         if len(values) != len(columns):
             raise ValueError('[!] There are not enough values/columns!')
-        self.ses = self.session()
         items = self.select(table, columns, values)
         if not items:
             raise ValueError('[!] Item with specified values doesn\'t exists!')
