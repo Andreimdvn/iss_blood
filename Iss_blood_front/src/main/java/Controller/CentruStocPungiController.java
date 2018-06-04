@@ -113,6 +113,7 @@ public class CentruStocPungiController extends ControlledScreen {
         return (StaffInfo) getScreenController().userInfo;
     }
 
+    @Override
     void updateThis(){
         updateLabels();
     }

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
 <?import de.jensd.fx.glyphs.octicons.OctIconView?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
@@ -11,7 +12,7 @@
 
 <AnchorPane prefHeight="655.0" prefWidth="1031.0" styleClass="formularPane" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CentruCereriSangeController">
    <children>
-      <TableView fx:id="cerereSangeTableView" layoutX="28.0" layoutY="31.0" onMouseClicked="#selectedRow" prefHeight="410.0" prefWidth="975.0" styleClass="box">
+      <TableView fx:id="cerereSangeTableView" layoutX="18.0" layoutY="39.0" onMouseClicked="#selectedRow" prefHeight="410.0" prefWidth="975.0" styleClass="box">
          <columns>
             <TableColumn fx:id="numePacientColumn" prefWidth="152.88889122009277" text="Nume pacient" />
             <TableColumn fx:id="grupaSangeColumn" minWidth="3.5555419921875" prefWidth="86.66664123535156" text="Grupa" />
@@ -50,11 +51,12 @@
                   </HBox>
                </children>
             </VBox>
+            <JFXCheckBox layoutX="710.0" layoutY="57.0" text="Esti sigur?" />
             <Label layoutX="325.0" layoutY="23.0" prefHeight="17.0" prefWidth="77.0" text="Nume doctor" />
             <Label layoutX="325.0" layoutY="57.0" prefHeight="17.0" prefWidth="77.0" text="Nume spital" />
             <Label fx:id="spitalLabel" layoutX="402.0" layoutY="58.0" prefHeight="17.0" prefWidth="200.0" />
             <Label fx:id="doctorLabel" layoutX="402.0" layoutY="23.0" prefHeight="17.0" prefWidth="235.0" />
-            <JFXButton layoutX="325.0" layoutY="93.0" prefHeight="25.0" prefWidth="154.0" styleClass="buttonMessageBox" text="Message him" />
+            <JFXButton layoutX="325.0" layoutY="93.0" onAction="#messageHim" prefHeight="25.0" prefWidth="154.0" styleClass="buttonMessageBox" text="Message him" />
          </children>
       </AnchorPane>
    </children>

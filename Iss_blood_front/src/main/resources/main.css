@@ -29,6 +29,35 @@
     -fx-centru-background-color: #D2D2D2;
 }
 
+.vboxMesajStanga {
+    -fx-text-alignment: left;
+    -fx-background-color: -fx-button-primary-color;
+    -fx-padding: 10;
+    -fx-wrap-text: true;
+    -fx-background-radius: 25 25 25 25%;
+    -fx-alignment: center-left;
+    -fx-orientation: left;
+    -fx-pref-height: 50px;
+    -fx-text-fill: -fx-background-primary-color;
+
+}
+.vboxChat{
+    -fx-spacing: 10px;
+    -fx-orientation: inherit;
+}
+.vboxMesajDreapta {
+    -fx-text-alignment: right;
+    -fx-alignment: center-right;
+    -fx-background-position: right;
+    -fx-orientation: right;
+    -fx-pref-height: 50px;
+    -fx-background-color:  -fx-prompt-primary-color;
+    -fx-padding: 10;
+    -fx-background-radius: 25 25 25 25%;
+    -fx-wrap-text: true;
+    -fx-text-fill: -fx-background-primary-color;
+}
+
 .plasmaBox{
     -fx-background-color: #F8C537;
     -fx-border-width: 0.03em;

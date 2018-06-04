@@ -92,36 +92,48 @@ public class CentruTransfuzieController extends ControlledScreen {
         borderPane.setCenter(homePane);
         checkSelected(t1);
         getScreenController().getControlledScreen(CENTRU_TRANSFUZIE_SCREEN).updateThis();
+
     }
 
     @FXML
     private void cereriDonariClicked(){
         borderPane.setCenter(super.getScreenController().getScreen("CENTRU_CERERI_DONARI"));
         checkSelected(t3);
+
     }
 
     @FXML
     private void stocCurentClicked(){
         borderPane.setCenter(super.getScreenController().getScreen("CENTRU_STOC_PUNGI"));
         checkSelected(t5);
+
     }
 
     @FXML
     private void cereriSangeClicked(){
         borderPane.setCenter(super.getScreenController().getScreen("CENTRU_CERERI_SANGE"));
         checkSelected(t4);
+
+
     }
 
     @FXML
     private void cerereDonareClicked(){
         borderPane.setCenter(super.getScreenController().getScreen("FORMULAR_DONARE"));
         checkSelected(t2);
+
+
         //borderPane.getCenter().setTranslateX(85);
         //borderPane.getCenter().setTranslateY(30);
 
         // borderPane.getCenter().setLayoutY(6500);
     }
+    @FXML
 
+    private void chatClicked(){
+
+    borderPane.setCenter(super.getScreenController().getScreen(Screen.CHAT_SCREEN));
+    }
     @FXML
     private void logout(){
         loadLogin();
@@ -171,11 +183,11 @@ public class CentruTransfuzieController extends ControlledScreen {
             Integer plasma = map.get("pungi_plasma");
             Integer total = trombocite + glob_rosii + plasma;
 
-            PieChart.Data pie_trombocite = new PieChart.Data("Pungi trombocite",total/trombocite);
+            PieChart.Data pie_trombocite = new PieChart.Data("Pungi trombocite",trombocite);
 
-            PieChart.Data pie_glob_rosii = new PieChart.Data("Pungi globule rosii",total/glob_rosii);
+            PieChart.Data pie_glob_rosii = new PieChart.Data("Pungi globule rosii",glob_rosii);
 
-            PieChart.Data pie_plasma = new PieChart.Data("Pungi plasma",total/plasma);
+            PieChart.Data pie_plasma = new PieChart.Data("Pungi plasma",plasma);
 
             ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
                     pie_trombocite, pie_glob_rosii, pie_plasma

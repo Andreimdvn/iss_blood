@@ -134,7 +134,6 @@ public class CentruAnalizaController extends ControlledScreen{
             CentruTransfuzieController cr =(CentruTransfuzieController)getScreenController().getControlledScreen("CENTRU_TRANSFUZIE");
             cr.setCenter(
                     getScreenController().getScreen("CENTRU_CERERI_DONARI"));
-
         }
     }
 

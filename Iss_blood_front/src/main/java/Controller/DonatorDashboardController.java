@@ -128,17 +128,39 @@ public class DonatorDashboardController extends ControlledScreen {
     @FXML
     private void animationDashboardButtons(){
         Pair<Boolean, String> validDonation = isAValidDonation();
-        if(validDonation.getKey()) {
-            mouseLeftFormularContainer();
-            mouseLeftIstoricContainer();
+
+        mouseLeftIstoricContainer();
+        mouseLeftFormularContainer();
 
             if(this.isAnySelected() && this.isAnyLoaded())
             {
+
              stopTimer();
-             loadBottomPane();
+             if(formularToggleButton.isSelected()) {
+                 if (validDonation.getKey())
+                     loadBottomPane();
+                 else {
+                     istoricToggleButton.setSelected(true);
+                     new CustomMessageBox("Donare", validDonation.getValue()).show();
+
+                 }
+             }
+             else
+                 loadBottomPane();
             }
             else if(this.isAnySelected() && !okStyle) {
-                moveCenterToTop();
+                if(validDonation.getKey() && formularToggleButton.isSelected())
+                    moveCenterToTop();
+                else if(formularToggleButton.isSelected() && !validDonation.getKey())
+                {
+                    formularToggleButton.setSelected(false);
+
+                    //mouseEnteredFormularContainer();
+                    //mouseEnteredIstoricContainer();
+                    new CustomMessageBox("Donare", validDonation.getValue()).show();
+                }
+                else if(!formularToggleButton.isSelected())
+                    moveCenterToTop();
             }
             else if(!this.isAnySelected() && okStyle) {
                 unloadFormular();
@@ -147,9 +169,7 @@ public class DonatorDashboardController extends ControlledScreen {
                 formularLoaded = false;
                 startTimer();
             }
-        } else {
-            new CustomMessageBox("Donare", validDonation.getValue()).show();
-        }
+
     }
 
     /**

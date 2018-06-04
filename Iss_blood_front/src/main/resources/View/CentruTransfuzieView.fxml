@@ -125,6 +125,11 @@
                   <ToggleButton fx:id="t3" mnemonicParsing="false" onMouseClicked="#cereriDonariClicked" prefHeight="29.0" prefWidth="178.0" styleClass="buttonSecondaryTiny" text="Vizualizare cereri donari" toggleGroup="$leftGroup" />
                   <ToggleButton fx:id="t4" mnemonicParsing="false" onAction="#cereriSangeClicked" prefHeight="29.0" prefWidth="178.0" styleClass="buttonSecondaryTiny" text="Vizualizare cereri sange" toggleGroup="$leftGroup" />
                   <ToggleButton fx:id="t5" mnemonicParsing="false" onAction="#stocCurentClicked" prefHeight="29.0" prefWidth="178.0" styleClass="buttonSecondaryTiny" text="Stoc curent" toggleGroup="$leftGroup" />
+                  <ToggleButton fx:id="t51" mnemonicParsing="false" onAction="#chatClicked" prefHeight="29.0" prefWidth="178.0" styleClass="buttonSecondaryTiny" text="Chat">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="leftGroup1" />
+                     </toggleGroup>
+                  </ToggleButton>
                </children>
             </VBox>
             <Pane layoutX="12.0" layoutY="6.0" prefHeight="150.0" prefWidth="208.0">
