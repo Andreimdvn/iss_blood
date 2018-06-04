@@ -57,7 +57,6 @@ class ServiceDonator(IService):
         if not sex_donator:
             return 1, "Eroare la sexul donatorului."
         return 0, "Donare valida"
-
         
     def get_current_date(self):
         now = datetime.datetime.now()
