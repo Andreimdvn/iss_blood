@@ -95,6 +95,20 @@ class FlaskServer:
         self.flask_app.add_url_rule("/get_centru_home_screen_data", "get_centru_home_screen_data",
                                     self.get_centru_home_screen_data, methods=["POST"])
 
+        self.flask_app.add_url_rule("/medic_get_stare_actuala", "get_status_actuala", self.get_stare_actuala,
+                                    methods=["POST"])
+
+    def get_stare_actuala(self):
+
+        self.request_data = request.get_json()
+        self.logger.debug("Got get_stare_actuala JSON: {}".format(self.request_data))
+
+        id_locatie = self.request_data["id_locatie"]
+
+        return_dict = {"entities" : self.controller.get_stare_actuala(id_locatie)}
+
+        return json.dumps(return_dict)
+
     def trimite_pungi(self):
         self.request_data = request.get_json()
         self.logger.debug("Got request trimite pungi JSON: {}".format(self.request_data))

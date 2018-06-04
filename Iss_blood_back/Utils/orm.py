@@ -120,7 +120,7 @@ class Pacient(DB):
     rh = Column(Enum('pozitiv', 'negativ'), nullable=False)
     grupa = Column(Enum('O1', 'A2', 'B3', 'AB4'), nullable=False)
     id_medic = Column(Integer, ForeignKey('Medic.id_user'))
-
+    donatori_preferentiali = Column(Integer, default=0)
     medic = relationship('Medic', back_populates='pacient')
     cereri_sange = relationship('CereriSange', back_populates='pacient')
 
@@ -220,7 +220,7 @@ class ORM:
         con_string = MYSQL_CON_STRING % (config['mysql_username'], config['mysql_password'], config['mysql_server'],
                                          config['mysql_port'], config['mysql_database'])
 
-        self.engine = create_engine(con_string, pool_size=20)
+        self.engine = create_engine(con_string, pool_size=10, max_overflow=20)
         self.session = scoped_session(sessionmaker(bind=self.engine))
         self.ses = None
 

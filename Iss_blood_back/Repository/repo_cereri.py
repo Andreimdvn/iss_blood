@@ -77,6 +77,34 @@ class RepositoryCereri(IRepository):
 
         return 0, "Updated successfully"
 
+    def get_stare_actuala(self, id_locatie):
+
+        pacienti = self.db.select('Pacient')
+        list_of_dict = []
+
+        for pacient in pacienti:
+
+            medic = self.db.select('Medic', ['id_user'], [pacient.id_medic], first=True)
+
+            if medic.id_locatie == id_locatie:
+                cereri = self.db.select('CereriSange', ['id_pacient'], [pacient.id])
+
+                nr_cereri = 0
+                if cereri is not None:
+                    nr_cereri = len(cereri)
+
+                x = {
+                        "nume_pacient": pacient.nume,
+                        "cnp_pacient": pacient.cnp,
+                        "grupa": pacient.grupa,
+                        "rh": pacient.rh,
+                        "numar_cereri": nr_cereri ,
+                        "donatori_preferentiali": pacient.donatori_preferentiali
+                    }
+                list_of_dict.append(x)
+
+        return list_of_dict
+
     def get_all_by_id_status(self, id_locatie, status, from_spital):
 
         specific_cols = ['status']

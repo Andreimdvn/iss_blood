@@ -176,11 +176,11 @@ public class CentruTransfuzieController extends ControlledScreen {
             Integer plasma = map.get("pungi_plasma");
             Integer total = trombocite + glob_rosii + plasma;
 
-            PieChart.Data pie_trombocite = new PieChart.Data("Pungi trombocite",total/trombocite);
+            PieChart.Data pie_trombocite = new PieChart.Data("Pungi trombocite",trombocite);
 
-            PieChart.Data pie_glob_rosii = new PieChart.Data("Pungi globule rosii",total/glob_rosii);
+            PieChart.Data pie_glob_rosii = new PieChart.Data("Pungi globule rosii",glob_rosii);
 
-            PieChart.Data pie_plasma = new PieChart.Data("Pungi plasma",total/plasma);
+            PieChart.Data pie_plasma = new PieChart.Data("Pungi plasma",plasma);
 
             ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
                     pie_trombocite, pie_glob_rosii, pie_plasma

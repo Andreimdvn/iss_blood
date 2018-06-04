@@ -1,5 +1,6 @@
 package Controller;
 
+import com.jfoenix.controls.JFXTextField;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -76,12 +77,14 @@ public class ChatController extends ControlledScreen{
     }
 
     @FXML
+    private JFXTextField messageTextField;
+    @FXML
     private void sent(){
-        Random x = new Random();
-        boolean y = x.nextBoolean();
-        handleMessage("Pizda lui Alin ",y);
+        //Random x = new Random();
+        //boolean y = x.nextBoolean();
+        handleMessage(messageTextField.getText(),true);
+        messageTextField.clear();
 
-        getService().getActiveUser();
 
     }
     private void handleMessage(String string, Boolean meSentIt){
@@ -102,6 +105,7 @@ public class ChatController extends ControlledScreen{
     }
     @Override
     void updateThis() {
+        getService().getActiveUser();
     }
 
 

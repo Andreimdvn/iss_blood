@@ -116,3 +116,7 @@ class BackController:
 
     def get_centru_home_screen_data(self, id_locatie):
         return self.service_sange.get_centru_home_screen_data(id_locatie)
+
+    def get_stare_actuala(self, id_locatie):
+        return self.service_medic.get_stare_actuala(id_locatie)
+

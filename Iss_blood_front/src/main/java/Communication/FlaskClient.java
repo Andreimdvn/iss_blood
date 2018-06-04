@@ -741,6 +741,43 @@ public class FlaskClient {
         return new Pair<>(true, "Success");
     }
 
+    public List<StarePacient> getStareActuala(int idLocatie)
+    {
+        List<StarePacient> list = new ArrayList<>();
+        HttpURLConnection connection = getConnection("/medic_get_stare_actuala");
+
+        if(connection == null)
+            System.out.println("Connection failed");
+
+        String jsonString = new JSONObject().put("id_locatie", idLocatie)
+                .toString();
+
+        logger.debug("SENDING: " + jsonString);
+        JSONObject jsonResponse = sendRequest(connection, jsonString);
+        logger.debug("RESPONSE : " + jsonResponse);
+
+        if(jsonResponse != null)
+        {
+            JSONArray formularDonares = jsonResponse.getJSONArray("entities");
+
+            for(int i = 0; i < formularDonares.length() ;i++)
+            {
+                JSONObject x = formularDonares.getJSONObject(i);
+                String numePacient = x.getString("nume_pacient");
+                String cnpPacient = x.getString("cnp_pacient");
+                GrupaSange grupaSange = GrupaSange.valueOf(x.getString("grupa").toUpperCase());
+                RH rh = RH.valueOf(x.getString("rh").toUpperCase());
+                int numarCereri = x.getInt("numar_cereri");
+                int donatoriPreferentiali = x.getInt("donatori_preferentiali");
+
+                StarePacient a = new StarePacient(numePacient,cnpPacient,grupaSange,rh,numarCereri,donatoriPreferentiali);
+
+                list.add(a);
+            }
+        }
+
+        return list;
+    }
     public Map<String,Integer> getCentruHomeScreenData(Integer idLocatie) {
         HttpURLConnection connection = getConnection("/get_centru_home_screen_data");
 
