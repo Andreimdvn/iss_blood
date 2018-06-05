@@ -121,6 +121,7 @@ class Pacient(DB):
     grupa = Column(Enum('O1', 'A2', 'B3', 'AB4'), nullable=False)
     id_medic = Column(Integer, ForeignKey('Medic.id_user'))
     donatori_preferentiali = Column(Integer, default=0)
+
     medic = relationship('Medic', back_populates='pacient')
     cereri_sange = relationship('CereriSange', back_populates='pacient')
 
@@ -174,10 +175,11 @@ class SangePrelucrat(DB):
     id_sange_brut = Column(Integer, ForeignKey('SangeBrut.id'))
     tip = Column(Enum('Plasma', 'Trombocite', 'Globule_rosii'))
     id_locatie = Column(Integer, ForeignKey('Locatie.id'))
-    status = Column(Enum('Prelucrat','Depozitat', 'Folosit', 'Expirat'))
+    status = Column(Enum('Prelucrat', 'Depozitat', 'Folosit', 'Expirat'))
 
     sange_brut = relationship('SangeBrut', back_populates='sange_prelucrat')
     locatie = relationship('Locatie', back_populates='sange_prelucrat')
+
 
 class FormularDonare(DB):
     __tablename__ = 'FormularDonare'
@@ -189,7 +191,8 @@ class FormularDonare(DB):
     grupa = Column(Enum("O1", "A2", "B3", "AB4", "UNKNOWN"))
     rh = Column(Enum("pozitiv", "negativ", "UNKNOWN"))
     zile_disponibil = Column(Integer)
-    status = Column(Enum('IN_ASTEPTARE','PRELEVARE','PREGATIRE','CALIFICARE','DISTRIBUIRE','NONCONFORM'), default='IN_ASTEPTARE')
+    status = Column(Enum('IN_ASTEPTARE', 'PRELEVARE', 'PREGATIRE', 'CALIFICARE', 'DISTRIBUIRE', 'NONCONFORM'),
+                    default='IN_ASTEPTARE')
 
 
 class CereriSange(DB):
