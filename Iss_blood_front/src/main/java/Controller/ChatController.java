@@ -4,6 +4,7 @@ import Model.StaffInfo;
 import Model.UserInfo;
 import com.jfoenix.controls.JFXTextField;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -20,9 +21,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Pair;
 
-import java.util.*;
-
-public class ChatController extends ControlledScreen{
+public class ChatController extends ControlledScreen {
 
     public void setCnpDestinar(String cnpDestinar) {
         this.cnpDestinar = cnpDestinar;
@@ -97,8 +96,9 @@ public class ChatController extends ControlledScreen{
         //boolean y = x.nextBoolean();
         //handleMessage(messageTextField.getText(),true);
         getService().addMessage(
+                sender,
                 getScreenController().userInfo.getUsername(),
-                sender,messageTextField.getText());
+                messageTextField.getText());
         messageTextField.clear();
 
     }
@@ -116,7 +116,9 @@ public class ChatController extends ControlledScreen{
             setStyledNodeForHim(l);
         }
 
+        Platform.runLater(() -> {
             mainChat.getChildren().add(mesaj);
+        });
     }
 
     ObservableList<Pair<String,String>> map = FXCollections.observableArrayList();
@@ -131,7 +133,7 @@ public class ChatController extends ControlledScreen{
     Label numeDestinatar;
 
     @FXML
-    private void listSelected(){
+    private void listSelected() {
 
         Pair<String,String> x = activeUsers.getSelectionModel().getSelectedItem();
 
@@ -142,20 +144,21 @@ public class ChatController extends ControlledScreen{
                 updateThis();
         }
     }
+
     String sender = null;
-
     ObservableList<Pair<String,Boolean>> messages = FXCollections.observableArrayList();
-
-
     UserInfo userInfo;
+
     @Override
     void updateThis() {
 
         userInfo = getScreenController().userInfo;
         map.setAll(getService().getActiveUser(userInfo.getUsername()));
 
+        Platform.runLater(() -> {
+            mainChat.getChildren().clear();
+        });
 
-        //mainChat.getChildren().clear();
         if(sender == null)
             messages.clear();
         else
@@ -166,5 +169,4 @@ public class ChatController extends ControlledScreen{
             }
         }
     }
-
 }

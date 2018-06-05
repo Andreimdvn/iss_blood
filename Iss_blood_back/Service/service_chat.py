@@ -36,7 +36,6 @@ class ServiceChat(IService):
 
         return 0, res
 
-
     def __get_username_for_cnp(self, cnp):
         for u in self.db.select('User'):
             if u.donatori and u.donatori[0].cnp == cnp:
@@ -67,19 +66,23 @@ class ServiceChat(IService):
     def get_messages_for_user(self, user_sender, user_receiver):
 
         result = []
+        message_ids = []
 
-        res = self.db.select('Mesaje', columns=['id_sender'], values=[user_sender])
+        res = self.db.select('Mesaje', columns=['id_sender', 'id_receiver'], values=[user_sender, user_receiver])
         for message in res:
+            message_ids.append(message.id)
             result.append({
                 "me": True,
                 "message": message.mesaj,
                 "data": str(message.data)
-            }
+                }
             )
 
-        res = self.db.select('Mesaje', columns=['id_receiver'], values=[user_receiver])
+        res = self.db.select('Mesaje', columns=['id_receiver', 'id_sender'], values=[user_sender, user_receiver])
 
         for message in res:
+            if message.id in message_ids:
+                continue
             result.append(
                 {
                     "me": False,

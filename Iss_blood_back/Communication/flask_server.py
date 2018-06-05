@@ -500,7 +500,7 @@ class FlaskServer:
 
         status, mesaj = self.controller.add_active_user(user)
 
-        # self.update_wrapper()
+        self.update_chat()
 
         return json.dumps({"status": status, "message": mesaj})
 
@@ -512,7 +512,7 @@ class FlaskServer:
 
         status, mesaj = self.controller.remove_user(user)
 
-        self.update_wrapper()
+        self.update_chat()
 
         return json.dumps({"status": status, "message": mesaj})
 
@@ -523,14 +523,12 @@ class FlaskServer:
         receiver = self.request_data["receiver"]
         message = self.request_data["message"]
         now = datetime.datetime.now()
-        date = str(now.year) + '-' + str(now.month) + '-' + str(now.day)
 
         self.logger.debug("New message received from [%s] to [%s] with message [%s] on [%s]!" % (sender, receiver,
-                                                                                                 message, date))
+                                                                                                 message, now))
+        status, mesaj = self.controller.add_new_message(sender, receiver, message, now)
 
-        status, mesaj = self.controller.add_new_message(sender, receiver, message, date)
-
-        self.update_wrapper()
+        self.update_chat()
 
         return json.dumps({"status": status, "message": mesaj})
 
