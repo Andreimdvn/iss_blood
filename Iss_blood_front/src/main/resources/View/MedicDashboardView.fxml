@@ -3,12 +3,11 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="600.0" prefWidth="1165.0" styleClass="formularPane" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MedicDashboardController">
    <center>
@@ -16,82 +15,18 @@
          <center>
             <AnchorPane fx:id="mainPane" prefHeight="446.0" prefWidth="900.0" styleClass="formularPane" stylesheets="@../main.css" BorderPane.alignment="CENTER">
                <children>
-                  <AnchorPane layoutX="61.0" layoutY="38.0">
+                  <AnchorPane layoutX="14.0" layoutY="62.0">
                      <children>
                         <Label layoutX="41.0" prefHeight="55.0" prefWidth="195.0" styleClass="headerFormular" text="Welcome back," />
-                        <Pane layoutX="115.0" layoutY="186.0" prefHeight="289.0" prefWidth="381.0" styleClass="subFormularPane">
-                           <children>
-                              <JFXButton layoutX="104.0" layoutY="250.0" prefHeight="25.0" prefWidth="173.0" styleClass="buttonFormular" text="View all request" />
-                              <Pane prefHeight="40.0" prefWidth="381.0" styleClass="headerPaneFormular">
-                                 <children>
-                                    <Label layoutX="144.0" layoutY="15.0" text="Active requests" />
-                                 </children>
-                              </Pane>
-                              <TableView layoutX="19.0" layoutY="65.0" prefHeight="159.0" prefWidth="343.0">
-                                <columns>
-                                  <TableColumn prefWidth="103.55553817749023" text="Numele" />
-                                  <TableColumn prefWidth="88.888916015625" text="Importanta" />
-                                    <TableColumn prefWidth="76.44442749023438" text="Grupa" />
-                                    <TableColumn prefWidth="70.2222900390625" text="RH" />
-                                </columns>
-                              </TableView>
-                           </children>
-                        </Pane>
                         <Label fx:id="fullnameLabel" layoutX="129.0" layoutY="41.0" prefHeight="55.0" prefWidth="353.0" styleClass="headerFormular" text="Doctor Moldovan Daniel-Gabriel" />
                      </children>
                   </AnchorPane>
-                  <VBox layoutX="684.0" layoutY="201.0">
-                     <children>
-                        <AnchorPane>
-                           <children>
-                              <Pane prefHeight="104.0" prefWidth="215.0" styleClass="subFormularPane">
-                                 <children>
-                                    <Pane prefHeight="104.0" prefWidth="75.0" styleClass="globulRosiiBox" />
-                                    <Pane layoutX="75.0" prefHeight="104.0" prefWidth="140.0" styleClass="box">
-                                       <children>
-                                          <Label layoutX="3.0" layoutY="14.0" styleClass="headerGlobuleRosii" text="Pungi globule rosii" />
-                                          <Label layoutX="5.0" layoutY="52.0" prefHeight="17.0" prefWidth="129.0" styleClass="labelBoxes" text="12" />
-                                       </children>
-                                    </Pane>
-                                 </children>
-                              </Pane>
-                           </children>
-                        </AnchorPane>
-                        <AnchorPane>
-                           <children>
-                              <Pane prefHeight="104.0" prefWidth="215.0" styleClass="subFormularPane">
-                                 <children>
-                                    <Pane prefHeight="104.0" prefWidth="75.0" styleClass="plasmaBox" />
-                                    <Pane layoutX="75.0" prefHeight="104.0" prefWidth="140.0" styleClass="box">
-                                       <children>
-                                          <Label layoutX="22.0" layoutY="14.0" styleClass="headerPlasma" text="Pungi plasma" />
-                                          <Label layoutX="5.0" layoutY="52.0" prefHeight="17.0" prefWidth="129.0" styleClass="labelBoxes" text="7" />
-                                       </children>
-                                    </Pane>
-                                 </children>
-                              </Pane>
-                           </children>
-                        </AnchorPane>
-                        <AnchorPane>
-                           <children>
-                              <Pane prefHeight="104.0" prefWidth="215.0" styleClass="subFormularPane">
-                                 <children>
-                                    <Pane prefHeight="104.0" prefWidth="75.0" styleClass="trombociteBox" />
-                                    <Pane layoutX="75.0" prefHeight="104.0" prefWidth="140.0" styleClass="box">
-                                       <children>
-                                          <Label layoutX="8.0" layoutY="14.0" styleClass="headerTrombocite" text="Pungi trombocite" />
-                                          <Label layoutX="5.0" layoutY="52.0" prefHeight="17.0" prefWidth="129.0" styleClass="labelBoxes" text="61" />
-                                       </children>
-                                    </Pane>
-                                 </children>
-                              </Pane>
-                           </children>
-                        </AnchorPane>
-                        <AnchorPane />
-                     </children>
-                  </VBox>
 
-                  <Label layoutX="690.0" layoutY="56.0" text="Loading..." fx:id="numeSpitalLabel"/>
+                  <Label fx:id="numeSpitalLabel" layoutX="380.0" layoutY="335.0" text="Loading...">
+                     <font>
+                        <Font size="36.0" />
+                     </font></Label>
+                  <FontAwesomeIconView glyphName="SHIELD" layoutX="456.0" layoutY="313.0" size="56" />
 
                </children>
             </AnchorPane>
@@ -131,6 +66,11 @@
                               <JFXButton fx:id="stareActualaButton" onMouseClicked="#stareActualaClicked" prefHeight="31.0" prefWidth="128.0" styleClass="buttonSecondary" text="Stare actuala" />
                            </children>
                         </Pane>
+                        <Pane prefHeight="112.0" prefWidth="171.0">
+                           <children>
+                              <JFXButton onAction="#chatClicked" prefHeight="31.0" prefWidth="128.0" styleClass="buttonSecondary" text="Chat" />
+                           </children>
+                        </Pane>
                      </children>
                   </VBox>
                   <JFXButton fx:id="logoutButton" layoutY="554.7142848968506" onMouseClicked="#logout" prefHeight="25.0" prefWidth="173.0" styleClass="buttonSecondary" text="Logout" />
@@ -142,12 +82,13 @@
                   <FontAwesomeIconView fill="WHITE" glyphName="BARS" layoutX="5.0" layoutY="10.0" onMouseClicked="#showLeftMenu" size="30" styleClass="iconSecondary" />
                </children>
             </AnchorPane>
-            <VBox layoutX="6.0" layoutY="89.0" spacing="58.0">
+            <VBox layoutX="6.0" layoutY="89.0" prefHeight="349.0" prefWidth="33.0" spacing="42.0">
                <children>
                   <FontAwesomeIconView fill="WHITE" glyphName="HOME" onMouseClicked="#homeButtonClicked" size="30" styleClass="iconSecondary" />
                   <FontAwesomeIconView fill="WHITE" glyphName="FILE" onMouseClicked="#CerereSangeClicked" size="30" styleClass="iconSecondary" />
                   <FontAwesomeIconView fill="WHITE" glyphName="FOLDER_OPEN" onMouseClicked="#IstoricCereriClicked" size="30" styleClass="iconSecondary" />
                   <FontAwesomeIconView fill="WHITE" glyphName="HEART" onMouseClicked="#stareActualaClicked" size="30" styleClass="iconSecondary" />
+                  <FontAwesomeIconView fill="WHITE" glyphName="BOOK" onMouseClicked="#stareActualaClicked" size="30" styleClass="iconSecondary" />
                </children>
             </VBox>
             <FontAwesomeIconView fill="WHITE" glyphName="UNLOCK" layoutX="7.0" layoutY="590.0" onMouseClicked="#logout" size="30" styleClass="iconSecondary" />

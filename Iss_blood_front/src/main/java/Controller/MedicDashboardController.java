@@ -114,6 +114,15 @@ public class MedicDashboardController extends ControlledScreen {
     }
 
     @FXML
+    private void chatClicked(){
+        logger.debug("chat cliked");
+        centralPane.setCenter(getScreenController().getScreen(Screen.CHAT_SCREEN));
+        mainPane.setPrefWidth(950);
+        //smainPane.setPrefHeight(655);
+        //sresizeCentralPane();
+    }
+
+    @FXML
     private void hideLeftMenu(){
 
         logger.debug("Buton hide left menu a fost apasat");

@@ -71,6 +71,8 @@ public class CentruTransfuzieController extends ControlledScreen {
     private ToggleButton t4;
     @FXML
     private ToggleButton t5;
+    @FXML
+    private ToggleButton t6;
 
     private void checkSelected(ToggleButton toggleButton){
         if(!anySelected()) {
@@ -133,6 +135,11 @@ public class CentruTransfuzieController extends ControlledScreen {
     private void chatClicked(){
 
     borderPane.setCenter(super.getScreenController().getScreen(Screen.CHAT_SCREEN));
+        checkSelected(t6);
+    //borderPane.getCenter().setLayoutY(50);
+    //borderPane.getCenter().setScaleX(50);
+    //borderPane.getCenter().setScaleY(20);
+    //borderPane.getCenter().setLayoutX(300);
     }
     @FXML
     private void logout(){

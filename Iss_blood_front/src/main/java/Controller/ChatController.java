@@ -40,32 +40,14 @@ public class ChatController extends ControlledScreen {
 
 
         activeUsers.setItems(map);
-
-        mainPane.setOnMousePressed(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                xOffset = event.getSceneX();
-                yOffset = event.getSceneY();
-            }
-        });
-        mainPane.setOnMouseDragged(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                Stage primaryStage = getStage();
-                primaryStage.setX(event.getScreenX() - xOffset);
-                primaryStage.setY(event.getScreenY() - yOffset);
-            }
-        });
     }
+
     @FXML
     private ListView<Pair<String,String>> activeUsers;
 
     @FXML
     private FontAwesomeIconView closeIcon;
 
-    private Stage getStage() {
-        return (Stage) closeIcon.getScene().getWindow();
-    }
     private void setStyledNodeForMe(Node node){
         node.getStyleClass().add("vboxMesajStanga");
     }
@@ -78,10 +60,6 @@ public class ChatController extends ControlledScreen {
     @FXML
     private VBox mainChat;
 
-    @FXML
-    private void close(){
-        getStage().close();
-    }
 
     private AnchorPane createMesaj(){
         AnchorPane anchorPane = new AnchorPane();
@@ -165,7 +143,7 @@ public class ChatController extends ControlledScreen {
         {
             messages .setAll(getService().getMessages(userInfo.getUsername(),sender));
             for (Pair<String, Boolean> message : messages) {
-                handleMessage(message.getKey(), message.getValue());
+                handleMessage(message.getKey(), !message.getValue());
             }
         }
     }
