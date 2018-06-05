@@ -42,6 +42,12 @@ public class FlaskClient {
                     System.out.println("Am primit update!");
                     update();
                 }
+            }).on("chat_update", new Emitter.Listener() {
+                @Override
+                public void call(Object... args) {
+                    System.out.println("Am primit update pentru chat!");
+                    update();
+                }
             });
 
             //socket.on("update_chat")

@@ -1,7 +1,7 @@
 import sys
 
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Column, Integer, String, ForeignKey, Date, Float, Enum, create_engine, Boolean
+from sqlalchemy import Column, Integer, String, ForeignKey, Date, Float, Enum, create_engine, Boolean, DateTime
 from sqlalchemy.orm import relationship, sessionmaker, scoped_session
 
 
@@ -225,7 +225,7 @@ class Mesaje(DB):
     id_sender = Column(String(50), ForeignKey('User.username'), nullable=False)
     id_receiver = Column(String(50), ForeignKey('User.username'), nullable=False)
     mesaj = Column(String(500), nullable=False)
-    data = Column(Date, nullable=False)
+    data = Column(DateTime, nullable=False)
 
 
 class ORM:
