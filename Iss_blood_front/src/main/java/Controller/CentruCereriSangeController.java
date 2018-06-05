@@ -3,8 +3,10 @@ package Controller;
 import Model.*;
 import Service.MainService;
 import Utils.Chat;
+import Utils.CustomMessageBox;
 import Utils.FunctiiUtile;
 import com.jfoenix.controls.JFXTextField;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -13,6 +15,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Pair;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -109,11 +112,24 @@ public class CentruCereriSangeController extends ControlledScreen{
         if(cerereSange != null){
 
             int id_locatie = getInfo().getIdLocatie();
-            getService().trimitePungi(cerereSange.getId(),
+             Pair<Boolean,String> status_mesaj = getService().trimitePungi(cerereSange.getId(),
                                       id_locatie,
                                       cerereSange.getGrupaSange(),
                                       cerereSange.getRh(),cerereSange.getNumarPungiPlasma(),
                                       cerereSange.getNumarPungiTrombocite(),cerereSange.getNumarPungiGlobuleRosii());
+            if(status_mesaj.getKey().equals(false)){
+                CustomMessageBox messageBox = new CustomMessageBox("Eroare",status_mesaj.getValue());
+                messageBox.show();
+                return;
+            }else{
+                CustomMessageBox messageBox = new CustomMessageBox("Success",status_mesaj.getValue());
+                messageBox.show();
+                return;
+            }
+        }else{
+            CustomMessageBox messageBox = new CustomMessageBox("Eroare","Selectati o cerere din tabel.");
+            messageBox.show();
+            return;
         }
     }
 

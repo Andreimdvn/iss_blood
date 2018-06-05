@@ -74,7 +74,7 @@ class BackController:
             self.service_medic.update_cerere(id_cerere, 'Rezolvata')
             return 0, "Pungile au fost trimise"
 
-        return 2, "Mesaj dragut de eroare"
+        return 2, "Stoc insuficient."
 
     def get_analize(self, cnp):
         return self.service_sange.get_analize(cnp)
