@@ -58,7 +58,7 @@ public class Formular1Controller extends ControlledScreen {
         else
         {
             button_next.setPrefWidth(95);
-            button_next.setText("Am înțeles");
+            button_next.setText("Am inteles");
         }
         pane_conditii.getChildren().clear();
         pane_conditii.getChildren().add(text_panes.get(currentScreen));
